@@ -13,10 +13,12 @@ function createWindow(): BrowserWindow {
 
   // Create the browser window.
   win = new BrowserWindow({
-    x: 0,
-    y: 0,
-    width: size.width,
-    height: size.height,
+    width: size.width * .75,
+    height: size.height * .8,
+    icon: __dirname + '/favicon.ico',
+    frame: false,
+    resizable: true,
+    backgroundColor: '#0e2942',
     webPreferences: {
       nodeIntegration: true,
       allowRunningInsecureContent: (serve) ? true : false,
