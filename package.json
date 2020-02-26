@@ -1,13 +1,17 @@
 {
   "name": "conceal-lite-wallet",
   "version": "0.0.1",
-  "description": "Angular 9 with Electron",
+  "description": "Conceal Lite Wallet Powered by Angular 9 with Electron",
   "homepage": "https://github.com/ThrownLemon/conceal-lite-wallet",
   "author": {
     "name": "ThrownLemon"
   },
   "keywords": [
-    "angular",
+    "conceal",
+    "wallet",
+    "lite",
+    "banking",
+    "crypto",
     "angular 9",
     "electron",
     "typescript",
