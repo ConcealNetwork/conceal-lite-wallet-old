@@ -1,11 +1,10 @@
 {
-  "name": "angular-electron",
-  "version": "7.0.1",
-  "description": "Angular 9 with Electron (Typescript + SASS + Hot Reload)",
-  "homepage": "https://github.com/maximegris/angular-electron",
+  "name": "conceal-lite-wallet",
+  "version": "0.0.1",
+  "description": "Angular 9 with Electron",
+  "homepage": "https://github.com/ThrownLemon/conceal-lite-wallet",
   "author": {
-    "name": "Maxime GRIS",
-    "email": "maxime.gris@gmail.com"
+    "name": "ThrownLemon"
   },
   "keywords": [
     "angular",
