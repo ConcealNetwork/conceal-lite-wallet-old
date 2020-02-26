@@ -17,6 +17,10 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HomeModule } from './home/home.module';
 
 import { AppComponent } from './app.component';
+import { SettingsComponent } from './settings/settings.component';
+import { ContactsComponent } from './contacts/contacts.component';
+import { TransferComponent } from './transfer/transfer.component';
+import { ActivityComponent } from './activity/activity.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -24,7 +28,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, SettingsComponent, ContactsComponent, TransferComponent, ActivityComponent],
   imports: [
     BrowserModule,
     FormsModule,

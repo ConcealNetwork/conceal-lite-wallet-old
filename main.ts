@@ -18,7 +18,7 @@ function createWindow(): BrowserWindow {
     icon: __dirname + '/favicon.ico',
     frame: false,
     resizable: true,
-    backgroundColor: '#0e2942',
+    backgroundColor: '#151515',
     webPreferences: {
       nodeIntegration: true,
       allowRunningInsecureContent: (serve) ? true : false,
