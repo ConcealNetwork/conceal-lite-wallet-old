@@ -24,13 +24,13 @@
 $min_width: 500px;
 $max_width: 1920px;
 $title_min_font: 11px;
-$title_max_font: 28px;
+$title_max_font: 32px;
 $min_font: 11px;
 $max_font: 24px;
 
 .mat-toolbar {
 	-webkit-app-region: drag;
-	height: 90px;
+	height: 85px;
 	position: absolute;
 	background: rgba(0, 0, 0, 0.2);
 	border-bottom: 0.8px solid rgba(255, 255, 255, 0.08) !important;
@@ -71,9 +71,17 @@ $max_font: 24px;
 		-webkit-app-region: no-drag;
 		-webkit-user-select: none;
 		user-select: none;
-		margin-left: 5px;
-		margin-right: 5px;
+		margin-left: 2.5px;
+		margin-right: 2.5px;
+		line-height: 1;
 		@include fluid-type($min_width, $max_width, $min_font, $max_font);
+	}
+
+	.border {
+		height:50%;
+		border-right: 0.8px solid rgba(255, 255, 255, 0.1) !important;
+		margin-left: 15px;
+		margin-right: 15px;
 	}
 		
 	.spacer {
