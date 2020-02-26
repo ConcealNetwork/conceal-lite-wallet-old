@@ -1,12 +1,20 @@
-<div class="">
-    Header
-    <a class="" (click)="minimize()">
-        minimize
-    </a>
-    <a class="" (click)="fullScreen()">
-        maximize
-    </a>
-    <a class="" (click)="logout()">
-        close
-    </a>
-</div>
+<mat-toolbar color="primary">
+	<img src="./assets/images/logo-sm.png" class="logo">
+	<span class="title">Lite Wallet</span>
+	<span class="spacer"></span>
+	<button mat-button class="navlink">Overview</button>
+	<button mat-button class="navlink">Activity</button>
+	<button mat-button class="navlink">Transfer</button>
+	<button mat-button class="navlink">Contacts</button>
+	<button mat-button class="navlink">Settings</button>
+	<span class="spacer"></span>
+	<button mat-icon-button aria-hidden="false" aria-label="Minimize" (click)="minimize()">
+		<mat-icon>fullscreen_exit</mat-icon>
+	</button>
+	<button mat-icon-button aria-hidden="false" aria-label="Maximize" (click)="fullScreen()">
+		<mat-icon>fullscreen</mat-icon>
+	</button>
+	<button mat-icon-button aria-hidden="false" aria-label="Close" (click)="logout()">
+		<mat-icon>close</mat-icon>
+	</button>
+</mat-toolbar>
