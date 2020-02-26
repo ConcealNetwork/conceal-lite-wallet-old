@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-import { ShellComponent } from '../shell/shell.component';
+import { ShellComponent } from './../shell/shell.component';
 
 /**
  * Provides helper methods to create routes.

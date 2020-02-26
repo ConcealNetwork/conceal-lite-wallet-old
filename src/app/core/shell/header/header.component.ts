@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 // Services
-import { ElectronService } from '../../services/electron/electron.service';
+import { ElectronService } from '../../services/electron.service';
 
 @Component({
   selector: 'app-header',

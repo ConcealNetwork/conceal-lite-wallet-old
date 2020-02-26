@@ -8,9 +8,9 @@ import { FooterComponent } from './shell/footer/footer.component';
 
 @NgModule({
   declarations: [
-    ShellComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ShellComponent
   ],
   imports: [
     CommonModule,

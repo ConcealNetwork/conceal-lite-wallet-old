@@ -7,8 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  isLoading: boolean = true;
+
   constructor() { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    this.isLoading = false;
+  }
 
 }
