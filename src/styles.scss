@@ -1,3 +1,6 @@
+$material-design-icons-font-directory-path: '~material-design-icons-iconfont/dist/fonts/';
+@import '~material-design-icons-iconfont/src/material-design-icons';
+
 @function strip-unit($value) {
   @return $value / ($value * 0 + 1);
 }
