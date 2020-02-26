@@ -2,11 +2,11 @@
 	<img src="./assets/images/logo-sm.png" class="logo">
 	<span class="title">Lite Wallet</span>
 	<span class="spacer"></span>
-	<button mat-button class="navlink">Overview</button>
-	<button mat-button class="navlink">Activity</button>
-	<button mat-button class="navlink">Transfer</button>
-	<button mat-button class="navlink">Contacts</button>
-	<button mat-button class="navlink">Settings</button>
+	<button mat-button class="navlink" routerLink="/home" routerLinkActive="active">Overview</button>
+	<button mat-button class="navlink" routerLink="/activity" routerLinkActive="active">Activity</button>
+	<button mat-button class="navlink" routerLink="/transfer" routerLinkActive="active">Transfer</button>
+	<button mat-button class="navlink" routerLink="/contacts" routerLinkActive="active">Contacts</button>
+	<button mat-button class="navlink" routerLink="/settings" routerLinkActive="active">Settings</button>
 	<span class="spacer"></span>
 	<button mat-icon-button aria-hidden="false" aria-label="Minimize" (click)="minimize()">
 		<mat-icon>fullscreen_exit</mat-icon>
