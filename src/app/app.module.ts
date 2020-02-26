@@ -14,8 +14,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
+// Modules
 import { HomeModule } from './home/home.module';
 
+// Compoents
 import { AppComponent } from './app.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ContactsComponent } from './contacts/contacts.component';
