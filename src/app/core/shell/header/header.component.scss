@@ -34,8 +34,8 @@ $max_font: 24px;
 	position: absolute;
 	background: rgba(0, 0, 0, 0.2);
 	border-bottom: 0.8px solid rgba(255, 255, 255, 0.08) !important;
-	padding-left: 25px;
-	padding-right: 25px;
+	padding-left: 15px;
+	padding-right: 15px;
 
 	.logo {
 		margin-right: 25px;
@@ -71,8 +71,8 @@ $max_font: 24px;
 		-webkit-app-region: no-drag;
 		-webkit-user-select: none;
 		user-select: none;
-		margin-left: 2.5px;
-		margin-right: 2.5px;
+		margin-left: 5px;
+		margin-right: 5px;
 		line-height: 1;
 		@include fluid-type($min_width, $max_width, $min_font, $max_font);
 	}
