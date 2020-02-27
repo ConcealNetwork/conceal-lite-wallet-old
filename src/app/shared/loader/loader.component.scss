@@ -1,11 +1,11 @@
 .app-loading {
-  background: #151515;
+  background: rgba(0,0,0,0.8);
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 250px;
+  height: 100%;
   overflow: hidden;
 }
 .app-loading .spinner {
