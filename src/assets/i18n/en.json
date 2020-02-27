@@ -1,8 +1,5 @@
 {
   "PAGES": {
-      "HOME": {
-          "TITLE": "Dashboard"
-      },
       "HEADER": {
         "TITLE": "Lite Wallet",
         "DASHBOARD": "Dashboard",
@@ -14,6 +11,15 @@
         "NODE": "Smart Node",
         "ONLINE": "Online",
         "OFFLINE": "Offline"
+      },
+      "HOME": {
+        "TITLE": "Dashboard"
+			},
+			"TRANSFER": {
+        "TITLE": "Transfer"
+			},
+			"ACTIVITY": {
+        "TITLE": "Activity"
       }
   }
 }

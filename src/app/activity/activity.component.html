@@ -1,1 +1,8 @@
-<p>activity works!</p>
+<div class="container">
+    <div class="loading" *ngIf="isLoading">
+        <app-loader [isLoading]="isLoading"></app-loader>
+    </div>
+    <h1 class="title">
+        {{ 'PAGES.ACTIVITY.TITLE' | translate }}
+    </h1>
+</div>
