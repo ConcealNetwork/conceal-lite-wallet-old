@@ -29,9 +29,10 @@ $min_font: 11px;
 $max_font: 24px;
 
 .mat-toolbar {
+	position: absolute;
+	z-index: 3;
 	-webkit-app-region: drag;
 	height: 85px;
-	position: absolute;
 	background: rgba(0, 0, 0, 0.2);
 	border-bottom: 0.8px solid rgba(255, 255, 255, 0.08) !important;
 	padding-left: 15px;

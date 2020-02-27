@@ -17,11 +17,15 @@ import { FooterComponent } from './shell/footer/footer.component';
 // Modules
 import { SharedModule } from '../shared/shared.module';
 
+// Directives
+import { ParticlesDirective } from './../shared/directives/particles.directive'
+
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
-    ShellComponent
+    ShellComponent,
+    ParticlesDirective
   ],
   imports: [
     CommonModule,
