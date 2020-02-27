@@ -1,7 +1,7 @@
 <div class="loading" *ngIf="isLoading">
   <app-loader [isLoading]="isLoading"></app-loader>
 </div>
-<div class="container">
+<div class="container" @enterAnimation>
   <h1 class="title">
       {{ 'PAGES.SETTINGS.TITLE' | translate }}
   </h1>
