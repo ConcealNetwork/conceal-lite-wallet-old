@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-transfer',
-  templateUrl: './transfer.component.html',
-  styleUrls: ['./transfer.component.scss']
+	selector: 'app-transfer',
+	templateUrl: './transfer.component.html',
+	styleUrls: ['./transfer.component.scss']
 })
 export class TransferComponent implements OnInit {
 
-  constructor() { }
+	isLoading: boolean = true;
 
-  ngOnInit(): void {
-  }
+	constructor() { }
+
+	ngOnInit(): void {
+		this.isLoading = false;
+	}
 
 }

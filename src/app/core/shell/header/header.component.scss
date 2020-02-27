@@ -1,24 +1,24 @@
 @function strip-unit($value) {
-  @return $value / ($value * 0 + 1);
+	@return $value / ($value * 0 + 1);
 }
 
 @mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
-  $u1: unit($min-vw);
-  $u2: unit($max-vw);
-  $u3: unit($min-font-size);
-  $u4: unit($max-font-size);
+	$u1: unit($min-vw);
+	$u2: unit($max-vw);
+	$u3: unit($min-font-size);
+	$u4: unit($max-font-size);
 
-  @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
+	@if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
 	& {
-	  font-size: $min-font-size;
-	  @media screen and (min-width: $min-vw) {
+		font-size: $min-font-size;
+		@media screen and (min-width: $min-vw) {
 		font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
-	  }
-	  @media screen and (min-width: $max-vw) {
+		}
+		@media screen and (min-width: $max-vw) {
 		font-size: $max-font-size;
-	  }
+		}
 	}
-  }
+	}
 }
 
 $min_width: 500px;
@@ -26,7 +26,7 @@ $max_width: 1920px;
 $title_min_font: 11px;
 $title_max_font: 32px;
 $min_font: 11px;
-$max_font: 24px;
+$max_font: 26px;
 
 .mat-toolbar {
 	position: absolute;
@@ -38,13 +38,16 @@ $max_font: 24px;
 	padding-left: 15px;
 	padding-right: 15px;
 
-	.logo {
-		margin-right: 25px;
+	@media only screen and (max-width: 900px) { 
+		.title, .border { 
+			display: none; 
+		} 
 	}
 
 	.title {
 		@include fluid-type($min_width, $max_width, $title_min_font, $title_max_font);
 		text-transform: capitalize;
+		margin-left: 25px;
 		margin-right: 25px;
 	}
 
@@ -75,15 +78,23 @@ $max_font: 24px;
 		user-select: none;
 		margin-left: 5px;
 		margin-right: 5px;
-		line-height: 1;
+    line-height: 1;
+    color: #efefef;
+	}
+  
+  .mat-icon-button.active {
+    border: 0.8px solid rgba(255, 255, 255, 0.1) !important;
+  }
+
+	.material-icons {
 		@include fluid-type($min_width, $max_width, $min_font, $max_font);
 	}
 
 	.border {
 		height:50%;
 		border-right: 0.8px solid rgba(255, 255, 255, 0.1) !important;
-		margin-left: 15px;
-		margin-right: 15px;
+		margin-left: 10px;
+		margin-right: 10px;
 	}
 		
 	.spacer {

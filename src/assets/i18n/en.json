@@ -20,6 +20,15 @@
 			},
 			"ACTIVITY": {
         "TITLE": "Activity"
+      },
+      "CONTACTS": {
+        "TITLE": "Contacts"
+      },
+      "MESSAGING": {
+        "TITLE": "Messaging"
+      },
+      "SETTINGS": {
+        "TITLE": "Settings"
       }
   }
 }

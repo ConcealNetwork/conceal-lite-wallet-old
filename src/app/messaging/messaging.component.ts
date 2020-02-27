@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-	selector: 'app-home',
-	templateUrl: './home.component.html',
-	styleUrls: ['./home.component.scss']
+	selector: 'app-messaging',
+	templateUrl: './messaging.component.html',
+	styleUrls: ['./messaging.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class MessagingComponent implements OnInit {
 
 	isLoading: boolean = true;
 

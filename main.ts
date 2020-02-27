@@ -15,6 +15,8 @@ function createWindow(): BrowserWindow {
   win = new BrowserWindow({
     width: size.width * .75,
     height: size.height * .8,
+    minWidth: 800,
+    minHeight: 600,
     icon: __dirname + '/favicon.ico',
     frame: false,
     resizable: true,

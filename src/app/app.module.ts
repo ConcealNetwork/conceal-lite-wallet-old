@@ -17,13 +17,14 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 // Modules
 import { HomeModule } from './home/home.module';
+import { TransferModule } from './transfer/transfer.module';
+import { ActivityModule } from './activity/activity.module';
+import { ContactsModule } from './contacts/contacts.module';
+import { SettingsModule } from './settings/settings.module';
+import { MessagingModule } from './messaging/messaging.module';
 
 // Compoents
 import { AppComponent } from './app.component';
-import { SettingsComponent } from './settings/settings.component';
-import { ContactsComponent } from './contacts/contacts.component';
-import { TransferComponent } from './transfer/transfer.component';
-import { ActivityComponent } from './activity/activity.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -31,7 +32,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 }
 
 @NgModule({
-  declarations: [AppComponent, SettingsComponent, ContactsComponent, TransferComponent, ActivityComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -40,6 +41,11 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     CoreModule,
     SharedModule,
     HomeModule,
+    TransferModule,
+    ActivityModule,
+    ContactsModule,
+    SettingsModule,
+    MessagingModule,
     AppRoutingModule,
     TranslateModule.forRoot({
       loader: {
