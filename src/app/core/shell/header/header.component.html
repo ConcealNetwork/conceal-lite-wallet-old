@@ -1,12 +1,14 @@
 <mat-toolbar color="primary">
 	<img src="./assets/images/logo-sm.png" class="logo">
-	<span class="title">Lite Wallet</span>
+	<span class="title">{{ 'PAGES.HEADER.TITLE' | translate }}</span>
+	<span class="border"></span>
+	<button mat-button class="navlink" routerLink="/home" routerLinkActive="active">{{ 'PAGES.HEADER.DASHBOARD' | translate }}</button>
+	<button mat-button class="navlink" routerLink="/transfer" routerLinkActive="active">{{ 'PAGES.HEADER.TRANSFER' | translate }}</button>
+	<button mat-button class="navlink" routerLink="/activity" routerLinkActive="active">{{ 'PAGES.HEADER.ACTIVITY' | translate }}</button>
 	<span class="spacer"></span>
-	<button mat-button class="navlink" routerLink="/home" routerLinkActive="active">Dashboard</button>
-	<button mat-button class="navlink" routerLink="/transfer" routerLinkActive="active">Transfer</button>
-	<button mat-button class="navlink" routerLink="/activity" routerLinkActive="active">Activity</button>
-	<button mat-button class="navlink" routerLink="/contacts" routerLinkActive="active">Contacts</button>
-	<span class="spacer"></span>
+	<button mat-icon-button aria-hidden="false" aria-label="Contacts" routerLink="/contats" routerLinkActive="active">
+		<mat-icon>contacts</mat-icon>
+	</button>
 	<button mat-icon-button aria-hidden="false" aria-label="Messaging" routerLink="/messaging" routerLinkActive="active">
 		<mat-icon>message</mat-icon>
 	</button>

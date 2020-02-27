@@ -1,5 +1,11 @@
 <mat-toolbar color="primary">
-	<span class="title">Wallet Offline</span>
+	<span class="title">
+		{{ 'PAGES.FOOTER.WALLET' | translate }} 
+		{{ ( isWalletOnline ? 'PAGES.FOOTER.ONLINE' : 'PAGES.FOOTER.OFFLINE' ) | translate }}
+	</span>
 	<span class="spacer"></span>
-	<span class="title">Node Offline</span>
+	<span class="title">
+		{{ 'PAGES.FOOTER.NODE' | translate }} 
+		{{ ( isNodeOnline ? 'PAGES.FOOTER.ONLINE' : 'PAGES.FOOTER.OFFLINE' ) | translate }}
+	</span>
 </mat-toolbar>

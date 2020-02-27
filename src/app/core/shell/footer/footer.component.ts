@@ -10,8 +10,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 export class FooterComponent implements OnInit, OnDestroy {
 
-  ngOnInit() {
+  isNodeOnline: boolean = false;
+  isWalletOnline: boolean = false;
 
+  ngOnInit() {
+    this.isNodeOnline = true;
+    this.isWalletOnline = true;
   }
 
   ngOnDestroy(){

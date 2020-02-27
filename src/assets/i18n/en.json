@@ -1,7 +1,19 @@
 {
   "PAGES": {
       "HOME": {
-          "TITLE": "App works !"
+          "TITLE": "Dashboard"
+      },
+      "HEADER": {
+        "TITLE": "Lite Wallet",
+        "DASHBOARD": "Dashboard",
+        "TRANSFER": "Transfer",
+        "ACTIVITY": "Activity"
+      },
+      "FOOTER": {
+        "WALLET": "Cloud Wallet",
+        "NODE": "Smart Node",
+        "ONLINE": "Online",
+        "OFFLINE": "Offline"
       }
   }
 }

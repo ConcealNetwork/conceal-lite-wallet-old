@@ -24,7 +24,7 @@
 $min_width: 500px;
 $max_width: 1920px;
 $min_font: 11px;
-$max_font: 22px;
+$max_font: 20px;
 
 .mat-toolbar {
 	@include fluid-type($min_width, $max_width, $min_font, $max_font);
@@ -35,7 +35,7 @@ $max_font: 22px;
   border-top: 0.8px solid rgba(255, 255, 255, 0.08) !important;
 	padding-left: 25px;
 	padding-right: 25px;
-	text-transform: uppercase;
+	text-transform: capitalize;
 	.spacer {
 		flex: auto;
 	}

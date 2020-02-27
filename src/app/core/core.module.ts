@@ -14,6 +14,9 @@ import { ShellComponent } from './shell/shell.component';
 import { HeaderComponent } from './shell/header/header.component';
 import { FooterComponent } from './shell/footer/footer.component';
 
+// Modules
+import { SharedModule } from '../shared/shared.module';
+
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -22,7 +25,8 @@ import { FooterComponent } from './shell/footer/footer.component';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    SharedModule
   ],
   exports: [
     MatMenuModule,

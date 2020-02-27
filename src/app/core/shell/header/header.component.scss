@@ -44,6 +44,7 @@ $max_font: 24px;
 	.title {
 		@include fluid-type($min_width, $max_width, $title_min_font, $title_max_font);
 		text-transform: capitalize;
+		margin-right: 25px;
 	}
 
 	.navlink {
