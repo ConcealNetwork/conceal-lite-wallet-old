@@ -1,11 +1,15 @@
+// Angular Core
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { TranslateModule } from '@ngx-translate/core';
-
-import { WebviewDirective } from './directives/';
 import { FormsModule } from '@angular/forms';
 
+// NG Translate
+import { TranslateModule } from '@ngx-translate/core';
+
+// Directives
+import { WebviewDirective } from './directives/';
+
+// Compoents
 import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
