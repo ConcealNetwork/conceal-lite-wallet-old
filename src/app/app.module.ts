@@ -28,6 +28,7 @@ import { ActivityModule } from './activity/activity.module';
 import { ContactsModule } from './contacts/contacts.module';
 import { SettingsModule } from './settings/settings.module';
 import { MessagingModule } from './messaging/messaging.module';
+import { LockModule } from './lock/lock.module';
 
 // Services 
 import { DataService } from './core/services/data.service';
@@ -56,6 +57,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ContactsModule,
     SettingsModule,
     MessagingModule,
+    LockModule,
     AppRoutingModule,
     MatMenuModule,
     MatToolbarModule,

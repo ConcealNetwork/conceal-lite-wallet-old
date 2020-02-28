@@ -29,6 +29,9 @@
       },
       "SETTINGS": {
         "TITLE": "Settings"
+      },
+      "LOCK": {
+        "TITLE": "Lock"
       }
   }
 }
