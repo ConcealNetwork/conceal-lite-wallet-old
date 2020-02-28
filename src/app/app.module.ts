@@ -38,8 +38,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 }
 
 @NgModule({
-  declarations: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -54,6 +54,10 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     SettingsModule,
     MessagingModule,
     AppRoutingModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -61,12 +65,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         deps: [HttpClient]
       }
     })
-  ],
-  exports: [
-    MatMenuModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

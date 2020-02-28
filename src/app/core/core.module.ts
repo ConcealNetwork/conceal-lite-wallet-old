@@ -1,7 +1,13 @@
 // Angular Core
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+
+// Angular Material
+import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 // Modules
 import { SharedModule } from '../shared/shared.module';
@@ -15,6 +21,7 @@ import { HeaderComponent } from './shell/header/header.component';
 import { FooterComponent } from './shell/footer/footer.component';
 
 @NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     HeaderComponent,
     FooterComponent,
@@ -24,7 +31,11 @@ import { FooterComponent } from './shell/footer/footer.component';
   imports: [
     CommonModule,
     RouterModule,
-    SharedModule
+    SharedModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule
   ],
   exports: []
 })
