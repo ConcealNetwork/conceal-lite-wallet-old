@@ -1,5 +1,5 @@
 // Core
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -37,6 +37,7 @@ import { ParticlesDirective } from './../shared/directives/particles.directive'
     MatToolbarModule,
     MatButtonModule,
     MatIconModule
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CoreModule { }
