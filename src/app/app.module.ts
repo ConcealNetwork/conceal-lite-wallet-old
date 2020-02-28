@@ -8,12 +8,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-// Angular Material
-import { MatMenuModule } from '@angular/material/menu';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-
 // NG Translate
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -59,10 +53,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MessagingModule,
     LockModule,
     AppRoutingModule,
-    MatMenuModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -4,6 +4,11 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 // Angular Material
+import { A11yModule } from '@angular/cdk/a11y';
+import { LayoutModule } from '@angular/cdk/layout';
+import { ObserversModule } from '@angular/cdk/observers';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { PortalModule } from '@angular/cdk/portal';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -32,6 +37,11 @@ import { FooterComponent } from './shell/footer/footer.component';
     CommonModule,
     RouterModule,
     SharedModule,
+    A11yModule,
+    LayoutModule,
+    ObserversModule,
+    OverlayModule,
+    PortalModule,
     MatMenuModule,
     MatToolbarModule,
     MatButtonModule,
