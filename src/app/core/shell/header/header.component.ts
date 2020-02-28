@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 // Services
 import { ElectronService } from '../../services/electron.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-header',
@@ -14,12 +15,14 @@ import { ElectronService } from '../../services/electron.service';
 
 export class HeaderComponent implements OnInit {
 
-  isFullScreen: boolean;
+  get isFullScreen():boolean { return this.dataService.isFullScreen; }
+  set isFullScreen(value: boolean) { this.dataService.isFullScreen = value; }
 
   constructor(
     public router: Router,
     private route: ActivatedRoute,
-    public electronService: ElectronService
+    public electronService: ElectronService,
+    public dataService: DataService
   ) { 
   }
 

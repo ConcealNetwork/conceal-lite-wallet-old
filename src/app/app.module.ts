@@ -29,6 +29,9 @@ import { ContactsModule } from './contacts/contacts.module';
 import { SettingsModule } from './settings/settings.module';
 import { MessagingModule } from './messaging/messaging.module';
 
+// Services 
+import { DataService } from './core/services/data.service';
+
 // Compoents
 import { AppComponent } from './app.component';
 
@@ -66,7 +69,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       }
     })
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
