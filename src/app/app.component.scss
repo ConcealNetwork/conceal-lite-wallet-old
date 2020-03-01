@@ -1,0 +1,32 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+app-background {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    z-index: 1;
+}
+
+app-header, app-footer {
+    position: relative;
+    z-index: 2;
+    flex: 0 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    -webkit-app-region: drag;
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 0.8px solid rgba(255, 255, 255, 0.08) !important;
+    border-top: 0.8px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.content {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    padding-left: 25px;
+    padding-right: 25px;
+}

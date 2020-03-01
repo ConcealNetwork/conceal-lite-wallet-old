@@ -1,6 +1,11 @@
+// Angular Core
 import { Component } from '@angular/core';
-import { ElectronService } from './core/services';
+
+// 3rd Party
 import { TranslateService } from '@ngx-translate/core';
+
+// Services
+import { ElectronService } from './shared/services/electron.service';
 import { AppConfig } from '../environments/environment';
 
 @Component({

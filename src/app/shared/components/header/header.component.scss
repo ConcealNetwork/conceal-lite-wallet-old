@@ -1,0 +1,78 @@
+@use './../../../../mixins' as *;
+
+$min_width: 500px;
+$max_width: 1920px;
+$title_min_font: 11px;
+$title_max_font: 32px;
+$min_font: 11px;
+$max_font: 26px;
+
+.mat-toolbar {
+	height: 80px;
+	padding-right: 0px;
+	background: none;
+
+	@media only screen and (max-width: 900px) { 
+		.title, .border { 
+			display: none; 
+		} 
+	}
+
+	.title {
+		@include fluid-type($min_width, $max_width, $title_min_font, $title_max_font);
+		text-transform: capitalize;
+		margin-left: 25px;
+		margin-right: 25px;
+	}
+
+	.navlink {
+		-webkit-app-region: no-drag;
+		-webkit-user-select: none;
+		user-select: none;
+		margin-left: 10px;
+		margin-right: 10px;
+		color: #aaa;
+	}
+
+	.active {
+		color: #fff;
+	}
+
+	.mat-button {
+		@include fluid-type($min_width, $max_width, $min_font, $max_font);
+		-webkit-app-region: no-drag;
+		-webkit-user-select: none;
+		user-select: none;
+		text-transform: uppercase;
+	}
+
+	.mat-icon-button {
+		-webkit-app-region: no-drag;
+		-webkit-user-select: none;
+		user-select: none;
+		margin-left: 5px;
+		margin-right: 5px;
+    	line-height: 1;
+    	color: #efefef;
+	}
+  
+  .mat-icon-button.active {
+		background: rgba(255, 255, 255, 0.1);
+  }
+
+	.material-icons {
+		@include fluid-type($min_width, $max_width, $min_font, $max_font);
+	}
+
+	.border {
+		height:50%;
+		border-right: 0.8px solid rgba(255, 255, 255, 0.1) !important;
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+		
+	.spacer {
+		flex: auto;
+	}
+
+}

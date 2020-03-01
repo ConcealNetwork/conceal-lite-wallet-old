@@ -1,0 +1,17 @@
+@use './../../../../mixins' as *;
+
+$min_width: 500px;
+$max_width: 1920px;
+$min_font: 11px;
+$max_font: 20px;
+
+.mat-toolbar {
+  height: 50px;
+	@include fluid-type($min_width, $max_width, $min_font, $max_font);
+  background: rgba(0, 0, 0, 0.2);
+  border-top: 0.8px solid rgba(255, 255, 255, 0.08) !important;
+	text-transform: capitalize;
+	.spacer {
+		flex: auto;
+	}
+}
