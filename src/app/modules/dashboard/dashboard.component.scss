@@ -6,8 +6,48 @@
 }
 
 .container {
-  .title {
-    margin: 25px;
-    color: white;
+  display: flex;
+  height: 100%;
+  .side {
+    width: 35%; /* A fixed width as the default */
+    padding: 25px;
+  }
+  .content {
+    flex-grow: 1; /* Set the middle element to grow and stretch */
+    padding: 25px;
+  }
+  mat-card {
+    position: relative;
+    z-index: 2;
+    background: rgba($color: #212121, $alpha: 0.8);
+    border: 3px solid rgba($color: orange, $alpha: 1);
+    border-radius: 10px;
+    color: #fff;
+    padding: 0;
+    margin: 15px;
+  }
+  mat-card-header {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+  mat-card-title {
+    margin: 0;
+    padding: 0;
+  }
+  .mat-card-header-text {
+    margin: 0 !important;
+  }
+  mat-card-content {
+    padding: 15px;
+  }
+  mat-card-actions {
+    position: relative;
+    z-index: 1;
+    background: rgba($color: grey, $alpha: 0.5);
+    padding: 0;
+    margin: 0;
+    .spacer {
+      flex: auto;
+    }
   }
 }

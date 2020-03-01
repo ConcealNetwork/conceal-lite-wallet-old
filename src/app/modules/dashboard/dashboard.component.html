@@ -2,7 +2,39 @@
   <app-loader [isLoading]="isLoading"></app-loader>
 </div>
 <div class="container" @enterAnimation>
-  <h1 class="title">
-    {{ 'PAGES.DASHBOARD.TITLE' | translate }}
-  </h1>
+  <div class="side">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          {{ 'PAGES.DASHBOARD.TITLE' | translate }}
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        test
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>Refresh</button>
+        <span class="spacer"></span>
+        <button mat-button>Transfer</button>
+      </mat-card-actions>
+    </mat-card>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          {{ 'PAGES.DASHBOARD.TITLE' | translate }}
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        test
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>Copy</button>
+        <span class="spacer"></span>
+        <button mat-button>QR Code</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <div class="content">
+    Content
+  </div>
 </div>
