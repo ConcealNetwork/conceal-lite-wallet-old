@@ -1,10 +1,13 @@
 .loading {
-  width: 100%;
+  position: absolute;
   height: 100%;
+  width: 100vw;
+  z-index: 1;
 }
 
 .container {
   .title {
+    margin: 25px;
     color: white;
   }
 }
