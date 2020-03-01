@@ -68,12 +68,12 @@ export class ParticlesDirective implements OnDestroy, OnInit {
   }
 
   ngOnInit() {
-    this.setCanvasSize();
+    //this.setCanvasSize();
     this.animate();
   }
 
   @HostListener("window:resize") onResize() {
-    this.setCanvasSize();
+    //this.setCanvasSize();
   }
 
   @HostListener("mouseleave") onMouseLeave() {

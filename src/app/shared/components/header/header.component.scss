@@ -7,22 +7,37 @@ $title_max_font: 32px;
 $min_font: 11px;
 $max_font: 26px;
 
-.mat-toolbar {
-	height: 80px;
-	padding-right: 0px;
-	background: none;
-
-	@media only screen and (max-width: 900px) { 
-		.title, .border { 
-			display: none; 
-		} 
+@media only screen and (max-width: 900px) { 
+	.mat-toolbar {
+		height: 65px !important;
 	}
+	.hidden-sm { 
+		display: none; 
+	} 
+	.logo {
+		width: 35px;
+		height: 35px;
+	}
+	.border {
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+}
+
+.mat-toolbar {
+	-webkit-app-region: drag;
+	height: 80px;
+	background: none;
 
 	.title {
 		@include fluid-type($min_width, $max_width, $title_min_font, $title_max_font);
 		text-transform: capitalize;
 		margin-left: 25px;
 		margin-right: 25px;
+	}
+
+	.logo {
+		padding-left: 15px;
 	}
 
 	.navlink {

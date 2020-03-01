@@ -15,9 +15,6 @@ app-header, app-footer {
     position: relative;
     z-index: 2;
     flex: 0 0 auto;
-    padding-left: 15px;
-    padding-right: 15px;
-    -webkit-app-region: drag;
     background: rgba(0, 0, 0, 0.2);
     border-bottom: 0.8px solid rgba(255, 255, 255, 0.08) !important;
     border-top: 0.8px solid rgba(255, 255, 255, 0.08) !important;
