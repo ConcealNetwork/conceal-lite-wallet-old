@@ -48,7 +48,33 @@
       </mat-card-footer>
     </mat-card>
   </div>
-  <div class="content" fxFlex>
-    Content
+  <div class="content" fxFlex fxLayout="column" fxLayoutAlign="start stretch">
+    <h1 class="title">{{ 'PAGES.DASHBOARD.ACTIVITY' | translate }}</h1>
+    
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Received Funds
+          </mat-panel-title>
+          <mat-panel-description>
+            5 Hours ago
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>I'm visible because I am open</p>
+      </mat-expansion-panel>
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Sent Funds
+          </mat-panel-title>
+          <mat-panel-description>
+            2 Days ago
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>I'm visible because I am open</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+
   </div>
 </div>

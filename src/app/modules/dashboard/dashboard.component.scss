@@ -13,7 +13,11 @@
   }
   .content {
     //background: rgba($color: red, $alpha: 0.1);
-    padding: 25px;
+    padding: 55px;
+    .title {
+      margin-top: -20px;
+      font-size: 2rem;
+    }
   }
   mat-card {
     height: 100%;

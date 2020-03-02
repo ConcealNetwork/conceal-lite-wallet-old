@@ -16,12 +16,16 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { ObserversModule } from '@angular/cdk/observers';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
+import { TextFieldModule } from '@angular/cdk/text-field';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 // NG Translate
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -74,12 +78,16 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ObserversModule,
     OverlayModule,
     PortalModule,
+    TextFieldModule,
     MatMenuModule,
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
     MatCardModule,
     MatProgressBarModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatInputModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

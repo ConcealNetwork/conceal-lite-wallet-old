@@ -15,7 +15,8 @@
       "DASHBOARD": {
         "TITLE": "Dashboard",
         "BALANCE": "Balance",
-        "ADDRESS": "Address"
+        "ADDRESS": "Address",
+        "ACTIVITY": "Recent Activity"
 			},
 			"TRANSFER": {
         "TITLE": "Transfer"
