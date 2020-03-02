@@ -3,15 +3,108 @@
 $min_width: 500px;
 $max_width: 1920px;
 $min_font: 11px;
-$max_font: 20px;
+$max_font: 24px;
 
 .mat-toolbar {
-  height: 50px;
+  height: 55px;
 	@include fluid-type($min_width, $max_width, $min_font, $max_font);
   background: rgba(0, 0, 0, 0.2);
   border-top: 0.8px solid rgba(255, 255, 255, 0.08) !important;
 	text-transform: capitalize;
+	.progress {
+		width: 30%;
+		height: 100%;
+		font-size: 0.8rem;
+		line-height: 1;
+		text-align: center;
+		justify-content: center; /* align horizontal */
+		align-items: center; /* align vertical */
+		color: rgba($color: #fff, $alpha: 0.7);
+		span {
+			display: flex;
+			justify-content: center; /* align horizontal */
+			align-items: center; /* align vertical */
+			margin-top: 5px;
+			margin-bottom: 8px;
+		}
+		mat-progress-bar {
+			margin-top: 5px;
+			animation: shadow-pulse 1.5s infinite;
+		}
+		mat-icon {
+			height: auto;
+			margin-right: 8px;
+		}
+		.unsynchronised {
+			color: rgba($color: red, $alpha: 0.7);
+		}
+		.synchronised {
+			color: rgba($color: green, $alpha: 0.9);
+		}
+	}
+	.title {
+		color: rgba($color: #fff, $alpha: 0.7);
+		display: flex;
+		justify-content: center; /* align horizontal */
+		align-items: center; /* align vertical */
+		mat-icon {
+			animation: shadow-pulse 1.5s infinite;
+		}
+		.right {
+			margin-left: 15px;
+		}
+		.left {
+			margin-right: 15px;
+		}
+		.offline {
+			padding: 2.5px;
+			border: 3px solid rgba($color: red, $alpha: 0.3);
+			border-radius: 25px;
+			color: rgba($color: red, $alpha: 0.7);
+		}
+		.online {
+			padding: 2.5px;
+			border: 3px solid rgba($color: green, $alpha: 0.3);
+			border-radius: 25px;
+			color: rgba($color: green, $alpha: 0.9);
+		}
+	}
 	.spacer {
 		flex: auto;
 	}
+	.spin {
+		-webkit-animation: spin 1000ms infinite linear;
+		animation: spin 1000ms infinite linear;
+	}
+}
+
+@keyframes shadow-pulse
+{
+     0% {
+		  box-shadow: 0 0 0 0px rgba(255,255,255, 0.15);
+     }
+     100% {
+		  box-shadow: 0 0 0 10px rgba(255,255,255, 0);
+     }
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+@keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
 }

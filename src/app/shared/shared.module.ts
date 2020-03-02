@@ -17,6 +17,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 // Directives
 import { WebviewDirective } from './directives/webview.directive';
@@ -51,6 +52,7 @@ import { FooterComponent } from './components/footer/footer.component';
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
+    MatProgressBarModule
   ],
   exports: [
     TranslateModule,

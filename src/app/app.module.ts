@@ -21,6 +21,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 // NG Translate
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -78,6 +79,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MatButtonModule,
     MatIconModule,
     MatCardModule,
+    MatProgressBarModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
