@@ -9,28 +9,27 @@
   display: flex;
   height: 100%;
   .side {
-    width: 35%; /* A fixed width as the default */
     padding: 25px;
   }
   .content {
-    flex-grow: 1; /* Set the middle element to grow and stretch */
+    background: rgba($color: red, $alpha: 0.1);
     padding: 25px;
   }
   mat-card {
-    position: relative;
-    z-index: 2;
+    height: 100%;
     background: rgba($color: #212121, $alpha: 0.8);
-    border: 3px solid rgba($color: orange, $alpha: 1);
-    border-radius: 10px;
+    border: 2px solid rgba($color: orange, $alpha: 1);
+    border-radius: 8px;
     color: #fff;
     padding: 0;
-    margin: 15px;
+    margin: 30px;
   }
   mat-card-header {
     padding-top: 15px;
     padding-bottom: 15px;
   }
   mat-card-title {
+    font-size: 1.18rem;
     margin: 0;
     padding: 0;
   }
@@ -38,16 +37,29 @@
     margin: 0 !important;
   }
   mat-card-content {
+    font-size: 1.3rem;
+    color: rgba($color: #fff, $alpha: 0.2);
     padding: 15px;
+    display: flex;
+    place-content: center;
+    align-items: center;
+  }
+  .mat-card-footer {
+    margin: 0;
+  }
+  .mat-button {
+    margin: 0;
+    height: 50px;
+    font-size: 0.8rem;
+    mat-icon {
+      margin-right: 10px;
+    }
   }
   mat-card-actions {
-    position: relative;
-    z-index: 1;
-    background: rgba($color: grey, $alpha: 0.5);
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    background: rgba($color: grey, $alpha: 0.4);
     padding: 0;
     margin: 0;
-    .spacer {
-      flex: auto;
-    }
   }
 }

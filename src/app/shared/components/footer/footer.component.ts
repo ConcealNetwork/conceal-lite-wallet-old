@@ -14,8 +14,8 @@ export class FooterComponent implements OnInit, OnDestroy {
   isWalletOnline: boolean = false;
 
   ngOnInit() {
-    this.isNodeOnline = true;
-    this.isWalletOnline = true;
+    this.isNodeOnline = false;
+    this.isWalletOnline = false;
   }
 
   ngOnDestroy(){

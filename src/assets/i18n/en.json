@@ -13,7 +13,9 @@
         "OFFLINE": "Offline"
       },
       "DASHBOARD": {
-        "TITLE": "Dashboard"
+        "TITLE": "Dashboard",
+        "BALANCE": "Balance",
+        "ADDRESS": "Address"
 			},
 			"TRANSFER": {
         "TITLE": "Transfer"
