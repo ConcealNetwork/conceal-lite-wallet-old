@@ -113,10 +113,29 @@ $mat-warn: (
 $primary: mat-palette($mat-primary);
 $accent: mat-palette($mat-accent, 100, 500, A100);
 $warn: mat-palette($mat-warn);
-
 $theme: mat-light-theme($primary, $accent, $warn);
-
 @include angular-material-theme($theme);
+
+.mat-expansion-indicator::after {
+  color: rgba($color: orange, $alpha: 0.8);
+}
+
+.mat-expansion-panel-header {
+  min-height: 60px;
+}
+.mat-expansion-panel-content {
+  background: rgba($color: rgb(124, 124, 124), $alpha: 0.2);
+}
+
+.mat-expansion-panel-body {
+  padding: 0 24px 0px !important;
+  border-top: 1px solid rgba($color: orange, $alpha: 0.5);
+  p {
+    font-size: 0.7rem;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
 
 /* You can add global styles to this file, and also import other style files */
 html, body {

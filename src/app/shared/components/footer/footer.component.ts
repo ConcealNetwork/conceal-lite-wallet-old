@@ -21,11 +21,13 @@ export class FooterComponent implements OnInit, OnDestroy {
   isNodeOnline: boolean = false;
   isWalletOnline: boolean = false;
   isSynchronising: boolean = true;
+  syncPercentage: number = 0;
 
   ngOnInit() {
     this.isNodeOnline = true;
     this.isWalletOnline = true;
-    this.isSynchronising = false;
+    this.isSynchronising = true;
+    this.syncPercentage = 68;
   }
 
   ngOnDestroy(){

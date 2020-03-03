@@ -3,7 +3,7 @@
 $min_width: 500px;
 $max_width: 1920px;
 $min_font: 11px;
-$max_font: 24px;
+$max_font: 22px;
 
 .mat-toolbar {
   height: 55px;
@@ -24,8 +24,8 @@ $max_font: 24px;
 			display: flex;
 			justify-content: center; /* align horizontal */
 			align-items: center; /* align vertical */
-			margin-top: 5px;
-			margin-bottom: 8px;
+			margin-top: 8px;
+			margin-bottom: 4px;
 		}
 		mat-progress-bar {
 			margin-top: 5px;
@@ -36,7 +36,7 @@ $max_font: 24px;
 			margin-right: 8px;
 		}
 		.unsynchronised {
-			color: rgba($color: red, $alpha: 0.7);
+			color: rgba($color: white, $alpha: 0.7);
 		}
 		.synchronised {
 			color: rgba($color: green, $alpha: 0.9);
@@ -58,13 +58,13 @@ $max_font: 24px;
 		}
 		.offline {
 			padding: 2.5px;
-			border: 3px solid rgba($color: red, $alpha: 0.3);
+			border: 2px solid rgba($color: red, $alpha: 0.3);
 			border-radius: 25px;
 			color: rgba($color: red, $alpha: 0.7);
 		}
 		.online {
 			padding: 2.5px;
-			border: 3px solid rgba($color: green, $alpha: 0.3);
+			border: 2px solid rgba($color: green, $alpha: 0.3);
 			border-radius: 25px;
 			color: rgba($color: green, $alpha: 0.9);
 		}

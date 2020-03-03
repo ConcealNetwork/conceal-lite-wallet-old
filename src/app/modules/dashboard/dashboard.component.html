@@ -51,25 +51,51 @@
   <div class="content" fxFlex fxLayout="column" fxLayoutAlign="start stretch">
     <h1 class="title">{{ 'PAGES.DASHBOARD.ACTIVITY' | translate }}</h1>
     
-    <mat-accordion>
-      <mat-expansion-panel>
+    <mat-accordion [@.disabled]="disableAnimation">
+      <mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header>
-          <mat-panel-title>
-            Received Funds
+          <mat-panel-title fxFlex="50">
+            <mat-icon fxFlex="15">flight_land</mat-icon>
+            <span fxFlex>Funds Received</span>
           </mat-panel-title>
-          <mat-panel-description>
-            5 Hours ago
+          <mat-panel-description fxFlex>
+            5 hours ago
           </mat-panel-description>
         </mat-expansion-panel-header>
         <p>I'm visible because I am open</p>
       </mat-expansion-panel>
-      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel [expanded]="false">
         <mat-expansion-panel-header>
-          <mat-panel-title>
-            Sent Funds
+          <mat-panel-title fxFlex="50">
+            <mat-icon fxFlex="15">flight_takeoff</mat-icon>
+            <span fxFlex>Funds Sent</span>
           </mat-panel-title>
-          <mat-panel-description>
-            2 Days ago
+          <mat-panel-description fxFlex>
+            2 days ago
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>I'm visible because I am open</p>
+      </mat-expansion-panel>
+      <mat-expansion-panel [expanded]="false">
+        <mat-expansion-panel-header>
+          <mat-panel-title fxFlex="50">
+            <mat-icon fxFlex="15">send</mat-icon>
+            <span fxFlex>Message Sent</span>
+          </mat-panel-title>
+          <mat-panel-description fxFlex>
+            1 week ago
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>I'm visible because I am open</p>
+      </mat-expansion-panel>
+      <mat-expansion-panel [expanded]="false">
+        <mat-expansion-panel-header>
+          <mat-panel-title fxFlex="50">
+            <mat-icon fxFlex="15">markunread_mailbox</mat-icon>
+            <span fxFlex>Message Received</span>
+          </mat-panel-title>
+          <mat-panel-description fxFlex>
+            6 weeks ago
           </mat-panel-description>
         </mat-expansion-panel-header>
         <p>I'm visible because I am open</p>

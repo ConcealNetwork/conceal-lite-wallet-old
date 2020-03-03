@@ -9,8 +9,8 @@
 	</span>
 	<span class="spacer"></span>
 	<section class="progress">
-		<span *ngIf="isSynchronising"><mat-icon class="spin unsynchronised">sync</mat-icon>Synchronising</span>
-		<span *ngIf="!isSynchronising"><mat-icon class="synchronised">cloud_done</mat-icon>Synchronised</span>
+		<span *ngIf="isSynchronising"><mat-icon class="spin unsynchronised">sync</mat-icon>Synchronising ({{syncPercentage}}%)</span>
+		<span *ngIf="!isSynchronising"><mat-icon class="synchronised">cloud_done</mat-icon>Synchronised ({{syncPercentage}}%)</span>
 		<mat-progress-bar [color]="color" [mode]="mode" [value]="value" [bufferValue]="bufferValue"></mat-progress-bar>
 	</section>
 	<span class="spacer"></span>

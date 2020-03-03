@@ -33,12 +33,17 @@ import { trigger, transition, query, style, stagger, animate } from '@angular/an
 })
 export class DashboardComponent implements OnInit {
 
-	isLoading: boolean = true;
+  isLoading: boolean = true;
+  disableAnimation: boolean = true;
 
 	constructor() { }
 
 	ngOnInit(): void {
-		this.isLoading = false;
-	}
-
+    this.isLoading = false;
+  }
+  
+  ngAfterViewInit(): void {
+    // timeout required to avoid the dreaded 'ExpressionChangedAfterItHasBeenCheckedError'
+    setTimeout(() => this.disableAnimation = false);
+  }
 }

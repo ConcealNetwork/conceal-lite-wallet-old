@@ -18,6 +18,23 @@
       margin-top: -20px;
       font-size: 2rem;
     }
+    mat-expansion-panel {
+      color: #fff;
+      background: rgba($color: #3b3b3b, $alpha: 0.8);
+    }
+    mat-panel-title, mat-panel-description {
+      color: #fff;
+      font-size: 0.9rem;
+      line-height: 1.25;
+    }
+    mat-panel-title {
+      span {
+        color: orange;
+      }
+    }
+    mat-panel-description { 
+      color: rgba($color: #fff, $alpha: 0.7);
+    }
   }
   mat-card {
     height: 100%;
