@@ -3,26 +3,27 @@
 </div>
 <div class="container" @enterAnimation>
   <div class="side" fxFlex="10" fxLayout="column" fxLayoutAlign="start start"></div>
-  <div class="content" fxFlex fxLayout="column" fxLayoutAlign="start end">
-    <mat-accordion fxLayout="row" fxLayoutAlign="end end" [@.disabled]="disableAnimation">
-      <mat-expansion-panel fxFlex [expanded]="true">
+  <div class="content" fxFlex fxLayout="column" fxLayoutAlign="start start">
+    <h1 class="title">{{ 'PAGES.TRANSFER.TITLE' | translate }}</h1>
+    <mat-accordion multi="true" [@.disabled]="disableAnimation">
+      <mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header>
           <mat-panel-title>
             <mat-icon>flight_land</mat-icon>
-            <span>{{ 'PAGES.TRANSFER.HEADING.OPTIONS' | translate }}</span>
+            <span>{{ 'PAGES.TRANSFER.HEADINGS.OPTIONS' | translate }}</span>
           </mat-panel-title>
         </mat-expansion-panel-header>
         <p>I'm visible because I am open</p>
       </mat-expansion-panel>
-      <!-- <mat-expansion-panel fxFlex [expanded]="false">
+      <mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header>
           <mat-panel-title>
             <mat-icon>flight_land</mat-icon>
-            <span>{{ 'PAGES.TRANSFER.HEADING.RECIPIENT' | translate }}</span>
+            <span>{{ 'PAGES.TRANSFER.HEADINGS.RECIPIENT' | translate }}</span>
           </mat-panel-title>
         </mat-expansion-panel-header>
         <p>I'm visible because I am open</p>
-      </mat-expansion-panel> -->
+      </mat-expansion-panel>
     </mat-accordion>
   </div>
   <div class="side" fxFlex="20" fxLayout="column" fxLayoutAlign="start start">

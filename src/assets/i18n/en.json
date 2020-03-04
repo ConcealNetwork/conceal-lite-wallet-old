@@ -19,7 +19,11 @@
         "ACTIVITY": "Recent Activity"
 			},
 			"TRANSFER": {
-        "TITLE": "Transfer"
+        "TITLE": "Transfer Funds",
+        "HEADINGS": {
+          "OPTIONS": "Options",
+          "RECIPIENT": "Recipient"
+        }
 			},
 			"ACTIVITY": {
         "TITLE": "Activity"
