@@ -1,15 +1,76 @@
 .loading {
-  width: 100%;
+  position: absolute;
   height: 100%;
+  width: 100vw;
+  z-index: 1;
 }
 
 .container {
-  position: relative;
-  height: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  .title {
-    color: white;
+  height: 100%;
+  .heading {
+    position: relative;
+    float:left;
   }
+  .title {
+    font-size: 1.5rem;
+  }
+  .content {
+    //background: rgba($color: red, $alpha: 0.1);
+    padding-top: 60px;
+    padding-bottom: 55px;
+    padding-left: 45px;
+    padding-right: 45px;
+  }
+  .side {
+    //background: rgba($color: blue, $alpha: 0.1);
+    padding-top: 55px;
+    padding-bottom: 55px;
+  }
+}
+
+mat-accordion {
+  width: 100%;
+  mat-expansion-panel {
+    color: #fff;
+    background: rgba($color: #3b3b3b, $alpha: 0.8);
+    mat-panel-title, mat-panel-description {
+      color: #fff;
+      font-size: 0.9rem;
+      line-height: 1.25;
+    }
+    mat-panel-title {
+      span {
+        color: orange;
+        margin-left: 20px;
+      }
+    }
+    mat-panel-description { 
+      color: rgba($color: #fff, $alpha: 0.7);
+    }
+  }
+}
+.button-menu {
+  :hover {
+    color: rgba($color: orange, $alpha: 0.9);
+  }
+  .mat-button {
+    border: 2px solid rgba($color: orange, $alpha: 0.5);
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: justify;
+    text-transform: uppercase;
+    min-width: 145px;
+    .button-name {
+      width: 100%;
+    }
+    mat-icon {
+      margin-right: 10px;
+      min-width: 30px;
+    }
+  }
+}
+
+.mat-button.mat-accent {
+  color: rgba($color: white, $alpha: 0.9);
 }
