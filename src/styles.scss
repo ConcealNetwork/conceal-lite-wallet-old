@@ -137,6 +137,36 @@ $theme: mat-light-theme($primary, $accent, $warn);
   }
 }
 
+.mat-table {
+  background: rgba($color: rgb(124, 124, 124), $alpha: 0.2);
+}
+th.mat-header-cell, td.mat-footer-cell {
+  border-bottom-color: rgba($color: orange, $alpha: 0.9);
+}
+td.mat-cell {
+  border-bottom-color: rgba($color: white, $alpha: 0.2);
+}
+.mat-paginator, .mat-header-cell, .mat-select-arrow {
+  color: orange;
+}
+.mat-cell {
+  color: #fff;
+}
+.mat-select-value {
+  color: rgba($color: white, $alpha: 0.8);
+}
+.mat-table thead, .mat-paginator {
+  background: rgba($color: #3b3b3b, $alpha: 0.8);
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-label {
+  color: rgba($color: orange, $alpha: 0.9);
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+  background-color: rgba($color: orange, $alpha: 0.9);
+}
+
 /* You can add global styles to this file, and also import other style files */
 html, body {
   margin: 0;
