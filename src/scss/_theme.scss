@@ -1,0 +1,114 @@
+// Import library functions for theme creation.
+@import "~@angular/material/theming";
+
+// Include non-theme styles for core.
+@include mat-core();
+
+// Define your application's custom theme.
+$mat-primary: (
+	50: #e3e3e3,
+	100: #b9b9b9,
+	200: #8a8a8a,
+	300: #5b5b5b,
+	400: #383838,
+	500: #151515,
+	600: #121212,
+	700: #0f0f0f,
+	800: #0c0c0c,
+	900: #060606,
+	A100: #ff4e4e,
+	A200: #ff1b1b,
+	A400: #e70000,
+	A700: #ce0000,
+	contrast: (
+		50: #000000,
+		100: #000000,
+		200: #000000,
+		300: #ffffff,
+		400: #ffffff,
+		500: #ffffff,
+		600: #ffffff,
+		700: #ffffff,
+		800: #ffffff,
+		900: #ffffff,
+		A100: #000000,
+		A200: #ffffff,
+		A400: #ffffff,
+		A700: #ffffff
+	)
+);
+
+$mat-accent: (
+	50: #fff4e0,
+	100: #ffe4b3,
+	200: #ffd280,
+	300: #ffc04d,
+	400: #ffb326,
+	500: #ffa500,
+	600: #ff9d00,
+	700: #ff9300,
+	800: #ff8a00,
+	900: #ff7900,
+	A100: #ffffff,
+	A200: #fff8f2,
+	A400: #ffdabf,
+	A700: #ffcba6,
+	contrast: (
+		50: #000000,
+		100: #000000,
+		200: #000000,
+		300: #000000,
+		400: #000000,
+		500: #000000,
+		600: #000000,
+		700: #000000,
+		800: #000000,
+		900: #000000,
+		A100: #000000,
+		A200: #000000,
+		A400: #000000,
+		A700: #000000
+	)
+);
+
+$mat-warn: (
+	50: #f3e0e0,
+	100: #e0b3b3,
+	200: #cc8080,
+	300: #b84d4d,
+	400: #a82626,
+	500: #990000,
+	600: #910000,
+	700: #860000,
+	800: #7c0000,
+	900: #6b0000,
+	A100: #ff9a9a,
+	A200: #ff6767,
+	A400: #ff3434,
+	A700: #ff1a1a,
+	contrast: (
+		50: #000000,
+		100: #000000,
+		200: #000000,
+		300: #ffffff,
+		400: #ffffff,
+		500: #ffffff,
+		600: #ffffff,
+		700: #ffffff,
+		800: #ffffff,
+		900: #ffffff,
+		A100: #000000,
+		A200: #000000,
+		A400: #ffffff,
+		A700: #ffffff
+	)
+);
+
+/* ======== Angular material custom themes ======== */
+$primary: mat-palette($mat-primary);
+$accent: mat-palette($mat-accent, 100, 500, A100);
+$warn: mat-palette($mat-warn);
+$theme: mat-light-theme($primary, $accent, $warn);
+
+// Include theme styles for Angular Material components.
+@include angular-material-theme($theme);

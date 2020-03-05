@@ -1,183 +1,83 @@
 // Imports
-@use './mixins' as *;
-$material-design-icons-font-directory-path: '~material-design-icons-iconfont/dist/fonts/';
-@import '~material-design-icons-iconfont/src/material-design-icons';
-@import '~@angular/material/theming';
-@include mat-core();
+@use './scss/mixins' as *;
+@use './scss/theme' as *;
 
-// Variables
+$material-design-icons-font-directory-path: "~material-design-icons-iconfont/dist/fonts/";
+@import "~material-design-icons-iconfont/src/material-design-icons";
+
+// Mixin Variables
 $min_width: 500px;
 $max_width: 1920px;
 $min_font: 11px;
 $max_font: 28px;
-$mat-primary: (
-50 : #e3e3e3,
-100 : #b9b9b9,
-200 : #8a8a8a,
-300 : #5b5b5b,
-400 : #383838,
-500 : #151515,
-600 : #121212,
-700 : #0f0f0f,
-800 : #0c0c0c,
-900 : #060606,
-A100 : #ff4e4e,
-A200 : #ff1b1b,
-A400 : #e70000,
-A700 : #ce0000,
-contrast: (
-  50 : #000000,
-  100 : #000000,
-  200 : #000000,
-  300 : #ffffff,
-  400 : #ffffff,
-  500 : #ffffff,
-  600 : #ffffff,
-  700 : #ffffff,
-  800 : #ffffff,
-  900 : #ffffff,
-  A100 : #000000,
-  A200 : #ffffff,
-  A400 : #ffffff,
-  A700 : #ffffff,
-)
-);
-
-$mat-accent: (
-50 : #fff4e0,
-100 : #ffe4b3,
-200 : #ffd280,
-300 : #ffc04d,
-400 : #ffb326,
-500 : #ffa500,
-600 : #ff9d00,
-700 : #ff9300,
-800 : #ff8a00,
-900 : #ff7900,
-A100 : #ffffff,
-A200 : #fff8f2,
-A400 : #ffdabf,
-A700 : #ffcba6,
-  contrast: (
-    50 : #000000,
-    100 : #000000,
-    200 : #000000,
-    300 : #000000,
-    400 : #000000,
-    500 : #000000,
-    600 : #000000,
-    700 : #000000,
-    800 : #000000,
-    900 : #000000,
-    A100 : #000000,
-    A200 : #000000,
-    A400 : #000000,
-    A700 : #000000,
-  )
-);
-
-$mat-warn: (
-  50 : #f3e0e0,
-  100 : #e0b3b3,
-  200 : #cc8080,
-  300 : #b84d4d,
-  400 : #a82626,
-  500 : #990000,
-  600 : #910000,
-  700 : #860000,
-  800 : #7c0000,
-  900 : #6b0000,
-  A100 : #ff9a9a,
-  A200 : #ff6767,
-  A400 : #ff3434,
-  A700 : #ff1a1a,
-  contrast: (
-    50 : #000000,
-    100 : #000000,
-    200 : #000000,
-    300 : #ffffff,
-    400 : #ffffff,
-    500 : #ffffff,
-    600 : #ffffff,
-    700 : #ffffff,
-    800 : #ffffff,
-    900 : #ffffff,
-    A100 : #000000,
-    A200 : #000000,
-    A400 : #ffffff,
-    A700 : #ffffff,
-  )
-);
-
-/* ======== Angular material custom themes ======== */ 
-$primary: mat-palette($mat-primary);
-$accent: mat-palette($mat-accent, 100, 500, A100);
-$warn: mat-palette($mat-warn);
-$theme: mat-light-theme($primary, $accent, $warn);
-@include angular-material-theme($theme);
 
 .mat-expansion-indicator::after {
-  color: rgba($color: orange, $alpha: 0.8);
+	color: rgba($color: orange, $alpha: 0.8);
 }
 
 .mat-expansion-panel-header {
-  min-height: 60px;
+	min-height: 60px;
 }
 .mat-expansion-panel-content {
-  background: rgba($color: rgb(124, 124, 124), $alpha: 0.2);
+	background: rgba($color: rgb(124, 124, 124), $alpha: 0.2);
 }
 
 .mat-expansion-panel-body {
-  padding: 0 24px 0px !important;
-  border-top: 1px solid rgba($color: orange, $alpha: 0.5);
-  p {
-    font-size: 0.7rem;
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
+	padding: 0 24px 0px !important;
+	border-top: 1px solid rgba($color: orange, $alpha: 0.5);
+	p {
+		font-size: 0.7rem;
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
 }
 
 .mat-table {
-  background: rgba($color: rgb(124, 124, 124), $alpha: 0.2);
+	background: rgba($color: rgb(124, 124, 124), $alpha: 0.2);
 }
-th.mat-header-cell, td.mat-footer-cell {
-  border-bottom-color: rgba($color: orange, $alpha: 0.9);
+th.mat-header-cell,
+td.mat-footer-cell {
+	border-bottom-color: rgba($color: orange, $alpha: 0.9);
 }
 td.mat-cell {
-  border-bottom-color: rgba($color: white, $alpha: 0.2);
+	border-bottom-color: rgba($color: white, $alpha: 0.2);
 }
-.mat-paginator, .mat-header-cell, .mat-select-arrow {
-  color: orange;
+.mat-paginator,
+.mat-header-cell,
+.mat-select-arrow {
+	color: orange;
 }
 .mat-cell {
-  color: #fff;
+	color: #fff;
 }
 .mat-select-value {
-  color: rgba($color: white, $alpha: 0.8);
+	color: rgba($color: white, $alpha: 0.8);
 }
-.mat-table thead, .mat-paginator {
-  background: rgba($color: #3b3b3b, $alpha: 0.8);
+.mat-table thead,
+.mat-paginator {
+	background: rgba($color: #3b3b3b, $alpha: 0.8);
 }
 
 .mat-form-field-appearance-legacy .mat-form-field-label {
-  color: rgba($color: orange, $alpha: 0.9);
+	color: rgba($color: orange, $alpha: 0.9);
 }
 
 .mat-form-field-appearance-legacy .mat-form-field-underline {
-  background-color: rgba($color: orange, $alpha: 0.9);
+	background-color: rgba($color: orange, $alpha: 0.9);
 }
 
 /* You can add global styles to this file, and also import other style files */
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: 'Poppins', Arial, Helvetica, sans-serif;
-  @include fluid-type($min_width, $max_width, $min_font, $max_font);
-  color: #fff;
-  background: url(./assets/images/background.jpg) no-repeat center fixed;
-  -webkit-background-size: cover; /* pour anciens Chrome et Safari */
-  background-size: cover; /* version standardisée */
+html,
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	font-family: "Poppins", Arial, Helvetica, sans-serif;
+	@include fluid-type($min_width, $max_width, $min_font, $max_font);
+	color: #fff;
+	background: url(./assets/images/background.jpg) no-repeat center fixed;
+	-webkit-background-size: cover; /* pour anciens Chrome et Safari */
+	background-size: cover; /* version standardisée */
 }
 
 // .mat-progress-bar.mat-accent .mat-progress-bar-buffer {

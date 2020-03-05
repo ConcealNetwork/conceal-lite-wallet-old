@@ -1,4 +1,4 @@
-@use './../../../../mixins' as *;
+@use './../../../../scss/mixins' as *;
 
 $min_width: 500px;
 $max_width: 1920px;
@@ -64,9 +64,9 @@ $max_font: 22px;
 		}
 		.online {
 			padding: 2.5px;
-			border: 2px solid rgba($color: green, $alpha: 0.3);
+			border: 2px solid rgba($color: orange, $alpha: 0.3);
 			border-radius: 25px;
-			color: rgba($color: green, $alpha: 0.9);
+			color: rgba($color: orange, $alpha: 0.9);
 		}
 	}
 	.spacer {
