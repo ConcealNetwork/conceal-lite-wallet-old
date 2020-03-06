@@ -1,0 +1,13 @@
+// Import theming functions
+@import '~@angular/material/theming';
+
+mat-card {
+  height: 100%;
+  margin: 15px;
+  border: 2px solid rgba($color: orange, $alpha: 1);
+  border-radius: 10px;
+}
+
+mat-card-actions {
+  background: rgba($color: grey, $alpha: 0.4);
+}
