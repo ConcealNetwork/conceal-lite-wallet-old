@@ -30,7 +30,8 @@ $max_font: 26px;
 	background: none;
 
 	.title {
-		@include fluid-type($min_width, $max_width, $title_min_font, $title_max_font);
+    @include fluid-type($min_width, $max_width, $title_min_font, $title_max_font);
+    color: #fff;
 		text-transform: capitalize;
 		margin-left: 25px;
 		margin-right: 25px;

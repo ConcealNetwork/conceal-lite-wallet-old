@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
 	<span class="title">
-		<mat-icon class="left offline" *ngIf="!isWalletOnline">wifi_off</mat-icon>
-		<mat-icon class="left online" *ngIf="isWalletOnline">wifi</mat-icon>
+		<mat-icon svgIcon="wifi_off" class="left offline" *ngIf="!isWalletOnline"></mat-icon>
+		<mat-icon svgIcon="wifi" class="left online" *ngIf="isWalletOnline"></mat-icon>
 		<span>
 			{{ 'PAGES.FOOTER.WALLET' | translate }}: 
 			{{ ( isWalletOnline ? 'PAGES.FOOTER.ONLINE' : 'PAGES.FOOTER.OFFLINE' ) | translate }}
@@ -9,17 +9,17 @@
 	</span>
 	<span class="spacer"></span>
 	<section class="progress">
-		<span *ngIf="isSynchronising"><mat-icon class="spin unsynchronised">sync</mat-icon>Synchronising ({{syncPercentage}}%)</span>
-		<span *ngIf="!isSynchronising"><mat-icon class="synchronised">cloud_done</mat-icon>Synchronised ({{syncPercentage}}%)</span>
-		<mat-progress-bar [color]="color" [mode]="mode" [value]="value" [bufferValue]="bufferValue"></mat-progress-bar>
-	</section>
+		<span *ngIf="isSynchronising"><mat-icon svgIcon="sync" class="unsynchronised"></mat-icon>Synchronising ({{syncPercentage}}%)</span>
+    <span *ngIf="!isSynchronising"><mat-icon svgIcon="cloud_done" class="synchronised"></mat-icon>Synchronised ({{syncPercentage}}%)</span>
+    <mat-progress-bar [color]="color" [mode]="mode" [value]="value" [bufferValue]="bufferValue"></mat-progress-bar>
+  </section>
 	<span class="spacer"></span>
 	<span class="title">
 		<span>
 			{{ 'PAGES.FOOTER.NODE' | translate }}: 
 			{{ ( isNodeOnline ? 'PAGES.FOOTER.ONLINE' : 'PAGES.FOOTER.OFFLINE' ) | translate }}
 		</span>
-		<mat-icon class="right offline" *ngIf="!isNodeOnline">wifi_off</mat-icon>
-		<mat-icon class="right online" *ngIf="isNodeOnline">wifi</mat-icon>
+		<mat-icon svgIcon="wifi_off" class="right offline" *ngIf="!isNodeOnline"></mat-icon>
+		<mat-icon svgIcon="wifi" class="right online" *ngIf="isNodeOnline"></mat-icon>
 	</span>
 </mat-toolbar>

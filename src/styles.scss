@@ -2,69 +2,11 @@
 @use './scss/mixins' as *;
 @use './scss/theme' as *;
 
-$material-design-icons-font-directory-path: "~material-design-icons-iconfont/dist/fonts/";
-@import "~material-design-icons-iconfont/src/material-design-icons";
-
 // Mixin Variables
 $min_width: 500px;
 $max_width: 1920px;
 $min_font: 11px;
 $max_font: 28px;
-
-.mat-expansion-indicator::after {
-	color: rgba($color: orange, $alpha: 0.8);
-}
-
-.mat-expansion-panel-header {
-	min-height: 60px;
-}
-.mat-expansion-panel-content {
-	background: rgba($color: rgb(124, 124, 124), $alpha: 0.2);
-}
-
-.mat-expansion-panel-body {
-	padding: 0 24px 0px !important;
-	border-top: 1px solid rgba($color: orange, $alpha: 0.5);
-	p {
-		font-size: 0.7rem;
-		padding-top: 10px;
-		padding-bottom: 10px;
-	}
-}
-
-.mat-table {
-	background: rgba($color: rgb(124, 124, 124), $alpha: 0.2);
-}
-th.mat-header-cell,
-td.mat-footer-cell {
-	border-bottom-color: rgba($color: orange, $alpha: 0.9);
-}
-td.mat-cell {
-	border-bottom-color: rgba($color: white, $alpha: 0.2);
-}
-.mat-paginator,
-.mat-header-cell,
-.mat-select-arrow {
-	color: orange;
-}
-.mat-cell {
-	color: #fff;
-}
-.mat-select-value {
-	color: rgba($color: white, $alpha: 0.8);
-}
-.mat-table thead,
-.mat-paginator {
-	background: rgba($color: #3b3b3b, $alpha: 0.8);
-}
-
-.mat-form-field-appearance-legacy .mat-form-field-label {
-	color: rgba($color: orange, $alpha: 0.9);
-}
-
-.mat-form-field-appearance-legacy .mat-form-field-underline {
-	background-color: rgba($color: orange, $alpha: 0.9);
-}
 
 /* You can add global styles to this file, and also import other style files */
 html,
@@ -79,7 +21,3 @@ body {
 	-webkit-background-size: cover; /* pour anciens Chrome et Safari */
 	background-size: cover; /* version standardisée */
 }
-
-// .mat-progress-bar.mat-accent .mat-progress-bar-buffer {
-//   background-color: orange !important;
-// }

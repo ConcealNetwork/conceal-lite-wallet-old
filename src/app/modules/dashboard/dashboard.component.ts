@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MatIconRegistry } from '@angular/material/icon';
 
 @Component({
 	selector: 'app-dashboard',
@@ -36,7 +38,16 @@ export class DashboardComponent implements OnInit {
   isLoading: boolean = true;
   disableAnimation: boolean = true;
 
-	constructor() { }
+	constructor(
+    public matIconRegistry: MatIconRegistry,
+    public domSanitizer: DomSanitizer
+  ) {
+    matIconRegistry.addSvgIconSet(
+      domSanitizer.bypassSecurityTrustResourceUrl(
+        `assets/materal-icons-twotone.svg`
+      )
+    );
+   }
 
 	ngOnInit(): void {
     this.isLoading = false;

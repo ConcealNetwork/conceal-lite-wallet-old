@@ -1,6 +1,8 @@
 // Core
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MatIconRegistry } from '@angular/material/icon';
 
 // Services
 import { ElectronService } from './../../services/electron.service';
@@ -22,8 +24,15 @@ export class HeaderComponent implements OnInit {
     public router: Router,
     private route: ActivatedRoute,
     public electronService: ElectronService,
-    public dataService: DataService
+    public dataService: DataService,
+    public matIconRegistry: MatIconRegistry,
+    public domSanitizer: DomSanitizer
   ) { 
+    matIconRegistry.addSvgIconSet(
+      domSanitizer.bypassSecurityTrustResourceUrl(
+        `assets/materal-icons-twotone.svg`
+      )
+    );
   }
 
   logout() {

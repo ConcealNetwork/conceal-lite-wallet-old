@@ -6,10 +6,10 @@ $min_font: 11px;
 $max_font: 22px;
 
 .mat-toolbar {
-  height: 55px;
+	height: 55px;
 	@include fluid-type($min_width, $max_width, $min_font, $max_font);
-  background: rgba(0, 0, 0, 0.2);
-  border-top: 0.8px solid rgba(255, 255, 255, 0.08) !important;
+	background: rgba(0, 0, 0, 0.2);
+	border-top: 0.8px solid rgba(255, 255, 255, 0.08) !important;
 	text-transform: capitalize;
 	.progress {
 		width: 30%;
@@ -78,33 +78,32 @@ $max_font: 22px;
 	}
 }
 
-@keyframes shadow-pulse
-{
-     0% {
-		  box-shadow: 0 0 0 0px rgba(255,255,255, 0.15);
-     }
-     100% {
-		  box-shadow: 0 0 0 10px rgba(255,255,255, 0);
-     }
+@keyframes shadow-pulse {
+	0% {
+		box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.15);
+	}
+	100% {
+		box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+	}
 }
 
 @-webkit-keyframes spin {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(359deg);
-        transform: rotate(359deg);
-    }
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(359deg);
+		transform: rotate(359deg);
+	}
 }
 @keyframes spin {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(359deg);
-        transform: rotate(359deg);
-    }
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(359deg);
+		transform: rotate(359deg);
+	}
 }

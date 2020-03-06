@@ -1,7 +1,9 @@
 // Core
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {ThemePalette} from '@angular/material/core';
-import {ProgressBarMode} from '@angular/material/progress-bar';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MatIconRegistry } from '@angular/material/icon';
+import { ThemePalette } from '@angular/material/core';
+import { ProgressBarMode } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-footer',
@@ -23,6 +25,17 @@ export class FooterComponent implements OnInit, OnDestroy {
   isSynchronising: boolean = true;
   syncPercentage: number = 0;
 
+  constructor(
+    public matIconRegistry: MatIconRegistry,
+    public domSanitizer: DomSanitizer
+  ) { 
+    matIconRegistry.addSvgIconSet(
+      domSanitizer.bypassSecurityTrustResourceUrl(
+        `assets/materal-icons-twotone.svg`
+      )
+    );
+  }
+
   ngOnInit() {
     this.isNodeOnline = true;
     this.isWalletOnline = true;
@@ -30,8 +43,6 @@ export class FooterComponent implements OnInit, OnDestroy {
     this.syncPercentage = 68;
   }
 
-  ngOnDestroy(){
-
-  }
+  ngOnDestroy(){ }
 
 }
