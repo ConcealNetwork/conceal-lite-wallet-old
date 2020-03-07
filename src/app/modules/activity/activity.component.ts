@@ -4,22 +4,12 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  color: string;
+export interface Transactions {
+  date: string;
+  amount: number;
+  fee: number;
+  height: number;
 }
-
-/** Constants used to fill up our data base. */
-const COLORS: string[] = [
-  'maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple', 'fuchsia', 'lime', 'teal',
-  'aqua', 'blue', 'navy', 'black', 'gray'
-];
-const NAMES: string[] = [
-  'Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack', 'Charlotte', 'Theodore', 'Isla', 'Oliver',
-  'Isabella', 'Jasper', 'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'
-];
 
 @Component({
 	selector: 'app-activity',
@@ -55,10 +45,10 @@ export class ActivityComponent implements OnInit {
 
   // MatPaginator Output
   pageEvent: PageEvent;
-  pageSize: Number = 8;
+  pageSize: Number = 10;
   pageSizeOptions: number[] = [5, 10, 25, 100];
-  displayedColumns: string[] = ['id', 'name', 'progress', 'color'];
-  dataSource: MatTableDataSource<UserData>;
+  displayedColumns: string[] = ['date', 'amount', 'fee', 'height'];
+  dataSource: MatTableDataSource<Transactions>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -67,9 +57,9 @@ export class ActivityComponent implements OnInit {
 
 	constructor() {
     // Create 100 users
-    const users = Array.from({length: 100}, (_, k) => this.createNewUser(k + 1));
+    const transactions = Array.from({length: 100}, (_, k) => this.createTransactions(k + 1));
     // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+    this.dataSource = new MatTableDataSource(transactions);
   }
 
 	ngOnInit(): void {
@@ -86,14 +76,17 @@ export class ActivityComponent implements OnInit {
     }
   }
 
+  randomDate(start, end) {
+    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())).toISOString().slice(0,10);
+  } 
+
   /** Builds and returns a new User. */
-  createNewUser(id: number): UserData {
-    const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' + NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
+  createTransactions(date: number): Transactions {
     return {
-      id: id.toString(),
-      name: name,
-      progress: Math.round(Math.random() * 100).toString(),
-      color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
+      date: this.randomDate(new Date(2012, 0, 1), new Date()),
+      amount: Math.floor(Math.random() * 16) + 5,
+      fee: Math.floor(Math.random() * (1 - 0.0001 + 1)) + 0.0001,
+      height: Math.floor(Math.random() * (557352 - 457352 + 1)) + 457352
     };
 
   }

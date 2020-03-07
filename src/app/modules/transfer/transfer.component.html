@@ -3,23 +3,23 @@
 </div>
 <div class="container" @enterAnimation>
   <div class="side" fxFlex="10" fxLayout="column" fxLayoutAlign="start start"></div>
-  <div class="content" fxFlex fxLayout="column" fxLayoutAlign="start start">
+  <div class="content expansion-panel" fxFlex fxLayout="column" fxLayoutAlign="start stretch">
     <h1 class="title">{{ 'PAGES.TRANSFER.TITLE' | translate }}</h1>
     <mat-accordion multi="true" [@.disabled]="disableAnimation">
       <mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header>
-          <mat-panel-title>
-            <mat-icon svgIcon="flight_land"></mat-icon>
-            <span>{{ 'PAGES.TRANSFER.HEADINGS.OPTIONS' | translate }}</span>
+          <mat-panel-title fxFlex="50">
+            <mat-icon svgIcon="flight_land" fxFlex="12"></mat-icon>
+            <span fxFlex>{{ 'PAGES.TRANSFER.HEADINGS.OPTIONS' | translate }}</span>
           </mat-panel-title>
         </mat-expansion-panel-header>
         <p>I'm visible because I am open</p>
       </mat-expansion-panel>
       <mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header>
-          <mat-panel-title>
-            <mat-icon svgIcon="flight_land"></mat-icon>
-            <span>{{ 'PAGES.TRANSFER.HEADINGS.RECIPIENT' | translate }}</span>
+          <mat-panel-title fxFlex="50">
+            <mat-icon svgIcon="flight_land" fxFlex="12"></mat-icon>
+            <span fxFlex>{{ 'PAGES.TRANSFER.HEADINGS.RECIPIENT' | translate }}</span>
           </mat-panel-title>
         </mat-expansion-panel-header>
         <p>I'm visible because I am open</p>
@@ -28,19 +28,19 @@
   </div>
   <div class="side" fxFlex="20" fxLayout="column" fxLayoutAlign="start start">
     <div class="button-menu" fxLayout="column">
-      <button mat-button aria-hidden="false" color="accent" aria-label="max">
+      <button mat-button aria-hidden="false" aria-label="max">
         <mat-icon svgIcon="select_all"></mat-icon>
         <span>Max</span>
       </button>
-      <button mat-button aria-hidden="false" color="accent" aria-label="contacts">
+      <button mat-button aria-hidden="false" aria-label="contacts">
         <mat-icon svgIcon="contacts"></mat-icon>
         <span>Contacts</span>
       </button>
-      <button mat-button aria-hidden="false" color="accent" aria-label="reset">
+      <button mat-button aria-hidden="false" aria-label="reset">
         <mat-icon svgIcon="cancel"></mat-icon>
         <span>Reset</span>
       </button>
-      <button mat-button aria-hidden="false" color="accent" aria-label="continue">
+      <button mat-button aria-hidden="false" aria-label="continue">
         <mat-icon svgIcon="check"></mat-icon>
         <span>Continue</span>
       </button>

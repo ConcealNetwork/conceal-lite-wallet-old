@@ -1,20 +1,12 @@
-@use './../../../../scss/mixins' as *;
-
-$min_width: 500px;
-$max_width: 1920px;
-$min_font: 11px;
-$max_font: 22px;
-
 .mat-toolbar {
 	height: 55px;
-	@include fluid-type($min_width, $max_width, $min_font, $max_font);
+	font-size: 0.6rem;
 	background: rgba(0, 0, 0, 0.2);
 	border-top: 0.8px solid rgba(255, 255, 255, 0.08) !important;
 	text-transform: capitalize;
 	.progress {
 		width: 30%;
 		height: 100%;
-		font-size: 0.8rem;
 		line-height: 1;
 		text-align: center;
 		justify-content: center; /* align horizontal */
@@ -24,12 +16,11 @@ $max_font: 22px;
 			display: flex;
 			justify-content: center; /* align horizontal */
 			align-items: center; /* align vertical */
-			margin-top: 8px;
-			margin-bottom: 4px;
+			margin-top: 12px;
+			margin-bottom: 10px;
 		}
 		mat-progress-bar {
 			margin-top: 5px;
-			animation: shadow-pulse 1.5s infinite;
 		}
 		mat-icon {
 			height: auto;

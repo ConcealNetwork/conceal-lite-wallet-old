@@ -1,0 +1,29 @@
+.expansion-panel {
+    .mat-expansion-panel-header {
+        border-radius: 0;
+        font-size: 0.9rem;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        .mat-icon {
+            color: white;
+            padding-right: 10px;
+            vertical-align: sub;
+          }
+          svg {
+            overflow: visible;
+            margin-bottom: -4px;
+          }
+        .mat-expansion-panel-header-title {
+            color: orange;
+        }
+    }
+    .mat-expansion-panel-body {
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background: rgba($color: grey, $alpha: 0.4);
+        border-top: 1px solid orange;
+        font-size: 0.7rem;
+    }
+}

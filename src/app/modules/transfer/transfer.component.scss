@@ -17,48 +17,27 @@
     margin-top: -25px;
   }
   .content {
-    //background: rgba($color: red, $alpha: 0.1);
-    padding-top: 60px;
+    padding-top: 55px;
     padding-bottom: 55px;
     padding-left: 45px;
     padding-right: 45px;
   }
   .side {
-    //background: rgba($color: blue, $alpha: 0.1);
-    padding-top: 126px;
+    padding-top: 125px;
     padding-bottom: 55px;
   }
 }
 
-mat-accordion {
-  width: 100%;
-  mat-expansion-panel {
-    color: #fff;
-    background: rgba($color: #3b3b3b, $alpha: 0.8);
-    mat-panel-title, mat-panel-description {
-      color: #fff;
-      font-size: 0.9rem;
-      line-height: 1.25;
-    }
-    mat-panel-title {
-      span {
-        color: orange;
-        margin-left: 20px;
-      }
-    }
-    mat-panel-description { 
-      color: rgba($color: #fff, $alpha: 0.7);
-    }
-  }
-}
 .button-menu {
-  :hover {
-    color: rgba($color: orange, $alpha: 0.9);
-  }
   .mat-button {
     border: 2px solid rgba($color: orange, $alpha: 0.5);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 25px;
+    padding-right: 25px;
     margin-top: 5px;
     margin-bottom: 5px;
+    font-size: 0.8rem;
     text-align: justify;
     text-transform: uppercase;
     min-width: 145px;
@@ -70,8 +49,4 @@ mat-accordion {
       min-width: 30px;
     }
   }
-}
-
-.mat-button.mat-accent {
-  color: rgba($color: white, $alpha: 0.9);
 }

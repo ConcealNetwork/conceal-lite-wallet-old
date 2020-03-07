@@ -9,10 +9,10 @@
 	</span>
 	<span class="spacer"></span>
 	<section class="progress">
-		<span *ngIf="isSynchronising"><mat-icon svgIcon="sync" class="unsynchronised"></mat-icon>Synchronising ({{syncPercentage}}%)</span>
-    <span *ngIf="!isSynchronising"><mat-icon svgIcon="cloud_done" class="synchronised"></mat-icon>Synchronised ({{syncPercentage}}%)</span>
-    <mat-progress-bar [color]="color" [mode]="mode" [value]="value" [bufferValue]="bufferValue"></mat-progress-bar>
-  </section>
+		<span *ngIf="isSynchronising">Synchronising ({{syncPercentage}}%)</span>
+		<span *ngIf="!isSynchronising">Synchronised ({{syncPercentage}}%)</span>
+		<mat-progress-bar [color]="color" [mode]="mode" [value]="value" [bufferValue]="bufferValue"></mat-progress-bar>
+  	</section>
 	<span class="spacer"></span>
 	<span class="title">
 		<span>

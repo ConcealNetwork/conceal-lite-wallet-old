@@ -222,6 +222,25 @@ $altTheme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
 }
 
 // Specific component overrides, pieces that are not in line with the general theming
+button:hover {
+	color: orange;
+}
+
+svg {
+	margin-left: 2.5px;
+}
+
+::-webkit-scrollbar {
+	width: 8px;
+}
+::-webkit-scrollbar-track {
+	background: #444;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+::-webkit-scrollbar-thumb {
+	background: orange; 
+	border-radius: 20px;
+}
 
 // Handle buttons appropriately, with respect to line-height
 .mat-raised-button,

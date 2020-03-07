@@ -4,27 +4,12 @@
 }
 
 .container {
-  margin-top: 45px;
+  margin-top: 55px;
   margin-left: 180px;
   margin-right: 180px;
   .title {
     margin-top: -25px;
     margin-bottom: 0;
     font-size: 2rem;
-  }
-  table {
-    width: 100%;
-  }
-  
-  .mat-form-field {
-    font-size: 14px;
-    width: 100%;
-  }
-  
-  td, th {
-    width: 25%;
-  }
-  .mat-input-element {
-    caret-color: rgba($color: orange, $alpha: 0.9);
   }
 }

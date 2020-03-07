@@ -2,7 +2,7 @@
   <app-loader [isLoading]="isLoading"></app-loader>
 </div>
 <div class="container" @enterAnimation>
-  <div class="side" fxFlex="40" fxLayout="column" fxLayoutAlign="center stretch">
+  <div class="side cards" fxFlex="40" fxLayout="column" fxLayoutAlign="center stretch">
     <mat-card fxLayout="column">
       <mat-card-header>
         <mat-card-title>
@@ -12,17 +12,19 @@
       <mat-card-content fxFlex="auto">
         Wallet Offline
       </mat-card-content>
-      <mat-card-actions fxLayoutAlign="center center">
-        <button mat-button aria-hidden="false" aria-label="refresh">
-          <mat-icon svgIcon="cloud_download"></mat-icon>
-          Refresh
-        </button>
-        <div fxFlex></div>
-        <button mat-button aria-hidden="false" aria-label="trasnfer">
-          <mat-icon svgIcon="send"></mat-icon>
-          Send Coins
-        </button>
-      </mat-card-actions>
+      <mat-card-footer>
+        <mat-card-actions fxLayoutAlign="center center">
+          <button mat-button aria-hidden="false" aria-label="refresh">
+            <mat-icon svgIcon="cloud_download"></mat-icon>
+            Refresh
+          </button>
+          <div fxFlex></div>
+          <button mat-button aria-hidden="false" aria-label="trasnfer">
+            <mat-icon svgIcon="send"></mat-icon>
+            Transfer
+          </button>
+        </mat-card-actions>
+      </mat-card-footer>
     </mat-card>
     <mat-card fxLayout="column">
       <mat-card-header>
@@ -48,7 +50,7 @@
       </mat-card-footer>
     </mat-card>
   </div>
-  <div class="content" fxFlex fxLayout="column" fxLayoutAlign="start stretch">
+  <div class="content expansion-panel" fxFlex fxLayout="column" fxLayoutAlign="start stretch">
     <h1 class="title">{{ 'PAGES.DASHBOARD.ACTIVITY' | translate }}</h1>
     
     <mat-accordion [@.disabled]="disableAnimation">

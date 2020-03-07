@@ -15,7 +15,7 @@ import { ProgressBarMode } from '@angular/material/progress-bar';
 export class FooterComponent implements OnInit, OnDestroy {
 
   // Progress Bar
-  color: ThemePalette = 'accent';
+  color: ThemePalette = 'primary';
   mode: ProgressBarMode = 'indeterminate';
   value = 50;
   bufferValue = 75;

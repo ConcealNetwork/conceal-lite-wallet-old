@@ -1,13 +1,59 @@
 // Import theming functions
 @import '~@angular/material/theming';
 
-mat-card {
-  height: 100%;
-  margin: 15px;
-  border: 2px solid rgba($color: orange, $alpha: 1);
-  border-radius: 10px;
+.cards {
+
+  .mat-card {
+    height: 100%;
+    margin: 15px;
+    border: 2px solid rgba($color: orange, $alpha: 1);
+    border-radius: 10px;
+  }
+
+  .mat-card-header {
+    .mat-card-header-text {
+      margin: 0;
+    }
+    .mat-card-title {
+      margin-bottom: 0px;
+      padding-left: 10px;
+      padding-right: 10px;
+      font-size: 1.4rem;
+    }
+  }
+
+  .mat-card-content {
+    padding: 11px;
+  }
+
+  mat-card-footer {
+    margin: 0 -16px -16px -16px;
+    .mat-card-actions {
+      margin: 0;
+      padding: 0;
+      background: rgba($color: grey, $alpha: 0.4);
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+      .mat-button {
+        margin: 0;
+        padding-left: 25px;
+        padding-right: 25px;
+        height: 60px;
+        font-size: 0.9rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .mat-icon {
+          padding-right: 10px;
+          vertical-align: sub;
+          margin-bottom: -4px;
+        }
+        svg {
+          overflow: visible;
+        }
+      }
+    }
+  }
+
 }
 
-mat-card-actions {
-  background: rgba($color: grey, $alpha: 0.4);
-}
