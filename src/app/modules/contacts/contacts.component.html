@@ -1,8 +1,82 @@
 <div class="loading" *ngIf="isLoading">
   <app-loader [isLoading]="isLoading"></app-loader>
 </div>
-<div class="container" @enterAnimation>
-    <h1 class="title">
-        {{ 'PAGES.CONTACTS.TITLE' | translate }}
-    </h1>
+
+<div class="container table" fxLayout="column" @enterAnimation>
+
+  <h1 class="title">{{ 'PAGES.CONTACTS.TITLE' | translate }}</h1>
+
+  <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center">
+
+    <mat-form-field fxFlex="70" class="filter">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search by Address, Payment ID or Label">
+    </mat-form-field>
+  
+    <div fxFlex="30" class="button-control">
+      <button mat-stroked-button color="primary">New Contact</button>
+      <button mat-stroked-button color="warn">Delete</button>
+    </div>
+
+  </div>
+
+  <div class="mat-elevation-z8">
+
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox color="primary" (change)="$event ? masterToggle() : null"
+            [checked]="selection.hasValue() && isAllSelected()"
+            [indeterminate]="selection.hasValue() && !isAllSelected()"
+            [aria-label]="checkboxLabel()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox color="primary" (click)="$event.stopPropagation()"
+            (change)="$event ? selection.toggle(row) : null"
+            [checked]="selection.isSelected(row)"
+            [aria-label]="checkboxLabel(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+  
+      <!-- Label Column -->
+      <ng-container matColumnDef="label">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Label </th>
+        <td mat-cell *matCellDef="let row"> {{row.label}} </td>
+      </ng-container>
+  
+      <!-- Address Column -->
+      <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
+        <td mat-cell *matCellDef="let row"> ccx{{row.address}} </td>
+      </ng-container>
+  
+      <!-- Payment ID Column -->
+      <ng-container matColumnDef="paymentid">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Payment ID </th>
+        <td mat-cell *matCellDef="let row"> {{row.paymentid}} </td>
+      </ng-container>
+  
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
+        <td mat-cell *matCellDef="let row" class="button-row">
+          <button mat-stroked-button color="primary">Pay</button>
+          <button mat-stroked-button>Copy</button>
+          <button mat-stroked-button>Edit</button>
+          <button mat-stroked-button color="warn">Delete</button>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
+    </table>
+
+    <mat-paginator class="mat-paginator-sticky" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+  </div>
+
 </div>

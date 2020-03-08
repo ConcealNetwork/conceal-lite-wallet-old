@@ -226,8 +226,10 @@ button:hover {
 	color: orange;
 }
 
-svg {
-	margin-left: 2.5px;
+.mat-icon {
+	svg {
+		margin-left: 2.5px;
+	}
 }
 
 ::-webkit-scrollbar {
