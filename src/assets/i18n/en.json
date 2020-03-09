@@ -26,13 +26,13 @@
         }
 			},
 			"ACTIVITY": {
-        "TITLE": "Recent Activity"
+        "TITLE": "Transactions"
       },
       "CONTACTS": {
         "TITLE": "Contacts"
       },
       "MESSAGING": {
-        "TITLE": "Messaging"
+        "TITLE": "Messages"
       },
       "SETTINGS": {
         "TITLE": "Settings"
