@@ -1,0 +1,31 @@
+<div class="addContact">
+  <h1 mat-dialog-title>Create Contact</h1>
+  <h2 class="subtitle">Adds a new contact to your wallet</h2>
+  <div mat-dialog-content>
+    <p>
+      <mat-form-field hintLabel="Max 15 characters" appearance="fill">
+        <mat-label>Label</mat-label>
+        <input matInput required #label maxlength="15" placeholder="John Citizen" [(ngModel)]="data.label">
+        <mat-hint align="end">{{label.value?.length || 0}}/15</mat-hint>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field hintLabel="Max 65 characters" appearance="fill">
+        <mat-label>Address</mat-label>
+        <input matInput required #address maxlength="65" placeholder="CCX Address" [(ngModel)]="data.address">
+        <mat-hint align="end">{{address.value?.length || 0}}/65</mat-hint>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field hintLabel="Max 35 characters" appearance="fill">
+        <mat-label>Payment ID</mat-label>
+        <input matInput #paymentid maxlength="35" placeholder="Optional" [(ngModel)]="data.paymentid">
+        <mat-hint align="end">{{paymentid.value?.length || 0}}/35</mat-hint>
+      </mat-form-field>
+    </p>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-stroked-button color="warn" (click)="onNoClick()">Cancel</button>
+    <button mat-stroked-button color="primary" [mat-dialog-close]="data.label" cdkFocusInitial>Save</button>
+  </div>
+</div>

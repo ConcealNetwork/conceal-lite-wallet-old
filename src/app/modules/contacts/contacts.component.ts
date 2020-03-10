@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export interface Contacts {
   label: string;
@@ -56,6 +57,10 @@ export class ContactsComponent implements OnInit {
   dataSource: MatTableDataSource<Contacts>;
   selection = new SelectionModel<Contacts>(true, []);
 
+  label: string;
+  address: string;
+  paymentid: string;
+
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
@@ -83,7 +88,7 @@ export class ContactsComponent implements OnInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.label + 1}`;
   }
 
-	constructor() {
+	constructor(public dialog: MatDialog) {
     // Create 100 users
     const contacts = Array.from({length: 100}, (_, k) => this.createContacts(k + 1));
     // Assign the data to the data source for the table to render
@@ -112,7 +117,35 @@ export class ContactsComponent implements OnInit {
       address: Math.random().toString(36).substring(2, 25) + Math.random().toString(36).substring(2, 25),
       paymentid: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
     };
+  }
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(NewContactDialog, {
+      width: '45%',
+      data: {label: this.label, address: this.address, paymentid: this.paymentid}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.label = result;
+    });
+  }
+
+}
+
+@Component({
+  selector: 'new-contact',
+  templateUrl: './new-contact.component.html',
+  styleUrls: ['./new-contact.component.scss'],
+})
+export class NewContactDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<NewContactDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: Contacts) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }
