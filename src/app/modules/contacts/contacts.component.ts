@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
-import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
+import { trigger, state, transition, query, style, stagger, animate } from '@angular/animations';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -44,7 +44,12 @@ const names: string[] = [
           animate(1000, style('*'))
         ], {optional: true})
       ])
-    ])
+    ]),
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
   ]
 })
 export class ContactsComponent implements OnInit {
@@ -56,6 +61,8 @@ export class ContactsComponent implements OnInit {
   displayedColumns: string[] = ['select', 'label', 'address', 'paymentid', 'actions'];
   dataSource: MatTableDataSource<Contacts>;
   selection = new SelectionModel<Contacts>(true, []);
+  isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
+  expandedElement: any;
 
   label: string;
   address: string;
