@@ -22,7 +22,7 @@
 
   <div class="mat-elevation-z8">
 
-    <table mat-table [dataSource]="dataSource" matSort>
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
 
       <!-- Checkbox Column -->
       <ng-container matColumnDef="select">
@@ -62,7 +62,8 @@
   
       <!-- Actions Column - Expanded Content Column -->
       <ng-container matColumnDef="actions">
-        <td mat-cell *matCellDef="let row" class="button-row">
+        <td mat-cell *matCellDef="let row" class="button-row" [attr.colspan]="displayedColumns.length">
+          <span style="font-size: 0.8rem; margin-right: 25px;">Actions:</span>
           <button mat-stroked-button color="primary">Pay</button>
           <button mat-stroked-button color="primary">Message</button>
           <button mat-stroked-button>Copy</button>
@@ -72,8 +73,8 @@
       </ng-container>
   
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;" [class.expanded]="expandedElement == row" (click)="expandedElement = row"></tr>
-      <tr mat-row *matRowDef="let row; columns: ['actions']; when: isExpansionDetailRow" [@detailExpand]="row.element == expandedElement ? 'expanded' : 'collapsed'" style="overflow: hidden"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="expandedElement = expandedElement === row ? null : row"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['actions'];" [@detailExpand]="row == expandedElement ? 'expanded' : 'collapsed'"></tr>
     </table>
 
     <mat-paginator class="mat-paginator-sticky" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

@@ -10,6 +10,7 @@ export interface Contacts {
   label: string;
   address: string;
   paymentid: string;
+  detailRow: boolean;
 }
 
 const names: string[] = [
@@ -46,9 +47,9 @@ const names: string[] = [
       ])
     ]),
     trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+      state('collapsed', style({display: 'none'})),
+      state('expanded', style({display: 'show', 'border-bottom-width': 0, height: '60px'})),
+      transition('expanded <=> collapsed', animate(200, style({opacity:0}))),
     ]),
   ]
 })
@@ -58,7 +59,7 @@ export class ContactsComponent implements OnInit {
   pageEvent: PageEvent;
   pageSize: Number = 10;
   pageSizeOptions: number[] = [5, 10, 25, 100];
-  displayedColumns: string[] = ['select', 'label', 'address', 'paymentid', 'actions'];
+  displayedColumns: string[] = ['select', 'label', 'address', 'paymentid'];
   dataSource: MatTableDataSource<Contacts>;
   selection = new SelectionModel<Contacts>(true, []);
   isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
@@ -67,6 +68,7 @@ export class ContactsComponent implements OnInit {
   label: string;
   address: string;
   paymentid: string;
+  detailRow: boolean;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -122,7 +124,8 @@ export class ContactsComponent implements OnInit {
     return {
       label: name,
       address: Math.random().toString(36).substring(2, 25) + Math.random().toString(36).substring(2, 25),
-      paymentid: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+      paymentid: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
+      detailRow: false
     };
   }
 
