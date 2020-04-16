@@ -1,0 +1,25 @@
+<div class="addMessage">
+    <h1 mat-dialog-title>New Message</h1>
+    <h2 class="subtitle">Send a message to an address</h2>
+    <div mat-dialog-content>
+      <p>
+        <mat-form-field hintLabel="Max 65 characters" appearance="fill">
+          <mat-label>Address</mat-label>
+          <input matInput required #address maxlength="65" placeholder="CCX Address" [(ngModel)]="data.address">
+          <mat-hint align="end">{{address.value?.length || 0}}/65</mat-hint>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field hintLabel="Max 500 characters" appearance="fill">
+          <mat-label>Message</mat-label>
+          <textarea rows="8" matInput #message maxlength="500" placeholder="Your message..." [(ngModel)]="data.message"></textarea>
+          <mat-hint align="end">{{message.value?.length || 0}}/500</mat-hint>
+        </mat-form-field>
+      </p>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-stroked-button color="warn" (click)="onNoClick()">Cancel</button>
+      <button mat-stroked-button color="primary" [mat-dialog-close]="data.message" cdkFocusInitial>Save</button>
+    </div>
+  </div>
+  

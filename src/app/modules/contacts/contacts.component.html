@@ -41,6 +41,14 @@
           </mat-checkbox>
         </td>
       </ng-container>
+
+      <!-- Options Column -->
+      <ng-container matColumnDef="options">
+        <th mat-header-cell *matHeaderCellDef><mat-icon svgIcon="unfold_more" style="margin-top: 10px;"></mat-icon></th>
+        <td mat-cell *matCellDef="let row"> 
+          <mat-icon style="margin-top: 5px;" svgIcon="{{expandedElement === row ? 'expand_less' : 'expand_more'}}"></mat-icon>
+        </td>
+      </ng-container>
   
       <!-- Label Column -->
       <ng-container matColumnDef="label">
@@ -63,7 +71,6 @@
       <!-- Actions Column - Expanded Content Column -->
       <ng-container matColumnDef="actions">
         <td mat-cell *matCellDef="let row" class="button-row" [attr.colspan]="displayedColumns.length">
-          <span style="font-size: 0.8rem; margin-right: 25px;">Actions:</span>
           <button mat-stroked-button color="primary">Pay</button>
           <button mat-stroked-button color="primary">Message</button>
           <button mat-stroked-button>Copy</button>
@@ -73,7 +80,7 @@
       </ng-container>
   
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="expandedElement = expandedElement === row ? null : row"></tr>
+      <tr mat-row class="pointer" *matRowDef="let row; columns: displayedColumns;" (click)="expandedElement = expandedElement === row ? null : row"></tr>
       <tr mat-row *matRowDef="let row; columns: ['actions'];" [@detailExpand]="row == expandedElement ? 'expanded' : 'collapsed'"></tr>
     </table>
 
