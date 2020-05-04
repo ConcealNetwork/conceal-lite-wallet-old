@@ -10,7 +10,24 @@
         </mat-card-title>
       </mat-card-header>
       <mat-card-content fxFlex="auto">
-        Wallet Offline
+        <div class="balances" fxLayout="column" fxLayoutAlign="space-between stretch">
+          <div fxLayout="row" fxFlex="25" fxLayout="row" fxLayoutAlign="space-between stretch">
+            <span class="st">Available</span>
+            <span class="sb">15,102,01 <span class="ccx">CCX</span></span>
+          </div>
+          <div fxLayout="row" fxFlex="25" fxLayout="row" fxLayoutAlign="space-between stretch">
+            <span class="st">Pending</span>
+            <span class="sb">0.000 <span class="ccx">CCX</span></span>
+          </div>
+          <div fxLayout="row" fxFlex="25" fxLayout="row" fxLayoutAlign="space-between stretch">
+            <span class="st">Locked Deposits</span>
+            <span class="sb">0.000 <span class="ccx">CCX</span></span>
+          </div>
+          <div fxLayout="row" fxFlex="25" fxLayout="row" fxLayoutAlign="space-between stretch">
+            <span class="st">Withdrawable</span>
+            <span class="sb">15,102,01 <span class="ccx">CCX</span></span>
+          </div>
+        </div>
       </mat-card-content>
       <mat-card-footer>
         <mat-card-actions fxLayoutAlign="center center">
@@ -33,7 +50,9 @@
         </mat-card-title>
       </mat-card-header>
       <mat-card-content fxFlex="auto">
-        Wallet Offline
+        <div class="address">
+          ccx7LXzDFiH9YD19bqNU654fVC4ZtysSBMu1QxNaQFhjW8PbKQTFtyDYXDxHPq4YUPi4tRzUwWcLKJeymxTV8m5R4oMTTzAZuu
+        </div>
       </mat-card-content>
       <mat-card-footer>
         <mat-card-actions fxLayoutAlign="center center">
@@ -64,7 +83,11 @@
             5 hours ago
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <p>I'm visible because I am open</p>
+        <div class="details" fxLayout="row" fxLayoutAlign="space-around stretch">
+          <span>25 CCX</span>
+          <span>25/04/2020</span>
+          <span>Height: 496,235</span>
+        </div>
       </mat-expansion-panel>
       <mat-expansion-panel [expanded]="false">
         <mat-expansion-panel-header>
@@ -76,7 +99,11 @@
             2 days ago
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <p>I'm visible because I am open</p>
+        <div class="details" fxLayout="row" fxLayoutAlign="space-around stretch">
+          <span>25 CCX</span>
+          <span>25/04/2020</span>
+          <span>Height: 496,235</span>
+        </div>
       </mat-expansion-panel>
       <mat-expansion-panel [expanded]="false">
         <mat-expansion-panel-header>
@@ -88,7 +115,10 @@
             1 week ago
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <p>I'm visible because I am open</p>
+        <div class="details" fxLayout="row" fxLayoutAlign="space-around stretch">
+          <span>25/04/2020</span>
+          <span>This is a test message to your wallet</span>
+        </div>
       </mat-expansion-panel>
       <mat-expansion-panel [expanded]="false">
         <mat-expansion-panel-header>
@@ -100,7 +130,10 @@
             6 weeks ago
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <p>I'm visible because I am open</p>
+        <div class="details" fxLayout="row" fxLayoutAlign="space-around stretch">
+          <span>25/04/2020</span>
+          <span>This is a test message to your wallet</span>
+        </div>
       </mat-expansion-panel>
     </mat-accordion>
 

@@ -8,14 +8,40 @@
 .container {
   display: flex;
   height: 100%;
+  .balances {
+    font-size: .85rem;
+    height: 100%;
+    .st {
+      color: orange;
+    }
+    .sb {
+      color: #c4c4c4;
+    }
+    .ccx {
+      color: #fff;
+    }
+  }
+  .address {
+    font-size: 1rem;
+    word-wrap: break-word;
+    text-align: center;
+    color: #c4c4c4;
+  }
   .side {
     padding: 40px;
+    .mat-card {
+      background: rgba(#393939, 0.8);
+    }
   }
   .content {
     padding: 55px;
     .title {
       margin-top: -20px;
       font-size: 2rem;
+    }
+    .details {
+      padding: 15px;
+      font-size: 0.9rem;
     }
   }
 }
