@@ -1,0 +1,45 @@
+{
+  "PAGES": {
+      "HEADER": {
+        "TITLE": "Billetera Lite",
+        "DASHBOARD": "Tablero",
+        "TRANSFER": "Transferir",
+        "ACTIVITY": "Actividad"
+      },
+      "FOOTER": {
+        "WALLET": "Billetera en la nube",
+        "NODE": "Nodo inteligente",
+        "ONLINE": "En línea",
+        "OFFLINE": "Desconectada"
+      },
+      "DASHBOARD": {
+        "TITLE": "Tablero",
+        "BALANCE": "Equilibrar",
+        "ADDRESS": "Habla a",
+        "ACTIVITY": "Actividad reciente"
+			},
+			"TRANSFER": {
+        "TITLE": "Transferir fondos",
+        "HEADINGS": {
+          "AMOUNT": "Cantidad",
+          "RECIPIENT": "Destinataria",
+          "MESSAGE": "Mensaje"
+        }
+			},
+			"ACTIVITY": {
+        "TITLE": "Actas"
+      },
+      "CONTACTS": {
+        "TITLE": "Contactos"
+      },
+      "MESSAGING": {
+        "TITLE": "Mensajes"
+      },
+      "SETTINGS": {
+        "TITLE": "Configuraciones"
+      },
+      "LOCK": {
+        "TITLE": "Bloquee su billetera"
+      }
+  }
+}
