@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
 	selector: 'app-settings',
@@ -33,12 +34,21 @@ import { trigger, transition, query, style, stagger, animate } from '@angular/an
 })
 export class SettingsComponent implements OnInit {
 
-	isLoading: boolean = true;
+  isLoading: boolean = true;
+  currentLang: string;
 
-	constructor() { }
+  constructor(private translate: TranslateService) { 
+    this.translate.use('en');
+  }
+  
+  useLanguage(language: string) {
+    this.translate.use(language);
+    this.currentLang = language;
+  }
 
 	ngOnInit(): void {
-		this.isLoading = false;
+    this.isLoading = false;
+    this.currentLang = this.translate.currentLang;
 	}
 
 }

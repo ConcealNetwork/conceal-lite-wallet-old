@@ -5,45 +5,95 @@
   <div class="side" fxFlex="5" fxLayout="column" fxLayoutAlign="start start"></div>
   <div class="content expansion-panel" fxFlex fxLayout="column" fxLayoutAlign="start stretch">
     <h1 class="title">{{ 'PAGES.TRANSFER.TITLE' | translate }}</h1>
-    <mat-accordion multi="true" [@.disabled]="disableAnimation">
+
+    <mat-accordion multi="false" [@.disabled]="disableAnimation">
+
       <mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header>
-          <mat-panel-title fxFlex="50">
-            <mat-icon svgIcon="flight_land" fxFlex="12"></mat-icon>
-            <span fxFlex>{{ 'PAGES.TRANSFER.HEADINGS.OPTIONS' | translate }}</span>
+          <mat-panel-title>
+            <span fxFlex>{{ 'PAGES.TRANSFER.HEADINGS.AMOUNT' | translate }}</span>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <p>I'm visible because I am open</p>
+        <mat-panel-description>
+          <div class="form-fields" fxFlex="50">
+            <mat-form-field hintLabel="Max 15 characters" appearance="fill">
+              <mat-label>Amount</mat-label>
+              <input matInput required #label type="number" maxlength="15" placeholder="0.000000">
+              <mat-hint align="end">Amount to Send?</mat-hint>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxFlex="50">
+            <div fxLayout="column" fxFill fxLayoutAlign="center space-evenly" class="button-small-menu">
+              <div fxLayout="row" fxLayoutAlign="center stretch" class="balance">
+                <span class="available">Available Balance:</span> 15,424 CCX
+              </div>
+              <div fxLayout="row" fxLayoutAlign="space-evenly stretch">
+                <button mat-stroked-button color="primary">Send 25%</button>
+                <button mat-stroked-button color="primary">Send 50%</button>
+                <button mat-stroked-button color="primary">Send Max</button>
+              </div>
+            </div>
+          </div>
+        </mat-panel-description>
       </mat-expansion-panel>
-      <mat-expansion-panel [expanded]="true">
+
+      <mat-expansion-panel [expanded]="false">
         <mat-expansion-panel-header>
-          <mat-panel-title fxFlex="50">
-            <mat-icon svgIcon="flight_land" fxFlex="12"></mat-icon>
+          <mat-panel-title>
             <span fxFlex>{{ 'PAGES.TRANSFER.HEADINGS.RECIPIENT' | translate }}</span>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <p>I'm visible because I am open</p>
+        <mat-panel-description>
+          <div class="form-fields" fxFlex="75">
+            <mat-form-field hintLabel="Max 65 characters" appearance="fill">
+              <mat-label>Address</mat-label>
+              <input matInput required #address maxlength="65" placeholder="CCX Address">
+              <mat-hint align="end">0/65</mat-hint>
+            </mat-form-field>
+            <mat-form-field hintLabel="Max 35 characters" appearance="fill">
+              <mat-label>Payment ID (Optional)</mat-label>
+              <input matInput #address maxlength="35" placeholder="Payment ID">
+              <mat-hint align="end">0/35</mat-hint>
+            </mat-form-field>
+            <p>Please ensure that the Address and the Payment ID (if included) are correct before sending. Funds sent to the wrong address will be lost.</p>
+          </div>
+          <div fxLayout="row" fxFlex="25" class="one">
+            <div fxLayout="column" fxFill fxLayoutAlign="center space-evenly" class="contacts two">
+              <div fxLayout="column" fxFlex="50" fxFill fxLayoutAlign="space-evenly center" class="three">
+                <button mat-stroked-button color="primary" routerLink="/contacts">Select Contact</button>
+                <mat-checkbox color="primary">Save Contact?</mat-checkbox>
+              </div>
+            </div>
+          </div>
+        </mat-panel-description>
       </mat-expansion-panel>
+
+      <mat-expansion-panel [expanded]="false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <span fxFlex>{{ 'PAGES.TRANSFER.HEADINGS.MESSAGE' | translate }}</span>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-panel-description>
+          <div class="form-fields">
+            <mat-form-field hintLabel="Max 260 characters" appearance="fill">
+              <mat-label>Message (Optional)</mat-label>
+              <input matInput #message maxlength="260" placeholder="Message">
+              <mat-hint align="end">0/260</mat-hint>
+            </mat-form-field>
+          </div>
+        </mat-panel-description>
+      </mat-expansion-panel>
+
     </mat-accordion>
   </div>
   <div class="side" fxFlex="20" fxLayout="column" fxLayoutAlign="start start">
-    <div class="button-menu" fxLayout="column">
-      <button mat-button aria-hidden="false" aria-label="max">
-        <mat-icon svgIcon="select_all"></mat-icon>
-        <span>Max</span>
-      </button>
-      <button mat-button aria-hidden="false" aria-label="contacts">
-        <mat-icon svgIcon="contacts"></mat-icon>
-        <span>Contacts</span>
-      </button>
-      <button mat-button aria-hidden="false" aria-label="reset">
-        <mat-icon svgIcon="cancel"></mat-icon>
-        <span>Reset</span>
-      </button>
-      <button mat-button aria-hidden="false" aria-label="continue">
-        <mat-icon svgIcon="check"></mat-icon>
-        <span>Continue</span>
-      </button>
+    <div fxLayout="row">
+      <div class="button-menu" fxLayout="column">
+        <button mat-stroked-button color="warn" aria-hidden="false" aria-label="reset">Cancel</button>
+        <button mat-stroked-button aria-hidden="false" aria-label="reset">Clear</button>
+        <button mat-stroked-button color="primary" aria-hidden="false" aria-label="continue">Send</button>
+      </div>
     </div>
   </div>
 </div>
