@@ -4,12 +4,35 @@
 }
 
 .container {
-  position: relative;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  //background-color: rgba(red, 0.1);
+  padding-left: 70px;
+  padding-right: 70px;
   .title {
-    color: white;
+    margin-top: -25px;
+    margin-bottom: 0;
+    font-size: 2rem;
+  }
+  .content {
+    //background-color: rgba(green, 0.1);
+    padding-top: 55px;
+    padding-bottom: 50px;
+    padding-left: 45px;
+    padding-right: 45px;
+    .selected {
+      border: solid 2px green;
+    }
+    mat-card {
+      min-width: 10rem;
+      border: solid 1px transparent;
+      padding: 1rem 2rem 1rem 2rem;
+      img {
+        margin-bottom: 15px;
+      }
+    }
+    mat-card:hover {
+      border: 2px solid orange;
+      transform: scale(1.05);
+      cursor: pointer;
+    }
   }
 }

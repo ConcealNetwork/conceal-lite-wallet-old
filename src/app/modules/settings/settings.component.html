@@ -1,8 +1,26 @@
 <div class="loading" *ngIf="isLoading">
   <app-loader [isLoading]="isLoading"></app-loader>
 </div>
-<div class="container" @enterAnimation>
-  <h1 class="title">
-      {{ 'PAGES.SETTINGS.TITLE' | translate }}
-  </h1>
+<div class="container" fxLayout="column" fxFill @enterAnimation>
+  <div class="content">
+    <h1 class="title">{{ 'PAGES.SETTINGS.TITLE' | translate }}</h1>
+    <h4>Language</h4>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <mat-card [class.selected]="currentLang=='en'" fxLayout="column" fxLayoutAlign="center center" (click)="useLanguage('en')">
+        <img src="./assets/images/eng.png">English
+      </mat-card>
+      <mat-card [class.selected]="currentLang=='sp'" fxLayout="column" fxLayoutAlign="center center" (click)="useLanguage('sp')">
+        <img src="./assets/images/sp.png">Spanish
+      </mat-card>
+      <mat-card [class.selected]="currentLang=='ma'" fxLayout="column" fxLayoutAlign="center center" (click)="useLanguage('ma')">
+        <img src="./assets/images/ch.png">Mandarin
+      </mat-card>
+      <mat-card [class.selected]="currentLang=='fr'"fxLayout="column" fxLayoutAlign="center center" (click)="useLanguage('fr')">
+        <img src="./assets/images/fr.png">French
+      </mat-card>
+      <mat-card [class.selected]="currentLang=='hi'" fxLayout="column" fxLayoutAlign="center center" (click)="useLanguage('hi')">
+        <img src="./assets/images/in.png">Hindi
+      </mat-card>
+    </div>
+  </div>
 </div>
