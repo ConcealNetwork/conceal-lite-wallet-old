@@ -5,11 +5,14 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 export interface Contacts {
   label: string;
   address: string;
   paymentid: string;
+  detailRow: boolean;
 }
 
 const names: string[] = [
@@ -46,9 +49,9 @@ const names: string[] = [
       ])
     ]),
     trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+      state('collapsed', style({display: 'none'})),
+      state('expanded', style({display: 'show', height: '60px'})),
+      transition('expanded <=> collapsed', animate(1, style({opacity:0}))),
     ]),
   ]
 })
@@ -58,7 +61,7 @@ export class ContactsComponent implements OnInit {
   pageEvent: PageEvent;
   pageSize: Number = 10;
   pageSizeOptions: number[] = [5, 10, 25, 100];
-  displayedColumns: string[] = ['select', 'label', 'address', 'paymentid', 'actions'];
+  displayedColumns: string[] = ['select', 'options', 'label', 'address', 'paymentid'];
   dataSource: MatTableDataSource<Contacts>;
   selection = new SelectionModel<Contacts>(true, []);
   isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
@@ -67,6 +70,7 @@ export class ContactsComponent implements OnInit {
   label: string;
   address: string;
   paymentid: string;
+  detailRow: boolean;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -95,7 +99,16 @@ export class ContactsComponent implements OnInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.label + 1}`;
   }
 
-	constructor(public dialog: MatDialog) {
+	constructor(
+    public dialog: MatDialog,
+    public matIconRegistry: MatIconRegistry,
+    public domSanitizer: DomSanitizer
+  ) {
+    matIconRegistry.addSvgIconSet(
+      domSanitizer.bypassSecurityTrustResourceUrl(
+        `assets/materal-icons-twotone.svg`
+      )
+    );
     // Create 100 users
     const contacts = Array.from({length: 100}, (_, k) => this.createContacts(k + 1));
     // Assign the data to the data source for the table to render
@@ -122,7 +135,8 @@ export class ContactsComponent implements OnInit {
     return {
       label: name,
       address: Math.random().toString(36).substring(2, 25) + Math.random().toString(36).substring(2, 25),
-      paymentid: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+      paymentid: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
+      detailRow: false
     };
   }
 

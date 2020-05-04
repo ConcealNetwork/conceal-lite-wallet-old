@@ -18,35 +18,72 @@
   }
   .content {
     padding-top: 55px;
-    padding-bottom: 55px;
+    padding-bottom: 50px;
     padding-left: 45px;
     padding-right: 45px;
+    .button-small-menu { 
+      transform: scale(0.9);
+      margin-bottom: 25px;
+      margin-left: 15px;
+      margin-top: -5px;
+      .balance {
+        margin-bottom: 1rem;
+        font-size: 0.8rem;
+        color: #d1d1d1;
+        .available {
+          color: #fff;
+          margin-right: 25px;
+        }
+      }
+      .mat-stroked-button {
+        border: 1px solid currentColor;
+        font-size: 0.6rem;
+      }
+    }
+    .contacts { 
+      margin-bottom: 45px;
+      margin-left: 15px;
+      margin-top: -45px;
+      button {
+        padding: 0.25rem 0.85rem 0.25rem 0.85rem;
+        font-size: 0.7rem;
+        border: 1px solid currentColor;
+      }
+    }
+    .form-fields {
+      width: 100%;
+      margin-left: 15px;
+      .mat-form-field {
+        width: 100%;
+        margin-top: 15px;
+        margin-bottom: 10px;
+      }
+    }
   }
   .side {
     padding-top: 125px;
     padding-bottom: 55px;
-  }
-}
-
-.button-menu {
-  .mat-button {
-    border: 2px solid rgba($color: orange, $alpha: 0.5);
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 25px;
-    padding-right: 25px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    font-size: 0.8rem;
-    text-align: justify;
-    text-transform: uppercase;
-    min-width: 145px;
-    .button-name {
-      width: 100%;
-    }
-    mat-icon {
-      margin-right: 10px;
-      min-width: 30px;
+    .button-menu {
+      .mat-stroked-button {
+        border: 1px solid currentColor;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 25px;
+        padding-right: 25px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        font-size: 0.8rem;
+        text-align: center;
+        text-transform: uppercase;
+        min-width: 150px;
+        .button-name {
+          width: 100%;
+        }
+        mat-icon {
+          margin-right: 10px;
+          min-width: 30px;
+        }
+      }
     }
   }
 }

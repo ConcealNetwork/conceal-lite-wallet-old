@@ -22,6 +22,9 @@
     }
   }
   .button-row {
+    background: rgb(57, 57, 57);
+    border-top: 0.1px solid orange;
+    border-bottom: 0.1px solid orange;
     button {
       margin-right: 10px;
     }
@@ -30,4 +33,8 @@
       line-height: 25px;
     }
   }
+}
+
+.pointer {
+  cursor: pointer;
 }

@@ -1,14 +1,20 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export interface Messages {
   date: string;
   type: string;
   height: number;
+  message: string;
+}
+
+export interface NewMessage {
+  address: string;
   message: string;
 }
 
@@ -54,11 +60,13 @@ export class MessagingComponent implements OnInit {
   displayedColumns: string[] = ['date', 'type', 'height', 'message'];
   dataSource: MatTableDataSource<Messages>;
   selection = new SelectionModel<Messages>(true, []);
+  isLoading: boolean = true;
+
+  address: string;
+  message: string;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-
-  isLoading: boolean = true;
   
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
@@ -82,7 +90,7 @@ export class MessagingComponent implements OnInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.date + 1}`;
   }
 
-	constructor() {
+	constructor(public dialog: MatDialog) {
     // Create 100 users
     const contacts = Array.from({length: 100}, (_, k) => this.createContacts(k + 1));
     // Assign the data to the data source for the table to render
@@ -118,6 +126,35 @@ export class MessagingComponent implements OnInit {
       message: message
     };
 
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(NewMessageDialog, {
+      width: '45%',
+      data: {address: this.address, message: this.message}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.message = result;
+    });
+  }
+
+}
+
+@Component({
+  selector: 'new-message',
+  templateUrl: './new-message.component.html',
+  styleUrls: ['./new-message.component.scss'],
+})
+export class NewMessageDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<NewMessageDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: NewMessage) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }

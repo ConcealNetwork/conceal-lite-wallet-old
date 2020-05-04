@@ -71,7 +71,7 @@ import { ActivityComponent } from './modules/activity/activity.component';
 import { ContactsComponent, NewContactDialog } from './modules/contacts/contacts.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { LockComponent } from './modules/lock/lock.component';
-import { MessagingComponent } from './modules/messaging/messaging.component';
+import { MessagingComponent, NewMessageDialog } from './modules/messaging/messaging.component';
 import { SettingsComponent } from './modules/settings/settings.component';
 import { TransferComponent } from './modules/transfer/transfer.component';
 
@@ -89,6 +89,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     DashboardComponent,
     LockComponent,
     MessagingComponent,
+    NewMessageDialog,
     SettingsComponent,
     TransferComponent
   ],
@@ -156,7 +157,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     DataService
   ],
   entryComponents: [
-    NewContactDialog
+    NewContactDialog,
+    NewMessageDialog
   ],
   bootstrap: [
     AppComponent
