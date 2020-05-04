@@ -4,12 +4,47 @@
 }
 
 .container {
-  position: relative;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   .title {
     color: white;
+  }
+  .subtitle {
+    color: #888;
+  }
+  .pin {
+    transform: scale(0.5);
+    button {
+      background-color: transparent;
+      border: 2px solid orange;
+      margin-left: 15px;
+      margin-right: 15px;
+      margin-bottom: 15px;
+    }
+  }
+  .lockbox {
+    background-color: rgba(#393939, 0.9);
+    border-radius: 10px;
+    min-width: 30vw;
+    min-height: 50vh;
+    padding: 1rem;
+    button {
+      color: #fff;
+      font-size: 1.1rem;
+      background-color: transparent;
+      border: 2px solid rgba(orange, 0.8);
+    }
+    .hidden {
+      border: none;
+      color: transparent;
+      box-shadow: none;
+      mat-icon {
+        color: #ddd;
+      }
+    }
+    .split {
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 10px;      
+    }
   }
 }
