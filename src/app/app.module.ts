@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { JwtModule } from "@auth0/angular-jwt";
 
 // Angular Material
 import {A11yModule} from '@angular/cdk/a11y';
@@ -80,6 +81,10 @@ import { TransferComponent } from './modules/transfer/transfer.component';
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
+export function tokenGetter() {
+  return localStorage.getItem("access_token");
 }
 
 @NgModule({
@@ -154,7 +159,13 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ["api.wallet.conceal.network"]
+      },
+    }),
   ],
   providers: [
     DataService,

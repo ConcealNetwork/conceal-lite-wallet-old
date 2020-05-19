@@ -55,8 +55,7 @@ export class LockComponent implements OnInit {
   submit() {
     if (this.form.valid) {
       this.submitEM.emit(this.form.value);
-      //console.log(this.form.value);
-      this.login(this.form.value.email, this.form.value.password, this.form.value.twofa);
+      this.AuthService.login(this.form.value.email, this.form.value.password, this.form.value.twofa);
     }
   }
   
@@ -66,10 +65,5 @@ export class LockComponent implements OnInit {
 	
   @Input() error: string | null;
   @Output() submitEM = new EventEmitter();
-
-	login(email,password,twofa) {
-    this.AuthService.login(email,password,twofa);
-    //console.log(email,password,twofa);
-	}
 
 }

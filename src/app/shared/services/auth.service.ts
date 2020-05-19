@@ -5,6 +5,10 @@ import { AppConfig } from '../../../environments/environment';
 
 const helper = new JwtHelperService();
 
+export interface Data {
+  message: string;
+}
+
 @Injectable({
 	providedIn: 'root'
 })
@@ -26,10 +30,12 @@ export class AuthService {
 		}
 		this.http.post(this.api + '/auth', JSON.stringify(body)).subscribe(
 			data => {
-				console.log("POST Request is successful ", data)
+				if (data['message'].token) this.setToken(data['message'].token);
+				return data['message'].token;
 			},
 			error => {
-				console.log("Error", error)
+				console.log("Error", error);
+				return error.message;
 			}
 		)
 	};
@@ -40,15 +46,15 @@ export class AuthService {
   };
 
 	setToken(token) {
-		localStorage.setItem('token', token);
+		localStorage.setItem('access_token', token);
 	}
 
 	getToken() :any {
-		localStorage.getItem('token');
+		localStorage.getItem('access_token');
 	} 
 	
 	logout() {
-		localStorage.removeItem('token');
+		localStorage.removeItem('access_token');
 	}
 	
   decodeToken() {
