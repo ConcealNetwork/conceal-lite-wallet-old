@@ -40,6 +40,9 @@
       },
       "LOCK": {
         "TITLE": "Lock Your Wallet"
+      },
+      "LOGIN": {
+        "TITLE": "Cloud Wallet Login"
       }
   }
 }

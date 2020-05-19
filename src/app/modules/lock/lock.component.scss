@@ -11,6 +11,16 @@
   .subtitle {
     color: #888;
   }
+  .mat-form-field {
+    font-size: 0.7rem;
+  }
+  .actions {
+    button {
+      padding: 0.35rem;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+  }
   .pin {
     transform: scale(0.5);
     button {
@@ -24,9 +34,12 @@
   .lockbox {
     background-color: rgba(#393939, 0.9);
     border-radius: 10px;
-    min-width: 30vw;
+    min-width: 35vw;
     min-height: 50vh;
-    padding: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
     button {
       color: #fff;
       font-size: 1.1rem;

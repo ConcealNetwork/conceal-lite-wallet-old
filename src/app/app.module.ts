@@ -5,7 +5,7 @@ import '../polyfills';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -64,6 +64,8 @@ import { SharedModule } from './shared/shared.module';
 
 // Services 
 import { DataService } from './shared/services/data.service';
+import { AuthService } from './shared/services/auth.service';
+import { CloudWalletService } from './shared/services/cloud.wallet.service';
 
 // Compoents
 import { AppComponent } from './app.component';
@@ -99,6 +101,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     FlexLayoutModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     SharedModule,
     AppRoutingModule,
@@ -154,7 +157,9 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     })
   ],
   providers: [
-    DataService
+    DataService,
+    AuthService,
+    CloudWalletService
   ],
   entryComponents: [
     NewContactDialog,
