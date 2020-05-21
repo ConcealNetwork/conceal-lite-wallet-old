@@ -43,33 +43,53 @@
 <div *ngIf="!isLoggedIn" class="container" @enterAnimation>
   <h1 class="title" fxLayout="column" fxLayoutAlign="center center">{{ 'PAGES.LOGIN.TITLE' | translate }}</h1>
   <div fxLayout="column" fxLayoutAlign="center center">
-    <div fxLayout="column" class="lockbox" fxLayoutAlign="center">
+    <div fxLayout="column" class="login" fxLayoutAlign="center">
       <form [formGroup]="form" (ngSubmit)="submit()">
+        <p>Sign in to continue.</p>
         <p>
           <mat-form-field fxFill appearance="fill">
             <mat-label>Email Address</mat-label>
-            <input type="email" matInput required #email placeholder="you@youremail.com" formControlName="email">
+            <input type="email" matInput placeholder="you@youremail.com" formControlName="emailFormControl">
+            <mat-error *ngIf="form.controls.emailFormControl.hasError('email') && !form.controls.emailFormControl.hasError('required')">
+              Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="form.controls.emailFormControl.hasError('required')">
+              Email address is <strong>required</strong>
+            </mat-error>
           </mat-form-field>
         </p>
         <p>
           <mat-form-field fxFill appearance="fill">
             <mat-label>Password</mat-label>
-            <input type="password" matInput required #password placeholder="password" formControlName="password">
+            <input type="password" matInput placeholder="password" formControlName="passwordFormControl">
+            <mat-error *ngIf="form.controls.passwordFormControl.hasError('required')">
+              Password is <strong>required</strong>
+            </mat-error>
           </mat-form-field>
         </p>
         <p>
-          <mat-form-field fxFill hintLabel="Max 6 characters" appearance="fill">
-            <mat-label>2FA Code</mat-label>
-            <input matInput #twofa maxlength="6" placeholder="00000" formControlName="twofa">
+          <mat-form-field fxFill hintLabel="6 Numbers" appearance="fill">
+            <mat-label>2FA Code (Optional)</mat-label>
+            <input #twofa matInput minlength="6" maxlength="6" placeholder="00000" formControlName="twofaFormControl">
             <mat-hint align="end">{{twofa.value?.length || 0}}/6</mat-hint>
+            <mat-error *ngIf="form.controls.twofaFormControl.hasError('minlength') || form.controls.twofaFormControl.hasError('maxlength')">
+              2FA code should be <strong>6 numbers</strong>
+            </mat-error>
+            <mat-error *ngIf="form.controls.twofaFormControl.hasError('pattern')">
+              2FA code should be <strong>only numbers</strong>
+            </mat-error>
           </mat-form-field>
         </p>
+        <mat-progress-bar mode="query" *ngIf="isFormLoading"></mat-progress-bar>
         <p *ngIf="error" class="error">
           {{ error }}
         </p>
-        <p class="actions">
-          <button  mat-stroked-button fxFill (click)="reset()">Reset</button>
-          <button mat-stroked-button fxFill type="submit">Login</button>
+        <p *ngIf="success" class="success">
+          {{ success }}
+        </p>
+        <p class="actions" fxLayout="row" fxLayoutGap="15px">
+          <button mat-stroked-button color="primary" fxFlex="50" type="submit">Login</button>
+          <button mat-stroked-button color="warn" fxFlex="50" (click)="this.form.reset()">Reset</button>
         </p>
       </form>
     </div>

@@ -11,16 +11,7 @@
   .subtitle {
     color: #888;
   }
-  .mat-form-field {
-    font-size: 0.7rem;
-  }
-  .actions {
-    button {
-      padding: 0.35rem;
-      margin-top: 5px;
-      margin-bottom: 5px;
-    }
-  }
+
   .pin {
     transform: scale(0.5);
     button {
@@ -31,6 +22,53 @@
       margin-bottom: 15px;
     }
   }
+
+  .login {
+    background-color: rgba(#393939, 0.9);
+    border-radius: 5px;
+    min-width: 32vw;
+    min-height: 50vh;
+    padding-top: 0rem;
+    padding-bottom: .25rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border: 1px solid orange;
+    .mat-form-field {
+      font-size: 0.6rem;
+    }
+    .error {
+      height: 25px;
+      width: 100%;
+      font-size: 0.6rem;
+      text-align: center;
+      line-height: 2;
+      border: 1px solid rgba(255, 0, 0, 0.5);
+      border-radius: 5px;
+      padding-top: .5rem;
+      padding-bottom: .5rem;
+      margin-bottom: -15px;
+    }
+    .success {
+      height: 25px;
+      width: 100%;
+      font-size: 0.6rem;
+      text-align: center;
+      line-height: 2;
+      border: 1px solid rgba(0, 255, 0, 0.5);
+      border-radius: 5px;
+      padding-top: .5rem;
+      padding-bottom: .5rem;
+      margin-bottom: -15px;
+    }
+    .actions {
+      button {
+        font-size: .85rem;
+        padding: .4rem;
+        margin-top: 10px;
+      }
+    }
+  }
+
   .lockbox {
     background-color: rgba(#393939, 0.9);
     border-radius: 10px;

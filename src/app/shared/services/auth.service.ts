@@ -28,16 +28,7 @@ export class AuthService {
 			rememberme: false,
 			code: twofa
 		}
-		this.http.post(this.api + '/auth', JSON.stringify(body)).subscribe(
-			data => {
-				if (data['message'].token) this.setToken(data['message'].token);
-				return data['message'].token;
-			},
-			error => {
-				console.log("Error", error);
-				return error.message;
-			}
-		)
+		return this.http.post(this.api + '/auth', JSON.stringify(body));
 	};
 
 	loggedIn() {
