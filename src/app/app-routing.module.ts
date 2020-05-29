@@ -11,20 +11,24 @@ import { MessagingComponent } from './modules/messaging/messaging.component';
 import { SettingsComponent } from './modules/settings/settings.component';
 import { TransferComponent } from './modules/transfer/transfer.component';
 
+// Services
+import { AuthGuard } from './shared/services/auth.guard';
+
 const routes: Routes = [
 	{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-	{ path: 'dashboard', component: DashboardComponent, },
-	{ path: 'activity', component: ActivityComponent },
-	{ path: 'contacts', component: ContactsComponent },
+	{ path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+	{ path: 'activity', component: ActivityComponent, canActivate: [AuthGuard] },
+	{ path: 'contacts', component: ContactsComponent, canActivate: [AuthGuard] },
 	{ path: 'lock', component: LockComponent },
-	{ path: 'message', component: MessagingComponent },
-	{ path: 'settings', component: SettingsComponent },
-	{ path: 'transfer', component: TransferComponent },
+	{ path: 'message', component: MessagingComponent, canActivate: [AuthGuard] },
+	{ path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
+	{ path: 'transfer', component: TransferComponent, canActivate: [AuthGuard] },
 	{ path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
 ];
 
 @NgModule({
 	imports: [RouterModule.forRoot(routes, { useHash: true })],
-	exports: [RouterModule]
+	exports: [RouterModule],
+	providers: [AuthGuard],
 })
 export class AppRoutingModule { }

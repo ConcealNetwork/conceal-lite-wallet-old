@@ -1,9 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter  } from '@angular/core';
+// Angular Core
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 
-// Import Services
+// Services
 import { AuthService } from './../../shared/services/auth.service';
+import { DataService } from './../../shared/services/data.service';
 
 @Component({
 	selector: 'app-lock',
@@ -58,30 +61,42 @@ export class LockComponent implements OnInit {
 
   isLoading: boolean = true;
   isFormLoading: boolean = false;
-  isLoggedIn: boolean = false;
+  isLoggedIn: boolean;
 
-	constructor(private AuthService: AuthService) { }
+	constructor(
+    private AuthService: AuthService,
+    private DataService: DataService,
+    private router: Router
+    ) { }
 
 	ngOnInit(): void {
-		this.isLoading = false;
+    this.isLoading = false;
+    this.isLoggedIn = this.DataService.isLoggedIn;
   }
   
   submit() {
     if (this.form.valid) {
+      this.error = null;
       this.isFormLoading = true;
       this.submitEM.emit(this.form.value);
-      this.AuthService.login(this.form.value.email, this.form.value.password, this.form.value.twofa).subscribe(
+      this.AuthService.login(this.form.value.emailFormControl, this.form.value.passwordFormControl, this.form.value.twofaFormControl).subscribe(
         data => { 
           if (data['message'].token && data['result'] === 'success') {
             this.AuthService.setToken(data['message'].token);
             this.success = 'Success!';
-            this.isLoggedIn = false;
+            this.DataService.isLoggedIn = true;
             this.isFormLoading = false;
+            setTimeout(() => {
+              this.router.navigate(['/']);
+            }, 2000);
           }
           if (data['result'] === 'success') {
-            this.success = 'Success!';
-            this.isLoggedIn = false;
+            this.success = 'Success! Redirecting now...';
+            this.DataService.isLoggedIn = true;
             this.isFormLoading = false;
+            setTimeout(() => {
+              this.router.navigate(['/']);
+            }, 2000);
           }
           if (data['result'] === 'error') {
             this.error = data['message'];

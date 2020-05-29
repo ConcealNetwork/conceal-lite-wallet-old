@@ -66,6 +66,7 @@ import { SharedModule } from './shared/shared.module';
 // Services 
 import { DataService } from './shared/services/data.service';
 import { AuthService } from './shared/services/auth.service';
+import { AuthGuard } from './shared/services/auth.guard';
 import { CloudWalletService } from './shared/services/cloud.wallet.service';
 
 // Compoents
@@ -170,6 +171,7 @@ export function tokenGetter() {
   providers: [
     DataService,
     AuthService,
+    AuthGuard,
     CloudWalletService
   ],
   entryComponents: [
