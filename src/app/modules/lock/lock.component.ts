@@ -6,7 +6,6 @@ import { trigger, transition, query, style, stagger, animate } from '@angular/an
 
 // Services
 import { AuthService } from './../../shared/services/auth.service';
-import { DataService } from './../../shared/services/data.service';
 
 @Component({
 	selector: 'app-lock',
@@ -65,13 +64,12 @@ export class LockComponent implements OnInit {
 
 	constructor(
     private AuthService: AuthService,
-    private DataService: DataService,
     private router: Router
     ) { }
 
 	ngOnInit(): void {
     this.isLoading = false;
-    this.isLoggedIn = this.DataService.isLoggedIn;
+    this.isLoggedIn = this.AuthService.loggedIn();
   }
   
   submit() {
@@ -84,7 +82,6 @@ export class LockComponent implements OnInit {
           if (data['message'].token && data['result'] === 'success') {
             this.AuthService.setToken(data['message'].token);
             this.success = 'Success!';
-            this.DataService.isLoggedIn = true;
             this.isFormLoading = false;
             setTimeout(() => {
               this.router.navigate(['/']);
@@ -92,7 +89,6 @@ export class LockComponent implements OnInit {
           }
           if (data['result'] === 'success') {
             this.success = 'Success! Redirecting now...';
-            this.DataService.isLoggedIn = true;
             this.isFormLoading = false;
             setTimeout(() => {
               this.router.navigate(['/']);

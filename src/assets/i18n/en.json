@@ -16,6 +16,8 @@
         "TITLE": "Dashboard",
         "BALANCE": "Balance",
         "ADDRESS": "Address",
+        "PORTFOLIO": "Your Portfolio",
+        "WALLETS": "Your Wallets",
         "ACTIVITY": "Recent Activity"
 			},
 			"TRANSFER": {

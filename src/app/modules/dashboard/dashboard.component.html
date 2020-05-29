@@ -1,9 +1,12 @@
 <div class="loading" *ngIf="isLoading">
   <app-loader [isLoading]="isLoading"></app-loader>
 </div>
-<div class="container" @enterAnimation>
-  <div class="side cards" fxFlex="40" fxLayout="column" fxLayoutAlign="center stretch">
-    <mat-card fxLayout="column">
+
+<div class="container" fxLayout="row" fxLayoutAlign="space-evenly" fxLayoutGap="50px" @enterAnimation>
+
+  <div class="first" fxFlex="40">
+    <h1 class="title">{{ 'PAGES.DASHBOARD.PORTFOLIO' | translate }}</h1>
+    <mat-card class="cards" fxLayout="column">
       <mat-card-header>
         <mat-card-title>
           {{ 'PAGES.DASHBOARD.BALANCE' | translate }}
@@ -43,99 +46,95 @@
         </mat-card-actions>
       </mat-card-footer>
     </mat-card>
-    <mat-card fxLayout="column">
-      <mat-card-header>
-        <mat-card-title>
-          {{ 'PAGES.DASHBOARD.ADDRESS' | translate }}
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-content fxFlex="auto">
-        <div class="address">
-          ccx7LXzDFiH9YD19bqNU654fVC4ZtysSBMu1QxNaQFhjW8PbKQTFtyDYXDxHPq4YUPi4tRzUwWcLKJeymxTV8m5R4oMTTzAZuu
-        </div>
-      </mat-card-content>
-      <mat-card-footer>
-        <mat-card-actions fxLayoutAlign="center center">
-          <button mat-button aria-hidden="false" aria-label="copy">
-            <!-- <mat-icon svgIcon="select_all"></mat-icon> -->
-            Copy
-          </button>
-          <div fxFlex></div>
-          <button mat-button aria-hidden="false" aria-label="qr_code">
-            <!-- <mat-icon svgIcon="panorama_fish_eye"></mat-icon> -->
-            QR Code
-          </button>
-        </mat-card-actions>
-      </mat-card-footer>
-    </mat-card>
   </div>
-  <div class="content expansion-panel" fxFlex fxLayout="column" fxLayoutAlign="start stretch">
-    <h1 class="title">{{ 'PAGES.DASHBOARD.ACTIVITY' | translate }}</h1>
-    
-    <mat-accordion [@.disabled]="disableAnimation">
-      <mat-expansion-panel [expanded]="true">
-        <mat-expansion-panel-header>
-          <mat-panel-title fxFlex="50">
-            <mat-icon svgIcon="flight_land" fxFlex="15"></mat-icon>
-            <span fxFlex>Funds Received</span>
-          </mat-panel-title>
-          <mat-panel-description fxFlex>
-            5 hours ago
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <div class="details" fxLayout="row" fxLayoutAlign="space-around stretch">
-          <span>25 CCX</span>
-          <span>25/04/2020</span>
-          <span>Height: 496,235</span>
-        </div>
-      </mat-expansion-panel>
-      <mat-expansion-panel [expanded]="false">
-        <mat-expansion-panel-header>
-          <mat-panel-title fxFlex="50">
-            <mat-icon svgIcon="flight_takeoff" fxFlex="15"></mat-icon>
-            <span fxFlex>Funds Sent</span>
-          </mat-panel-title>
-          <mat-panel-description fxFlex>
-            2 days ago
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <div class="details" fxLayout="row" fxLayoutAlign="space-around stretch">
-          <span>25 CCX</span>
-          <span>25/04/2020</span>
-          <span>Height: 496,235</span>
-        </div>
-      </mat-expansion-panel>
-      <mat-expansion-panel [expanded]="false">
-        <mat-expansion-panel-header>
-          <mat-panel-title fxFlex="50">
-            <mat-icon svgIcon="send" fxFlex="15"></mat-icon>
-            <span fxFlex>Message Sent</span>
-          </mat-panel-title>
-          <mat-panel-description fxFlex>
-            1 week ago
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <div class="details" fxLayout="row" fxLayoutAlign="space-around stretch">
-          <span>25/04/2020</span>
-          <span>This is a test message to your wallet</span>
-        </div>
-      </mat-expansion-panel>
-      <mat-expansion-panel [expanded]="false">
-        <mat-expansion-panel-header>
-          <mat-panel-title fxFlex="50">
-            <mat-icon svgIcon="markunread_mailbox" fxFlex="15"></mat-icon>
-            <span fxFlex>Message Received</span>
-          </mat-panel-title>
-          <mat-panel-description fxFlex>
-            6 weeks ago
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <div class="details" fxLayout="row" fxLayoutAlign="space-around stretch">
-          <span>25/04/2020</span>
-          <span>This is a test message to your wallet</span>
-        </div>
-      </mat-expansion-panel>
-    </mat-accordion>
 
+  <div fxFlex="60">
+    <div class="first expansion-panel" fxLayout="column">
+      <h1 class="title">{{ 'PAGES.DASHBOARD.WALLETS' | translate }}</h1>
+      <div class="cards" fxLayout="row" fxLayoutGap="15px">
+        <mat-card fxFlex *ngFor="let item of wallets | keyvalue">
+          <mat-card-header>
+            <mat-card-title>
+              {{ (item.key.length>7)? (item.key | slice:0:7)+'...':(item.key) }}{{(item.key | slice:-7)}}
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div>Balance: {{ item.value.balance }}</div>
+            <div>Locked: {{ item.value.locked }}</div>
+            <div>Total: {{ item.value.total }}</div>
+            <div>Default: {{ item.value.default }}</div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  
+    <div class="expansion-panel" fxLayout="column">
+      <h1 class="title">{{ 'PAGES.DASHBOARD.ACTIVITY' | translate }}</h1>
+      <mat-accordion [@.disabled]="disableAnimation">
+        <mat-expansion-panel [expanded]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title fxFlex="50">
+              <mat-icon svgIcon="flight_land" fxFlex="15"></mat-icon>
+              <span fxFlex>Funds Received</span>
+            </mat-panel-title>
+            <mat-panel-description fxFlex>
+              5 hours ago
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="details" fxLayout="row" fxLayoutAlign="space-around stretch">
+            <span>25 CCX</span>
+            <span>25/04/2020</span>
+            <span>Height: 496,235</span>
+          </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel [expanded]="false">
+          <mat-expansion-panel-header>
+            <mat-panel-title fxFlex="50">
+              <mat-icon svgIcon="flight_takeoff" fxFlex="15"></mat-icon>
+              <span fxFlex>Funds Sent</span>
+            </mat-panel-title>
+            <mat-panel-description fxFlex>
+              2 days ago
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="details" fxLayout="row" fxLayoutAlign="space-around stretch">
+            <span>25 CCX</span>
+            <span>25/04/2020</span>
+            <span>Height: 496,235</span>
+          </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel [expanded]="false">
+          <mat-expansion-panel-header>
+            <mat-panel-title fxFlex="50">
+              <mat-icon svgIcon="send" fxFlex="15"></mat-icon>
+              <span fxFlex>Message Sent</span>
+            </mat-panel-title>
+            <mat-panel-description fxFlex>
+              1 week ago
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="details" fxLayout="row" fxLayoutAlign="space-around stretch">
+            <span>25/04/2020</span>
+            <span>This is a test message to your wallet</span>
+          </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel [expanded]="false">
+          <mat-expansion-panel-header>
+            <mat-panel-title fxFlex="50">
+              <mat-icon svgIcon="markunread_mailbox" fxFlex="15"></mat-icon>
+              <span fxFlex>Message Received</span>
+            </mat-panel-title>
+            <mat-panel-description fxFlex>
+              6 weeks ago
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="details" fxLayout="row" fxLayoutAlign="space-around stretch">
+            <span>25/04/2020</span>
+            <span>This is a test message to your wallet</span>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
   </div>
+  
 </div>

@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { JwtHelperService } from "@auth0/angular-jwt";
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { AppConfig } from '../../../environments/environment';
-
-const helper = new JwtHelperService();
 
 export interface Data {
   message: string;
@@ -15,7 +13,8 @@ export interface Data {
 
 export class AuthService {
 	constructor(
-		private http: HttpClient
+		private http: HttpClient,
+		public jwtHelper: JwtHelperService
 	) {}
 
 	api = AppConfig.walletAPI;
@@ -32,9 +31,12 @@ export class AuthService {
 	};
 
 	loggedIn() {
-		const token = this.getToken();
-		return !!token && !helper.isTokenExpired(token);
-  };
+		return this.jwtHelper.isTokenExpired();
+	};
+	
+	getExpireDate() {
+		return this.jwtHelper.getTokenExpirationDate();
+	}
 
 	setToken(token) {
 		localStorage.setItem('access_token', token);
@@ -49,7 +51,7 @@ export class AuthService {
 	}
 	
   decodeToken() {
-		helper.decodeToken(this.getToken());
+		this.jwtHelper.decodeToken(this.getToken());
 	}
 
 }

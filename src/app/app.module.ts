@@ -67,7 +67,7 @@ import { SharedModule } from './shared/shared.module';
 import { DataService } from './shared/services/data.service';
 import { AuthService } from './shared/services/auth.service';
 import { AuthGuard } from './shared/services/auth.guard';
-import { CloudWalletService } from './shared/services/cloud.wallet.service';
+import { CloudService } from './shared/services/cloud.service';
 
 // Compoents
 import { AppComponent } from './app.component';
@@ -164,7 +164,9 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        whitelistedDomains: ["api.wallet.conceal.network"]
+        whitelistedDomains: ["api.wallet.conceal.network"],
+        headerName: "token",
+        authScheme: ""
       },
     }),
   ],
@@ -172,7 +174,7 @@ export function tokenGetter() {
     DataService,
     AuthService,
     AuthGuard,
-    CloudWalletService
+    CloudService
   ],
   entryComponents: [
     NewContactDialog,
