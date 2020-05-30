@@ -55,6 +55,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 
+// 3rd Party
+import {NgPipesModule} from 'ngx-pipes';
+
 // NG Translate
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -154,6 +157,7 @@ export function tokenGetter() {
     MatTreeModule,
     PortalModule,
     ScrollingModule,
+    NgPipesModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

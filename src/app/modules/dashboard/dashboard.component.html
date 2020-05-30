@@ -2,73 +2,97 @@
   <app-loader [isLoading]="isLoading"></app-loader>
 </div>
 
-<div class="container" fxLayout="row" fxLayoutAlign="space-evenly" fxLayoutGap="50px" @enterAnimation>
+<div class="container" fxLayout="column" fxLayoutAlign="space-evenly" fxLayoutGap="15px" @enterAnimation>
 
-  <div class="first" fxFlex="40">
-    <h1 class="title">{{ 'PAGES.DASHBOARD.PORTFOLIO' | translate }}</h1>
-    <mat-card class="cards" fxLayout="column">
-      <mat-card-header>
-        <mat-card-title>
-          {{ 'PAGES.DASHBOARD.BALANCE' | translate }}
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-content fxFlex="auto">
-        <div class="balances" fxLayout="column" fxLayoutAlign="space-between stretch">
-          <div fxLayout="row" fxFlex="25" fxLayout="row" fxLayoutAlign="space-between stretch">
-            <span class="st">Available</span>
-            <span class="sb">15,102,01 <span class="ccx">CCX</span></span>
-          </div>
-          <div fxLayout="row" fxFlex="25" fxLayout="row" fxLayoutAlign="space-between stretch">
-            <span class="st">Pending</span>
-            <span class="sb">0.000 <span class="ccx">CCX</span></span>
-          </div>
-          <div fxLayout="row" fxFlex="25" fxLayout="row" fxLayoutAlign="space-between stretch">
-            <span class="st">Locked Deposits</span>
-            <span class="sb">0.000 <span class="ccx">CCX</span></span>
-          </div>
-          <div fxLayout="row" fxFlex="25" fxLayout="row" fxLayoutAlign="space-between stretch">
-            <span class="st">Withdrawable</span>
-            <span class="sb">15,102,01 <span class="ccx">CCX</span></span>
-          </div>
-        </div>
-      </mat-card-content>
-      <mat-card-footer>
-        <mat-card-actions fxLayoutAlign="center center">
-          <button mat-button aria-hidden="false" aria-label="refresh">
-            <!-- <mat-icon svgIcon="cloud_download"></mat-icon> -->
-            Refresh
-          </button>
-          <div fxFlex></div>
-          <button mat-button aria-hidden="false" aria-label="trasnfer">
-            <!-- <mat-icon svgIcon="send"></mat-icon> -->
-            Transfer
-          </button>
-        </mat-card-actions>
-      </mat-card-footer>
-    </mat-card>
-  </div>
+  <div fxLayout="row" fxLayoutGap="50px">
 
-  <div fxFlex="60">
-    <div class="first expansion-panel" fxLayout="column">
+    <div fxFlex="30">
+      <h1 class="title">{{ 'PAGES.DASHBOARD.PORTFOLIO' | translate }}</h1>
+      <mat-card class="cards" fxLayout="column">
+        <mat-card-header>
+          <mat-card-title>
+            {{ 'PAGES.DASHBOARD.BALANCE' | translate }}
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content fxFlex="auto">
+          <div class="balances" fxLayout="column" fxLayoutAlign="space-between stretch">
+            <div fxLayout="row" fxFlex="25" fxLayout="row" fxLayoutAlign="space-between stretch">
+              <span class="st">Available</span>
+              <span class="sb">15,102,01 <span class="ccx">CCX</span></span>
+            </div>
+            <div fxLayout="row" fxFlex="25" fxLayout="row" fxLayoutAlign="space-between stretch">
+              <span class="st">Pending</span>
+              <span class="sb">0.000 <span class="ccx">CCX</span></span>
+            </div>
+            <div fxLayout="row" fxFlex="25" fxLayout="row" fxLayoutAlign="space-between stretch">
+              <span class="st">Withdrawable</span>
+              <span class="sb">15,102,01 <span class="ccx">CCX</span></span>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-footer>
+          <mat-card-actions fxLayoutAlign="center center">
+            <button mat-button aria-hidden="false" aria-label="refresh">
+              Refresh
+            </button>
+            <div fxFlex></div>
+            <button mat-button aria-hidden="false" aria-label="trasnfer">
+              Transfer
+            </button>
+          </mat-card-actions>
+        </mat-card-footer>
+      </mat-card>
+    </div>
+
+    <div fxFlex="70">
       <h1 class="title">{{ 'PAGES.DASHBOARD.WALLETS' | translate }}</h1>
-      <div class="cards" fxLayout="row" fxLayoutGap="15px">
-        <mat-card fxFlex *ngFor="let item of wallets | keyvalue">
+      <div fxLayout="row" fxLayoutGap="15px">
+        <mat-card class="cards" fxFlex fxLayout="column" *ngFor="let item of wallets | keyvalue | reverse">
           <mat-card-header>
-            <mat-card-title>
-              {{ (item.key.length>7)? (item.key | slice:0:7)+'...':(item.key) }}{{(item.key | slice:-7)}}
+            <mat-card-title fxLayout="row" fxLayoutAlign="space-between stretch">
+              <div>{{ (item.key.length>7)? (item.key | slice:0:7)+'...':(item.key) }}{{(item.key | slice:-7)}}</div>
+              <div class="default" *ngIf="item.value.default">
+                <mat-icon svgIcon="favorite" matTooltip="Default Wallet" aria-label="Default Wallet" matTooltipPosition="above"></mat-icon>
+              </div>
             </mat-card-title>
           </mat-card-header>
-          <mat-card-content>
-            <div>Balance: {{ item.value.balance }}</div>
-            <div>Locked: {{ item.value.locked }}</div>
-            <div>Total: {{ item.value.total }}</div>
-            <div>Default: {{ item.value.default }}</div>
+          <mat-card-content fxFlex="auto">
+            <div class="balances" fxLayout="column" fxLayoutAlign="space-between stretch">
+              <div fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
+                <span class="st">Available</span>
+                <span class="sb">{{ item.value.total }} <span class="ccx">CCX</span></span>
+              </div>
+              <div fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
+                <span class="st">Pending</span>
+                <span class="sb">{{ item.value.locked }} <span class="ccx">CCX</span></span>
+              </div>
+              <div fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
+                <span class="st">Withdrawable</span>
+                <span class="sb">{{ item.value.balance }} <span class="ccx">CCX</span></span>
+              </div>
+            </div>
           </mat-card-content>
+          <mat-card-footer>
+            <mat-card-actions fxLayoutAlign="space-between center">
+              <button mat-button aria-hidden="false" aria-label="refresh">
+                Export Keys
+              </button>
+              <button mat-button aria-hidden="false" aria-label="trasnfer">
+                QR Code
+              </button>
+              <button mat-button aria-hidden="false" aria-label="trasnfer" *ngIf="!item.value.default">
+                Delete Wallet
+              </button>
+            </mat-card-actions>
+          </mat-card-footer>
         </mat-card>
       </div>
     </div>
-  
-    <div class="expansion-panel" fxLayout="column">
+
+  </div>
+
+  <!-- <div fxLayout="row">
+    <div class="expansion-panel" fxFlex>
       <h1 class="title">{{ 'PAGES.DASHBOARD.ACTIVITY' | translate }}</h1>
       <mat-accordion [@.disabled]="disableAnimation">
         <mat-expansion-panel [expanded]="true">
@@ -135,6 +159,6 @@
         </mat-expansion-panel>
       </mat-accordion>
     </div>
-  </div>
+  </div> -->
   
 </div>

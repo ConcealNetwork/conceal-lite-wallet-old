@@ -8,18 +8,17 @@
 .container {
   display: flex;
   overflow: hidden;
-  margin: 2rem;
+  margin-left: 3rem;
+  margin-right: 3rem;
+  margin-top: 0.5rem;
   .title {
     line-height: 1;
-  }
-  .first {
-    margin-top: -1.5rem;
   }
   .mat-card {
     background: rgba(#393939, 0.8);
   }
   .mat-card-footer {
-    border-top: 1px solid orange;
+    border-top: 0.5px solid orange;
   }
   .balances {
     font-size: .85rem;

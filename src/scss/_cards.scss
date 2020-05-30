@@ -14,16 +14,22 @@
     .mat-card-header-text {
       margin: 0;
     }
+    .mat-card-header-text {
+      width: 100%;
+    }
     .mat-card-title {
       margin-bottom: 0px;
       padding-left: 10px;
       padding-right: 10px;
-      font-size: 1.3rem;
+      font-size: 1.1rem;
     }
   }
 
   .mat-card-content {
-    padding: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   mat-card-footer {
@@ -36,10 +42,10 @@
       border-bottom-right-radius: 8px;
       .mat-button {
         margin: 0;
-        padding-left: 25px;
-        padding-right: 25px;
-        height: 60px;
-        font-size: 0.9rem;
+        padding-left: 20px;
+        padding-right: 20px;
+        height: 50px;
+        font-size: 0.7rem;
         display: flex;
         flex-direction: column;
         justify-content: center;

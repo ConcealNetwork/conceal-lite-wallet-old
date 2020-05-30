@@ -99,5 +99,7 @@
   "engines": {
     "node": ">=10.13.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "ngx-pipes": "2.7.3"
+  }
 }
