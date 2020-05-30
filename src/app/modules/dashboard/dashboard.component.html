@@ -51,8 +51,9 @@
           <mat-card-header>
             <mat-card-title fxLayout="row" fxLayoutAlign="space-between stretch">
               <div>{{ (item.key.length>7)? (item.key | slice:0:7)+'...':(item.key) }}{{(item.key | slice:-7)}}</div>
-              <div class="default" *ngIf="item.value.default">
-                <mat-icon svgIcon="favorite" matTooltip="Default Wallet" aria-label="Default Wallet" matTooltipPosition="above"></mat-icon>
+              <div class="default" fxLayoutGap="15px">
+                <mat-icon *ngIf="item.value.default" svgIcon="stars" matTooltip="Primary Address" aria-label="Primary" matTooltipPosition="above" matTooltipClass="custom-tooltip"></mat-icon>
+                <mat-icon svgIcon="assignment" matTooltip="Copy Address" aria-label="Copy Address" matTooltipPosition="above" matTooltipClass="custom-tooltip"></mat-icon>
               </div>
             </mat-card-title>
           </mat-card-header>
@@ -77,11 +78,11 @@
               <button mat-button aria-hidden="false" aria-label="refresh">
                 Export Keys
               </button>
+              <button mat-button color="warn" aria-hidden="false" aria-label="trasnfer" *ngIf="!item.value.default">
+                Delete Wallet
+              </button>
               <button mat-button aria-hidden="false" aria-label="trasnfer">
                 QR Code
-              </button>
-              <button mat-button aria-hidden="false" aria-label="trasnfer" *ngIf="!item.value.default">
-                Delete Wallet
               </button>
             </mat-card-actions>
           </mat-card-footer>

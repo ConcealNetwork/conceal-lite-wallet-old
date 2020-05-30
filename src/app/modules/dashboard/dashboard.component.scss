@@ -20,6 +20,9 @@
   .mat-card-footer {
     border-top: 0.5px solid orange;
   }
+  .mat-icon {
+    cursor: pointer;
+  }
   .balances {
     font-size: .85rem;
     height: 100%;
@@ -43,4 +46,11 @@
     padding: 15px;
     font-size: 0.9rem;
   }
+}
+
+.custom-tooltip { 
+  font-size: 0.6rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border: 0.5px solid rgba(orange, 0.5);
 }

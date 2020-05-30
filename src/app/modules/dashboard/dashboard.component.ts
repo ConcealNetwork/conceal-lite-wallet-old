@@ -1,5 +1,5 @@
 // Angular Core
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
@@ -11,6 +11,7 @@ import { CloudService } from './../../shared/services/cloud.service';
 	selector: 'app-dashboard',
 	templateUrl: './dashboard.component.html',
 	styleUrls: ['./dashboard.component.scss'],
+	encapsulation: ViewEncapsulation.None,
 	animations: [
 		trigger(
 			'enterAnimation', [
