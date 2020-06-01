@@ -16,4 +16,8 @@ export class CloudService {
 		return this.http.get(`${this.api}/wallet/unified`);
 	};
 
+	getMarketData = () => {
+		return this.http.get('https://api.coingecko.com/api/v3/coins/conceal?sparkline=true');
+	};
+
 }

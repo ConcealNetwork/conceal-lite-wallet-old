@@ -1,6 +1,7 @@
 .loading {
-  position: absolute;
-  height: 100%;
+  position: fixed;
+  overflow: hidden;
+  height: 100vh;
   width: 100vw;
   z-index: 1;
 }
@@ -46,6 +47,12 @@
     padding: 15px;
     font-size: 0.9rem;
   }
+}
+
+.chart {
+  display: flex;
+  height: 200px;
+  width: 100%;
 }
 
 .custom-tooltip { 

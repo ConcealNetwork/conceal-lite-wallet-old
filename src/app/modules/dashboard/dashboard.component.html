@@ -18,15 +18,15 @@
           <div class="balances" fxLayout="column" fxLayoutAlign="space-between stretch">
             <div fxLayout="row" fxFlex="25" fxLayout="row" fxLayoutAlign="space-between stretch">
               <span class="st">Available</span>
-              <span class="sb">15,102,01 <span class="ccx">CCX</span></span>
+              <span class="sb">{{portfolio?.available || 0}} <span class="ccx">CCX</span></span>
             </div>
             <div fxLayout="row" fxFlex="25" fxLayout="row" fxLayoutAlign="space-between stretch">
               <span class="st">Pending</span>
-              <span class="sb">0.000 <span class="ccx">CCX</span></span>
+              <span class="sb">{{portfolio?.pending || 0}} <span class="ccx">CCX</span></span>
             </div>
             <div fxLayout="row" fxFlex="25" fxLayout="row" fxLayoutAlign="space-between stretch">
               <span class="st">Withdrawable</span>
-              <span class="sb">15,102,01 <span class="ccx">CCX</span></span>
+              <span class="sb">{{portfolio?.withdrawable || 0}} <span class="ccx">CCX</span></span>
             </div>
           </div>
         </mat-card-content>
@@ -74,15 +74,15 @@
             </div>
           </mat-card-content>
           <mat-card-footer>
-            <mat-card-actions fxLayoutAlign="space-between center">
-              <button mat-button aria-hidden="false" aria-label="refresh">
+            <mat-card-actions fxLayoutAlign="start center">
+              <button mat-button aria-hidden="false" aria-label="refresh" matTooltip="Export your private keys" aria-label="Export your private keys" matTooltipPosition="below" matTooltipClass="custom-tooltip">
                 Export Keys
               </button>
-              <button mat-button color="warn" aria-hidden="false" aria-label="trasnfer" *ngIf="!item.value.default">
-                Delete Wallet
-              </button>
-              <button mat-button aria-hidden="false" aria-label="trasnfer">
+              <button mat-button aria-hidden="false" aria-label="trasnfer" matTooltip="Show your QR Code" aria-label="Show your QR Code" matTooltipPosition="below" matTooltipClass="custom-tooltip">
                 QR Code
+              </button>
+              <button mat-button aria-hidden="false" aria-label="trasnfer" *ngIf="!item.value.default" matTooltip="Delete your wallet" aria-label="Delete your wallet" matTooltipPosition="below" matTooltipClass="custom-tooltip">
+                Remove
               </button>
             </mat-card-actions>
           </mat-card-footer>
@@ -90,6 +90,15 @@
       </div>
     </div>
 
+  </div>
+
+  <div fxLayout="column">
+    <h1 class="title">{{ 'PAGES.DASHBOARD.MARKET' | translate }}</h1>
+    <mat-card class="">
+      <mat-card-content>
+        <div echarts [options]="market" (chartInit)="onChartInit($event)" class="chart"></div>
+      </mat-card-content>
+    </mat-card>
   </div>
 
   <!-- <div fxLayout="row">

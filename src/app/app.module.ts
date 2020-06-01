@@ -56,7 +56,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 
 // 3rd Party
-import {NgPipesModule} from 'ngx-pipes';
+import { NgPipesModule } from 'ngx-pipes';
+import { NgxEchartsModule } from 'ngx-echarts';
+import { init } from 'echarts';
 
 // NG Translate
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -171,6 +173,11 @@ export function tokenGetter() {
         whitelistedDomains: ["api.wallet.conceal.network"],
         headerName: "token",
         authScheme: ""
+      },
+    }),
+    NgxEchartsModule.forRoot({
+      echarts: {
+        init,
       },
     }),
   ],

@@ -18,7 +18,8 @@
         "ADDRESS": "Address",
         "PORTFOLIO": "Your Portfolio",
         "WALLETS": "Your Wallets",
-        "ACTIVITY": "Recent Activity"
+        "ACTIVITY": "Recent Activity",
+        "MARKET": "Market"
 			},
 			"TRANSFER": {
         "TITLE": "Transfer Funds",

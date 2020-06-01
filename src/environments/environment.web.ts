@@ -5,5 +5,6 @@
 
 export const AppConfig = {
   production: false,
-  environment: 'DEV'
+  environment: 'DEV',
+  walletAPI: 'https://api.wallet.conceal.network/api'
 };
