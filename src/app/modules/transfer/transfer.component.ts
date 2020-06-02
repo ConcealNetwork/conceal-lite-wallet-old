@@ -6,32 +6,32 @@ import { MatIconRegistry } from '@angular/material/icon';
 @Component({
 	selector: 'app-transfer',
 	templateUrl: './transfer.component.html',
-	styleUrls: ['./transfer.component.scss'],
+  styleUrls: ['./transfer.component.scss'],
   animations: [
-    trigger(
-      'enterAnimation', [
-        transition(':enter', [
-          style({opacity:0}),
-          animate(400, style({opacity:1}))
-        ]),
-        transition(':leave', [
-          style({opacity:1}),
-          animate(400, style({opacity:0}))
-        ])
-      ]
-    ),
-    trigger('stagger', [
-      transition('* => *', [
-        query('#cards', style({ opacity: 0, transform: 'translateX(-40px)' }), {optional: true}),
-        query('#cards', stagger('300ms', [
-          animate('600ms 1.2s ease-out', style({ opacity: 1, transform: 'translateX(0)' })),
-        ]), {optional: true}),
-        query('#cards', [
-          animate(1000, style('*'))
-        ], {optional: true})
-      ])
-    ])
-  ]
+		trigger(
+			'enterAnimation', [
+				transition(':enter', [
+					style({opacity:0}),
+					animate(800, style({opacity:1}))
+				]),
+				transition(':leave', [
+					style({opacity:1}),
+					animate(400, style({opacity:0}))
+				])
+			]
+		),
+		trigger('stagger', [
+			transition(':enter', [
+				query('mat-expansion-panel, .title', style({ opacity: 0, transform: 'translateX(-80px)' }), {optional: true}),
+				query('mat-expansion-panel, .title', stagger('400ms', [
+					animate('400ms 0.3s ease-out', style({ opacity: 1, transform: 'translateX(0)' })),
+				]), {optional: true}),
+				query('#cards', [
+					animate(1000, style('*'))
+				], {optional: true})
+			])
+		])
+	]
 })
 export class TransferComponent implements OnInit {
 
@@ -51,11 +51,6 @@ export class TransferComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.isLoading = false;
-  }
-  
-  ngAfterViewInit(): void {
-    // timeout required to avoid the dreaded 'ExpressionChangedAfterItHasBeenCheckedError'
-    setTimeout(() => this.disableAnimation = false);
   }
 
 }

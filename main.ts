@@ -2,7 +2,10 @@ import { app, BrowserWindow, screen } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 
+let aspect = require("electron-aspectratio");
+let mainWindowHandler;
 let win: BrowserWindow = null;
+
 const args = process.argv.slice(1),
     serve = args.some(val => val === '--serve');
 
@@ -13,10 +16,10 @@ function createWindow(): BrowserWindow {
 
   // Create the browser window.
   win = new BrowserWindow({
-    width: size.width * .75,
-    height: size.height * .8,
+    width: 1024,
+    height: 768,
     minWidth: 1024,
-    minHeight: 600,
+    minHeight: 768,
     icon: __dirname + '/favicon.ico',
     frame: false,
     resizable: true,
@@ -26,6 +29,12 @@ function createWindow(): BrowserWindow {
       allowRunningInsecureContent: (serve) ? true : false,
     },
   });
+
+  //Create a new handler for the mainWindow
+  mainWindowHandler = new aspect(win);
+
+  //define the ratio
+  mainWindowHandler.setRatio(4, 3, 10);
 
   if (serve) {
     require('electron-reload')(__dirname, {

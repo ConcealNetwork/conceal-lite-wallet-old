@@ -1,19 +1,16 @@
 .loading {
-  position: fixed;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
-  height: 100vh;
-  width: 100vw;
-  z-index: 1;
 }
 
 .container {
-  display: flex;
-  overflow: hidden;
+  height: 100%;
   margin-left: 3rem;
   margin-right: 3rem;
-  margin-top: 0.5rem;
   .title {
     line-height: 1;
+    margin-block-start: 0 !important;
   }
   .mat-card {
     background: rgba(#393939, 0.8);
@@ -49,9 +46,9 @@
   }
 }
 
-.chart {
-  display: flex;
-  height: 200px;
+.chart-wrapper {
+  display: flex; 
+  height: 11rem;
   width: 100%;
 }
 

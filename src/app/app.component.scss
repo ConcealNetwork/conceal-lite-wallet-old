@@ -1,28 +1,25 @@
-.wrapper {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-}
-
-app-background {
+.background {
+    z-index: -99;
     position: absolute;
     height: 100vh;
     width: 100vw;
-    z-index: 1;
 }
 
-app-header, app-footer {
+.wrapper {
+    z-index: 0;
     position: relative;
+    height: 100%;
+}
+
+.header, .footer {
     z-index: 2;
-    flex: 0 0 auto;
-    background: rgba(0, 0, 0, 0.2);
-    border-bottom: 0.8px solid rgba(255, 255, 255, 0.08) !important;
-    border-top: 0.8px solid rgba(255, 255, 255, 0.08) !important;
+    background: rgba(151, 141, 141, 0.2);
+    border-bottom: 0.8px solid rgba(255, 255, 255, 0.08);
+    border-top: 0.8px solid rgba(255, 255, 255, 0.08);
 }
 
 .content {
-    position: relative;
     z-index: 3;
-    flex: 1;
+    height: calc(100% - (85px + 65px));
     overflow-y: auto;
 }

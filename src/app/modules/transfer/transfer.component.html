@@ -1,7 +1,7 @@
 <div class="loading" *ngIf="isLoading">
   <app-loader [isLoading]="isLoading"></app-loader>
 </div>
-<div class="container" @enterAnimation>
+<div class="container" @enterAnimation @stagger>
   <div class="side" fxFlex="5" fxLayout="column" fxLayoutAlign="start start"></div>
   <div class="content expansion-panel" fxFlex fxLayout="column" fxLayoutAlign="start stretch">
     <h1 class="title">{{ 'PAGES.TRANSFER.TITLE' | translate }}</h1>

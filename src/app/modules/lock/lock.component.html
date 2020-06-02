@@ -2,45 +2,7 @@
   <app-loader [isLoading]="isLoading"></app-loader>
 </div>
 
-<div *ngIf="!isLoggedIn" class="container" @enterAnimation>
-  <h1 class="title" fxLayout="column" fxLayoutAlign="center center">{{ 'PAGES.LOCK.TITLE' | translate }}</h1>
-  <div fxLayout="column" fxLayoutAlign="center center">
-    <div fxLayout="column" class="subtitle">Enter Passcode</div>
-    <div fxLayout="row" class="pin">
-      <button mat-fab color="primary"></button>
-      <button mat-fab color="primary"></button>
-      <button mat-fab color="primary"></button>
-      <button mat-fab color="primary"></button>
-      <button mat-fab color="primary"></button>
-    </div>
-    <div fxLayout="column" class="lockbox" fxLayoutAlign="center">
-      <div class="split" fxLayoutAlign="space-around center">
-        <button mat-fab color="primary">1</button>
-        <button mat-fab color="primary">2</button>
-        <button mat-fab color="primary">3</button>
-      </div>
-      <div class="split" fxLayoutAlign="space-around center">
-        <button mat-fab color="primary">4</button>
-        <button mat-fab color="primary">5</button>
-        <button mat-fab color="primary">6</button>
-      </div>
-      <div class="split" fxLayoutAlign="space-around center">
-        <button mat-fab color="primary">7</button>
-        <button mat-fab color="primary">8</button>
-        <button mat-fab color="primary">9</button>
-      </div>
-      <div class="split" fxLayoutAlign="space-around center">
-        <button class="hidden" mat-fab color="primary">0</button>
-        <button mat-fab color="primary">0</button>
-        <button class="hidden" mat-fab color="primary">
-          <mat-icon svgIcon="cancel"></mat-icon>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div *ngIf="isLoggedIn" class="container" @enterAnimation>
+<div class="container" @enterAnimation>
   <h1 class="title" fxLayout="column" fxLayoutAlign="center center">{{ 'PAGES.LOGIN.TITLE' | translate }}</h1>
   <div fxLayout="column" fxLayoutAlign="center center">
     <div fxLayout="column" class="login" fxLayoutAlign="center">

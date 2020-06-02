@@ -1,8 +1,8 @@
 .mat-toolbar {
 	-webkit-app-region: drag;
-	height: 80px;
-	background: none;
-
+	height: 85px;
+	background: rgba(0, 0, 0, 0.2);
+	border-bottom: 0.8px solid rgba(255, 255, 255, 0.08) !important;
 	.title {
    		font-size: 1.2rem;
     	color: orange;
@@ -19,8 +19,6 @@
 		-webkit-app-region: no-drag;
 		-webkit-user-select: none;
 		user-select: none;
-		margin-left: 0;
-		margin-right: 10px;
 		color: #aaa;
 		padding: 5px 20px 5px 20px;
 	}
@@ -30,7 +28,7 @@
 	}
 
 	.mat-button {
-		font-size: 1rem;
+		font-size: 0.9rem;
 		-webkit-app-region: no-drag;
 		-webkit-user-select: none;
 		user-select: none;
@@ -56,29 +54,12 @@
 	.border {
 		height: 70%;
 		border-right: 0.8px solid rgba(white, 0.1);
-		margin-left: 15px;
-		margin-right: 15px;
+		margin-left: 10px;
+		margin-right: 10px;
 	}
 		
 	.spacer {
 		flex: auto;
 	}
 
-}
-
-@media only screen and (max-width: 900px) { 
-	.mat-toolbar {
-		height: 65px !important;
-	}
-	.hidden-sm { 
-		display: none; 
-	} 
-	.logo {
-		width: 35px;
-		height: 35px;
-	}
-	.border {
-		margin-left: 0px;
-		margin-right: 0px;
-	}
 }

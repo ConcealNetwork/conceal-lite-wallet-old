@@ -57,8 +57,7 @@ import {MatTreeModule} from '@angular/material/tree';
 
 // 3rd Party
 import { NgPipesModule } from 'ngx-pipes';
-import { NgxEchartsModule } from 'ngx-echarts';
-import { init } from 'echarts';
+import { ChartsModule } from 'ng2-charts';
 
 // NG Translate
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -160,6 +159,7 @@ export function tokenGetter() {
     PortalModule,
     ScrollingModule,
     NgPipesModule,
+    ChartsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -174,12 +174,7 @@ export function tokenGetter() {
         headerName: "token",
         authScheme: ""
       },
-    }),
-    NgxEchartsModule.forRoot({
-      echarts: {
-        init,
-      },
-    }),
+    })
   ],
   providers: [
     DataService,

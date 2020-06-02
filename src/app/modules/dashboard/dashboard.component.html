@@ -2,13 +2,13 @@
   <app-loader [isLoading]="isLoading"></app-loader>
 </div>
 
-<div class="container" fxLayout="column" fxLayoutAlign="space-evenly" fxLayoutGap="15px" @enterAnimation>
+<div *ngIf="!isLoading" class="container" fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="35px" @enterAnimation @stagger>
 
-  <div fxLayout="row" fxLayoutGap="50px">
+  <div fxLayout="row" fxLayoutGap="45px">
 
     <div fxFlex="30">
       <h1 class="title">{{ 'PAGES.DASHBOARD.PORTFOLIO' | translate }}</h1>
-      <mat-card class="cards" fxLayout="column">
+      <mat-card id="cards" class="cards" fxLayout="column">
         <mat-card-header>
           <mat-card-title>
             {{ 'PAGES.DASHBOARD.BALANCE' | translate }}
@@ -47,7 +47,7 @@
     <div fxFlex="70">
       <h1 class="title">{{ 'PAGES.DASHBOARD.WALLETS' | translate }}</h1>
       <div fxLayout="row" fxLayoutGap="15px">
-        <mat-card class="cards" fxFlex fxLayout="column" *ngFor="let item of wallets | keyvalue | reverse">
+        <mat-card id="cards" class="cards" fxFlex fxLayout="column" *ngFor="let item of wallets | keyvalue | reverse">
           <mat-card-header>
             <mat-card-title fxLayout="row" fxLayoutAlign="space-between stretch">
               <div>{{ (item.key.length>7)? (item.key | slice:0:7)+'...':(item.key) }}{{(item.key | slice:-7)}}</div>
@@ -94,81 +94,20 @@
 
   <div fxLayout="column">
     <h1 class="title">{{ 'PAGES.DASHBOARD.MARKET' | translate }}</h1>
-    <mat-card class="">
+    <mat-card id="cards" class="cards">
       <mat-card-content>
-        <div echarts [options]="market" (chartInit)="onChartInit($event)" class="chart"></div>
+        <div class="chart-wrapper">
+          <canvas baseChart
+            [datasets]="lineChartData" 
+            [labels]="lineChartLabels" 
+            [options]="lineChartOptions"
+            [colors]="lineChartColors" 
+            [chartType]="lineChartType" 
+          >
+          </canvas>
+        </div>
       </mat-card-content>
     </mat-card>
   </div>
-
-  <!-- <div fxLayout="row">
-    <div class="expansion-panel" fxFlex>
-      <h1 class="title">{{ 'PAGES.DASHBOARD.ACTIVITY' | translate }}</h1>
-      <mat-accordion [@.disabled]="disableAnimation">
-        <mat-expansion-panel [expanded]="true">
-          <mat-expansion-panel-header>
-            <mat-panel-title fxFlex="50">
-              <mat-icon svgIcon="flight_land" fxFlex="15"></mat-icon>
-              <span fxFlex>Funds Received</span>
-            </mat-panel-title>
-            <mat-panel-description fxFlex>
-              5 hours ago
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <div class="details" fxLayout="row" fxLayoutAlign="space-around stretch">
-            <span>25 CCX</span>
-            <span>25/04/2020</span>
-            <span>Height: 496,235</span>
-          </div>
-        </mat-expansion-panel>
-        <mat-expansion-panel [expanded]="false">
-          <mat-expansion-panel-header>
-            <mat-panel-title fxFlex="50">
-              <mat-icon svgIcon="flight_takeoff" fxFlex="15"></mat-icon>
-              <span fxFlex>Funds Sent</span>
-            </mat-panel-title>
-            <mat-panel-description fxFlex>
-              2 days ago
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <div class="details" fxLayout="row" fxLayoutAlign="space-around stretch">
-            <span>25 CCX</span>
-            <span>25/04/2020</span>
-            <span>Height: 496,235</span>
-          </div>
-        </mat-expansion-panel>
-        <mat-expansion-panel [expanded]="false">
-          <mat-expansion-panel-header>
-            <mat-panel-title fxFlex="50">
-              <mat-icon svgIcon="send" fxFlex="15"></mat-icon>
-              <span fxFlex>Message Sent</span>
-            </mat-panel-title>
-            <mat-panel-description fxFlex>
-              1 week ago
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <div class="details" fxLayout="row" fxLayoutAlign="space-around stretch">
-            <span>25/04/2020</span>
-            <span>This is a test message to your wallet</span>
-          </div>
-        </mat-expansion-panel>
-        <mat-expansion-panel [expanded]="false">
-          <mat-expansion-panel-header>
-            <mat-panel-title fxFlex="50">
-              <mat-icon svgIcon="markunread_mailbox" fxFlex="15"></mat-icon>
-              <span fxFlex>Message Received</span>
-            </mat-panel-title>
-            <mat-panel-description fxFlex>
-              6 weeks ago
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <div class="details" fxLayout="row" fxLayoutAlign="space-around stretch">
-            <span>25/04/2020</span>
-            <span>This is a test message to your wallet</span>
-          </div>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </div>
-  </div> -->
   
 </div>
