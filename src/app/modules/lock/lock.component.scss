@@ -1,9 +1,7 @@
 .loading {
-  position: fixed;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
-  height: 100vh;
-  width: 100vw;
-  z-index: 1;
 }
 
 .container {
@@ -11,35 +9,24 @@
   margin-left: 3rem;
   margin-right: 3rem;
   .title {
-    color: white;
+    line-height: 1;
+    margin-block-start: 0 !important;
   }
   .subtitle {
     color: #888;
   }
-
-  .pin {
-    transform: scale(0.5);
-    button {
-      background-color: transparent;
-      border: 2px solid orange;
-      margin-left: 15px;
-      margin-right: 15px;
-      margin-bottom: 15px;
-    }
-  }
-
   .login {
     background-color: rgba(#393939, 0.9);
     border-radius: 5px;
-    min-width: 32vw;
-    min-height: 50vh;
-    padding-top: 0rem;
-    padding-bottom: .25rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    min-width: 45vw;
+    min-height: 55vh;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
     border: 1px solid orange;
     .mat-form-field {
-      font-size: 0.6rem;
+      font-size: 0.9rem;
     }
     .error {
       height: 25px;
@@ -49,7 +36,7 @@
       line-height: 2;
       border: 1px solid rgba(255, 0, 0, 0.5);
       border-radius: 5px;
-      padding-top: .5rem;
+      padding-top: 0.5rem;
       padding-bottom: .5rem;
       margin-bottom: -15px;
     }
@@ -71,36 +58,6 @@
         padding: .4rem;
         margin-top: 10px;
       }
-    }
-  }
-
-  .lockbox {
-    background-color: rgba(#393939, 0.9);
-    border-radius: 10px;
-    min-width: 35vw;
-    min-height: 50vh;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    button {
-      color: #fff;
-      font-size: 1.1rem;
-      background-color: transparent;
-      border: 2px solid rgba(orange, 0.8);
-    }
-    .hidden {
-      border: none;
-      color: transparent;
-      box-shadow: none;
-      mat-icon {
-        color: #ddd;
-      }
-    }
-    .split {
-      padding: 10px;
-      margin-top: 10px;
-      margin-bottom: 10px;      
     }
   }
 }

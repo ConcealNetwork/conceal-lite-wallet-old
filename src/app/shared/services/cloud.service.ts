@@ -18,9 +18,9 @@ export class CloudService {
 	};
 
 	getMarketData = () => {
-		if (localStorage.getItem('market_data') !== null) {
+		if (sessionStorage.getItem('market_data') !== null) {
 			return new Observable(observer => {
-				observer.next(JSON.parse(localStorage.getItem('market_data')));
+				observer.next(JSON.parse(sessionStorage.getItem('market_data')));
 				observer.complete();
 			})
 		} else {

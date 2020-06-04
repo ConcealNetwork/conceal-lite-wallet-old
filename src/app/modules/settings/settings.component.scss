@@ -1,34 +1,44 @@
 .loading {
-  width: 100%;
   height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
 
 .container {
-  //background-color: rgba(red, 0.1);
-  padding-left: 70px;
-  padding-right: 70px;
+  height: 100%;
+  margin-left: 3rem;
+  margin-right: 3rem;
   .title {
-    margin-top: -25px;
-    margin-bottom: 0;
+    line-height: 1;
+    margin-block-start: 0 !important;
+    margin-block-end: 0 !important;
   }
-  .content {
-    //background-color: rgba(green, 0.1);
-    padding-top: 55px;
-    padding-bottom: 50px;
-    padding-left: 45px;
-    padding-right: 45px;
+  .subtitle {
+    color: #888;
+  }
+  .language {
     .selected {
-      border: solid 2px green;
+      background: darken(green, $amount: 15);
+      border: 2px solid green !important
     }
-    mat-card {
+    .cards {
       min-width: 10rem;
-      border: solid 1px transparent;
+      border: solid 2px transparent;
       padding: 1rem 2rem 1rem 2rem;
       img {
+        width: 50px;
         margin-bottom: 15px;
+        border:2px solid #ccc;
+        border-radius: 500px;
+      }
+      .icon {
+        position: absolute;
+        top: 2px;
+        right: 5px;
+        color: #ddd;
       }
     }
-    mat-card:hover {
+    .cards:hover {
       border: 2px solid orange;
       transform: scale(1.05);
       cursor: pointer;

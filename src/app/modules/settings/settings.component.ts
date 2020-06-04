@@ -12,7 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
 			'enterAnimation', [
 				transition(':enter', [
 					style({opacity:0}),
-					animate(400, style({opacity:1}))
+					animate(800, style({opacity:1}))
 				]),
 				transition(':leave', [
 					style({opacity:1}),
@@ -21,10 +21,10 @@ import { TranslateService } from '@ngx-translate/core';
 			]
 		),
 		trigger('stagger', [
-			transition('* => *', [
-				query('#cards', style({ opacity: 0, transform: 'translateX(-40px)' }), {optional: true}),
-				query('#cards', stagger('300ms', [
-					animate('600ms 1.2s ease-out', style({ opacity: 1, transform: 'translateX(0)' })),
+			transition(':enter', [
+				query('#cards, .title, .subtitle', style({ opacity: 0, transform: 'translateX(-80px)' }), {optional: true}),
+				query('#cards, .title, .subtitle', stagger('200ms', [
+					animate('400ms 0.3s ease-out', style({ opacity: 1, transform: 'translateX(0)' })),
 				]), {optional: true}),
 				query('#cards', [
 					animate(1000, style('*'))

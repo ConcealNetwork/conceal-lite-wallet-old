@@ -68,7 +68,7 @@ export class DashboardComponent implements OnInit {
 	ngOnInit(): void {
 
 		this.CloudService.getMarketData().subscribe((data) => {
-			localStorage.setItem('market_data', JSON.stringify(data));
+			sessionStorage.setItem('market_data', JSON.stringify(data));
 			this.marketData.push(...data['market_data'].sparkline_7d.price);
 			let len = this.marketData.length;
 			let duration = moment.duration(7 / len, 'd').asMilliseconds();
