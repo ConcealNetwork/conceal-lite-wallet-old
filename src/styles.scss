@@ -20,6 +20,5 @@ body {
 	font-family: "Poppins", Arial, Helvetica, sans-serif;
 	@include fluid-type($min_width, $max_width, $min_font, $max_font);
 	color: #fff;
-	background: url(./assets/images/background.jpg) no-repeat center fixed;
-	background-size: cover;
+	border-radius: 10px;
 }

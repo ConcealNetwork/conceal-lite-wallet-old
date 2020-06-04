@@ -21,9 +21,9 @@ function createWindow(): BrowserWindow {
     minWidth: 1024,
     minHeight: 768,
     icon: __dirname + '/favicon.ico',
+    transparent: true, 
     frame: false,
     resizable: true,
-    backgroundColor: '#151515',
     webPreferences: {
       nodeIntegration: true,
       allowRunningInsecureContent: (serve) ? true : false,
