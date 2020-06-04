@@ -50,8 +50,12 @@ export class AuthService {
 		localStorage.removeItem('access_token');
 	}
 	
-  decodeToken() {
+  	decodeToken() {
 		this.jwtHelper.decodeToken(this.getToken());
 	}
+
+	getQRCode = () => {
+		return this.http.post(this.api + '/two-factor-authentication/', null);
+	};
 
 }

@@ -1,8 +1,9 @@
 // Angular Core
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Inject } from '@angular/core';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 // 3rd Party
 import { ChartDataSets } from 'chart.js';
@@ -16,6 +17,7 @@ import { CloudService } from './../../shared/services/cloud.service';
 	selector: 'app-dashboard',
 	templateUrl: './dashboard.component.html',
 	styleUrls: ['./dashboard.component.scss'],
+	encapsulation: ViewEncapsulation.None,
 	animations: [
 		trigger(
 			'enterAnimation', [
@@ -55,6 +57,7 @@ export class DashboardComponent implements OnInit {
 
 	constructor(
 		public matIconRegistry: MatIconRegistry,
+		public dialog: MatDialog,
 		public domSanitizer: DomSanitizer,
 		private CloudService: CloudService,
 	) {
@@ -158,7 +161,23 @@ export class DashboardComponent implements OnInit {
     },
   ];
 
-  lineChartType = 'line';
+	lineChartType = 'line';
+	
+	ngAfterViewInit(): void {
+		// timeout required to avoid the dreaded 'ExpressionChangedAfterItHasBeenCheckedError'
+		setTimeout(() => this.disableAnimation = false);
+	}
+
+	openDialog(value): void {
+    const dialogRef = this.dialog.open(QrCodeDialog, {
+			width: '400px',
+			height: '405px',
+			data: value,
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 
 }
 
@@ -178,3 +197,20 @@ export const formattedStringAmount: any = ({
   }
   return `${useSymbol ? c : ''} ${parseFloat(amount).toLocaleString(undefined, formatOptions)} ${!useSymbol ? c : ''}`;
 };
+
+@Component({
+  selector: 'qr-code',
+  templateUrl: './qr-code.component.html',
+  styleUrls: ['./qr-code.component.scss'],
+})
+export class QrCodeDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<QrCodeDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+}

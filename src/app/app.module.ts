@@ -58,6 +58,7 @@ import {MatTreeModule} from '@angular/material/tree';
 // 3rd Party
 import { NgPipesModule } from 'ngx-pipes';
 import { ChartsModule } from 'ng2-charts';
+import { QRCodeModule } from 'angularx-qrcode';
 
 // NG Translate
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -77,7 +78,7 @@ import { CloudService } from './shared/services/cloud.service';
 import { AppComponent } from './app.component';
 import { ActivityComponent } from './modules/activity/activity.component';
 import { ContactsComponent, NewContactDialog } from './modules/contacts/contacts.component';
-import { DashboardComponent } from './modules/dashboard/dashboard.component';
+import { DashboardComponent, QrCodeDialog } from './modules/dashboard/dashboard.component';
 import { LockComponent } from './modules/lock/lock.component';
 import { MessagingComponent, NewMessageDialog } from './modules/messaging/messaging.component';
 import { SettingsComponent } from './modules/settings/settings.component';
@@ -102,6 +103,7 @@ export function tokenGetter() {
     LockComponent,
     MessagingComponent,
     NewMessageDialog,
+    QrCodeDialog,
     SettingsComponent,
     TransferComponent
   ],
@@ -160,6 +162,7 @@ export function tokenGetter() {
     ScrollingModule,
     NgPipesModule,
     ChartsModule,
+    QRCodeModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -184,7 +187,8 @@ export function tokenGetter() {
   ],
   entryComponents: [
     NewContactDialog,
-    NewMessageDialog
+    NewMessageDialog,
+    QrCodeDialog,
   ],
   bootstrap: [
     AppComponent
