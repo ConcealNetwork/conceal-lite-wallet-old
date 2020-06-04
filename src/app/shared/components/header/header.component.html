@@ -6,27 +6,31 @@
 	<button mat-button class="navlink" routerLink="/transfer" routerLinkActive="active">{{ 'PAGES.HEADER.TRANSFER' | translate }}</button>
 	<button mat-button class="navlink" routerLink="/activity" routerLinkActive="active">{{ 'PAGES.HEADER.ACTIVITY' | translate }}</button>
 	<span class="spacer"></span>
-	<button mat-icon-button aria-hidden="false" aria-label="Contacts" routerLink="/contacts" routerLinkActive="active">
-		<mat-icon svgIcon="contacts"></mat-icon>
-	</button>
-	<button mat-icon-button aria-hidden="false" aria-label="Messaging" routerLink="/message" routerLinkActive="active">
-		<mat-icon svgIcon="message"></mat-icon>
-	</button>
-	<button mat-icon-button aria-hidden="false" aria-label="Settings" routerLink="/settings" routerLinkActive="active">
-		<mat-icon svgIcon="settings"></mat-icon>
-	</button>
-	<button mat-icon-button aria-hidden="false" aria-label="Lock" routerLink="/lock" routerLinkActive="active">
-		<mat-icon svgIcon="lock"></mat-icon>
-	</button>
+	<div class="action-icons">
+		<button mat-icon-button aria-hidden="false" aria-label="Contacts" routerLink="/contacts" routerLinkActive="active">
+			<mat-icon svgIcon="contacts"></mat-icon>
+		</button>
+		<button mat-icon-button aria-hidden="false" aria-label="Messaging" routerLink="/message" routerLinkActive="active">
+			<mat-icon svgIcon="message"></mat-icon>
+		</button>
+		<button mat-icon-button aria-hidden="false" aria-label="Settings" routerLink="/settings" routerLinkActive="active">
+			<mat-icon svgIcon="settings"></mat-icon>
+		</button>
+		<button mat-icon-button aria-hidden="false" aria-label="Lock" routerLink="/lock" routerLinkActive="active">
+			<mat-icon svgIcon="lock"></mat-icon>
+		</button>
+	</div>
 	<span class="border"></span>
-	<button mat-icon-button aria-hidden="false" aria-label="Minimize" (click)="minimize()">
-		<mat-icon svgIcon="minimize"></mat-icon>
-	</button>
-	<button mat-icon-button aria-hidden="false" aria-label="Maximize" (click)="fullScreen()">
-		<mat-icon svgIcon="fullscreen" *ngIf="!isFullScreen"></mat-icon>
-		<mat-icon svgIcon="fullscreen_exit" *ngIf="isFullScreen"></mat-icon>
-	</button>
-	<button mat-icon-button aria-hidden="false" aria-label="Close" (click)="logout()">
-		<mat-icon svgIcon="close"></mat-icon>
-	</button>
+	<div class="window-ctl">
+		<button mat-icon-button aria-hidden="false" aria-label="Minimize" (click)="minimize()">
+			<mat-icon svgIcon="minimize"></mat-icon>
+		</button>
+		<button mat-icon-button aria-hidden="false" aria-label="Maximize" (click)="fullScreen()">
+			<mat-icon svgIcon="fullscreen" *ngIf="!isFullScreen"></mat-icon>
+			<mat-icon svgIcon="fullscreen_exit" *ngIf="isFullScreen"></mat-icon>
+		</button>
+		<button mat-icon-button aria-hidden="false" aria-label="Close" (click)="logout()">
+			<mat-icon svgIcon="close"></mat-icon>
+		</button>
+	</div>
 </mat-toolbar>

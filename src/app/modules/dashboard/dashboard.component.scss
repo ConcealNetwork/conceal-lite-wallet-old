@@ -5,9 +5,10 @@
 }
 
 .container {
+  transform: scale(0.9);
   height: 100%;
-  margin-left: 3rem;
-  margin-right: 3rem;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
   .title {
     line-height: 1;
     margin-block-start: 0 !important;
@@ -48,7 +49,7 @@
 
 .chart-wrapper {
   display: flex; 
-  height: 11rem;
+  height: 10rem;
   width: 100%;
 }
 

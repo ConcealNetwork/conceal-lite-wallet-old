@@ -1,18 +1,17 @@
 .mat-toolbar {
 	-webkit-app-region: drag;
-	height: 85px;
+	height: 70px;
 	background: rgba(0, 0, 0, 0.2);
 	border-bottom: 0.8px solid rgba(255, 255, 255, 0.08) !important;
 	.title {
-   		font-size: 1.2rem;
+   		font-size: 1.3rem;
     	color: orange;
-		text-transform: capitalize;
-		margin-left: 25px;
-		margin-right: 15px;
+		margin-left: 10px;
+		margin-right: 10px;
 	}
 
 	.logo {
-		padding-left: 5px;
+		transform: scale(0.7);
 	}
 
 	.navlink {
@@ -20,7 +19,7 @@
 		-webkit-user-select: none;
 		user-select: none;
 		color: #aaa;
-		padding: 5px 20px 5px 20px;
+		padding: 5px 35px 5px 35px;
 	}
 
 	.active {
@@ -28,11 +27,11 @@
 	}
 
 	.mat-button {
-		font-size: 0.9rem;
+		font-size: 1rem;
 		-webkit-app-region: no-drag;
 		-webkit-user-select: none;
 		user-select: none;
-		text-transform: uppercase;
+		text-transform: capitalize;
 	}
 
 	.mat-icon-button {
@@ -42,8 +41,6 @@
 		margin-left: 5px;
 		margin-right: 5px;
     	line-height: 1;
-		color: #e9e9e9;
-		transform: scale(0.9);
 		.mat-icon {
 			margin-left: 1px;
 		}
@@ -53,14 +50,23 @@
 		color: orange;
   }
 	.border {
-		height: 70%;
+		height: 100%;
 		border-right: 0.8px solid rgba(white, 0.1);
-		margin-left: 10px;
-		margin-right: 10px;
+		margin-left: 15px;
+		margin-right: 15px;
 	}
 		
 	.spacer {
 		flex: auto;
+	}
+
+	.action-icons {
+		color: #e9e9e9;
+	}
+
+	.window-ctl {
+		transform: scale(1.1);
+		color: orange;
 	}
 
 }

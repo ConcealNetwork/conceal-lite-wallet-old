@@ -1,13 +1,12 @@
 .mat-toolbar {
-	font-size: 0.6rem;
-	height: 65px;
+	font-size: 0.5rem;
+	height: 50px;
 	background: rgba(0, 0, 0, 0.2);
 	border-top: 0.8px solid rgba(255, 255, 255, 0.08) !important;
 	text-transform: capitalize;
 	.progress {
 		width: 30%;
-		height: 65px;
-		margin-top: 15px;
+		height: 50px;
 		line-height: 1;
 		text-align: center;
 		justify-content: center; /* align horizontal */
@@ -44,9 +43,11 @@
 		}
 		.right {
 			margin-left: 15px;
+			transform: scale(0.8);
 		}
 		.left {
 			margin-right: 15px;
+			transform: scale(0.8);
 		}
 		.offline {
 			padding: 2.5px;

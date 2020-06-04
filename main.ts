@@ -16,10 +16,10 @@ function createWindow(): BrowserWindow {
 
   // Create the browser window.
   win = new BrowserWindow({
-    width: 1024,
-    height: 768,
-    minWidth: 1024,
-    minHeight: 768,
+    width: 1280,
+    height: 720,
+    minWidth: 1280,
+    minHeight: 720,
     icon: __dirname + '/favicon.ico',
     transparent: true, 
     frame: false,
@@ -34,7 +34,7 @@ function createWindow(): BrowserWindow {
   mainWindowHandler = new aspect(win);
 
   //define the ratio
-  mainWindowHandler.setRatio(4, 3, 10);
+  mainWindowHandler.setRatio(16, 9, 10);
 
   if (serve) {
     require('electron-reload')(__dirname, {

@@ -20,10 +20,17 @@ body {
 	font-family: "Poppins", Arial, Helvetica, sans-serif;
 	@include fluid-type($min_width, $max_width, $min_font, $max_font);
 	color: #fff;
-	border-radius: 10px;
 }
 
 .cdk-overlay-dark-backdrop {
-	border-radius: 10px;
 	background: rgba(0, 0, 0, 0.70);
+}
+
+@media only screen and (max-width: 1919px) {
+	body {
+		border-radius: 10px;
+	}
+	.cdk-overlay-dark-backdrop {
+		border-radius: 10px;
+	}
 }

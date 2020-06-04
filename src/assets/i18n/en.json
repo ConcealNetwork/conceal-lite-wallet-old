@@ -1,10 +1,10 @@
 {
   "PAGES": {
       "HEADER": {
-        "TITLE": "Lite Wallet",
+        "TITLE": "Wallet",
         "DASHBOARD": "Dashboard",
         "TRANSFER": "Transfer",
-        "ACTIVITY": "Activity"
+        "ACTIVITY": "Transactions"
       },
       "FOOTER": {
         "WALLET": "Cloud Wallet",
