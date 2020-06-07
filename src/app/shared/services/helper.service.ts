@@ -29,6 +29,7 @@ export class HelperService {
 	height: number = 0;
 	portfolio: any;
 	wallets: any;
+	transactions: any;
 
 	constructor(
 		private snackBar: MatSnackBar,
