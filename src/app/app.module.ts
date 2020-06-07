@@ -73,16 +73,20 @@ import { DataService } from './shared/services/data.service';
 import { AuthService } from './shared/services/auth.service';
 import { AuthGuard } from './shared/services/auth.guard';
 import { CloudService } from './shared/services/cloud.service';
+import { HelperService } from './shared/services/helper.service';
 
 // Compoents
 import { AppComponent } from './app.component';
 import { ActivityComponent } from './modules/activity/activity.component';
 import { ContactsComponent, NewContactDialog } from './modules/contacts/contacts.component';
-import { DashboardComponent, QrCodeDialog } from './modules/dashboard/dashboard.component';
+import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { LockComponent } from './modules/lock/lock.component';
 import { MessagingComponent, NewMessageDialog } from './modules/messaging/messaging.component';
 import { SettingsComponent } from './modules/settings/settings.component';
 import { TransferComponent } from './modules/transfer/transfer.component';
+// Dialogs
+import { WalletKeysDialog } from './shared/components/dialogs/privatekeys.component';
+import { QrCodeDialog } from './shared/components/dialogs/qrcode.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -104,6 +108,7 @@ export function tokenGetter() {
     MessagingComponent,
     NewMessageDialog,
     QrCodeDialog,
+    WalletKeysDialog,
     SettingsComponent,
     TransferComponent
   ],
@@ -183,12 +188,14 @@ export function tokenGetter() {
     DataService,
     AuthService,
     AuthGuard,
-    CloudService
+    CloudService,
+    HelperService,
   ],
   entryComponents: [
     NewContactDialog,
     NewMessageDialog,
     QrCodeDialog,
+    WalletKeysDialog,
   ],
   bootstrap: [
     AppComponent

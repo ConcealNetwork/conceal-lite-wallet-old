@@ -13,7 +13,7 @@ export class CloudService {
 
 	api = AppConfig.walletAPI;
 
-	getWallets = () => {
+	getWalletsData = () => {
 		return this.http.get(`${this.api}/wallet/unified`);
 	};
 
@@ -26,6 +26,10 @@ export class CloudService {
 		} else {
 			return this.http.get('https://api.coingecko.com/api/v3/coins/conceal?sparkline=true');
 		}
+	};
+
+	getWalletKeys = (address, code) => {
+		return this.http.get(`${this.api}/wallet/keys?address=${address}&code=${code}`);
 	};
 
 }

@@ -1,0 +1,44 @@
+<div class="content" *ngIf="!haveKeys">
+	<h1 mat-dialog-title>Export Keys</h1>
+	<h2 class="subtitle">Enter you 2FA code to continue</h2>
+	<div class="twofa" mat-dialog-content>
+		<form [formGroup]="form" (ngSubmit)="submit()" fxLayout="column" fxLayoutAlign="space-between stretch">
+			<p>
+				<mat-form-field fxFill hintLabel="6 Numbers" appearance="fill">
+					<mat-label>2FA Code</mat-label>
+					<input #twofa matInput minlength="6" maxlength="6" placeholder="00000" formControlName="twofaFormControl">
+					<mat-hint align="end">{{twofa.value?.length || 0}}/6</mat-hint>
+					<mat-error *ngIf="form.controls.twofaFormControl.hasError('minlength') || form.controls.twofaFormControl.hasError('maxlength')">
+						2FA code should be <strong>6 numbers</strong>
+					</mat-error>
+					<mat-error *ngIf="form.controls.twofaFormControl.hasError('pattern')">
+						2FA code should be <strong>only numbers</strong>
+					</mat-error>
+					<mat-error *ngIf="form.controls.twofaFormControl.hasError('required')">
+						2FA Code is <strong>required</strong>
+					</mat-error>
+				</mat-form-field>
+			</p>
+			<div *ngIf="isFormLoading" class="progress"><mat-progress-bar mode="query"></mat-progress-bar></div>
+			<div *ngIf="error" class="error">{{ error }}</div>
+			<div *ngIf="success" class="success">{{ success }}</div>
+			<div class="actions" fxLayout="row" fxLayoutGap="15px">
+				<button mat-stroked-button color="primary" fxFlex="50" type="submit">Submit</button>
+				<button mat-stroked-button color="warn" fxFlex="50" (click)="this.form.reset()">Reset</button>
+			</div>
+		</form>
+	</div>
+</div>
+
+<div class="content" *ngIf="haveKeys">
+	<h1 mat-dialog-title>Your Private Keys</h1>
+	<div class="keys" mat-dialog-content>
+		<mat-form-field class="keys" *ngFor="let item of keys | keyvalue | reverse" fxLayout="column" fxLayoutAlign="space-between stretch">
+			<mat-label>{{ item.key }}</mat-label>
+			<input matInput type="text" [value]="item.value">
+			<button mat-button matSuffix mat-icon-button aria-label="Copy" (click)="copyToClipboard(item.value)" matTooltip="Copy Key" aria-label="Copy Key" matTooltipPosition="above" matTooltipClass="custom-tooltip">
+				<mat-icon svgIcon="assignment"></mat-icon>
+			</button>
+		</mat-form-field>
+	</div>
+</div>

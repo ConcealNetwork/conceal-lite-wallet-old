@@ -5,9 +5,10 @@
 }
 
 .container {
+  transform: scale(0.9);
   height: 100%;
-  margin-left: 3rem;
-  margin-right: 3rem;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
   .title {
     line-height: 1;
     margin-block-start: 0 !important;
@@ -18,15 +19,15 @@
   .login {
     background-color: rgba(#393939, 0.9);
     border-radius: 5px;
-    min-width: 45vw;
-    min-height: 55vh;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    padding-left: 3rem;
-    padding-right: 3rem;
+    min-width: 35vw;
+    min-height: 50vh;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
     border: 1px solid orange;
     .mat-form-field {
-      font-size: 0.9rem;
+      font-size: 0.8rem;
     }
     .error {
       height: 25px;

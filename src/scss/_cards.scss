@@ -21,7 +21,7 @@
       margin-bottom: 0px;
       padding-left: 10px;
       padding-right: 10px;
-      font-size: 1.1rem;
+      font-size: 1rem;
     }
   }
 
@@ -30,6 +30,7 @@
     padding-bottom: 5px;
     padding-left: 10px;
     padding-right: 10px;
+    margin-bottom: 10px;
   }
 
   mat-card-footer {
@@ -42,9 +43,9 @@
       border-bottom-right-radius: 8px;
       .mat-button {
         margin: 0;
-        padding-left: 15px;
-        padding-right: 15px;
-        height: 2.5rem;
+        padding-left: 0.8rem;
+        padding-right: 0.8rem;
+        height: 2.15rem;
         font-size: 0.7rem;
         display: flex;
         flex-direction: column;

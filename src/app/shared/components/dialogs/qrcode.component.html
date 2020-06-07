@@ -1,0 +1,12 @@
+<div class="content">
+    <h1 mat-dialog-title>Wallet QR Code</h1>
+    <h2 class="subtitle">Scan this code on your device</h2>
+    <div class="wrap">
+        <div class="logo">
+            <img src="./assets/images/logo.png" class="image">
+        </div>
+        <div class="code">
+            <qrcode [qrdata]="data" [width]="350" [margin]="1" [errorCorrectionLevel]="'M'" [colorDark]="'#393939ff'" [colorLight]="'#ffa500ff'"></qrcode>
+        </div>
+    </div>
+</div>
