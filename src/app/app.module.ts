@@ -84,6 +84,7 @@ import { LockComponent } from './modules/lock/lock.component';
 import { MessagingComponent, NewMessageDialog } from './modules/messaging/messaging.component';
 import { SettingsComponent } from './modules/settings/settings.component';
 import { TransferComponent } from './modules/transfer/transfer.component';
+
 // Dialogs
 import { WalletKeysDialog } from './shared/components/dialogs/privatekeys.component';
 import { QrCodeDialog } from './shared/components/dialogs/qrcode.component';

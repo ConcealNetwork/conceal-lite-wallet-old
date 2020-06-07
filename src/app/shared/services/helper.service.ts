@@ -72,6 +72,22 @@ export class HelperService {
 		});
 	}
 
+	refreshWallets() {
+		this.isWalletLoading = true;
+		this.cloudService.getWalletsData().subscribe((data) => {
+			if (data['result'] === 'success') {
+				this.height = data['message'].height;
+				this.wallets = data['message'].wallets;
+				this.portfolio = {
+					available: Object.keys(this.wallets).reduce((acc, curr) => acc + this.wallets[curr].balance + this.wallets[curr].locked || acc, 0),
+					pending: Object.keys(this.wallets).reduce((acc, curr) => acc + this.wallets[curr].locked || acc, 0),
+					withdrawable: Object.keys(this.wallets).reduce((acc, curr) => acc + this.wallets[curr].balance || acc, 0),
+				}
+				this.isWalletLoading = false;
+			}
+		});
+	}
+
 	copyToClipboard(value: string): void {
 		this.electronService.clipboard.clear();
 		this.electronService.clipboard.writeText(value);

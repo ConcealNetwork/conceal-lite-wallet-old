@@ -4,7 +4,7 @@ import { trigger, transition, query, style, stagger, animate } from '@angular/an
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
 
-// Electron
+// Services
 import { HelperService } from './../../shared/services/helper.service';
 
 // 3rd Party

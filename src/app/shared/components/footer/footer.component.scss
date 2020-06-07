@@ -1,102 +1,37 @@
 .mat-toolbar {
-	font-size: 0.5rem;
-	height: 50px;
+	font-size: 0.7rem;
+	color: #fff;
 	background: rgba(0, 0, 0, 0.2);
 	border-top: 0.8px solid rgba(255, 255, 255, 0.08) !important;
-	text-transform: capitalize;
-	.progress {
-		width: 30%;
+	padding-left: 25px;
+	padding-right: 25px;
+	
+	.section {
 		height: 50px;
-		line-height: 1;
-		text-align: center;
-		justify-content: center; /* align horizontal */
-		align-items: center; /* align vertical */
-		color: rgba($color: #fff, $alpha: 0.7);
-		span {
-			display: flex;
-			justify-content: center; /* align horizontal */
-			align-items: center; /* align vertical */
-			margin-top: 12px;
-			margin-bottom: 10px;
+		.progress {
+			font-size: 0.6rem;
 		}
-		mat-progress-bar {
-			margin-top: 5px;
-		}
-		mat-icon {
-			height: auto;
-			margin-right: 8px;
-		}
-		.unsynchronised {
-			color: rgba($color: white, $alpha: 0.7);
-		}
-		.synchronised {
-			color: rgba($color: green, $alpha: 0.9);
-		}
-	}
-	.title {
-		color: rgba($color: #fff, $alpha: 0.7);
-		display: flex;
-		justify-content: center; /* align horizontal */
-		align-items: center; /* align vertical */
-		mat-icon {
-			animation: shadow-pulse 1.5s infinite;
-		}
-		.right {
-			margin-left: 15px;
-			transform: scale(0.8);
-		}
-		.left {
-			margin-right: 15px;
-			transform: scale(0.8);
-		}
-		.offline {
-			padding: 2.5px;
-			border: 2px solid rgba($color: red, $alpha: 0.3);
-			border-radius: 25px;
-			color: rgba($color: red, $alpha: 0.7);
-		}
-		.online {
-			padding: 2.5px;
-			border: 2px solid rgba($color: orange, $alpha: 0.3);
-			border-radius: 25px;
-			color: rgba($color: orange, $alpha: 0.9);
+		.items {
+			color: #c4c4c4;
+			font-size: 0.56rem;
+			text-align: center;
+			line-height: 1;
+			.title{
+				display: block;
+				color: orange;
+				line-height: 1;
+				padding: 2.5px;
+			}
+			.value {
+				display: block;
+				font-size: 0.6rem;
+				line-height: 1;
+				padding: 2.5px;
+				.ccx {
+					color: #fff;
+				}
+			}
 		}
 	}
-	.spacer {
-		flex: auto;
-	}
-	.spin {
-		-webkit-animation: spin 1000ms infinite linear;
-		animation: spin 1000ms infinite linear;
-	}
-}
-
-@keyframes shadow-pulse {
-	0% {
-		box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.15);
-	}
-	100% {
-		box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
-	}
-}
-
-@-webkit-keyframes spin {
-	0% {
-		-webkit-transform: rotate(0deg);
-		transform: rotate(0deg);
-	}
-	100% {
-		-webkit-transform: rotate(359deg);
-		transform: rotate(359deg);
-	}
-}
-@keyframes spin {
-	0% {
-		-webkit-transform: rotate(0deg);
-		transform: rotate(0deg);
-	}
-	100% {
-		-webkit-transform: rotate(359deg);
-		transform: rotate(359deg);
-	}
+	
 }
