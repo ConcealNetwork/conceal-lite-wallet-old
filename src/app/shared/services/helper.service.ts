@@ -29,6 +29,7 @@ export class HelperService {
 	height: number = 0;
 	portfolio: any;
 	wallets: any;
+	walletCount: number = 0;
 	transactions: any;
 
 	constructor(
@@ -62,6 +63,7 @@ export class HelperService {
 			if (data['result'] === 'success') {
 				this.height = data['message'].height;
 				this.wallets = data['message'].wallets;
+				this.walletCount = Object.keys(this.wallets).length;
 				this.portfolio = {
 					available: Object.keys(this.wallets).reduce((acc, curr) => acc + this.wallets[curr].balance + this.wallets[curr].locked || acc, 0),
 					pending: Object.keys(this.wallets).reduce((acc, curr) => acc + this.wallets[curr].locked || acc, 0),
@@ -79,15 +81,53 @@ export class HelperService {
 			if (data['result'] === 'success') {
 				this.height = data['message'].height;
 				this.wallets = data['message'].wallets;
+				this.walletCount = Object.keys(this.wallets).length;
 				this.portfolio = {
 					available: Object.keys(this.wallets).reduce((acc, curr) => acc + this.wallets[curr].balance + this.wallets[curr].locked || acc, 0),
 					pending: Object.keys(this.wallets).reduce((acc, curr) => acc + this.wallets[curr].locked || acc, 0),
 					withdrawable: Object.keys(this.wallets).reduce((acc, curr) => acc + this.wallets[curr].balance || acc, 0),
 				}
 				this.isWalletLoading = false;
+				this.isLoading = false;
 			}
 		});
 	}
+
+	deleteWallet(wallet) {
+		this.isLoading = true;
+		this.cloudService.deleteWallet(wallet).subscribe((data) => {
+			if (data['result'] === 'success') {
+				this.openSnackBar('Wallet Deleted', 'Dismiss');
+				this.refreshWallets();
+			} else {
+				this.openSnackBar(data['message'], 'Dismiss');
+			}
+		})
+	}
+
+	createWallet() { 
+		this.isLoading = true;
+		this.cloudService.createWallet().subscribe((data) => { 
+			if (data['result'] === 'success') {
+				this.openSnackBar('Wallet Created', 'Dismiss');
+				this.refreshWallets();
+			} else {
+				this.openSnackBar(data['message'], 'Dismiss');
+			}
+		})
+	}
+
+	importWallet(privateSpendKey) { 
+		this.cloudService.importWallet(privateSpendKey).subscribe((data) => { 
+			if (data['result'] === 'success') {
+				this.openSnackBar('Wallet Imported', 'Dismiss');
+				this.refreshWallets();
+			} else {
+				this.openSnackBar(data['message'], 'Dismiss');
+			}
+		})
+	}
+
 
 	copyToClipboard(value: string): void {
 		this.electronService.clipboard.clear();
@@ -98,7 +138,7 @@ export class HelperService {
 
 	openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
-			duration: 2000,
+			duration: 8000,
 			panelClass: 'notify',
 			horizontalPosition: this.snackbarHorizontalPosition,
       verticalPosition: this.snackbarVerticalPosition,

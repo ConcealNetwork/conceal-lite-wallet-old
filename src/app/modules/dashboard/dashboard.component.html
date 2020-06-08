@@ -46,12 +46,11 @@
     <div fxFlex="70">
       <h1 class="title">{{ 'PAGES.DASHBOARD.WALLETS' | translate }}</h1>
       <div fxLayout="row" fxLayoutGap="15px">
-        <mat-card id="cards" class="cards" fxFlex fxLayout="column" *ngFor="let item of this.helperService.wallets | keyvalue | reverse">
+        <mat-card id="cards" class="cards" fxFlex fxLayout="column" *ngFor="let item of this.helperService.wallets | keyvalue">
           <mat-card-header>
             <mat-card-title fxLayout="row" fxLayoutAlign="space-between stretch">
               <div>
                 {{ (item.key.length>7)? (item.key | slice:0:7)+'...':(item.key) }}{{(item.key | slice:-7)}}
-                <!-- <span class="primary" *ngIf="item.value.default">(*)</span> -->
               </div>
               <div class="icons" fxLayoutGap="5px">
                 <button mat-button mat-icon-button aria-hidden="false" aria-label="Scan QR code" matTooltip="Scan QR code" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="this.helperService.openCodeDialog(item.key)">
@@ -81,7 +80,7 @@
           </mat-card-content>
           <mat-card-footer>
             <mat-card-actions fxLayoutAlign="start center">
-              <button mat-button aria-hidden="false" aria-label="Transfer funds" matTooltip="Transfer funds"  matTooltipPosition="below" matTooltipClass="custom-tooltip" routerLink="/transfer">
+              <button mat-button aria-hidden="false" aria-label="Transfer funds" matTooltip="Transfer funds" matTooltipPosition="below" matTooltipClass="custom-tooltip" routerLink="/transfer">
                 Transfer
               </button>
               <button mat-button aria-hidden="false" aria-label="Pay someone" matTooltip="Pay someone" matTooltipPosition="below" matTooltipClass="custom-tooltip" routerLink="/contacts">
@@ -90,11 +89,17 @@
               <button mat-button aria-hidden="false" aria-label="Export private keys" matTooltip="Export private Keys" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="this.helperService.openKeysDialog(item.key)">
                 Export
               </button>
-              <button mat-button aria-hidden="false" aria-label="Delete wallet" matTooltip="Delete wallet" aria-label="Delete wallet" matTooltipPosition="below" matTooltipClass="custom-tooltip" *ngIf="!item.value.default">
+              <button mat-button aria-hidden="false" aria-label="Delete wallet" matTooltip="Delete wallet" aria-label="Delete wallet" matTooltipPosition="below" matTooltipClass="custom-tooltip" *ngIf="!item.value.default" (click)="this.helperService.deleteWallet(item.key)">
                 Remove
               </button>
             </mat-card-actions>
           </mat-card-footer>
+        </mat-card>
+        <mat-card id="cards" class="cards new" fxFlex fxLayout="column" *ngIf="this.helperService.walletCount === 1">
+          <mat-card-content fxFlex="auto" fxLayoutGap="15px" fxLayout="column" fxLayoutAlign="space-around center">
+            <button mat-button aria-label="Import wallet from keys" matTooltip="Import wallet from keys" aria-label="Import wallet from keys" matTooltipPosition="above" matTooltipClass="custom-tooltip">Import Wallet</button>
+            <button mat-button aria-label="Generate a new wallet" matTooltip="Generate a new wallet" aria-label="Generate a new wallet" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="this.helperService.createWallet()">Create Wallet</button>
+          </mat-card-content>
         </mat-card>
       </div>
     </div>

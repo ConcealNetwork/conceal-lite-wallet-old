@@ -13,11 +13,11 @@ export class CloudService {
 
 	api = AppConfig.walletAPI;
 
-	getWalletsData = () => {
+	getWalletsData() {
 		return this.http.get(`${this.api}/wallet/unified`);
 	};
 
-	getMarketData = () => {
+	getMarketData() {
 		if (sessionStorage.getItem('market_data') !== null) {
 			return new Observable(observer => {
 				observer.next(JSON.parse(sessionStorage.getItem('market_data')));
@@ -28,8 +28,21 @@ export class CloudService {
 		}
 	};
 
-	getWalletKeys = (address, code) => {
+	getWalletKeys(address, code) {
 		return this.http.get(`${this.api}/wallet/keys?address=${address}&code=${code}`);
 	};
+
+	deleteWallet(address) {
+		return this.http.delete(`${this.api}/wallet?address=${address}`);
+	};
+
+	createWallet() {
+    return this.http.post(`${this.api}/wallet/`, null);
+	};
+	
+	importWallet(privateSpendKey) {
+    privateSpendKey = JSON.stringify({ privateSpendKey });
+    return this.http.post(`${this.api}/wallet/import`, privateSpendKey);
+  };
 
 }

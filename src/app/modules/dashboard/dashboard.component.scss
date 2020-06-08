@@ -26,8 +26,21 @@
   }
 
   .cards {
-	  height: 26.1vh;
-  }
+		height: 26.1vh;
+	}
+	
+	.new {
+		background: rgba(#393939, 0.0);
+		.mat-card-content button {
+			background: rgba(#393939, 0.9);
+			font-size: 0.75rem;
+			border: 2px solid rgba(orange, 0.7);
+			padding-left: 2rem;
+			padding-right: 2rem;
+			padding-top: 0.5rem;
+			padding-bottom: 0.5rem;
+		}
+	}
 
   .primary {
     font-size: 0.7rem;

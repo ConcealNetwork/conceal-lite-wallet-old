@@ -97,7 +97,7 @@ export class DashboardComponent implements OnInit {
 					padding: 5,
           maxTicksLimit: 5,
 					fontSize: 12,
-					fontColor: 'rgb(255, 255, 255)',
+					fontColor: 'rgb(220, 220, 220)',
           callback: amount => `${this.helperService.formattedStringAmount(amount, null, '$')}`
 				},
         gridLines: {
@@ -112,7 +112,7 @@ export class DashboardComponent implements OnInit {
 					minRotation: 0,
 					padding: 5,
 					fontSize: 12,
-					fontColor: 'rgb(255, 165, 0)',
+					fontColor: 'rgb(100,100,100)',
         },
         gridLines: {
 					color: 'rgba(255, 255, 255, .08)',
