@@ -34,6 +34,9 @@
           <mat-card-actions fxLayoutAlign="space-between center">
             <button mat-button aria-hidden="false" aria-label="refresh" matTooltip="Refresh balances" aria-label="Refresh balances" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="this.helperService.refreshWallets()">
               Refresh
+						</button>
+						<button mat-button aria-hidden="false" aria-label="refresh" matTooltip="Banking" aria-label="Banking" matTooltipPosition="below" matTooltipClass="custom-tooltip">
+              Banking
             </button>
             <div class="spinner">
               <mat-spinner *ngIf="this.helperService.isWalletLoading"></mat-spinner>
@@ -56,7 +59,7 @@
                 <button mat-button mat-icon-button aria-hidden="false" aria-label="Scan QR code" matTooltip="Scan QR code" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="this.helperService.openCodeDialog(item.key)">
                   <mat-icon svgIcon="camera_enhance">QR Code</mat-icon>
                 </button>
-                <button mat-button mat-icon-button aria-hidden="false" aria-label="Copy address" matTooltip="Copy address" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="this.helperService.copyToClipboard(item.key)">
+                <button mat-button mat-icon-button aria-hidden="false" aria-label="Copy address" matTooltip="Copy address" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="this.helperService.copyToClipboard(item.key, 'Address Copied')">
                   <mat-icon svgIcon="assignment">Copy</mat-icon>
                 </button>
               </div>
@@ -86,7 +89,7 @@
               <button mat-button aria-hidden="false" aria-label="Pay someone" matTooltip="Pay someone" matTooltipPosition="below" matTooltipClass="custom-tooltip" routerLink="/contacts">
                 Pay
               </button>
-              <button mat-button aria-hidden="false" aria-label="Export private keys" matTooltip="Export private Keys" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="this.helperService.openKeysDialog(item.key)">
+              <button mat-button aria-hidden="false" aria-label="Export private keys" matTooltip="Export private Keys" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="this.helperService.openExportKeysDialog(item.key)">
                 Export
               </button>
               <button mat-button aria-hidden="false" aria-label="Delete wallet" matTooltip="Delete wallet" aria-label="Delete wallet" matTooltipPosition="below" matTooltipClass="custom-tooltip" *ngIf="!item.value.default" (click)="this.helperService.deleteWallet(item.key)">
@@ -95,12 +98,12 @@
             </mat-card-actions>
           </mat-card-footer>
         </mat-card>
-        <mat-card id="cards" class="cards new" fxFlex fxLayout="column" *ngIf="this.helperService.walletCount === 1">
-          <mat-card-content fxFlex="auto" fxLayoutGap="15px" fxLayout="column" fxLayoutAlign="space-around center">
-            <button mat-button aria-label="Import wallet from keys" matTooltip="Import wallet from keys" aria-label="Import wallet from keys" matTooltipPosition="above" matTooltipClass="custom-tooltip">Import Wallet</button>
+        <div class="new" fxFlex fxLayout="column" *ngIf="this.helperService.walletCount === 1">
+          <div fxFlex="auto" fxLayoutGap="15px" fxLayout="column" fxLayoutAlign="space-around center">
+            <button mat-button aria-label="Import wallet from keys" matTooltip="Import wallet from keys" aria-label="Import wallet from keys" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="this.helperService.openImportKeysDialog()">Import Wallet</button>
             <button mat-button aria-label="Generate a new wallet" matTooltip="Generate a new wallet" aria-label="Generate a new wallet" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="this.helperService.createWallet()">Create Wallet</button>
-          </mat-card-content>
-        </mat-card>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -112,16 +115,16 @@
       <mat-card-content>
         <div class="chart-wrapper">
           <canvas baseChart
-            [datasets]="lineChartData" 
-            [labels]="lineChartLabels" 
+            [datasets]="lineChartData"
+            [labels]="lineChartLabels"
             [options]="lineChartOptions"
-            [colors]="lineChartColors" 
-            [chartType]="lineChartType" 
+            [colors]="lineChartColors"
+            [chartType]="lineChartType"
           >
           </canvas>
         </div>
       </mat-card-content>
     </mat-card>
   </div>
-  
+
 </div>

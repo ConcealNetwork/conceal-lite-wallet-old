@@ -68,26 +68,24 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 
-// Services 
+// Services
 import { DataService } from './shared/services/data.service';
 import { AuthService } from './shared/services/auth.service';
 import { AuthGuard } from './shared/services/auth.guard';
 import { CloudService } from './shared/services/cloud.service';
 import { HelperService } from './shared/services/helper.service';
+import { SnackbarService } from './shared/services/snackbar.service';
+import { DialogService } from './shared/services/dialog.service';
 
 // Compoents
 import { AppComponent } from './app.component';
 import { ActivityComponent } from './modules/activity/activity.component';
-import { ContactsComponent, NewContactDialog } from './modules/contacts/contacts.component';
+import { ContactsComponent } from './modules/contacts/contacts.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { LockComponent } from './modules/lock/lock.component';
-import { MessagingComponent, NewMessageDialog } from './modules/messaging/messaging.component';
+import { MessagingComponent } from './modules/messaging/messaging.component';
 import { SettingsComponent } from './modules/settings/settings.component';
 import { TransferComponent } from './modules/transfer/transfer.component';
-
-// Dialogs
-import { WalletKeysDialog } from './shared/components/dialogs/privatekeys.component';
-import { QrCodeDialog } from './shared/components/dialogs/qrcode.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -103,13 +101,9 @@ export function tokenGetter() {
     AppComponent,
     ActivityComponent,
     ContactsComponent,
-    NewContactDialog,
     DashboardComponent,
     LockComponent,
-    MessagingComponent,
-    NewMessageDialog,
-    QrCodeDialog,
-    WalletKeysDialog,
+		MessagingComponent,
     SettingsComponent,
     TransferComponent
   ],
@@ -190,14 +184,11 @@ export function tokenGetter() {
     AuthService,
     AuthGuard,
     CloudService,
-    HelperService,
+		HelperService,
+		SnackbarService,
+		DialogService
   ],
-  entryComponents: [
-    NewContactDialog,
-    NewMessageDialog,
-    QrCodeDialog,
-    WalletKeysDialog,
-  ],
+  entryComponents: [],
   bootstrap: [
     AppComponent
   ]

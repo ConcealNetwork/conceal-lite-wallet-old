@@ -44,7 +44,7 @@ export class TransferComponent implements OnInit {
   ) {
     matIconRegistry.addSvgIconSet(
       domSanitizer.bypassSecurityTrustResourceUrl(
-        `assets/materal-icons-twotone.svg`
+        `assets/fonts/materal-icons-twotone.svg`
       )
     );
    }

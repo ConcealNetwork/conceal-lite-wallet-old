@@ -6,6 +6,7 @@ import { trigger, transition, query, style, stagger, animate } from '@angular/an
 
 // Services
 import { AuthService } from './../../shared/services/auth.service';
+import { HelperService } from './../../shared/services/helper.service';
 
 @Component({
 	selector: 'app-lock',
@@ -63,22 +64,24 @@ export class LockComponent implements OnInit {
   isLoggedIn: boolean;
 
 	constructor(
-    private AuthService: AuthService,
+		private AuthService: AuthService,
+		private helperService: HelperService,
     private router: Router
     ) { }
 
 	ngOnInit(): void {
     this.isLoading = false;
-    this.isLoggedIn = this.AuthService.loggedIn();
+		this.isLoggedIn = this.AuthService.loggedIn();
+		this.helperService.isWalletLoading = false;
   }
-  
+
   submit() {
     if (this.form.valid) {
       this.error = null;
       this.isFormLoading = true;
       this.submitEM.emit(this.form.value);
       this.AuthService.login(this.form.value.emailFormControl, this.form.value.passwordFormControl, this.form.value.twofaFormControl).subscribe(
-        data => { 
+        data => {
           if (data['message'].token && data['result'] === 'success') {
             this.AuthService.setToken(data['message'].token);
             this.success = 'Success!';

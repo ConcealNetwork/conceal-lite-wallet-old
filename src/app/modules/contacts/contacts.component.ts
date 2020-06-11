@@ -4,7 +4,6 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -76,7 +75,7 @@ export class ContactsComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   isLoading: boolean = true;
-  
+
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -100,13 +99,12 @@ export class ContactsComponent implements OnInit {
   }
 
 	constructor(
-    public dialog: MatDialog,
     public matIconRegistry: MatIconRegistry,
     public domSanitizer: DomSanitizer
   ) {
     matIconRegistry.addSvgIconSet(
       domSanitizer.bypassSecurityTrustResourceUrl(
-        `assets/materal-icons-twotone.svg`
+        `assets/fonts/materal-icons-twotone.svg`
       )
     );
     // Create 100 users
@@ -120,7 +118,7 @@ export class ContactsComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-  
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -138,35 +136,6 @@ export class ContactsComponent implements OnInit {
       paymentid: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
       detailRow: false
     };
-  }
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(NewContactDialog, {
-      width: '45%',
-      data: {label: this.label, address: this.address, paymentid: this.paymentid}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.label = result;
-    });
-  }
-
-}
-
-@Component({
-  selector: 'new-contact',
-  templateUrl: './new-contact.component.html',
-  styleUrls: ['./new-contact.component.scss'],
-})
-export class NewContactDialog {
-
-  constructor(
-    public dialogRef: MatDialogRef<NewContactDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: Contacts) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
   }
 
 }

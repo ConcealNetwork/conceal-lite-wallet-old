@@ -4,7 +4,6 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export interface Messages {
   date: string;
@@ -67,7 +66,7 @@ export class MessagingComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  
+
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -90,7 +89,7 @@ export class MessagingComponent implements OnInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.date + 1}`;
   }
 
-	constructor(public dialog: MatDialog) {
+	constructor() {
     // Create 100 users
     const contacts = Array.from({length: 100}, (_, k) => this.createContacts(k + 1));
     // Assign the data to the data source for the table to render
@@ -102,7 +101,7 @@ export class MessagingComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-  
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -113,7 +112,7 @@ export class MessagingComponent implements OnInit {
 
   randomDate(start, end) {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())).toISOString().slice(0,10);
-  } 
+  }
 
   /** Builds and returns a new User. */
   createContacts(date: number): Messages {
@@ -126,35 +125,6 @@ export class MessagingComponent implements OnInit {
       message: message
     };
 
-  }
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(NewMessageDialog, {
-      width: '45%',
-      data: {address: this.address, message: this.message}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.message = result;
-    });
-  }
-
-}
-
-@Component({
-  selector: 'new-message',
-  templateUrl: './new-message.component.html',
-  styleUrls: ['./new-message.component.scss'],
-})
-export class NewMessageDialog {
-
-  constructor(
-    public dialogRef: MatDialogRef<NewMessageDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: NewMessage) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
   }
 
 }

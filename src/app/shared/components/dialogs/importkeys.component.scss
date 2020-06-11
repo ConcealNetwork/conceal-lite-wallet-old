@@ -14,7 +14,6 @@
 	}
 
 	.error {
-		height: 25px;
 		font-size: 0.6rem;
 		text-align: center;
 		line-height: 2;
@@ -22,12 +21,10 @@
 		border-radius: 5px;
 		padding-top: 0.5rem;
 		padding-bottom: .5rem;
-		margin-top: 10px;
-		margin-bottom: 10px;
+		margin-bottom: 25px;
 	}
 
 	.success {
-		height: 25px;
 		font-size: 0.6rem;
 		text-align: center;
 		line-height: 2;
@@ -35,12 +32,10 @@
 		border-radius: 5px;
 		padding-top: .5rem;
 		padding-bottom: .5rem;
-		margin-top: 10px;
-		margin-bottom: 10px;
+		margin-bottom: 25px;
 	}
 
 	.progress {
-		margin-top: 10px;
 		margin-bottom: 25px;
 	}
 
@@ -53,7 +48,7 @@
 		}
 	}
 
-	.twofa {
+	.PrivateSpendKey {
 		overflow: hidden;
 
 		.mat-form-field {

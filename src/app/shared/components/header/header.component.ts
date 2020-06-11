@@ -12,7 +12,7 @@ import { DataService } from './../../services/data.service';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  providers: [] 
+  providers: []
 })
 
 export class HeaderComponent implements OnInit {
@@ -27,10 +27,10 @@ export class HeaderComponent implements OnInit {
     public dataService: DataService,
     public matIconRegistry: MatIconRegistry,
     public domSanitizer: DomSanitizer
-  ) { 
+  ) {
     matIconRegistry.addSvgIconSet(
       domSanitizer.bypassSecurityTrustResourceUrl(
-        `assets/materal-icons-twotone.svg`
+        `assets/fonts/materal-icons-twotone.svg`
       )
     );
   }

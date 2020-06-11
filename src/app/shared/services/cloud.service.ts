@@ -9,9 +9,9 @@ import { Observable } from 'rxjs';
 
 export class CloudService {
 
-	constructor(private http: HttpClient) { }
-
 	api = AppConfig.walletAPI;
+
+	constructor(private http: HttpClient) { }
 
 	getWalletsData() {
 		return this.http.get(`${this.api}/wallet/unified`);
@@ -28,6 +28,10 @@ export class CloudService {
 		}
 	};
 
+	getPrices() {
+    return this.http.get(`https://api.coingecko.com/api/v3/simple/price?ids=conceal&vs_currencies=btc&include_last_updated_at=true`)
+  };
+
 	getWalletKeys(address, code) {
 		return this.http.get(`${this.api}/wallet/keys?address=${address}&code=${code}`);
 	};
@@ -37,12 +41,12 @@ export class CloudService {
 	};
 
 	createWallet() {
-    return this.http.post(`${this.api}/wallet/`, null);
+		return this.http.post(`${this.api}/wallet/`, null);
 	};
-	
+
 	importWallet(privateSpendKey) {
-    privateSpendKey = JSON.stringify({ privateSpendKey });
-    return this.http.post(`${this.api}/wallet/import`, privateSpendKey);
-  };
+		privateSpendKey = JSON.stringify({ privateSpendKey });
+		return this.http.post(`${this.api}/wallet/import`, privateSpendKey);
+	};
 
 }

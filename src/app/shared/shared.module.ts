@@ -30,6 +30,13 @@ import { BackgroundComponent } from './components/background/background.componen
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 
+// Dialog Components
+// import { ExportKeysDialog } from './components/dialogs/exportkeys.component';
+// import { ImportKeysDialog } from './components/dialogs/importkeys.component';
+// import { QrCodeDialog } from './components/dialogs/qrcode.component';
+// import { NewMessageDialog } from './components/dialogs/new-message.component';
+// import { NewContactDialog } from './components/dialogs/new-contact.component';
+
 @NgModule({
   declarations: [
     WebviewDirective,
@@ -37,7 +44,12 @@ import { FooterComponent } from './components/footer/footer.component';
     LoaderComponent,
     BackgroundComponent,
     HeaderComponent,
-    FooterComponent
+		FooterComponent,
+		// ExportKeysDialog,
+		// ImportKeysDialog,
+		// QrCodeDialog,
+		// NewMessageDialog,
+		// NewContactDialog
   ],
   imports: [
     CommonModule,
@@ -65,7 +77,9 @@ import { FooterComponent } from './components/footer/footer.component';
     BackgroundComponent,
     HeaderComponent,
     FooterComponent
-  ]
+	],
+	providers :[],
+	entryComponents: [],
 })
 
 export class SharedModule {}

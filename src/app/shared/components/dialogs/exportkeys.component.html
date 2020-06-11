@@ -1,4 +1,4 @@
-<div class="content" *ngIf="!haveKeys">
+<div class="content" *ngIf="!this.helperService.haveKeys">
 	<h1 mat-dialog-title>Export Keys</h1>
 	<h2 class="subtitle">Enter you 2FA code to continue</h2>
 	<div class="twofa" mat-dialog-content>
@@ -19,9 +19,9 @@
 					</mat-error>
 				</mat-form-field>
 			</p>
-			<div *ngIf="isFormLoading" class="progress"><mat-progress-bar mode="query"></mat-progress-bar></div>
-			<div *ngIf="error" class="error">{{ error }}</div>
-			<div *ngIf="success" class="success">{{ success }}</div>
+			<div *ngIf="this.helperService.isFormLoading" class="progress"><mat-progress-bar mode="query"></mat-progress-bar></div>
+			<div *ngIf="this.helperService.error" class="error">{{ this.helperService.error }}</div>
+			<div *ngIf="this.helperService.success" class="success">{{ this.helperService.success }}</div>
 			<div class="actions" fxLayout="row" fxLayoutGap="15px">
 				<button mat-stroked-button color="primary" fxFlex="50" type="submit">Submit</button>
 				<button mat-stroked-button color="warn" fxFlex="50" (click)="this.form.reset()">Reset</button>
@@ -30,13 +30,13 @@
 	</div>
 </div>
 
-<div class="content" *ngIf="haveKeys">
+<div class="content" *ngIf="this.helperService.haveKeys">
 	<h1 mat-dialog-title>Your Private Keys</h1>
 	<div class="keys" mat-dialog-content>
-		<mat-form-field class="keys" *ngFor="let item of keys | keyvalue | reverse" fxLayout="column" fxLayoutAlign="space-between stretch">
+		<mat-form-field class="keys" *ngFor="let item of this.helperService.keys | keyvalue | reverse" fxLayout="column" fxLayoutAlign="space-between stretch">
 			<mat-label>{{ item.key }}</mat-label>
 			<input matInput type="text" [value]="item.value">
-			<button mat-button matSuffix mat-icon-button aria-label="Copy" (click)="copyToClipboard(item.value)" matTooltip="Copy Key" aria-label="Copy Key" matTooltipPosition="above" matTooltipClass="custom-tooltip">
+			<button mat-button matSuffix mat-icon-button aria-label="Copy" (click)="this.helperService.copyToClipboard(item.value, 'Key Copied')" matTooltip="Copy Key" aria-label="Copy Key" matTooltipPosition="above" matTooltipClass="custom-tooltip">
 				<mat-icon svgIcon="assignment"></mat-icon>
 			</button>
 		</mat-form-field>

@@ -1,0 +1,77 @@
+.content {
+	overflow: hidden;
+	margin: 10px;
+
+	.mat-dialog-title {
+		font-size: 1.4rem;
+		color: orange;
+	}
+
+	.subtitle {
+		margin-top: -5px;
+		font-size: 0.8rem;
+		color: white;
+	}
+
+	.error {
+		font-size: 0.6rem;
+		text-align: center;
+		line-height: 2;
+		border: 1px solid rgba(255, 0, 0, 0.5);
+		border-radius: 5px;
+		padding-top: 0.5rem;
+		padding-bottom: .5rem;
+		margin-bottom: 10px;
+	}
+
+	.success {
+		font-size: 0.6rem;
+		text-align: center;
+		line-height: 2;
+		border: 1px solid rgba(0, 255, 0, 0.5);
+		border-radius: 5px;
+		padding-top: .5rem;
+		padding-bottom: .5rem;
+		margin-bottom: 10px;
+	}
+
+	.progress {
+		margin-top: 10px;
+		margin-bottom: 25px;
+	}
+
+	.actions {
+		margin-top: 10px;
+
+		button {
+			font-size: .85rem;
+			padding: .4rem;
+		}
+	}
+
+	.twofa {
+		overflow: hidden;
+
+		.mat-form-field {
+			font-size: 0.9rem;
+		}
+	}
+
+	.keys {
+		margin-top: 15px;
+		overflow: hidden;
+
+		.mat-form-field {
+			font-size: 1rem;
+		}
+
+		.mat-icon-button {
+			color: orange;
+			margin-left: 0.2rem;
+			padding-right: 5px;
+			padding-left: 3.5px;
+			padding-bottom: 1.5px;
+		}
+
+	}
+}
