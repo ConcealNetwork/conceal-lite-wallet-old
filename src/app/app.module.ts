@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import '../polyfills';
 
-// Anguler Core
+// Anguler
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -82,7 +82,7 @@ import { AppComponent } from './app.component';
 import { ActivityComponent } from './modules/activity/activity.component';
 import { ContactsComponent } from './modules/contacts/contacts.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
-import { LockComponent } from './modules/lock/lock.component';
+import { AuthComponent } from './modules/auth/auth.component';
 import { MessagingComponent } from './modules/messaging/messaging.component';
 import { SettingsComponent } from './modules/settings/settings.component';
 import { TransferComponent } from './modules/transfer/transfer.component';
@@ -102,7 +102,7 @@ export function tokenGetter() {
     ActivityComponent,
     ContactsComponent,
     DashboardComponent,
-    LockComponent,
+    AuthComponent,
 		MessagingComponent,
     SettingsComponent,
     TransferComponent

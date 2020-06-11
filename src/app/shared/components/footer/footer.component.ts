@@ -1,17 +1,16 @@
-// Core
+// Angular
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressBarMode } from '@angular/material/progress-bar';
 
 // Services
-import { HelperService } from './../../services/helper.service';
+import { DataService } from './../../services/data.service';
 
 @Component({
   selector: 'app-footer',
   encapsulation: ViewEncapsulation.None,
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss'],
-  providers: [] 
+  styleUrls: ['./footer.component.scss']
 })
 
 export class FooterComponent implements OnInit {
@@ -21,7 +20,7 @@ export class FooterComponent implements OnInit {
   mode: ProgressBarMode = 'indeterminate';
 
   constructor(
-    private helperService: HelperService,
+		private dataService: DataService
   ) { }
 
   ngOnInit() { }

@@ -5,6 +5,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 // Services
 import { HelperService } from '../../services/helper.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
 	selector: 'exportkeys',
@@ -28,13 +29,14 @@ export class ExportKeysDialog {
 
 	constructor (
 		private helperService: HelperService,
+		private dataService: DataService,
 		public dialogRef: MatDialogRef<ExportKeysDialog>,	@Inject(MAT_DIALOG_DATA) public data: any
 	) {}
 
 	submit() {
 		if (this.form.valid) {
-			this.helperService.error = null;
-			this.helperService.isFormLoading = true;
+			this.dataService.error = null;
+			this.dataService.isFormLoading = true;
 			this.submitEM.emit(this.form.value);
 			this.helperService.getWalletKeys(this.data, this.form.value.twofaFormControl);
 		}

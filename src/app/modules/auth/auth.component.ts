@@ -1,17 +1,17 @@
-// Angular Core
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+// Angular
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 
 // Services
-import { AuthService } from './../../shared/services/auth.service';
-import { HelperService } from './../../shared/services/helper.service';
+import { AuthService } from '../../shared/services/auth.service';
+import { DataService } from '../../shared/services/data.service';
 
 @Component({
-	selector: 'app-lock',
-	templateUrl: './lock.component.html',
-  styleUrls: ['./lock.component.scss'],
+	selector: 'app-auth',
+	templateUrl: './auth.component.html',
+  styleUrls: ['./auth.component.scss'],
 	animations: [
 		trigger(
 			'enterAnimation', [
@@ -38,11 +38,7 @@ import { HelperService } from './../../shared/services/helper.service';
 		])
 	]
 })
-export class LockComponent implements OnInit {
-
-  @Input() error: string | null;
-  @Input() success: string | null;
-  @Output() submitEM = new EventEmitter();
+export class AuthComponent implements OnInit {
 
   form: FormGroup = new FormGroup({
     emailFormControl: new FormControl('', [
@@ -59,53 +55,49 @@ export class LockComponent implements OnInit {
     ])
 	});
 
-  isLoading: boolean = true;
-  isFormLoading: boolean = false;
-  isLoggedIn: boolean;
-
 	constructor(
-		private AuthService: AuthService,
-		private helperService: HelperService,
+		private authService: AuthService,
+		private dataService: DataService,
     private router: Router
     ) { }
 
 	ngOnInit(): void {
-    this.isLoading = false;
-		this.isLoggedIn = this.AuthService.loggedIn();
-		this.helperService.isWalletLoading = false;
+    this.dataService.isLoading = false;
+		this.dataService.isLoggedIn = this.authService.loggedIn();
+		this.dataService.isWalletLoading = false;
   }
 
   submit() {
     if (this.form.valid) {
-      this.error = null;
-      this.isFormLoading = true;
-      this.submitEM.emit(this.form.value);
-      this.AuthService.login(this.form.value.emailFormControl, this.form.value.passwordFormControl, this.form.value.twofaFormControl).subscribe(
+      this.dataService.error = null;
+      this.dataService.isFormLoading = true;
+      this.dataService.formData.emit(this.form.value);
+      this.authService.login(this.form.value.emailFormControl, this.form.value.passwordFormControl, this.form.value.twofaFormControl).subscribe(
         data => {
           if (data['message'].token && data['result'] === 'success') {
-            this.AuthService.setToken(data['message'].token);
-            this.success = 'Success!';
-            this.isFormLoading = false;
+            this.authService.setToken(data['message'].token);
+            this.dataService.success = 'Success!';
+            this.dataService.isFormLoading = false;
             setTimeout(() => {
               this.router.navigate(['/']);
             }, 2000);
           }
           if (data['result'] === 'success') {
-            this.success = 'Success! Redirecting now...';
-            this.isFormLoading = false;
+            this.dataService.success = 'Success! Redirecting now...';
+            this.dataService.isFormLoading = false;
             setTimeout(() => {
               this.router.navigate(['/']);
             }, 2000);
           }
           if (data['result'] === 'error') {
-            this.error = data['message'];
-            this.isFormLoading = false;
+            this.dataService.error = data['message'];
+            this.dataService.isFormLoading = false;
           }
         },
         error => {
             console.log(error);
-            this.error = error.message;
-            this.isFormLoading = false;
+            this.dataService.error = error.message;
+            this.dataService.isFormLoading = false;
         }
       );
     }

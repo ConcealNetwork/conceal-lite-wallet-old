@@ -21,10 +21,10 @@ export class HeaderComponent implements OnInit {
   set isFullScreen(value: boolean) { this.dataService.isFullScreen = value; }
 
   constructor(
+		public electronService: ElectronService,
+    private dataService: DataService,
     public router: Router,
     private route: ActivatedRoute,
-    public electronService: ElectronService,
-    public dataService: DataService,
     public matIconRegistry: MatIconRegistry,
     public domSanitizer: DomSanitizer
   ) {
@@ -53,7 +53,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     // Subscribe to routes
-    this.route.params.subscribe( params => { const key = <string>params['key'] } );
+		this.route.params.subscribe( params => { const key = <string>params['key'] } );
   }
 
 }

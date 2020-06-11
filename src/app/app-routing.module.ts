@@ -1,4 +1,4 @@
-// Angular Core
+// Angular
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ActivityComponent } from './modules/activity/activity.component';
 import { ContactsComponent } from './modules/contacts/contacts.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
-import { LockComponent } from './modules/lock/lock.component';
+import { AuthComponent } from './modules/auth/auth.component';
 import { MessagingComponent } from './modules/messaging/messaging.component';
 import { SettingsComponent } from './modules/settings/settings.component';
 import { TransferComponent } from './modules/transfer/transfer.component';
@@ -19,7 +19,7 @@ const routes: Routes = [
 	{ path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
 	{ path: 'activity', component: ActivityComponent, canActivate: [AuthGuard] },
 	{ path: 'contacts', component: ContactsComponent, canActivate: [AuthGuard] },
-	{ path: 'lock', component: LockComponent },
+	{ path: 'auth', component: AuthComponent },
 	{ path: 'message', component: MessagingComponent, canActivate: [AuthGuard] },
 	{ path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
 	{ path: 'transfer', component: TransferComponent, canActivate: [AuthGuard] },

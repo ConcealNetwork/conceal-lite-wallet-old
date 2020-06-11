@@ -6,6 +6,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 
 // Services
 import { HelperService } from './../../shared/services/helper.service';
+import { DataService } from '../../shared/services/data.service';
 
 // 3rd Party
 import { ChartDataSets } from 'chart.js';
@@ -41,9 +42,10 @@ import { Color, Label } from 'ng2-charts';
 export class DashboardComponent implements OnInit {
 
 	constructor(
+		private helperService: HelperService,
+		private dataService: DataService,
 		public matIconRegistry: MatIconRegistry,
 		public domSanitizer: DomSanitizer,
-		private helperService: HelperService,
 	) {
 		matIconRegistry.addSvgIconSet(
 			domSanitizer.bypassSecurityTrustResourceUrl(
@@ -59,13 +61,13 @@ export class DashboardComponent implements OnInit {
 	}
 
 	lineChartType = 'line';
-	lineChartLabels: Label[] = this.helperService.marketLabels;
+	lineChartLabels: Label[] = this.dataService.marketLabels;
 	lineChartColors: Color[] = [{
 		backgroundColor: 'rgba(255, 165, 0, 0.3)',
 		borderColor: 'rgb(255, 165, 0)',
 	}, ];
 	lineChartData: ChartDataSets[] = [{
-		data: this.helperService.marketData,
+		data: this.dataService.marketData,
 		label: 'Price',
 		fill: true,
 		backgroundColor: 'rgba(255, 165, 0, 0.2)',

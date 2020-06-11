@@ -6,6 +6,7 @@ import * as moment from 'moment';
 
 // Services
 import { ElectronService } from '../services/electron.service';
+import { DataService } from '../services/data.service';
 import { CloudService } from '../services/cloud.service';
 import { SnackbarService } from '../services/snackbar.service';
 
@@ -15,68 +16,52 @@ import { SnackbarService } from '../services/snackbar.service';
 
 export class HelperService {
 
-	isWalletLoading: boolean = true;
-	isLoading: boolean = true;
-	marketData = [];
-	marketLabels = [];
-	prices: any;
-	height: number = 0;
-	portfolio: any;
-	wallets: any;
-	walletCount: number = 0;
-	transactions: any;
-	success: any;
-	error: any;
-
-	isFormLoading: any;
-	haveKeys: any;
-	keys: any;
-
 	constructor (
-		private cloudService: CloudService,
 		private electronService: ElectronService,
-		private snackbarService: SnackbarService,
+		private cloudService: CloudService,
+		private dataService: DataService,
+		private snackbarService: SnackbarService
 	) { }
 
 		getMarket() {
-			if (this.marketData.length !== 0 || this.marketLabels.length !== 0) {
-				this.marketData = [];
-				this.marketLabels = [];
+			if (this.dataService.marketData.length !== 0 || this.dataService.marketLabels.length !== 0) {
+				this.dataService.marketData = [];
+				this.dataService.marketLabels = [];
 			}
 			this.cloudService.getMarketData().subscribe((data) => {
 				sessionStorage.setItem('market_data', JSON.stringify(data));
-				this.marketData.push(...data['market_data'].sparkline_7d.price);
-				let len = this.marketData.length;
+				this.dataService.marketData.push(...data['market_data'].sparkline_7d.price);
+				let len = this.dataService.marketData.length;
 				let duration = moment.duration(7 / len, 'd').asMilliseconds();
 				let i = 0;
 				for (i = len - 1; i >= 0; i--) {
-					this.marketLabels.push(moment().subtract(duration * (i + 1), 'ms').fromNow());
+					this.dataService.marketLabels.push(moment().subtract(duration * (i + 1), 'ms').fromNow());
 				}
 			})
 		}
 
 		getPrices() {
 			this.cloudService.getPrices().subscribe((data) => {
-				this.prices = data;
+				this.dataService.prices = data;
 				console.log(data);
 			})
 		}
 
 		getWallets() {
-			this.isLoading = true;
-			this.isWalletLoading = true;
+			this.dataService.isLoading = true;
+			this.dataService.isWalletLoading = true;
 			this.cloudService.getWalletsData().subscribe((data) => {
 				if (data['result'] === 'success') {
-					this.height = data['message'].height;
-					this.wallets = data['message'].wallets;
-					this.walletCount = Object.keys(this.wallets).length;
-					this.portfolio = {
-						available: Object.keys(this.wallets).reduce((acc, curr) => acc + this.wallets[curr].balance + this.wallets[curr].locked || acc, 0),
-						pending: Object.keys(this.wallets).reduce((acc, curr) => acc + this.wallets[curr].locked || acc, 0),
-						withdrawable: Object.keys(this.wallets).reduce((acc, curr) => acc + this.wallets[curr].balance || acc, 0),
+					this.dataService.height = data['message'].height;
+					this.dataService.wallets = data['message'].wallets;
+					this.dataService.walletCount = Object.keys(this.dataService.wallets).length;
+					this.dataService.portfolio = {
+						available: Object.keys(this.dataService.wallets).reduce((acc, curr) => acc + this.dataService.wallets[curr].balance + this.dataService.wallets[curr].locked || acc, 0),
+						pending: Object.keys(this.dataService.wallets).reduce((acc, curr) => acc + this.dataService.wallets[curr].locked || acc, 0),
+						withdrawable: Object.keys(this.dataService.wallets).reduce((acc, curr) => acc + this.dataService.wallets[curr].balance || acc, 0),
 					}
-					this.isLoading = false;
-					this.isWalletLoading = false;
+					this.dataService.isLoading = false;
+					this.dataService.isWalletLoading = false;
 				}
 			});
 		}
@@ -84,15 +69,15 @@ export class HelperService {
 		getWalletKeys(address, code) {
 		  this.cloudService.getWalletKeys(address, code).subscribe((data) => {
 			  if (data['result'] === 'success') {
-				  this.success = 'Success! Loading Keys...';
-					this.isFormLoading = false;
+				  this.dataService.success = 'Success! Loading Keys...';
+					this.dataService.isFormLoading = false;
 					setTimeout(() => {
-				  	this.haveKeys = true;
-						this.keys = data['message'];
+				  	this.dataService.haveKeys = true;
+						this.dataService.keys = data['message'];
 					}, 2000);
 			  } else {
-				  this.error = data['message'];
-					this.isFormLoading = false;
+				  this.dataService.error = data['message'];
+					this.dataService.isFormLoading = false;
 					this.snackbarService.openSnackBar(data['message'], 'Dismiss');
 			  }
 		  })
@@ -101,40 +86,40 @@ export class HelperService {
 		importWallet(privateSpendKey) {
 			this.cloudService.importWallet(privateSpendKey).subscribe((data) => {
 				if (data['result'] === 'success') {
-					this.success = 'Success! Importing Wallet...';
-					this.isFormLoading = false;
+					this.dataService.success = 'Success! Importing Wallet...';
+					this.dataService.isFormLoading = false;
 					setTimeout(() => {
 						this.snackbarService.openSnackBar('Wallet Imported', 'Dismiss');
 						this.refreshWallets();
 					}, 2000);
 				} else {
-					this.error = data['message'];
-					this.isFormLoading = false;
+					this.dataService.error = data['message'];
+					this.dataService.isFormLoading = false;
 					this.snackbarService.openSnackBar(data['message'], 'Dismiss');
 				}
 			})
 		}
 
 		refreshWallets() {
-			this.isWalletLoading = true;
+			this.dataService.isWalletLoading = true;
 			this.cloudService.getWalletsData().subscribe((data) => {
 				if (data['result'] === 'success') {
-					this.height = data['message'].height;
-					this.wallets = data['message'].wallets;
-					this.walletCount = Object.keys(this.wallets).length;
-					this.portfolio = {
-						available: Object.keys(this.wallets).reduce((acc, curr) => acc + this.wallets[curr].balance + this.wallets[curr].locked || acc, 0),
-						pending: Object.keys(this.wallets).reduce((acc, curr) => acc + this.wallets[curr].locked || acc, 0),
-						withdrawable: Object.keys(this.wallets).reduce((acc, curr) => acc + this.wallets[curr].balance || acc, 0),
+					this.dataService.height = data['message'].height;
+					this.dataService.wallets = data['message'].wallets;
+					this.dataService.walletCount = Object.keys(this.dataService.wallets).length;
+					this.dataService.portfolio = {
+						available: Object.keys(this.dataService.wallets).reduce((acc, curr) => acc + this.dataService.wallets[curr].balance + this.dataService.wallets[curr].locked || acc, 0),
+						pending: Object.keys(this.dataService.wallets).reduce((acc, curr) => acc + this.dataService.wallets[curr].locked || acc, 0),
+						withdrawable: Object.keys(this.dataService.wallets).reduce((acc, curr) => acc + this.dataService.wallets[curr].balance || acc, 0),
 					}
-					this.isWalletLoading = false;
-					this.isLoading = false;
+					this.dataService.isWalletLoading = false;
+					this.dataService.isLoading = false;
 				}
 			});
 		}
 
 		deleteWallet(wallet) {
-			this.isLoading = true;
+			this.dataService.isLoading = true;
 			this.cloudService.deleteWallet(wallet).subscribe((data) => {
 				if (data['result'] === 'success') {
 					this.snackbarService.openSnackBar('Wallet Deleted', 'Dismiss');
@@ -146,7 +131,7 @@ export class HelperService {
 		}
 
 		createWallet() {
-			this.isLoading = true;
+			this.dataService.isLoading = true;
 			this.cloudService.createWallet().subscribe((data) => {
 				if (data['result'] === 'success') {
 					this.snackbarService.openSnackBar('Wallet Created', 'Dismiss');

@@ -1,48 +1,46 @@
-<mat-toolbar fxLayout="row" fxLayoutAlign="space-around stretch" *ngIf="!this.helperService.isWalletLoading">
-
-	<div class="section" fxLayout="column" fxLayoutAlign="center stretch" *ngIf="!this.helperService.isWalletLoading">
-		<section class="items">
-			<span class="title">Current Height</span> 
-			<span class="value">{{this.helperService.height || 0}}</span>
-		</section>
+<mat-toolbar fxLayout="row" fxLayoutAlign="space-around stretch" *ngIf="!this.dataService.isWalletLoading">
+	<div *ngIf="!this.dataService.isLoggedIn">
+		<div class="section" fxLayout="column" fxLayoutAlign="center stretch">
+			<section class="items">
+				<span class="title">Current Height</span>
+				<span class="value">{{this.dataService.height || 0}}</span>
+			</section>
+		</div>
+		<div class="section" fxLayout="column" fxLayoutAlign="center stretch">
+			<section class="items">
+				<span class="title">Transactions</span>
+				<span class="value">{{this.dataService.transactions || 0}}</span>
+			</section>
+		</div>
+		<div class="section" fxLayout="column" fxLayoutAlign="center stretch">
+			<section class="items">
+				<span class="title">Portfolio (CCX)</span>
+				<span class="value">{{this.dataService.portfolio?.available || 0}} <span class="ccx">CCX</span></span>
+			</section>
+		</div>
+		<div class="section" fxLayout="column" fxLayoutAlign="center stretch">
+			<section class="items">
+				<span class="title">Portfolio (BTC)</span>
+				<span class="value">0 <span class="ccx">BTC</span></span>
+			</section>
+		</div>
+		<div class="section" fxLayout="column" fxLayoutAlign="center stretch">
+			<section class="items">
+				<span class="title">Portfolio (USD)</span>
+				<span class="value">0 <span class="ccx">USD</span></span>
+			</section>
+		</div>
 	</div>
-
-	<div class="section" fxLayout="column" fxLayoutAlign="center stretch" *ngIf="!this.helperService.isWalletLoading">
-		<section class="items">
-			<span class="title">Transactions</span> 
-			<span class="value">{{this.helperService.transactions || 0}}</span>
-		</section>
-	</div>
-
-	<div class="section" fxLayout="column" fxLayoutAlign="center stretch" *ngIf="!this.helperService.isWalletLoading">
-		<section class="items">
-			<span class="title">Portfolio (CCX)</span> 
-			<span class="value">{{this.helperService.portfolio?.available || 0}} <span class="ccx">CCX</span></span>
-		</section>
-	</div>
-
-	<div class="section" fxLayout="column" fxLayoutAlign="center stretch" *ngIf="!this.helperService.isWalletLoading">
-		<section class="items">
-			<span class="title">Portfolio (BTC)</span> 
-			<span class="value">0 <span class="ccx">BTC</span></span>
-		</section>
-	</div>
-
-	<div class="section" fxLayout="column" fxLayoutAlign="center stretch" *ngIf="!this.helperService.isWalletLoading">
-		<section class="items">
-			<span class="title">Portfolio (USD)</span> 
-			<span class="value">0 <span class="ccx">USD</span></span>
-		</section>
-	</div>
-
 </mat-toolbar>
 
-<mat-toolbar fxLayout="row" fxLayoutAlign="center stretch" *ngIf="this.helperService.isWalletLoading">
-	<div fxFlex="30" class="section" fxLayout="column" fxLayoutAlign="center stretch" *ngIf="this.helperService.isWalletLoading">
-		<section fxFill class="progress">
-			<span>Refreshing, one moment please...</span>
-			<mat-progress-bar [color]="color" [mode]="mode"></mat-progress-bar>
-		</section>
+<mat-toolbar fxLayout="row" fxLayoutAlign="center stretch" *ngIf="this.dataService.isWalletLoading">
+	<div *ngIf="!this.dataService.isLoggedIn">
+		<div fxFlex="30" class="section" fxLayout="column" fxLayoutAlign="center stretch">
+			<section fxFill class="progress">
+				<span>Refreshing, one moment please...</span>
+				<mat-progress-bar [color]="color" [mode]="mode"></mat-progress-bar>
+			</section>
+		</div>
 	</div>
 </mat-toolbar>
 
