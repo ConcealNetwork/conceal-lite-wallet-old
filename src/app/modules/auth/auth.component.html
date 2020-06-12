@@ -1,8 +1,8 @@
-<div class="loading" *ngIf="isLoading">
-  <app-loader [isLoading]="isLoading"></app-loader>
+<div class="loading" *ngIf="getDataService().isLoading">
+  <app-loader [isLoading]="getDataService().isLoading"></app-loader>
 </div>
 
-<div *ngIf="!isLoading" class="container" fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="35px" @enterAnimation @stagger>
+<div *ngIf="!getDataService().isLoading && getDataService().isLoggedIn" class="container" fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="35px" @enterAnimation @stagger>
   <h1 class="title" fxLayout="column" fxLayoutAlign="center center">{{ 'PAGES.LOGIN.TITLE' | translate }}</h1>
   <div fxLayout="column" fxLayoutAlign="center center">
     <div id="cards" fxLayout="column" class="login" fxLayoutAlign="center">
@@ -42,12 +42,12 @@
             </mat-error>
           </mat-form-field>
         </p>
-        <mat-progress-bar mode="query" *ngIf="isFormLoading"></mat-progress-bar>
-        <p *ngIf="error" class="error">
-          {{ error }}
+        <mat-progress-bar mode="query" *ngIf="getDataService().isFormLoading"></mat-progress-bar>
+        <p *ngIf="getDataService().error" class="error">
+          {{ getDataService().error }}
         </p>
-        <p *ngIf="success" class="success">
-          {{ success }}
+        <p *ngIf="getDataService().success" class="success">
+          {{ getDataService().success }}
         </p>
         <p class="actions" fxLayout="row" fxLayoutGap="15px">
           <button mat-stroked-button color="primary" fxFlex="50" type="submit">Login</button>
@@ -56,4 +56,8 @@
       </form>
     </div>
   </div>
+</div>
+
+<div *ngIf="!getDataService().isLoading && !getDataService().isLoggedIn" class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="35px" @enterAnimation @stagger>
+	<button mat-stroked-button color="primary" cdkFocusInitial (click)="logout()">Logout...</button>
 </div>

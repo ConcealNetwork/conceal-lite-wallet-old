@@ -1,5 +1,5 @@
-<div class="content" *ngIf="!this.helperService.haveKeys">
-	<h1 mat-dialog-title>Export Keys</h1>
+<div class="content" *ngIf="!getDataService().haveKeys">
+	<h1 mat-dialog-title class="title">Export Keys</h1>
 	<h2 class="subtitle">Enter you 2FA code to continue</h2>
 	<div class="twofa" mat-dialog-content>
 		<form [formGroup]="form" (ngSubmit)="submit()" fxLayout="column" fxLayoutAlign="space-between stretch">
@@ -19,9 +19,9 @@
 					</mat-error>
 				</mat-form-field>
 			</p>
-			<div *ngIf="this.helperService.isFormLoading" class="progress"><mat-progress-bar mode="query"></mat-progress-bar></div>
-			<div *ngIf="this.helperService.error" class="error">{{ this.helperService.error }}</div>
-			<div *ngIf="this.helperService.success" class="success">{{ this.helperService.success }}</div>
+			<div class="progress" *ngIf="getDataService().isFormLoading"><mat-progress-bar mode="query"></mat-progress-bar></div>
+			<div class="error" *ngIf="getDataService().error">{{ getDataService().error }}</div>
+			<div class="success" *ngIf="getDataService().success">{{ getDataService().success }}</div>
 			<div class="actions" fxLayout="row" fxLayoutGap="15px">
 				<button mat-stroked-button color="primary" fxFlex="50" type="submit">Submit</button>
 				<button mat-stroked-button color="warn" fxFlex="50" (click)="this.form.reset()">Reset</button>
@@ -30,15 +30,20 @@
 	</div>
 </div>
 
-<div class="content" *ngIf="this.helperService.haveKeys">
-	<h1 mat-dialog-title>Your Private Keys</h1>
+<div class="content" *ngIf="getDataService().haveKeys">
+	<h1 mat-dialog-title class="title">Your Private Keys</h1>
+	<h2 class="subtitle">Save your keys to a secure location</h2>
 	<div class="keys" mat-dialog-content>
-		<mat-form-field class="keys" *ngFor="let item of this.helperService.keys | keyvalue | reverse" fxLayout="column" fxLayoutAlign="space-between stretch">
-			<mat-label>{{ item.key }}</mat-label>
-			<input matInput type="text" [value]="item.value">
-			<button mat-button matSuffix mat-icon-button aria-label="Copy" (click)="this.helperService.copyToClipboard(item.value, 'Key Copied')" matTooltip="Copy Key" aria-label="Copy Key" matTooltipPosition="above" matTooltipClass="custom-tooltip">
-				<mat-icon svgIcon="assignment"></mat-icon>
-			</button>
-		</mat-form-field>
+		<div class="box" fxLayout="column" fxLayoutAlign="space-around" fxLayoutGap="15px">
+			<div fxFill *ngFor="let item of getDataService().keys | keyvalue | reverse">
+				<mat-form-field fxFlex="85">
+					<mat-label>{{ item.key }}</mat-label>
+					<input matInput type="text" [value]="item.value">
+				</mat-form-field>
+				<button fxFlex="15" mat-stroked-button aria-label="Copy key" matTooltip="Copy key" aria-label="Copy key" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="this.helperService.copyToClipboard(item.value, 'Key Copied')">
+					<mat-icon svgIcon="assignment"></mat-icon>
+				</button>
+			</div>
+		</div>
 	</div>
 </div>

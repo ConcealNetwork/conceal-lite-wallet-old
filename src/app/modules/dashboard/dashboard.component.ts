@@ -5,8 +5,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
 
 // Services
+import { AuthService } from '../../shared/services/auth.service';
 import { HelperService } from './../../shared/services/helper.service';
 import { DataService } from '../../shared/services/data.service';
+import { DialogService } from '../../shared/services/dialog.service';
 
 // 3rd Party
 import { ChartDataSets } from 'chart.js';
@@ -42,8 +44,10 @@ import { Color, Label } from 'ng2-charts';
 export class DashboardComponent implements OnInit {
 
 	constructor(
+		private authService: AuthService,
 		private helperService: HelperService,
 		private dataService: DataService,
+		private dialogService: DialogService,
 		public matIconRegistry: MatIconRegistry,
 		public domSanitizer: DomSanitizer,
 	) {
@@ -54,10 +58,21 @@ export class DashboardComponent implements OnInit {
 		);
 	}
 
+	// Get Services
+	getDialogService() {
+		return this.dialogService;
+	}
+	getHelperService() {
+		return this.helperService;
+	}
+	getDataService() {
+		return this.dataService;
+	}
+
 	ngOnInit(): void {
 		this.helperService.getMarket();
 		this.helperService.getWallets();
-		this.helperService.getPrices();
+		this.dataService.isLoggedIn = this.authService.loggedIn();
 	}
 
 	lineChartType = 'line';

@@ -55,23 +55,30 @@ export class AuthComponent implements OnInit {
     ])
 	});
 
-	constructor(
+	constructor (
 		private authService: AuthService,
 		private dataService: DataService,
     private router: Router
-    ) { }
+	) { }
+
+	// Get Services
+	getDataService() { return this.dataService }
 
 	ngOnInit(): void {
-    this.dataService.isLoading = false;
 		this.dataService.isLoggedIn = this.authService.loggedIn();
-		this.dataService.isWalletLoading = false;
-  }
+	}
+
+	logout() {
+		this.dataService.isLoading = true;
+		this.authService.logout();
+		this.dataService.isLoggedIn = this.authService.loggedIn();
+		this.dataService.isLoading = false;
+	}
 
   submit() {
     if (this.form.valid) {
       this.dataService.error = null;
       this.dataService.isFormLoading = true;
-      this.dataService.formData.emit(this.form.value);
       this.authService.login(this.form.value.emailFormControl, this.form.value.passwordFormControl, this.form.value.twofaFormControl).subscribe(
         data => {
           if (data['message'].token && data['result'] === 'success') {
@@ -86,7 +93,8 @@ export class AuthComponent implements OnInit {
             this.dataService.success = 'Success! Redirecting now...';
             this.dataService.isFormLoading = false;
             setTimeout(() => {
-              this.router.navigate(['/']);
+							this.router.navigate(['/']);
+							this.dataService.success = '';
             }, 2000);
           }
           if (data['result'] === 'error') {
@@ -95,7 +103,6 @@ export class AuthComponent implements OnInit {
           }
         },
         error => {
-            console.log(error);
             this.dataService.error = error.message;
             this.dataService.isFormLoading = false;
         }

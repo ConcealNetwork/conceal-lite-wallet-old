@@ -1,13 +1,13 @@
 <mat-toolbar color="primary">
 	<img src="./assets/images/logo-sm.png" class="logo">
 	<span color="accent" class="title hidden-sm">{{ 'PAGES.HEADER.TITLE' | translate }}</span>
-	<div *ngIf="!this.dataService.isLoggedIn">
+	<div *ngIf="!getDataService().isLoggedIn">
 		<button mat-button class="navlink" routerLink="/dashboard" routerLinkActive="active">{{ 'PAGES.HEADER.DASHBOARD' | translate }}</button>
 		<button mat-button class="navlink" routerLink="/transfer" routerLinkActive="active">{{ 'PAGES.HEADER.TRANSFER' | translate }}</button>
 		<button mat-button class="navlink" routerLink="/activity" routerLinkActive="active">{{ 'PAGES.HEADER.ACTIVITY' | translate }}</button>
 	</div>
 	<span class="spacer"></span>
-	<div class="action-icons" *ngIf="!this.dataService.isLoggedIn">
+	<div class="action-icons" *ngIf="!getDataService().isLoggedIn">
 		<button mat-icon-button aria-hidden="false" aria-label="Contacts" routerLink="/contacts" routerLinkActive="active">
 			<mat-icon svgIcon="contacts"></mat-icon>
 		</button>

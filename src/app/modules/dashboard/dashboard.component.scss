@@ -28,7 +28,7 @@
   .cards {
 		height: 26.1vh;
 	}
-	
+
 	.new {
 		background: rgba(#393939, 0.0);
 		button {
@@ -46,7 +46,7 @@
     font-size: 0.7rem;
     color: #c4c4c4;
   }
-  
+
   .icons {
     margin-top: -7px;
 		margin-right: -11px;
@@ -87,8 +87,6 @@
 	}
 
 	.spinner {
-		margin-left: 20px;
-		margin-right: 20px;
 		mat-spinner {
 			zoom: 0.22
 		}
@@ -97,7 +95,7 @@
 	.chart-card {
 		padding-left: 0px !important;
 		padding-right: 0px !important;
-	
+
 		.chart-wrapper {
 			display: flex;
 			height: 25.5vh;
@@ -127,4 +125,4 @@
 
 .mat-dialog-container {
 	overflow: hidden !important;
-}	
+}

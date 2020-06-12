@@ -4,7 +4,8 @@ import { ThemePalette } from '@angular/material/core';
 import { ProgressBarMode } from '@angular/material/progress-bar';
 
 // Services
-import { DataService } from './../../services/data.service';
+import { DataService } from '../../services/data.service';
+import { HelperService } from '../../services/helper.service';
 
 @Component({
   selector: 'app-footer',
@@ -19,9 +20,14 @@ export class FooterComponent implements OnInit {
   color: ThemePalette = 'primary';
   mode: ProgressBarMode = 'indeterminate';
 
-  constructor(
-		private dataService: DataService
-  ) { }
+  constructor (
+		private dataService: DataService,
+		private helperService: HelperService
+	) {	}
+
+	getDataService() {
+		return this.dataService;
+	}
 
   ngOnInit() { }
 

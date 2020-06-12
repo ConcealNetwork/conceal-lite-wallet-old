@@ -43,7 +43,6 @@ export class HelperService {
 		getPrices() {
 			this.cloudService.getPrices().subscribe((data) => {
 				this.dataService.prices = data;
-				console.log(data);
 			})
 		}
 
@@ -62,6 +61,24 @@ export class HelperService {
 					}
 					this.dataService.isLoading = false;
 					this.dataService.isWalletLoading = false;
+				}
+			});
+		}
+
+		refreshWallets() {
+			this.dataService.isWalletLoading = true;
+			this.cloudService.getWalletsData().subscribe((data) => {
+				if (data['result'] === 'success') {
+					this.dataService.height = data['message'].height;
+					this.dataService.wallets = data['message'].wallets;
+					this.dataService.walletCount = Object.keys(this.dataService.wallets).length;
+					this.dataService.portfolio = {
+						available: Object.keys(this.dataService.wallets).reduce((acc, curr) => acc + this.dataService.wallets[curr].balance + this.dataService.wallets[curr].locked || acc, 0),
+						pending: Object.keys(this.dataService.wallets).reduce((acc, curr) => acc + this.dataService.wallets[curr].locked || acc, 0),
+						withdrawable: Object.keys(this.dataService.wallets).reduce((acc, curr) => acc + this.dataService.wallets[curr].balance || acc, 0),
+					}
+					this.dataService.isWalletLoading = false;
+					this.dataService.isLoading = false;
 				}
 			});
 		}
@@ -100,24 +117,6 @@ export class HelperService {
 			})
 		}
 
-		refreshWallets() {
-			this.dataService.isWalletLoading = true;
-			this.cloudService.getWalletsData().subscribe((data) => {
-				if (data['result'] === 'success') {
-					this.dataService.height = data['message'].height;
-					this.dataService.wallets = data['message'].wallets;
-					this.dataService.walletCount = Object.keys(this.dataService.wallets).length;
-					this.dataService.portfolio = {
-						available: Object.keys(this.dataService.wallets).reduce((acc, curr) => acc + this.dataService.wallets[curr].balance + this.dataService.wallets[curr].locked || acc, 0),
-						pending: Object.keys(this.dataService.wallets).reduce((acc, curr) => acc + this.dataService.wallets[curr].locked || acc, 0),
-						withdrawable: Object.keys(this.dataService.wallets).reduce((acc, curr) => acc + this.dataService.wallets[curr].balance || acc, 0),
-					}
-					this.dataService.isWalletLoading = false;
-					this.dataService.isLoading = false;
-				}
-			});
-		}
-
 		deleteWallet(wallet) {
 			this.dataService.isLoading = true;
 			this.cloudService.deleteWallet(wallet).subscribe((data) => {
@@ -142,6 +141,11 @@ export class HelperService {
 			})
 		}
 
+		getPortfolioBTC() {
+			this.getPrices();
+			this.dataService.prices;
+		}
+
 		copyToClipboard(value: string, message: string): void {
 			this.electronService.clipboard.clear();
 			this.electronService.clipboard.writeText(value);
@@ -151,32 +155,6 @@ export class HelperService {
 		formattedStringAmount(amount, currency, symbol): any {
 			const formatOptions = { minimumFractionDigits: 2, maximumFractionDigits: 2 };
 			return `${symbol ? symbol : ''} ${parseFloat(amount).toLocaleString(undefined, formatOptions)} ${currency ? currency : ''} `;
-		};
-
-		FormattedAmount(amount, currency, symbol) {
-
-			let minimumFractionDigits;
-			let maximumFractionDigits;
-
-			switch (currency) {
-				case 'BTC':
-					minimumFractionDigits = 8;
-					maximumFractionDigits = 8;
-					break;
-				case 'USD':
-					minimumFractionDigits = 2;
-					maximumFractionDigits = 2;
-					break;
-				default:
-					minimumFractionDigits = 2;
-					maximumFractionDigits = 2;
-					break;
-			}
-
-			const formatOptions = { minimumFractionDigits, maximumFractionDigits };
-
-			return this.formattedStringAmount(amount, currency, symbol);
-
 		};
 
 	}

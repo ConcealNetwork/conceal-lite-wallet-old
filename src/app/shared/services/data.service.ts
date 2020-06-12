@@ -12,8 +12,8 @@ export class DataService {
 	isLoading: boolean = false;
 	isLoggedIn: boolean = false;
 	isFormLoading: boolean = false;
-	marketData: any;
-	marketLabels: any;
+	marketData: any = [];
+	marketLabels: any = [];
 	prices: any;
 	height: number;
 	portfolio: any;
@@ -22,7 +22,6 @@ export class DataService {
 	transactions: any;
 	haveKeys: any;
 	keys: any;
-	formData: any;
 	success: any;
 	error: any;
 

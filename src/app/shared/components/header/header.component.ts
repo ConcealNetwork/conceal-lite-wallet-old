@@ -5,8 +5,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
 
 // Services
-import { ElectronService } from './../../services/electron.service';
-import { DataService } from './../../services/data.service';
+import { ElectronService } from '../../services/electron.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-header',
@@ -33,7 +33,11 @@ export class HeaderComponent implements OnInit {
         `assets/fonts/materal-icons-twotone.svg`
       )
     );
-  }
+	}
+
+	getDataService() {
+		return this.dataService;
+	}
 
   logout() {
     this.electronService.window.close();

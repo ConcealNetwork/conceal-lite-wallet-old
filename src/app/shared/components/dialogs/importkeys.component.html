@@ -1,7 +1,7 @@
 <div class="content">
-	<h1 mat-dialog-title>Import Wallet</h1>
+	<h1 mat-dialog-title class="title">Import Wallet</h1>
 	<h2 class="subtitle">Enter private spend key to continue</h2>
-	<div class="PrivateSpendKey" mat-dialog-content>
+	<div class="private" mat-dialog-content>
 		<form [formGroup]="form" (ngSubmit)="submit()" fxLayout="column" fxLayoutAlign="space-between stretch">
 			<p>
 				<mat-form-field fxFill appearance="fill">
@@ -12,9 +12,9 @@
 					</mat-error>
 				</mat-form-field>
 			</p>
-			<div *ngIf="this.helperService.isFormLoading" class="progress"><mat-progress-bar mode="query"></mat-progress-bar></div>
-			<div *ngIf="this.helperService.error" class="error">{{ this.helperService.error }}</div>
-			<div *ngIf="this.helperService.success" class="success">{{ this.helperService.success }}</div>
+			<div class="progress" *ngIf="getDataService().isFormLoading"><mat-progress-bar mode="query"></mat-progress-bar></div>
+			<div class="error" *ngIf="getDataService().error">{{ getDataService().error }}</div>
+			<div class="success" *ngIf="getDataService().success">{{ getDataService().success }}</div>
 			<div class="actions" fxLayout="row" fxLayoutGap="15px">
 				<button mat-stroked-button color="primary" fxFlex="50" type="submit">Submit</button>
 				<button mat-stroked-button color="warn" fxFlex="50" (click)="this.form.reset()">Reset</button>

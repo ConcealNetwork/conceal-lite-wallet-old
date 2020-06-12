@@ -8,6 +8,10 @@ import { NewMessageDialog } from '../components/dialogs/new-message.component';
 import { NewContactDialog } from '../components/dialogs/new-contact.component';
 import { ImportKeysDialog } from '../components/dialogs/importkeys.component';
 import { ExportKeysDialog } from '../components/dialogs/exportkeys.component';
+import { BankingDialog } from '../components/dialogs/banking.component';
+
+// Services
+import { DataService } from '../services/data.service';
 
 @Injectable({
 	providedIn: 'root'
@@ -15,24 +19,21 @@ import { ExportKeysDialog } from '../components/dialogs/exportkeys.component';
 
 export class DialogService {
 
-	success: any;
-	error: any;
-
 	constructor (
-		public dialog: MatDialog
+		public dialog: MatDialog,
+		private dataService: DataService
 	) { }
 
 
-	openCodeDialog(value): void {
+	openQRCodeDialog(value): void {
 		const dialogRef = this.dialog.open(QrCodeDialog, {
 			width: '400px',
 			height: 'auto',
 			data: value,
 		})
 		dialogRef.afterClosed().subscribe(result => {
-			//console.log('The dialog was closed');
-			this.success = '';
-			this.error = '';
+			this.dataService.success = '';
+			this.dataService.error = '';
 		})
 	}
 
@@ -43,9 +44,8 @@ export class DialogService {
 			data: value,
 		})
 		dialogRef.afterClosed().subscribe(result => {
-			//console.log('The dialog was closed');
-			this.success = '';
-			this.error = '';
+			this.dataService.success = '';
+			this.dataService.error = '';
 		})
 	}
 
@@ -55,9 +55,17 @@ export class DialogService {
 			height: 'auto',
 		})
 		dialogRef.afterClosed().subscribe(result => {
-			//console.log('The dialog was closed');
-			this.success = '';
-			this.error = '';
+			this.dataService.success = '';
+			this.dataService.error = '';
+		})
+	}
+
+	openBankingDialog(): void {
+		const dialogRef = this.dialog.open(BankingDialog, {
+			width: '460px',
+			height: 'auto',
+		})
+		dialogRef.afterClosed().subscribe(result => {
 		})
 	}
 
@@ -68,9 +76,8 @@ export class DialogService {
       data: {address: value.address, message: value.message}
     })
     dialogRef.afterClosed().subscribe(result => {
-			//console.log('The dialog was closed');
-			this.success = '';
-			this.error = '';
+			this.dataService.success = '';
+			this.dataService.error = '';
     })
 	}
 
@@ -81,9 +88,8 @@ export class DialogService {
       data: {label: value.label, address: value.address, paymentid: value.paymentid}
     })
     dialogRef.afterClosed().subscribe(result => {
-			//console.log('The dialog was closed');
-			this.success = '';
-			this.error = '';
+			this.dataService.success = '';
+			this.dataService.error = '';
     })
   }
 

@@ -4,14 +4,14 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 // Dialogs
 @Component({
-	selector: 'app-qrcode',
-	templateUrl: './qrcode.component.html',
-	styleUrls: ['./qrcode.component.scss'],
+	selector: 'app-banking',
+	templateUrl: './banking.component.html',
+	styleUrls: ['./banking.component.scss'],
 })
-export class QrCodeDialog {
+export class BankingDialog {
 
 	constructor (
-		public dialogRef: MatDialogRef<QrCodeDialog>, @Inject(MAT_DIALOG_DATA) public data: any
+		public dialogRef: MatDialogRef<BankingDialog>, @Inject(MAT_DIALOG_DATA) public data: any
 	) {	}
 
 	close() {

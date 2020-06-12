@@ -1,10 +1,11 @@
 .content {
 	overflow: hidden;
-	margin: 10px;
 
-	.mat-dialog-title {
+	.title {
 		font-size: 1.4rem;
 		color: orange;
+		line-height: 1;
+		margin-block-start: 0 !important;
 	}
 
 	.subtitle {
@@ -53,24 +54,33 @@
 		overflow: hidden;
 
 		.mat-form-field {
-			font-size: 0.9rem;
+			font-size: 0.8rem;
 		}
 	}
 
 	.keys {
-		margin-top: 15px;
 		overflow: hidden;
 
-		.mat-form-field {
-			font-size: 1rem;
+		.box {
+			padding-left: 35px;
+			padding-right: 35px;
+			padding-top: 25px;
+			padding-bottom: 10px;
+			border: 1px solid orange;
+			margin-top: 10px;
+			border-radius: 8px;
 		}
 
-		.mat-icon-button {
-			color: orange;
-			margin-left: 0.2rem;
-			padding-right: 5px;
-			padding-left: 3.5px;
-			padding-bottom: 1.5px;
+		.mat-form-field {
+			font-size: 0.8rem;
+			margin-right: 20px;
+		}
+
+		.mat-stroked-button {
+			margin-top: 15px;
+			margin-bottom: 15px;
+			margin-left: 0px;
+			margin-right: 0px;
 		}
 
 	}

@@ -58,7 +58,6 @@ import {MatTreeModule} from '@angular/material/tree';
 // 3rd Party
 import { NgPipesModule } from 'ngx-pipes';
 import { ChartsModule } from 'ng2-charts';
-import { QRCodeModule } from 'angularx-qrcode';
 
 // NG Translate
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -162,7 +161,6 @@ export function tokenGetter() {
     ScrollingModule,
     NgPipesModule,
     ChartsModule,
-    QRCodeModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
