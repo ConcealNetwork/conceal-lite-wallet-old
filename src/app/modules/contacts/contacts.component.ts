@@ -1,3 +1,4 @@
+// Angular
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { trigger, state, transition, query, style, stagger, animate } from '@angular/animations';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -6,6 +7,10 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+
+// Services
+import { HelperService } from './../../shared/services/helper.service';
+import { DialogService } from '../../shared/services/dialog.service';
 
 export interface Contacts {
   label: string;
@@ -99,6 +104,8 @@ export class ContactsComponent implements OnInit {
   }
 
 	constructor(
+		private helperService: HelperService,
+		private dialogService: DialogService,
     public matIconRegistry: MatIconRegistry,
     public domSanitizer: DomSanitizer
   ) {
@@ -111,7 +118,15 @@ export class ContactsComponent implements OnInit {
     const contacts = Array.from({length: 100}, (_, k) => this.createContacts(k + 1));
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(contacts);
-  }
+	}
+
+	// Get Services
+	getDialogService() {
+		return this.dialogService;
+	}
+	getHelperService() {
+		return this.helperService;
+	}
 
 	ngOnInit(): void {
     this.isLoading = false;

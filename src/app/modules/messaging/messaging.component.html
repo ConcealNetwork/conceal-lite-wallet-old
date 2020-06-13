@@ -12,9 +12,9 @@
       <mat-label>Filter</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Search by Date, Type, Height or Message">
     </mat-form-field>
-  
+
     <div fxFlex="30" class="button-control">
-      <button mat-stroked-button color="primary" (click)="openDialog()">New Message</button>
+      <button mat-stroked-button color="primary" (click)="getDialogService().openNewMessageDialog(null)">New Message</button>
       <!-- <button mat-stroked-button color="warn">Delete</button> -->
     </div>
 
@@ -29,25 +29,25 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
         <td mat-cell *matCellDef="let row"> {{row.date}} </td>
       </ng-container>
-  
+
       <!-- Type Column -->
       <ng-container matColumnDef="type">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
         <td mat-cell *matCellDef="let row"> {{row.type}} </td>
       </ng-container>
-  
+
       <!-- Height Column -->
       <ng-container matColumnDef="height">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Height </th>
         <td mat-cell *matCellDef="let row"> {{row.height}} </td>
       </ng-container>
-  
+
       <!-- Message Column -->
       <ng-container matColumnDef="message">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Message </th>
         <td mat-cell *matCellDef="let row"> {{row.message}} </td>
       </ng-container>
-  
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
     </table>

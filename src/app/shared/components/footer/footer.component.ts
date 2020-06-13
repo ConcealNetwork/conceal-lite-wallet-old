@@ -28,7 +28,12 @@ export class FooterComponent implements OnInit {
 	getDataService() {
 		return this.dataService;
 	}
+	getHelperService() {
+		return this.helperService;
+	}
 
-  ngOnInit() { }
+  ngOnInit() {
+
+	}
 
 }

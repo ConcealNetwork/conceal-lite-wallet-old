@@ -28,8 +28,8 @@ export class CloudService {
 		}
 	};
 
-	getPrices() {
-    return this.http.get(`https://api.coingecko.com/api/v3/simple/price?ids=conceal&vs_currencies=btc&include_last_updated_at=true`)
+	getPrices(currency) {
+		return this.http.get(`https://api.coingecko.com/api/v3/simple/price?ids=conceal&vs_currencies=${currency}&include_last_updated_at=false`);
   };
 
 	getWalletKeys(address, code) {
