@@ -10,6 +10,7 @@ import { AuthComponent } from './modules/auth/auth.component';
 import { MessagingComponent } from './modules/messaging/messaging.component';
 import { SettingsComponent } from './modules/settings/settings.component';
 import { TransferComponent } from './modules/transfer/transfer.component';
+import { PayComponent } from './modules/pay/pay.component';
 
 // Services
 import { AuthGuard } from './shared/services/auth.guard';
@@ -23,6 +24,7 @@ const routes: Routes = [
 	{ path: 'message', component: MessagingComponent, canActivate: [AuthGuard] },
 	{ path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
 	{ path: 'transfer', component: TransferComponent, canActivate: [AuthGuard] },
+	{ path: 'pay', component: PayComponent, canActivate: [AuthGuard] },
 	{ path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
 ];
 

@@ -4,20 +4,22 @@
 	<div *ngIf="!getDataService().isLoggedIn">
 		<button mat-button class="navlink" routerLink="/dashboard" routerLinkActive="active">{{ 'PAGES.HEADER.DASHBOARD' | translate }}</button>
 		<button mat-button class="navlink" routerLink="/transfer" routerLinkActive="active">{{ 'PAGES.HEADER.TRANSFER' | translate }}</button>
-		<button mat-button class="navlink" routerLink="/activity" routerLinkActive="active">{{ 'PAGES.HEADER.ACTIVITY' | translate }}</button>
 	</div>
 	<span class="spacer"></span>
 	<div class="action-icons" *ngIf="!getDataService().isLoggedIn">
-		<button mat-icon-button aria-hidden="false" aria-label="Contacts" routerLink="/contacts" routerLinkActive="active">
+		<button mat-icon-button aria-hidden="false" aria-label="Transactions" routerLink="/activity" routerLinkActive="active" matTooltip="Transactions" matTooltipPosition="below" matTooltipClass="custom-tooltip">
+			<mat-icon svgIcon="receipt"></mat-icon>
+		</button>
+		<button mat-icon-button aria-hidden="false" aria-label="Contacts" routerLink="/contacts" routerLinkActive="active" matTooltip="Contacts" matTooltipPosition="below" matTooltipClass="custom-tooltip">
 			<mat-icon svgIcon="contacts"></mat-icon>
 		</button>
-		<button mat-icon-button aria-hidden="false" aria-label="Messaging" routerLink="/message" routerLinkActive="active">
+		<button mat-icon-button aria-hidden="false" aria-label="Messaging" routerLink="/message" routerLinkActive="active" matTooltip="Messaging" matTooltipPosition="below" matTooltipClass="custom-tooltip">
 			<mat-icon svgIcon="message"></mat-icon>
 		</button>
-		<button mat-icon-button aria-hidden="false" aria-label="Settings" routerLink="/settings" routerLinkActive="active">
+		<button mat-icon-button aria-hidden="false" aria-label="Settings" routerLink="/settings" routerLinkActive="active" matTooltip="Settings" matTooltipPosition="below" matTooltipClass="custom-tooltip">
 			<mat-icon svgIcon="settings"></mat-icon>
 		</button>
-		<button mat-icon-button aria-hidden="false" aria-label="Lock" routerLink="/auth" routerLinkActive="active">
+		<button mat-icon-button aria-hidden="false" aria-label="Lock" routerLink="/auth" routerLinkActive="active" matTooltip="Authentication" matTooltipPosition="below" matTooltipClass="custom-tooltip">
 			<mat-icon svgIcon="lock"></mat-icon>
 		</button>
 	</div>

@@ -11,7 +11,7 @@
 	margin-right: auto;
 
 	.title {
-		font-size: 1.6rem;
+		font-size: 1.5rem;
 		line-height: 1;
 		margin-block-start: 0 !important;
 	}
@@ -19,6 +19,10 @@
 	.mat-card {
 		background: rgba(#393939, 0.8);
 		border-radius: 8px;
+	}
+
+	.mat-card-title {
+		font-size: 0.8rem;
 	}
 
 	.mat-card-footer {
@@ -48,9 +52,10 @@
   }
 
   .icons {
-    margin-top: -7px;
-		margin-right: -11px;
+    margin-top: -10px;
+		margin-right: -20px;
 		color: #c4c4c4;
+		transform: scale(0.8);
   }
 
 	.balances {
@@ -63,6 +68,7 @@
 
 		.st {
 			color: orange;
+			opacity: 0.8;
 		}
 
 		.sb {
@@ -92,27 +98,27 @@
 		}
 	}
 
+	.portfolio-card {
+		min-height: 186px;
+		max-height: 258px;
+		background: rgba(128, 128, 128, 0.4);
+	}
+
 	.chart-card {
+		height: auto;
+		background: rgba(128, 128, 128, 0.4);
 		padding-left: 0px !important;
 		padding-right: 0px !important;
 
 		.chart-wrapper {
 			display: flex;
-			height: 25.5vh;
+			height: 20.3vh;
 			width: 100%;
 			padding: 0;
 			margin: 0;
 		}
 	}
 
-}
-
-.custom-tooltip {
-	font-size: 0.6rem;
-	padding-left: 1rem;
-	padding-right: 1rem;
-	border: 0.5px solid rgba(orange, 0.5);
-	background: #111;
 }
 
 .notify {

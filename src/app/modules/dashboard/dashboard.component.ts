@@ -20,22 +20,22 @@ import { Color, Label } from 'ng2-charts';
   styleUrls: ['./dashboard.component.scss'],
   encapsulation: ViewEncapsulation.None,
   animations: [
-		trigger('stagger1', [
+		trigger('staggerLeft', [
 			transition(':enter', [
 				query('#cards', style({ opacity: 0, transform: 'translateX(-40px)' }), {optional: true}),
-				query('#cards', stagger('200ms', [
-					animate('400ms 0.25s ease-out', style({ opacity: 1, transform: 'translateX(0)' })),
+				query('#cards', stagger('300ms', [
+					animate('400ms 0.35s ease-out', style({ opacity: 1, transform: 'translateX(0)' })),
 				]), {optional: true}),
 				query('#cards', [
 					animate(1000, style('*'))
 				], {optional: true})
 			])
 		]),
-		trigger('stagger2', [
+		trigger('staggerDown', [
 			transition(':enter', [
-				query('#title, #button', style({ opacity: 0, transform: 'translateY(-80px)' }), {optional: true}),
-				query('#title, #button', stagger('200ms', [
-					animate('400ms 0.25s ease-out', style({ opacity: 1, transform: 'translateY(0)' })),
+				query('#title, #button', style({ opacity: 0, transform: 'translateY(-40px)' }), {optional: true}),
+				query('#title, #button', stagger('300ms', [
+					animate('400ms 0.35s ease-out', style({ opacity: 1, transform: 'translateY(0)' })),
 				]), {optional: true}),
 				query('#title, #button', [
 					animate(1000, style('*'))
@@ -46,7 +46,7 @@ import { Color, Label } from 'ng2-charts';
 })
 export class DashboardComponent implements OnInit {
 
-	constructor(
+	constructor (
 		private authService: AuthService,
 		private helperService: HelperService,
 		private dataService: DataService,

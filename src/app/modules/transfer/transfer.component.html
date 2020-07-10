@@ -1,99 +1,243 @@
-<div class="loading" *ngIf="isLoading">
-  <app-loader [isLoading]="isLoading"></app-loader>
+<div class="loading" *ngIf="getDataService().isLoading">
+  <app-loader></app-loader>
 </div>
-<div class="container" @enterAnimation @stagger>
-  <div class="side" fxFlex="5" fxLayout="column" fxLayoutAlign="start start"></div>
-  <div class="content expansion-panel" fxFlex fxLayout="column" fxLayoutAlign="start stretch">
-    <h1 class="title">{{ 'PAGES.TRANSFER.TITLE' | translate }}</h1>
 
-    <mat-accordion multi="false" [@.disabled]="disableAnimation">
+<div *ngIf="!getDataService().isLoading" class="container" fxLayout="column" fxLayoutAlign="space-evenly stretch">
 
-      <mat-expansion-panel [expanded]="true">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <span fxFlex>{{ 'PAGES.TRANSFER.HEADINGS.AMOUNT' | translate }}</span>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <mat-panel-description>
-          <div class="form-fields" fxFlex="50">
-            <mat-form-field hintLabel="Max 15 characters" appearance="fill">
-              <mat-label>Amount</mat-label>
-              <input matInput required #label type="number" maxlength="15" placeholder="0.000000">
-              <mat-hint align="end">Amount to Send?</mat-hint>
-            </mat-form-field>
-          </div>
-          <div fxLayout="row" fxFlex="50">
-            <div fxLayout="column" fxFill fxLayoutAlign="center space-evenly" class="button-small-menu">
-              <div fxLayout="row" fxLayoutAlign="center stretch" class="balance">
-                <span class="available">Available Balance:</span> 15,424 CCX
-              </div>
-              <div fxLayout="row" fxLayoutAlign="space-evenly stretch">
-                <button mat-stroked-button color="primary">Send 25%</button>
-                <button mat-stroked-button color="primary">Send 50%</button>
-                <button mat-stroked-button color="primary">Send Max</button>
-              </div>
-            </div>
-          </div>
-        </mat-panel-description>
-      </mat-expansion-panel>
+	<div fxLayout="row" fxLayoutGap="45px">
 
-      <mat-expansion-panel [expanded]="false">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <span fxFlex>{{ 'PAGES.TRANSFER.HEADINGS.RECIPIENT' | translate }}</span>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <mat-panel-description>
-          <div class="form-fields" fxFlex="75">
-            <mat-form-field hintLabel="Max 65 characters" appearance="fill">
-              <mat-label>Address</mat-label>
-              <input matInput required #address maxlength="65" placeholder="CCX Address">
-              <mat-hint align="end">0/65</mat-hint>
-            </mat-form-field>
-            <mat-form-field hintLabel="Max 35 characters" appearance="fill">
-              <mat-label>Payment ID (Optional)</mat-label>
-              <input matInput #address maxlength="35" placeholder="Payment ID">
-              <mat-hint align="end">0/35</mat-hint>
-            </mat-form-field>
-            <p>Please ensure that the Address and the Payment ID (if included) are correct before sending. Funds sent to the wrong address will be lost.</p>
-          </div>
-          <div fxLayout="row" fxFlex="25" class="one">
-            <div fxLayout="column" fxFill fxLayoutAlign="center space-evenly" class="contacts two">
-              <div fxLayout="column" fxFlex="50" fxFill fxLayoutAlign="space-evenly center" class="three">
-                <button mat-stroked-button color="primary" routerLink="/contacts">Select Contact</button>
-                <mat-checkbox color="primary">Save Contact?</mat-checkbox>
-              </div>
-            </div>
-          </div>
-        </mat-panel-description>
-      </mat-expansion-panel>
+		<mat-tab-group>
 
-      <mat-expansion-panel [expanded]="false">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <span fxFlex>{{ 'PAGES.TRANSFER.HEADINGS.MESSAGE' | translate }}</span>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <mat-panel-description>
-          <div class="form-fields">
-            <mat-form-field hintLabel="Max 260 characters" appearance="fill">
-              <mat-label>Message (Optional)</mat-label>
-              <input matInput #message maxlength="260" placeholder="Message">
-              <mat-hint align="end">0/260</mat-hint>
-            </mat-form-field>
-          </div>
-        </mat-panel-description>
-      </mat-expansion-panel>
+			<mat-tab label="Pay">
+				<p class="desc">Pay someone from your wallets.</p>
+				<div fxLayout="row" fxLayoutGap="45px">
+					<div class="content expansion-panel" fxFlex fxLayout="column" fxLayoutAlign="start stretch">
+						<mat-accordion>
+							<mat-expansion-panel id="panel" [expanded]="step === 0" (opened)="setStep(0)">
+								<mat-expansion-panel-header>
+									<mat-panel-title>
+										<span fxFlex>{{ 'PAGES.PAY.HEADINGS.SENDER' | translate }}</span>
+									</mat-panel-title>
+								</mat-expansion-panel-header>
+								<mat-panel-description>
+									<div fxFlex fxLayout="column">
+										<div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+											<div fxFlex fxLayout="column" fxFlex="80">
+												<div class="heading">{{ 'PAGES.PAY.HEADINGS.SENDER' | translate }}</div>
+												<div class="subheading">Please select a wallet to send from and the desired amount to pay.</div>
+											</div>
+											<div class="balance" fxFlex="30">
+												<div class="available">Available Balance</div>
+												<div class="amount">
+													<span>{{getDataService().balance}}</span>
+													<span class="symbol"> CCX</span>
+												</div>
+											</div>
+										</div>
+										<div fxFlex fxLayout="row" fxLayoutAlign="start stretch">
+											<div class="form-fields" fxFlex="35">
+												<mat-form-field fxFlex appearance="fill">
+													<mat-label>From Wallet</mat-label>
+													<span matPrefix>
+														<mat-icon svgIcon="account_balance_wallet"></mat-icon>
+													</span>
+													<mat-select required [(value)]="getDataService().selectedWallet" (selectionChange)="getHelperService().selectedWallet($event.value)">
+														<mat-option [value]="item.key" *ngFor="let item of getDataService().wallets | keyvalue">
+															{{ (item.key.length > 7) ? (item.key | slice:0:7) +'...':(item.key) }}{{ (item.key | slice:-7) }}
+														</mat-option>
+													</mat-select>
+												</mat-form-field>
+											</div>
+											<div class="form-fields" fxFlex="30">
+												<mat-form-field fxFlex appearance="fill">
+													<mat-label>Amount</mat-label>
+													<input matInput required #amount type="number" [value]="getDataService().sendAmount">
+													<span matSuffix>CCX</span>
+												</mat-form-field>
+											</div>
+											<div class="buttons" fxFlex="30" fxFlexOffset="5">
+												<div fxLayout="row" fxFill fxLayoutGap="10px">
+														<button mat-stroked-button aria-hidden="false" aria-label="Add 25% of balance" matTooltip="Add 25% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().percentageOfBalance(25)">25%</button>
+														<button mat-stroked-button aria-hidden="false" aria-label="Add 50% of balance" matTooltip="Add 50% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().percentageOfBalance(50)">50%</button>
+														<button mat-stroked-button aria-hidden="false" aria-label="Add 100% of balance" matTooltip="Add 100% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().percentageOfBalance(100)">Max</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</mat-panel-description>
+								<mat-action-row>
+									<button class="triggers" mat-button color="primary" (click)="nextStep()">Next</button>
+								</mat-action-row>
+							</mat-expansion-panel>
+							<mat-expansion-panel id="panel" [expanded]="step === 1" (opened)="setStep(1)">
+								<mat-expansion-panel-header>
+									<mat-panel-title>
+										<span fxFlex>{{ 'PAGES.PAY.HEADINGS.RECIPIENT' | translate }}</span>
+									</mat-panel-title>
+								</mat-expansion-panel-header>
+								<mat-panel-description>
+									<div fxFlex fxLayout="column">
+										<div fxFlex fxLayout="row" fxLayoutAlign="start">
+											<div fxFlex="100" fxLayout="column" fxLayoutAlign="start">
+												<div class="heading">{{ 'PAGES.PAY.HEADINGS.RECIPIENT' | translate }}</div>
+												<div class="subheading">Please ensure that the Address and the Payment ID (if included) are correct before sending. Funds sent to the wrong address will be lost.</div>
+											</div>
+										</div>
+										<div fxLayout="row" fxFlex fxLayoutAlign="start stretch" fxLayoutGap="15px">
+											<div class="form-fields" fxFlex="80" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="24px">
+												<mat-form-field hintLabel="Max 65 characters" appearance="fill">
+													<mat-label>Address</mat-label>
+													<input matInput required #address type="text" maxlength="65" placeholder="CCX Address">
+													<mat-icon class="icon-button" matSuffix svgIcon="contacts" matTooltip="Select from contacts" matTooltipPosition="below" matTooltipClass="custom-tooltip" routerLink="/contacts"></mat-icon>
+													<mat-hint align="end">{{address.value.length}} / 65</mat-hint>
+												</mat-form-field>
+												<mat-form-field hintLabel="Max 35 characters" appearance="fill">
+													<mat-label>Payment ID (Optional)</mat-label>
+													<input matInput #payid type="text" maxlength="35" placeholder="Payment ID">
+													<mat-hint align="end">{{payid.value.length}} / 35</mat-hint>
+												</mat-form-field>
+											</div>
+											<div class="form-fields" fxFlex="40" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="15px">
+												<mat-form-field hintLabel="Max 260 characters" appearance="fill">
+													<mat-label>Message (Optional)</mat-label>
+													<textarea rows="7" matInput #message type="text" maxlength="260" placeholder="Message"></textarea>
+													<mat-hint align="end">{{message.value.length}} / 260</mat-hint>
+												</mat-form-field>
+											</div>
+										</div>
+									</div>
+								</mat-panel-description>
+								<mat-action-row>
+									<button class="triggers" mat-button color="primary" (click)="prevStep()">Back</button>
+								</mat-action-row>
+							</mat-expansion-panel>
+						</mat-accordion>
+					</div>
+				</div>
+			</mat-tab>
 
-    </mat-accordion>
-  </div>
-  <div class="side" fxFlex="20" fxLayout="column" fxLayoutAlign="start start">
-    <div fxLayout="row">
-      <div class="button-menu" fxLayout="column">
-        <button mat-stroked-button color="warn" aria-hidden="false" aria-label="reset">Cancel</button>
-        <button mat-stroked-button aria-hidden="false" aria-label="reset">Clear</button>
-        <button mat-stroked-button color="primary" aria-hidden="false" aria-label="continue">Send</button>
-      </div>
-    </div>
-  </div>
+			<mat-tab label="Transfer">
+				<p class="desc">Transfer between your wallets.</p>
+				<div fxLayout="row" fxLayoutGap="45px">
+					<div class="content expansion-panel" fxFlex fxLayout="column" fxLayoutAlign="start stretch">
+						<mat-accordion>
+							<!-- panel 1 -->
+							<mat-expansion-panel id="panel" [expanded]="step === 0" (opened)="setStep(0)">
+								<mat-expansion-panel-header>
+									<mat-panel-title>
+										<span fxFlex>{{ 'PAGES.TRANSFER.HEADINGS.SENDER' | translate }}</span>
+									</mat-panel-title>
+								</mat-expansion-panel-header>
+								<mat-panel-description>
+									<div fxFlex fxLayout="column">
+										<div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+											<div fxFlex fxLayout="column" fxFlex="80">
+												<div class="heading">{{ 'PAGES.TRANSFER.HEADINGS.SENDER' | translate }}</div>
+												<div class="subheading">Please select the wallet you want the fund transfer from.</div>
+											</div>
+											<div class="balance" fxFlex="30">
+												<div class="available">Available Balance</div>
+												<div class="amount">
+													<span>{{getDataService().balance}}</span>
+													<span class="symbol"> CCX</span>
+												</div>
+											</div>
+										</div>
+										<div fxFlex fxLayout="row" fxLayoutAlign="start stretch">
+											<div class="form-fields" fxFlex="35">
+												<mat-form-field fxFlex appearance="fill">
+													<mat-label>From Wallet</mat-label>
+													<span matPrefix>
+														<mat-icon svgIcon="account_balance_wallet"></mat-icon>
+													</span>
+													<mat-select required [(value)]="getDataService().selectedWallet" (selectionChange)="getHelperService().selectedWallet($event.value)">
+														<mat-option [value]="item.key" *ngFor="let item of getDataService().wallets | keyvalue">
+															{{ (item.key.length > 7) ? (item.key | slice:0:7) +'...':(item.key) }}{{ (item.key | slice:-7) }}
+														</mat-option>
+													</mat-select>
+												</mat-form-field>
+											</div>
+											<div class="form-fields" fxFlex="30">
+												<mat-form-field fxFlex appearance="fill">
+													<mat-label>Amount</mat-label>
+													<input matInput required #amount type="number" [value]="getDataService().sendAmount">
+													<span matSuffix>CCX</span>
+												</mat-form-field>
+											</div>
+											<div class="buttons" fxFlex="30" fxFlexOffset="5">
+												<div fxLayout="row" fxFill fxLayoutGap="10px">
+														<button mat-stroked-button aria-hidden="false" aria-label="Add 25% of balance" matTooltip="Add 25% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().percentageOfBalance(25)">25%</button>
+														<button mat-stroked-button aria-hidden="false" aria-label="Add 50% of balance" matTooltip="Add 50% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().percentageOfBalance(50)">50%</button>
+														<button mat-stroked-button aria-hidden="false" aria-label="Add 100% of balance" matTooltip="Add 100% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().percentageOfBalance(100)">Max</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</mat-panel-description>
+								<mat-action-row>
+									<button class="triggers" mat-button color="primary" (click)="nextStep()">Next</button>
+								</mat-action-row>
+							</mat-expansion-panel>
+							<!-- panel 2 -->
+							<mat-expansion-panel id="panel" [expanded]="step === 1" (opened)="setStep(1)">
+								<mat-expansion-panel-header>
+									<mat-panel-title>
+										<span fxFlex>{{ 'PAGES.TRANSFER.HEADINGS.RECIPIENT' | translate }}</span>
+									</mat-panel-title>
+								</mat-expansion-panel-header>
+								<mat-panel-description>
+									<div fxFlex fxLayout="column">
+										<div fxFlex fxLayout="row" fxLayoutAlign="start">
+											<div fxFlex="100" fxLayout="column" fxLayoutAlign="start">
+												<div class="heading">{{ 'PAGES.TRANSFER.HEADINGS.RECIPIENT' | translate }}</div>
+												<div class="subheading">Please select the wallet you want to funds deposited to.</div>
+											</div>
+										</div>
+										<div fxLayout="row" fxFlex fxLayoutAlign="start stretch" fxLayoutGap="15px">
+											<div class="form-fields" fxFlex="40" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="24px">
+												<mat-form-field fxFlex appearance="fill">
+													<mat-label>To Wallet</mat-label>
+													<span matPrefix>
+														<mat-icon svgIcon="account_balance_wallet"></mat-icon>
+													</span>
+													<mat-select required [(value)]="getDataService().todWallet">
+														<mat-option [value]="item.key" *ngFor="let item of getDataService().wallets | keyvalue">
+															{{ (item.key.length > 7) ? (item.key | slice:0:7) +'...':(item.key) }}{{ (item.key | slice:-7) }}
+														</mat-option>
+													</mat-select>
+												</mat-form-field>
+											</div>
+											<div class="form-fields" fxFlex="80" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="15px">
+												<mat-form-field hintLabel="Max 260 characters" appearance="fill">
+													<mat-label>Message (Optional)</mat-label>
+													<textarea rows="1" matInput #message type="text" maxlength="260" placeholder="Message"></textarea>
+													<mat-hint align="end">{{message.value.length}} / 260</mat-hint>
+												</mat-form-field>
+											</div>
+										</div>
+									</div>
+								</mat-panel-description>
+								<mat-action-row>
+									<button class="triggers" mat-button color="primary" (click)="prevStep()">Back</button>
+								</mat-action-row>
+							</mat-expansion-panel>
+						</mat-accordion>
+					</div>
+				</div>
+			</mat-tab>
+
+		</mat-tab-group>
+
+		<div class="side" fxLayout="column" fxLayoutAlign="center stretch">
+			<div fxLayout="row">
+				<div class="button-menu" fxLayout="column" @stagger2>
+					<button id="button" mat-stroked-button color="warn" aria-hidden="false" aria-label="reset">Cancel</button>
+					<button id="button" mat-stroked-button aria-hidden="false" aria-label="clear">Clear</button>
+					<button id="button" mat-stroked-button color="primary" aria-hidden="false" aria-label="continue">Send</button>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
 </div>

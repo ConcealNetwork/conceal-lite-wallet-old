@@ -21,7 +21,7 @@
       margin-bottom: 0px;
       padding-left: 10px;
       padding-right: 10px;
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
   }
 
@@ -42,6 +42,7 @@
       border-bottom-left-radius: 8px;
       border-bottom-right-radius: 8px;
       .mat-button {
+				opacity: 0.8;
         margin: 0;
         padding-left: 0.8rem;
         padding-right: 0.8rem;

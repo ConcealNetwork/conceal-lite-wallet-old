@@ -16,26 +16,6 @@
 		margin-block-start: 0 !important;
 	}
 
-	.desc {
-		font-size: 0.8rem;
-		color: rgba($color: white, $alpha: 0.7)
-	}
-
-	.mat-tab-label-container {
-		//margin-bottom: 25px;
-		font-size: 2rem;
-		.mat-tab-label {
-			font-size: 1rem;
-			border-top-left-radius: 5px;
-			border-top-right-radius: 5px;
-		}
-		.mat-tab-label-active {
-			color: white;
-			opacity: 1;
-		}
-	}
-
-
 	.content {
 
 		.form-fields, .buttons {

@@ -3,8 +3,7 @@
       "HEADER": {
         "TITLE": "Wallet",
         "DASHBOARD": "Dashboard",
-        "TRANSFER": "Transfer",
-        "ACTIVITY": "Transactions"
+        "TRANSFER": "Pay & Transfer"
       },
       "FOOTER": {
         "WALLET": "Cloud Wallet",
@@ -19,14 +18,20 @@
         "PORTFOLIO": "Your Portfolio",
         "WALLETS": "Your Wallets",
         "ACTIVITY": "Recent Activity",
-        "MARKET": "Market"
+        "MARKET": "Market Data"
 			},
 			"TRANSFER": {
-        "TITLE": "Transfer Funds",
+        "TITLE": "Transfer",
         "HEADINGS": {
-          "AMOUNT": "Amount",
-          "RECIPIENT": "Recipient",
-          "MESSAGE": "Message"
+          "SENDER": "From Wallet",
+          "RECIPIENT": "To Wallet"
+        }
+			},
+			"PAY": {
+        "TITLE": "Pay Someone",
+        "HEADINGS": {
+          "SENDER": "Origin",
+          "RECIPIENT": "Destination"
         }
 			},
 			"ACTIVITY": {

@@ -1,5 +1,6 @@
 // Angular Core
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 // 3rd Party
 import * as moment from 'moment';
@@ -20,7 +21,8 @@ export class HelperService {
 		private electronService: ElectronService,
 		private cloudService: CloudService,
 		private dataService: DataService,
-		private snackbarService: SnackbarService
+		private snackbarService: SnackbarService,
+		private router: Router
 	) { }
 
 		getMarket() {
@@ -45,20 +47,23 @@ export class HelperService {
 			this.dataService.isWalletLoading = true;
 			this.cloudService.getWalletsData().subscribe((data) => {
 				if (data['result'] === 'success') {
+
 					this.dataService.height = data['message'].height;
 					this.dataService.wallets = data['message'].wallets;
+
 					this.dataService.walletCount = Object.keys(this.dataService.wallets).length;
 					this.dataService.available = Object.keys(this.dataService.wallets).reduce((acc, curr) => acc + this.dataService.wallets[curr].balance + this.dataService.wallets[curr].locked || acc, 0);
 					this.dataService.pending = Object.keys(this.dataService.wallets).reduce((acc, curr) => acc + this.dataService.wallets[curr].locked || acc, 0);
 					this.dataService.withdrawable = Object.keys(this.dataService.wallets).reduce((acc, curr) => acc + this.dataService.wallets[curr].balance || acc, 0);
 					this.dataService.transactionCount = Object.keys(this.dataService.wallets).reduce((acc, curr) => acc + this.dataService.wallets[curr].transactions.length || acc, 0);
+
 					this.cloudService.getPrices('btc').subscribe((data) => {
-						this.dataService.btcPrice = data['conceal'].btc;
-						this.dataService.portfolioBTC = (this.dataService.btcPrice * this.dataService.available);
+						this.dataService.priceBTC = data['conceal'].btc;
+						this.dataService.portfolioBTC = (this.dataService.priceBTC * this.dataService.available);
 					})
 					this.cloudService.getPrices('usd').subscribe((data) => {
-						this.dataService.usdPrice = data['conceal'].usd;
-						this.dataService.portfolioUSD = (this.dataService.usdPrice * this.dataService.available);
+						this.dataService.priceUSD = data['conceal'].usd;
+						this.dataService.portfolioUSD = (this.dataService.priceUSD * this.dataService.available);
 					})
 					this.dataService.isLoading = false;
 					this.dataService.isWalletLoading = false;
@@ -70,20 +75,23 @@ export class HelperService {
 			this.dataService.isWalletLoading = true;
 			this.cloudService.getWalletsData().subscribe((data) => {
 				if (data['result'] === 'success') {
+
 					this.dataService.height = data['message'].height;
 					this.dataService.wallets = data['message'].wallets;
+
 					this.dataService.walletCount = Object.keys(this.dataService.wallets).length;
 					this.dataService.available = Object.keys(this.dataService.wallets).reduce((acc, curr) => acc + this.dataService.wallets[curr].balance + this.dataService.wallets[curr].locked || acc, 0);
 					this.dataService.pending = Object.keys(this.dataService.wallets).reduce((acc, curr) => acc + this.dataService.wallets[curr].locked || acc, 0);
 					this.dataService.withdrawable = Object.keys(this.dataService.wallets).reduce((acc, curr) => acc + this.dataService.wallets[curr].balance || acc, 0);
 					this.dataService.transactionCount = Object.keys(this.dataService.wallets).reduce((acc, curr) => acc + this.dataService.wallets[curr].transactions.length || acc, 0);
+
 					this.cloudService.getPrices('btc').subscribe((data) => {
-						this.dataService.btcPrice = data['conceal'].btc;
-						this.dataService.portfolioBTC = (this.dataService.btcPrice * this.dataService.available);
+						this.dataService.priceBTC = data['conceal'].btc;
+						this.dataService.portfolioBTC = (this.dataService.priceBTC * this.dataService.available);
 					})
 					this.cloudService.getPrices('usd').subscribe((data) => {
-						this.dataService.usdPrice = data['conceal'].usd;
-						this.dataService.portfolioUSD = (this.dataService.usdPrice * this.dataService.available);
+						this.dataService.priceUSD = data['conceal'].usd;
+						this.dataService.portfolioUSD = (this.dataService.priceUSD * this.dataService.available);
 					})
 					this.dataService.isWalletLoading = false;
 					this.dataService.isLoading = false;
@@ -97,7 +105,7 @@ export class HelperService {
 				  this.dataService.success = 'Success! Loading keys...';
 					this.dataService.isFormLoading = false;
 					setTimeout(() => {
-				  	this.dataService.haveKeys = true;
+				  	this.dataService.isKeysLoaded = true;
 						this.dataService.keys = data['message'];
 					}, 2000);
 			  } else {
@@ -157,6 +165,21 @@ export class HelperService {
 			this.electronService.clipboard.clear();
 			this.electronService.clipboard.writeText(value);
 			this.snackbarService.openSnackBar(message, 'Dismiss');
+		}
+
+		transferFrom(wallet) {
+			this.dataService.selectedWallet = wallet;
+			this.selectedWallet(wallet);
+			this.router.navigate(['/transfer']);
+		}
+
+		selectedWallet(wallet) {
+			this.dataService.balance = this.dataService.wallets[wallet].balance;
+			this.dataService.sendAmount = 0;
+		}
+
+		percentageOfBalance(percent) {
+			if (this.dataService.balance) this.dataService.sendAmount = ((percent / 100) * this.dataService.balance);
 		}
 
 		formattedStringAmount(amount, currency, symbol): any {

@@ -18,12 +18,7 @@ export class FooterComponent implements OnInit {
 
   // Progress Bar
   color: ThemePalette = 'primary';
-  mode: ProgressBarMode = 'indeterminate';
-
-  constructor (
-		private dataService: DataService,
-		private helperService: HelperService
-	) {	}
+	mode: ProgressBarMode = 'indeterminate';
 
 	getDataService() {
 		return this.dataService;
@@ -32,8 +27,12 @@ export class FooterComponent implements OnInit {
 		return this.helperService;
 	}
 
-  ngOnInit() {
+  constructor (
+		private dataService: DataService,
+		private helperService: HelperService
+	) {	}
 
+  ngOnInit() {
 	}
 
 }

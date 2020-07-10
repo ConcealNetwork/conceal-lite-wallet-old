@@ -6,14 +6,14 @@ import { MatIconRegistry } from '@angular/material/icon';
 
 // Services
 import { AuthService } from '../../shared/services/auth.service';
-import { HelperService } from './../../shared/services/helper.service';
+import { HelperService } from '../../shared/services/helper.service';
 import { DataService } from '../../shared/services/data.service';
 import { DialogService } from '../../shared/services/dialog.service';
 
 @Component({
-	selector: 'app-transfer',
-	templateUrl: './transfer.component.html',
-	styleUrls: ['./transfer.component.scss'],
+	selector: 'app-pay',
+	templateUrl: './pay.component.html',
+	styleUrls: ['./pay.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 	// issue with :enter animations and mat-expansion-panel
   animations: [
@@ -41,7 +41,7 @@ import { DialogService } from '../../shared/services/dialog.service';
 		])
   ]
 })
-export class TransferComponent implements OnInit {
+export class PayComponent implements OnInit {
 
 	step = 0;
 

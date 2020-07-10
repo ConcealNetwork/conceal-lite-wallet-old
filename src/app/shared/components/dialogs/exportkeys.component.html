@@ -1,4 +1,4 @@
-<div class="content" *ngIf="!getDataService().haveKeys">
+<div class="content" *ngIf="!getDataService().isKeysLoaded">
 	<h1 mat-dialog-title class="title">Export Keys</h1>
 	<h2 class="subtitle">Enter you 2FA code to continue</h2>
 	<div class="twofa" mat-dialog-content>
@@ -30,7 +30,7 @@
 	</div>
 </div>
 
-<div class="content" *ngIf="getDataService().haveKeys">
+<div class="content" *ngIf="getDataService().isKeysLoaded">
 	<h1 mat-dialog-title class="title">Your Private Keys</h1>
 	<h2 class="subtitle">Save your keys to a secure location</h2>
 	<div class="keys" mat-dialog-content>
