@@ -5,10 +5,26 @@
 	border-bottom: 0.8px solid rgba(255, 255, 255, 0.08) !important;
 
 	.title {
-   	font-size: 1.3rem;
-    color: orange;
-		margin-left: 10px;
+		font-size: 1.2rem;
+		letter-spacing: 0.02em;
+		margin-left: 15px;
 		margin-right: 25px;
+		text-transform: capitalize;
+		text-shadow: 0 0 80px rgba(255, 255, 255, .5);
+
+		/* Clip Background Image */
+		background: url(assets/images/animated_text_fill.png) repeat-y;
+		-webkit-background-clip: text;
+		background-clip: text;
+
+		/* Animate Background Image */
+		-webkit-text-fill-color: transparent;
+		-webkit-animation: aitf 80s linear infinite;
+
+		/* Activate hardware acceleration for smoother animations */
+		-webkit-transform: translate3d(0, 0, 0);
+		-webkit-backface-visibility: hidden;
+
 	}
 
 	.logo {
@@ -42,13 +58,14 @@
 		user-select: none;
 		margin-left: 5px;
 		margin-right: 5px;
-    	line-height: 1;
+		line-height: 1;
+
 		.mat-icon {
 			margin-left: 1px;
 		}
 	}
 
-  .mat-icon-button.active {
+	.mat-icon-button.active {
 		color: orange;
 	}
 
@@ -72,4 +89,10 @@
 		color: orange;
 	}
 
+}
+
+/* Animate Background Image */
+@-webkit-keyframes aitf {
+	0% { background-position: 0% 50%; }
+	100% { background-position: 100% 50%; }
 }

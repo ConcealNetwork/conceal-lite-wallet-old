@@ -2,15 +2,24 @@
 import { Component, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 // Services
-import { HelperService } from '../../services/helper.service';
-import { DataService } from '../../services/data.service';
+import { HelperService } from '../../../services/helper.service';
+import { DataService } from '../../../services/data.service';
 
 @Component({
-	selector: 'app-exportkeys',
-	templateUrl: './exportkeys.component.html',
-	styleUrls: ['./exportkeys.component.scss']
+	selector: 'app-export',
+	templateUrl: './export.dialog.html',
+	styleUrls: ['./export.dialog.scss'],
+  animations: [
+		trigger('transition', [
+			transition(':enter', [
+				style({ opacity: 0}),
+				animate('0.4s ease-in', style({ opacity: 1}))
+			])
+		])
+	]
 })
 export class ExportKeysDialog {
 

@@ -1,4 +1,4 @@
-<div class="content" *ngIf="!getDataService().isKeysLoaded">
+<div class="content" *ngIf="!getDataService().isKeysLoaded" @transition>
 	<h1 mat-dialog-title class="title">Export Keys</h1>
 	<h2 class="subtitle">Enter you 2FA code to continue</h2>
 	<div class="twofa" mat-dialog-content>
@@ -23,14 +23,14 @@
 			<div class="error" *ngIf="getDataService().error">{{ getDataService().error }}</div>
 			<div class="success" *ngIf="getDataService().success">{{ getDataService().success }}</div>
 			<div class="actions" fxLayout="row" fxLayoutGap="15px">
-				<button mat-stroked-button color="primary" fxFlex="50" type="submit">Submit</button>
 				<button mat-stroked-button color="warn" fxFlex="50" (click)="this.form.reset()">Reset</button>
+				<button mat-stroked-button color="primary" fxFlex="50" type="submit">Submit</button>
 			</div>
 		</form>
 	</div>
 </div>
 
-<div class="content" *ngIf="getDataService().isKeysLoaded">
+<div class="content" *ngIf="getDataService().isKeysLoaded" @transition>
 	<h1 mat-dialog-title class="title">Your Private Keys</h1>
 	<h2 class="subtitle">Save your keys to a secure location</h2>
 	<div class="keys" mat-dialog-content>

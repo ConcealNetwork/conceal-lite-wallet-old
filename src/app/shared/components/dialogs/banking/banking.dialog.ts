@@ -5,8 +5,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 // Dialogs
 @Component({
 	selector: 'app-banking',
-	templateUrl: './banking.component.html',
-	styleUrls: ['./banking.component.scss'],
+	templateUrl: './banking.dialog.html',
+	styleUrls: ['./banking.dialog.scss'],
 })
 export class BankingDialog {
 

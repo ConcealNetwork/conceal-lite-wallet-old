@@ -2,13 +2,14 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
-// Dialogs
-import { QrCodeDialog } from '../components/dialogs/qrcode.component';
-import { NewMessageDialog } from '../components/dialogs/new-message.component';
-import { NewContactDialog } from '../components/dialogs/new-contact.component';
-import { ImportKeysDialog } from '../components/dialogs/importkeys.component';
-import { ExportKeysDialog } from '../components/dialogs/exportkeys.component';
-import { BankingDialog } from '../components/dialogs/banking.component';
+// Dialog Components
+import { ExportKeysDialog } from './../components/dialogs/dashboard/export.dialog';
+import { ImportKeysDialog } from './../components/dialogs/dashboard/import.dialog';
+import { QrCodeDialog } from './../components/dialogs/dashboard/code.dialog';
+import { NewMessageDialog } from './../components/dialogs/messages/new.message.dialog';
+import { NewContactDialog } from './../components/dialogs/contacts/new.contact.dialog';
+import { BankingDialog } from './../components/dialogs/banking/banking.dialog';
+import { TransferDialog } from './../components/dialogs/transfer/transfer.dialog';
 
 // Services
 import { DataService } from '../services/data.service';
@@ -39,7 +40,7 @@ export class DialogService {
 
 	openExportKeysDialog(value): void {
 		const dialogRef = this.dialog.open(ExportKeysDialog, {
-			width: '460px',
+			width: '45%',
 			height: 'auto',
 			data: value,
 		})
@@ -51,7 +52,7 @@ export class DialogService {
 
 	openImportKeysDialog(): void {
 		const dialogRef = this.dialog.open(ImportKeysDialog, {
-			width: '460px',
+			width: '40%',
 			height: 'auto',
 		})
 		dialogRef.afterClosed().subscribe(result => {
@@ -62,7 +63,7 @@ export class DialogService {
 
 	openBankingDialog(): void {
 		const dialogRef = this.dialog.open(BankingDialog, {
-			width: '460px',
+			width: '40%',
 			height: 'auto',
 		})
 		dialogRef.afterClosed().subscribe(result => {
@@ -74,6 +75,18 @@ export class DialogService {
 			width: '45%',
 			height: 'auto',
       data: {address: value.address, message: value.message}
+    })
+    dialogRef.afterClosed().subscribe(result => {
+			this.dataService.success = '';
+			this.dataService.error = '';
+    })
+	}
+
+	openTransferDialog(amount, wallet, address, message?, paymentID?): void {
+    const dialogRef = this.dialog.open(TransferDialog, {
+			width: '45%',
+			height: 'auto',
+      data: {amount: amount, wallet: wallet, address: address, message: message, paymentID: paymentID}
     })
     dialogRef.afterClosed().subscribe(result => {
 			this.dataService.success = '';

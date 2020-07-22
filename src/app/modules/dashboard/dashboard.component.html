@@ -4,71 +4,6 @@
 
 <div *ngIf="!getDataService().isLoading" class="container" fxLayout="column" fxLayoutAlign="space-evenly stretch" @staggerLeft @staggerDown>
 
-  <div fxLayout="row" fxLayoutGap="45px">
-
-    <div fxFlex="100">
-      <h1 id="title" class="title">{{ 'PAGES.DASHBOARD.WALLETS' | translate }}</h1>
-      <div fxLayout="row" fxLayoutGap="25px">
-        <mat-card id="cards" class="cards" fxFlex fxLayout="column" *ngFor="let item of getDataService().wallets | keyvalue">
-          <mat-card-header>
-            <mat-card-title fxLayout="row" fxLayoutAlign="space-between stretch">
-              <div>
-                {{ (item.key.length>7)? (item.key | slice:0:7)+'...':(item.key) }}{{(item.key | slice:-7)}}
-              </div>
-              <div class="icons" fxLayoutGap="0px">
-                <button mat-button mat-icon-button aria-hidden="false" aria-label="Scan QR code" matTooltip="Scan QR code" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getDialogService().openQRCodeDialog(item.key)">
-                  <mat-icon svgIcon="camera_enhance">QR Code</mat-icon>
-								</button>
-								<button mat-button mat-icon-button aria-hidden="false" aria-label="Export private keys" matTooltip="Export private keys" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getDialogService().openExportKeysDialog(item.key)">
-                  <mat-icon svgIcon="lock_open">Export Keys</mat-icon>
-                </button>
-                <button mat-button mat-icon-button aria-hidden="false" aria-label="Copy address" matTooltip="Copy address" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getHelperService().copyToClipboard(item.key, 'Address Copied')">
-                  <mat-icon svgIcon="assignment">Copy</mat-icon>
-                </button>
-              </div>
-            </mat-card-title>
-          </mat-card-header>
-          <mat-card-content fxFlex="auto">
-            <div class="balances" fxLayout="column" fxLayoutAlign="space-evenly stretch">
-              <div class="balance" fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
-                <span class="st">Available</span>
-                <span class="sb">{{ getHelperService().formatAmount(item.value.total, 1, 5) }} <span class="ccx">CCX</span></span>
-              </div>
-              <div class="balance" fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
-                <span class="st">Pending</span>
-                <span class="sb">{{ getHelperService().formatAmount(item.value.locked, 1, 5) }} <span class="ccx">CCX</span></span>
-              </div>
-              <div class="balance" fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
-                <span class="st">Withdrawable</span>
-                <span class="sb">{{ getHelperService().formatAmount(item.value.balance, 1, 5) }} <span class="ccx">CCX</span></span>
-              </div>
-            </div>
-          </mat-card-content>
-          <mat-card-footer>
-            <mat-card-actions fxLayoutAlign="start center">
-              <button mat-button aria-hidden="false" aria-label="Pay someone" matTooltip="Pay someone" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().transferFrom(item.key)">
-                Pay
-              </button>
-              <button mat-button aria-hidden="false" aria-label="Transfer between accounts" matTooltip="Transfer between accounts" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().transferFrom(item.key)">
-                Transfer
-              </button>
-              <button mat-button color="warn" aria-hidden="false" aria-label="Delete wallet" matTooltip="Delete wallet" aria-label="Delete wallet" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().deleteWallet(item.key, item.value.total)">
-                Remove
-              </button>
-            </mat-card-actions>
-          </mat-card-footer>
-        </mat-card>
-        <div class="new" fxFlex fxLayout="column" *ngIf="getDataService().walletCount === 2">
-          <div fxFlex="auto" fxLayoutGap="15px" fxLayout="column" fxLayoutAlign="space-around center">
-            <button id="button" mat-button aria-label="Import wallet from keys" matTooltip="Import wallet from keys" aria-label="Import wallet from keys" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getDialogService().openImportKeysDialog()">Import Wallet</button>
-            <button id="button" mat-button aria-label="Generate a new wallet" matTooltip="Generate a new wallet" aria-label="Generate a new wallet" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().createWallet()">Create Wallet</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
   <div fxLayout="row" fxLayoutGap="25px">
 
 		<div fxFlex="35">
@@ -90,7 +25,7 @@
             </div>
             <div class="balance" fxLayout="row" fxFlex="25" fxLayout="row" fxLayoutAlign="space-between stretch">
               <span class="st">Total Pending</span>
-              <span class="sb">{{getHelperService().formatAmount(getDataService().pending, 1, 5) || 0}} <span class="ccx">CCX</span></span>
+              <span class="sb" [ngClass]="{'locked': (getDataService().pending != 0)}">{{getHelperService().formatAmount(getDataService().pending, 1, 5) || 0}} <span class="ccx">CCX</span></span>
             </div>
             <div class="balance" fxLayout="row" fxFlex="25" fxLayout="row" fxLayoutAlign="space-between stretch">
               <span class="st">Total Withdrawable</span>
@@ -130,5 +65,70 @@
 		</div>
 
 	</div>
+
+	<div fxLayout="row" fxLayoutGap="45px">
+
+    <div fxFlex="100">
+      <h1 id="title" class="title">{{ 'PAGES.DASHBOARD.WALLETS' | translate }}</h1>
+      <div class="walletRow" fxLayout="row" fxLayoutGap="25px">
+        <mat-card id="cards" class="cards walletCard" fxFlex fxLayout="column" *ngFor="let item of getDataService().wallets | keyvalue">
+          <mat-card-header>
+            <mat-card-title fxLayout="row" fxLayoutAlign="space-between stretch">
+              <div>
+                {{ (item.key.length>7)? (item.key | slice:0:7)+'...':(item.key) }}{{(item.key | slice:-7)}}
+              </div>
+              <div class="icons" fxLayoutGap="0px">
+                <button mat-button mat-icon-button aria-hidden="false" aria-label="Scan QR code" matTooltip="Scan QR code" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getDialogService().openQRCodeDialog(item.key)">
+                  <mat-icon svgIcon="camera_enhance">QR Code</mat-icon>
+								</button>
+								<button mat-button mat-icon-button aria-hidden="false" aria-label="Export private keys" matTooltip="Export private keys" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getDialogService().openExportKeysDialog(item.key)">
+                  <mat-icon svgIcon="lock_open">Export Keys</mat-icon>
+                </button>
+                <button mat-button mat-icon-button aria-hidden="false" aria-label="Copy address" matTooltip="Copy address" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getHelperService().copyToClipboard(item.key, 'Address Copied')">
+                  <mat-icon svgIcon="assignment">Copy</mat-icon>
+                </button>
+              </div>
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content fxFlex="auto">
+            <div class="balances" fxLayout="column" fxLayoutAlign="space-evenly stretch">
+              <div class="balance" fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
+                <span class="st">Available</span>
+                <span class="sb">{{ getHelperService().formatAmount(item.value.total, 1, 5) }} <span class="ccx">CCX</span></span>
+              </div>
+              <div class="balance" fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
+                <span class="st">Pending</span>
+                <span class="sb" [ngClass]="{'locked': (item.value.locked != 0)}">{{ getHelperService().formatAmount(item.value.locked, 1, 5) }} <span class="ccx">CCX</span></span>
+              </div>
+              <div class="balance" fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
+                <span class="st">Withdrawable</span>
+                <span class="sb">{{ getHelperService().formatAmount(item.value.balance, 1, 5) }} <span class="ccx">CCX</span></span>
+              </div>
+            </div>
+          </mat-card-content>
+          <mat-card-footer>
+            <mat-card-actions fxLayoutAlign="start center">
+              <button mat-button aria-hidden="false" aria-label="Pay someone" matTooltip="Pay someone" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().transferFrom(item.key, 0)">
+                Pay
+              </button>
+              <button mat-button aria-hidden="false" aria-label="Transfer between accounts" matTooltip="Transfer between accounts" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().transferFrom(item.key, 1)">
+                Transfer
+              </button>
+              <button mat-button color="warn" aria-hidden="false" aria-label="Delete wallet" matTooltip="Delete wallet" aria-label="Delete wallet" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().deleteWallet(item.key, item.value.total)">
+                Remove
+              </button>
+            </mat-card-actions>
+          </mat-card-footer>
+        </mat-card>
+        <div class="new walletCard" fxFlex fxLayout="column" *ngIf="getDataService().walletCount <= 6">
+          <div fxFlex="auto" fxLayoutGap="15px" fxLayout="column" fxLayoutAlign="space-around center">
+            <button id="button" mat-button aria-label="Import wallet from keys" matTooltip="Import wallet from keys" aria-label="Import wallet from keys" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getDialogService().openImportKeysDialog()">Import Wallet</button>
+            <button id="button" mat-button aria-label="Generate a new wallet" matTooltip="Generate a new wallet" aria-label="Generate a new wallet" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().createWallet()">Create Wallet</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 
 </div>

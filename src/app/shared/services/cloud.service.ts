@@ -49,4 +49,20 @@ export class CloudService {
 		return this.http.post(`${this.api}/wallet/import`, privateSpendKey);
 	};
 
+	createTransaction(amount, wallet, address, paymentID, message, code) {
+		let client = '';
+		let ref = '';
+    const body = {
+      amount: parseFloat(amount),
+			wallet,  		// origin
+			address,  	// destination
+			paymentID, 	// destination ID
+			message, 		// message
+			code,				// 2FA code
+			client,			// Client not used
+			ref					// Ref not used
+    };
+		return this.http.put(`${this.api}/wallet`, JSON.stringify(body));
+  };
+
 }

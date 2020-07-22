@@ -1,6 +1,6 @@
 // Angular
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
 
@@ -13,37 +13,12 @@ import { DialogService } from '../../shared/services/dialog.service';
 @Component({
 	selector: 'app-transfer',
 	templateUrl: './transfer.component.html',
-	styleUrls: ['./transfer.component.scss'],
-	encapsulation: ViewEncapsulation.None,
-	// issue with :enter animations and mat-expansion-panel
-  animations: [
-		// trigger('stagger1', [
-		// 	transition(':enter', [
-		// 		query('#panel', style({ opacity: 0, transform: 'translateX(-40px)' }), {optional: true}),
-		// 		query('#panel', stagger('300ms', [
-		// 			animate('400ms 0.35s ease-out', style({ opacity: 1, transform: 'translateX(0)' })),
-		// 		]), {optional: true}),
-		// 		query('#panel', [
-		// 			animate(1000, style('*'))
-		// 		], {optional: true})
-		// 	])
-		// ]),
-		trigger('stagger2', [
-			transition(':enter', [
-				query('#title, #button', style({ opacity: 0, transform: 'translateY(-40px)' }), {optional: true}),
-				query('#title, #button', stagger('300ms', [
-					animate('400ms 0.35s ease-out', style({ opacity: 1, transform: 'translateY(0)' })),
-				]), {optional: true}),
-				query('#title, #button', [
-					animate(1000, style('*'))
-				], {optional: true})
-			])
-		])
-  ]
+	styleUrls: ['./transfer.component.scss']
 })
 export class TransferComponent implements OnInit {
 
-	step = 0;
+	step: number = 0;
+	walletsValid: boolean = true;
 
   setStep(index: number) {
     this.step = index;
@@ -55,7 +30,49 @@ export class TransferComponent implements OnInit {
 
   prevStep() {
     this.step--;
-  }
+	}
+
+	pay: FormGroup = new FormGroup({
+		amountFormControl: new FormControl('', [
+			Validators.pattern('^[0-9]+\.?[0-9]*$'),
+			Validators.required,
+		]),
+		walletFormControl: new FormControl('', [
+			Validators.required,
+		]),
+		toaddressFormControl: new FormControl('', [
+			Validators.required,
+			Validators.minLength(65),
+			Validators.maxLength(65),
+			this.matches.bind(this),
+		]),
+		paymentidFormControl: new FormControl('', [
+			Validators.minLength(35),
+			Validators.maxLength(35),
+		]),
+		messageFormControl: new FormControl('', [
+			Validators.minLength(1),
+			Validators.maxLength(260),
+		]),
+	});
+
+	transfer: FormGroup = new FormGroup({
+		amountFormControl: new FormControl('', [
+			Validators.pattern('^[0-9]+\.?[0-9]*$'),
+			Validators.required,
+		]),
+		walletFormControl: new FormControl('', [
+			Validators.required,
+		]),
+		toaddressFormControl: new FormControl('', [
+			Validators.required,
+			this.matches.bind(this),
+		]),
+		messageFormControl: new FormControl('', [
+			Validators.minLength(1),
+			Validators.maxLength(260),
+		]),
+	});
 
 	constructor (
 		private authService: AuthService,
@@ -83,11 +100,55 @@ export class TransferComponent implements OnInit {
 		return this.dataService;
 	}
 
+	setAmount(value) {
+		this.getHelperService().percentageOfBalance(value);
+		this.transfer.controls.amountFormControl.patchValue(this.dataService.sendAmount, { emitEvent: true });
+		this.pay.controls.amountFormControl.patchValue(this.dataService.sendAmount, { emitEvent: true });
+	}
+
+	submit() {
+		if (this.transfer.valid) {
+			this.getDialogService().openTransferDialog (
+				this.transfer.value.amountFormControl,
+				this.transfer.value.walletFormControl,
+				this.transfer.value.toaddressFormControl,
+				this.transfer.value?.messageFormControl,
+			)
+		}
+		else if (this.pay.valid) {
+			this.getDialogService().openTransferDialog (
+				this.pay.value.amountFormControl,
+				this.pay.value.walletFormControl,
+				this.pay.value.toaddressFormControl,
+				this.pay.value?.messageFormControl,
+				this.pay.value?.paymentidFormControl,
+			)
+		}
+		else {
+			this.getHelperService().createSnackbar('Issues detected, please review selection.')
+		}
+	}
+
 	ngOnInit(): void {
 		this.helperService.getMarket();
 		this.helperService.getWallets();
 		this.dataService.isLoggedIn = this.authService.loggedIn();
 		this.dataService.sendAmount = 0;
+		if (this.dataService.selectedWallet) {
+			this.transfer.controls.walletFormControl.patchValue(this.dataService.selectedWallet, { emitEvent: true });
+			this.pay.controls.walletFormControl.patchValue(this.dataService.selectedWallet, { emitEvent: true });
+		}
+	}
+
+	// custom validator
+	private matches(control: FormControl): { [s: string]: boolean } {
+		if (this.transfer && (control.value == this.transfer.controls.walletFormControl.value)) {
+			return { match: true };
+		}
+		if (this.pay && (control.value == this.pay.controls.walletFormControl.value)) {
+			return { match: true };
+		}
+		return null;
 	}
 
 }

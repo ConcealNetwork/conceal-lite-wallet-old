@@ -3,9 +3,9 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
-  selector: 'new-message',
-  templateUrl: './new-message.component.html',
-  styleUrls: ['./new-message.component.scss'],
+  selector: 'app-new-message',
+  templateUrl: './new.message.dialog.html',
+  styleUrls: ['./new.message.dialog.scss'],
 })
 export class NewMessageDialog {
 

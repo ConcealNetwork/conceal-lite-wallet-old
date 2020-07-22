@@ -38,7 +38,6 @@ export class DataService {
 	// Wallet Data
 	wallets: Wallets;
 	height: Height;
-
 	available: number;
 	pending: number;
 	withdrawable: number;
@@ -54,9 +53,12 @@ export class DataService {
 	error: string;
 
 	// Transfer Data
+	selectedTab: number = 0;
 	selectedWallet: any;
 	todWallet: any;
 	sendAmount: number = 0;
 	balance: number = 0;
+	toBalance: number = 0;
+	fee: number = 0.001000;
 
 }

@@ -10,6 +10,15 @@
 	margin-left: auto;
 	margin-right: auto;
 
+	.walletRow {
+		overflow-x: auto;
+		scroll-behavior: smooth;
+		padding-bottom: 15px;
+		.walletCard {
+			min-width: 367px;
+		}
+	}
+
 	.title {
 		font-size: 1.5rem;
 		line-height: 1;
@@ -75,6 +84,10 @@
 			color: #c4c4c4;
 		}
 
+		.locked {
+			color: #f18787 !important;
+		}
+
 		.ccx {
 			color: #fff;
 		}
@@ -119,14 +132,6 @@
 		}
 	}
 
-}
-
-.notify {
-	background: #111;
-	border: 1px solid orange;
-	font-size: 0.1rem;
-	color: #fff;
-	text-overflow: wrap;
 }
 
 .mat-dialog-container {

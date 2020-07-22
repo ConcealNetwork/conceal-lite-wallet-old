@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // NG Translate
 import { TranslateModule } from '@ngx-translate/core';
@@ -39,12 +40,13 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 
 // Dialog Components
-import { ExportKeysDialog } from './components/dialogs/exportkeys.component';
-import { ImportKeysDialog } from './components/dialogs/importkeys.component';
-import { QrCodeDialog } from './components/dialogs/qrcode.component';
-import { NewMessageDialog } from './components/dialogs/new-message.component';
-import { NewContactDialog } from './components/dialogs/new-contact.component';
-import { BankingDialog } from './components/dialogs/banking.component';
+import { ExportKeysDialog } from './components/dialogs/dashboard/export.dialog';
+import { ImportKeysDialog } from './components/dialogs/dashboard/import.dialog';
+import { QrCodeDialog } from './components/dialogs/dashboard/code.dialog';
+import { NewMessageDialog } from './components/dialogs/messages/new.message.dialog';
+import { NewContactDialog } from './components/dialogs/contacts/new.contact.dialog';
+import { BankingDialog } from './components/dialogs/banking/banking.dialog';
+import { TransferDialog } from './components/dialogs/transfer/transfer.dialog';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,8 @@ import { BankingDialog } from './components/dialogs/banking.component';
 		QrCodeDialog,
 		NewMessageDialog,
 		NewContactDialog,
-		BankingDialog
+		BankingDialog,
+		TransferDialog
   ],
   imports: [
     CommonModule,
@@ -68,6 +71,7 @@ import { BankingDialog } from './components/dialogs/banking.component';
     TranslateModule,
 		FormsModule,
 		ReactiveFormsModule,
+		BrowserAnimationsModule,
     A11yModule,
     LayoutModule,
     ObserversModule,
@@ -89,8 +93,6 @@ import { BankingDialog } from './components/dialogs/banking.component';
     TranslateModule,
     WebviewDirective,
     ParticlesDirective,
-		FormsModule,
-		ReactiveFormsModule,
     LoaderComponent,
     BackgroundComponent,
     HeaderComponent,

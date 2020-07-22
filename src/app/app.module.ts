@@ -85,7 +85,6 @@ import { AuthComponent } from './modules/auth/auth.component';
 import { MessagingComponent } from './modules/messaging/messaging.component';
 import { SettingsComponent } from './modules/settings/settings.component';
 import { TransferComponent } from './modules/transfer/transfer.component';
-import { PayComponent } from './modules/pay/pay.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -106,7 +105,6 @@ export function tokenGetter() {
 		MessagingComponent,
     SettingsComponent,
 		TransferComponent,
-		PayComponent,
   ],
   imports: [
     BrowserModule,

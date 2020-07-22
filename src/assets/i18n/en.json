@@ -1,7 +1,7 @@
 {
   "PAGES": {
       "HEADER": {
-        "TITLE": "Wallet",
+        "TITLE": "Lite Wallet",
         "DASHBOARD": "Dashboard",
         "TRANSFER": "Pay & Transfer"
       },
@@ -13,7 +13,7 @@
       },
       "DASHBOARD": {
         "TITLE": "Dashboard",
-        "BALANCE": "Balance",
+        "BALANCE": "Combined Balance",
         "ADDRESS": "Address",
         "PORTFOLIO": "Your Portfolio",
         "WALLETS": "Your Wallets",

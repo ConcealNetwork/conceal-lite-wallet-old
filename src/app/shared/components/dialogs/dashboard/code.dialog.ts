@@ -4,9 +4,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 // Dialogs
 @Component({
-	selector: 'app-qrcode',
-	templateUrl: './qrcode.component.html',
-	styleUrls: ['./qrcode.component.scss'],
+	selector: 'app-code',
+	templateUrl: './code.dialog.html',
+	styleUrls: ['./code.dialog.scss'],
 })
 export class QrCodeDialog {
 

@@ -1,0 +1,100 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+
+	<div id="panel" class="content" *ngIf="!confirmed" @transition>
+
+		<h1 mat-dialog-title class="title">Confirmation</h1>
+		<h2 class="subtitle">Please review and confirm your transaction</h2>
+
+		<div mat-dialog-content fxLayout="column">
+			<div fxFlex="100" fxLayout="row" fxLayoutGap="15px">
+				<div fxFlex="30" fxLayout="column">
+					<mat-form-field appearance="fill">
+						<mat-label>Amount</mat-label>
+						<input matInput formControlName="amountFormControl">
+						<span matSuffix>CCX</span>
+					</mat-form-field>
+				</div>
+				<div fxFlex="70" fxLayout="column">
+					<mat-form-field appearance="fill">
+						<mat-label>From Wallet</mat-label>
+						<input matInput formControlName="walletFormControl">
+					</mat-form-field>
+				</div>
+			</div>
+			<div fxFlex="100" fxLayout="row" fxLayoutGap="15px">
+				<div fxFlex="100" fxLayout="column">
+					<mat-form-field appearance="fill">
+						<mat-label>To Address</mat-label>
+						<input matInput formControlName="toaddressFormControl">
+					</mat-form-field>
+				</div>
+			</div>
+			<div fxFlex="100" fxLayout="row" fxLayoutGap="15px" *ngIf="data.paymentID">
+				<div fxFlex="100" fxLayout="column">
+					<mat-form-field appearance="fill">
+						<mat-label>Payment ID</mat-label>
+						<input matInput formControlName="paymentidFormControl">
+					</mat-form-field>
+				</div>
+			</div>
+			<div fxFlex="100" fxLayout="row" fxLayoutGap="15px" *ngIf="data.message">
+				<div fxFlex="100" fxLayout="column">
+					<mat-form-field appearance="fill">
+						<mat-label>Message</mat-label>
+						<textarea rows="2" matInput formControlName="messageFormControl"></textarea>
+					</mat-form-field>
+				</div>
+			</div>
+		</div>
+
+		<div class="actions" fxLayout="row" fxLayoutGap="15px">
+			<button mat-stroked-button color="warn" fxFlex="50" type="button" (click)="close()">Cancel</button>
+			<button mat-stroked-button color="primary" fxFlex="50" type="button" (click)="confirmed=true">Confirm</button>
+		</div>
+
+	</div>
+
+	<div id="panel" class="content" *ngIf="confirmed" @transition>
+
+		<h1 mat-dialog-title class="title">Authorization</h1>
+		<h2 class="subtitle">Please enter your 2FA code to authorize your transaction</h2>
+
+		<div mat-dialog-content fxLayout="column">
+			<div class="send" fxFlex="100" fxLayout="row" fxLayoutGap="15px">
+				<div fxFlex="40" fxLayout="column">
+					<mat-form-field appearance="fill">
+						<mat-label>Transaction Fee</mat-label>
+						<input matInput formControlName="feeFormControl">
+						<span matSuffix>CCX</span>
+					</mat-form-field>
+				</div>
+				<div fxFlex="60" fxLayout="column">
+					<mat-form-field fxFill hintLabel="6 Numbers" appearance="fill">
+						<mat-label>2FA Code</mat-label>
+						<input #twofa matInput minlength="6" maxlength="6" placeholder="00000" formControlName="twofaFormControl">
+						<mat-hint align="end">{{twofa.value?.length || 0}}/6</mat-hint>
+						<mat-error *ngIf="form.controls.twofaFormControl.hasError('minlength') || form.controls.twofaFormControl.hasError('maxlength')">
+							2FA code should be <strong>6 numbers</strong>
+						</mat-error>
+						<mat-error *ngIf="form.controls.twofaFormControl.hasError('pattern')">
+							2FA code should be <strong>numbers only</strong>
+						</mat-error>
+						<mat-error *ngIf="form.controls.twofaFormControl.hasError('required')">
+							2FA Code is <strong>required</strong>
+						</mat-error>
+					</mat-form-field>
+				</div>
+			</div>
+			<div class="progress" *ngIf="getDataService().isFormLoading"><mat-progress-bar mode="query"></mat-progress-bar></div>
+			<div class="error" *ngIf="getDataService().error">{{ getDataService().error }}</div>
+			<div class="success" *ngIf="getDataService().success">{{ getDataService().success }}</div>
+			<div class="actions" fxLayout="row" fxLayoutGap="15px">
+				<button mat-stroked-button fxFlex="25" type="button" (click)="confirmed=false">Review</button>
+				<button mat-stroked-button color="warn" fxFlex="35" type="button" (click)="close()">Cancel</button>
+				<button mat-stroked-button color="primary" fxFlex="40" type="submit">Authorise</button>
+			</div>
+		</div>
+
+	</div>
+
+</form>
