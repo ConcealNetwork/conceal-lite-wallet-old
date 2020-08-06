@@ -120,7 +120,7 @@
             </mat-card-actions>
           </mat-card-footer>
         </mat-card>
-        <div class="new walletCard" fxFlex fxLayout="column" *ngIf="getDataService().walletCount <= 6">
+        <div class="new walletCard" fxFlex fxLayout="column" *ngIf="getDataService().walletCount <= 2">
           <div fxFlex="auto" fxLayoutGap="15px" fxLayout="column" fxLayoutAlign="space-around center">
             <button id="button" mat-button aria-label="Import wallet from keys" matTooltip="Import wallet from keys" aria-label="Import wallet from keys" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getDialogService().openImportKeysDialog()">Import Wallet</button>
             <button id="button" mat-button aria-label="Generate a new wallet" matTooltip="Generate a new wallet" aria-label="Generate a new wallet" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().createWallet()">Create Wallet</button>

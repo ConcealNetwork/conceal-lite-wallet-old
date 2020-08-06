@@ -1,14 +1,22 @@
+// Angular
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
+// Services
+import { AuthService } from '../../shared/services/auth.service';
+import { HelperService } from './../../shared/services/helper.service';
+import { DataService } from '../../shared/services/data.service';
+
 export interface Transactions {
-  date: string;
-  amount: number;
-  fee: number;
-  height: number;
+	type: string;
+	status: string;
+	amount: number;
+	fee: number;
+	timestamp: string;
+	address: string;
 }
 
 @Component({
@@ -47,48 +55,45 @@ export class ActivityComponent implements OnInit {
   pageEvent: PageEvent;
   pageSize: Number = 10;
   pageSizeOptions: number[] = [5, 10, 25, 100];
-  displayedColumns: string[] = ['date', 'amount', 'fee', 'height'];
-  dataSource: MatTableDataSource<Transactions>;
+  displayedColumns: string[] = ['type', 'status', 'amount', 'fee', 'timestamp', 'address'];
+	dataSource: MatTableDataSource<Transactions>;
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
 
-	isLoading: boolean = true;
+	constructor(
+		private authService: AuthService,
+		private helperService: HelperService,
+		private dataService: DataService,
+	) {
+		this.helperService.getTransactions();
+		setTimeout(() => {
+			// Assign the data to the data source for the table to render
+			this.dataSource = new MatTableDataSource(this.dataService.transactions);
+			this.dataSource.paginator = this.paginator;
+			this.dataSource.sort = this.sort;
+		}, 1500);
+	}
 
-	constructor() {
-    // Create 100 users
-    const transactions = Array.from({length: 100}, (_, k) => this.createTransactions(k + 1));
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(transactions);
-  }
+	// Get Services
+	getHelperService() {
+		return this.helperService;
+	}
+	getDataService() {
+		return this.dataService;
+	}
 
 	ngOnInit(): void {
-    this.isLoading = false;
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-  
+		this.dataService.isLoggedIn = this.authService.loggedIn();
+	}
+
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-  }
-
-  randomDate(start, end) {
-    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())).toISOString().slice(0,10);
-  } 
-
-  /** Builds and returns a new User. */
-  createTransactions(date: number): Transactions {
-    return {
-      date: this.randomDate(new Date(2012, 0, 1), new Date()),
-      amount: Math.floor(Math.random() * 16) + 5,
-      fee: Math.floor(Math.random() * (1 - 0.0001 + 1)) + 0.0001,
-      height: Math.floor(Math.random() * (557352 - 457352 + 1)) + 457352
-    };
-
   }
 
 }

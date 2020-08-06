@@ -1,9 +1,22 @@
 .container {
-  margin-top: 55px;
-  margin-left: 115px;
-  margin-right: 115px;
-  .title {
-    margin-top: -25px;
-    margin-bottom: 0;
-  }
+	height: 100%;
+	width: 80vw;
+	margin-left: auto;
+	margin-right: auto;
+
+	.title {
+		font-size: 1.5rem;
+		line-height: 1;
+		margin-block-start: 0.65rem !important;
+		margin-block-end: 0 !important;
+	}
+
+	.capitalize {
+		text-transform: capitalize;
+	}
+
+	.processed {
+		color: rgba($color: lightgreen, $alpha: 0.8);
+	}
+
 }

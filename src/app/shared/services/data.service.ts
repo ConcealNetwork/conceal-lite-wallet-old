@@ -61,4 +61,7 @@ export class DataService {
 	toBalance: number = 0;
 	fee: number = 0.001000;
 
+	// Messages
+	messages: any;
+
 }

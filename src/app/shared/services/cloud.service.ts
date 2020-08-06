@@ -36,6 +36,17 @@ export class CloudService {
 		return this.http.get(`${this.api}/wallet/keys?address=${address}&code=${code}`);
 	};
 
+	getMessages() {
+    return this.http.get(`${this.api}/wallet/messages`);
+	};
+
+	sendMessage(address, message, password, sdm, twoFACode, wallet) {
+		const body = {
+			address, message, password, sdm, twoFACode, wallet
+		};
+		return this.http.post(`${this.api}/wallet/send-message`, JSON.stringify(body));
+  };
+
 	deleteWallet(address) {
 		return this.http.delete(`${this.api}/wallet?address=${address}`);
 	};

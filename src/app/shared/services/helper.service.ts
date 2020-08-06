@@ -1,6 +1,7 @@
 // Angular Core
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 
 // 3rd Party
 import * as moment from 'moment';
@@ -10,7 +11,6 @@ import { ElectronService } from '../services/electron.service';
 import { DataService } from '../services/data.service';
 import { CloudService } from '../services/cloud.service';
 import { SnackbarService } from '../services/snackbar.service';
-import { DialogService } from '../services/dialog.service';
 
 @Injectable({
 	providedIn: 'root'
@@ -23,7 +23,7 @@ export class HelperService {
 		private cloudService: CloudService,
 		private dataService: DataService,
 		private snackbarService: SnackbarService,
-		private dialogService: DialogService,
+		private dialog: MatDialog,
 		private router: Router
 	) { }
 
@@ -101,6 +101,20 @@ export class HelperService {
 		});
 	}
 
+	getTransactions() {
+		this.cloudService.getWalletsData().subscribe((data) => {
+			this.dataService.wallets = data['message'].wallets;
+			// Merge Transactions
+			let transactions = Object.values(this.dataService.wallets);
+			let arr = [];
+			for(let i = 0; i < transactions.length; i++) {
+					arr.push(transactions[i]['transactions']);
+			}
+			const transactionsMerged = Array.prototype.concat(...arr);
+			this.dataService.transactions = transactionsMerged;
+		});
+	}
+
 	getWalletKeys(address, code) {
 		this.cloudService.getWalletKeys(address, code).subscribe((data) => {
 			if (data['result'] === 'success') {
@@ -163,6 +177,26 @@ export class HelperService {
 		})
 	}
 
+	getMessages() {
+		this.dataService.isLoading = true;
+		this.cloudService.getMessages().subscribe((data) => {
+			if (data['result'] === 'success') {
+				// Merge Transactions
+				let messages = Object.values(data['message']);
+				let arr = [];
+				for(let i = 0; i < messages.length; i++) {
+						arr.push(messages[i]);
+				}
+				const messagesMerged = Array.prototype.concat(...arr);
+				this.dataService.messages = messagesMerged;
+				this.dataService.isLoading = false;
+			} else {
+				this.snackbarService.openSnackBar(data['message'], 'Dismiss');
+				this.dataService.isLoading = false;
+			}
+		})
+  };
+
 	copyToClipboard(value: string, message: string): void {
 		this.electronService.clipboard.clear();
 		this.electronService.clipboard.writeText(value);
@@ -200,7 +234,7 @@ export class HelperService {
 				this.dataService.isFormLoading = false;
 				setTimeout(() => {
 					this.router.navigate(['/dashboard']);
-					this.dialogService.dialog.closeAll();
+					this.dialog.closeAll();
 					this.snackbarService.openSnackBar('Your transaction was successful', 'Dismiss');
 				}, 2000);
 			} else {
@@ -220,5 +254,13 @@ export class HelperService {
 		const formatOptions = { minimumFractionDigits: minDec, maximumFractionDigits: maxDec };
 		return `${parseFloat(amount).toLocaleString('en', formatOptions)}`;
 	};
+
+	formatAddress(address) {
+		return address.slice(0,7) + '...' + address.slice(-7);
+	}
+
+	formatDatetime(datetime) {
+		return moment(datetime).fromNow(); //eg. 1 day ago, 2 hours ago etc
+	}
 
 	}
