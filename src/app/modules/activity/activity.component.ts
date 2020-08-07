@@ -72,7 +72,7 @@ export class ActivityComponent implements OnInit {
 			this.dataSource = new MatTableDataSource(this.dataService.transactions);
 			this.dataSource.paginator = this.paginator;
 			this.dataSource.sort = this.sort;
-		}, 1500);
+		}, 2000);
 	}
 
 	// Get Services

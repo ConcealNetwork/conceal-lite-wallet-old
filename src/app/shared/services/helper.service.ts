@@ -263,4 +263,9 @@ export class HelperService {
 		return moment(datetime).fromNow(); //eg. 1 day ago, 2 hours ago etc
 	}
 
+	formatTypeText(type) {
+		if (type === 'in') return 'Received';
+		if (type === 'out') return 'Sent';
 	}
+
+}

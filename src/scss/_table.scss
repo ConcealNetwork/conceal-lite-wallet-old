@@ -2,9 +2,9 @@
 
     .mat-elevation-z8 {
         position: relative;
-        height: calc(100vh - 350px);
+        //height: calc(100vh - 350px);
         overflow: auto;
-        margin-bottom: 25px;
+        margin-bottom: 45px;
     }
 
     .filter {
@@ -13,7 +13,8 @@
     }
 
     .mat-table {
-        width: 100%;
+				width: 100%;
+				//height: 100%;
         thead {
             background: rgba($color: #555, $alpha: 1);
         }

@@ -1,7 +1,6 @@
 // Angular
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
-import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -60,34 +59,11 @@ export class MessagingComponent implements OnInit {
   pageEvent: PageEvent;
   pageSize: Number = 10;
   pageSizeOptions: number[] = [5, 10, 25, 100];
-  displayedColumns: string[] = ['type', 'message', 'sdm', 'timestamp'];
+  displayedColumns: string[] = ['type', 'timestamp', 'sdm', 'message'];
   dataSource: MatTableDataSource<Messages>;
-  selection = new SelectionModel<Messages>(true, []);
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-
-  /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
-  }
-
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    this.isAllSelected() ?
-    this.selection.clear() :
-    this.dataSource.data.forEach(row => this.selection.select(row));
-  }
-
-  /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: Messages): string {
-    if (!row) {
-      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
-    }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.timestamp + 1}`;
-  }
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
 
 	constructor (
 		private authService: AuthService,
@@ -101,8 +77,6 @@ export class MessagingComponent implements OnInit {
 			this.dataSource = new MatTableDataSource(this.dataService.messages);
 			this.dataSource.paginator = this.paginator;
 			this.dataSource.sort = this.sort;
-			console.log(this.dataService.messages);
-			console.log(this.dataSource);
 		}, 1500);
 	}
 
