@@ -5,3 +5,11 @@
 .mat-form-field-suffix {
 	margin-left: 12px;
 }
+
+.mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+	background-color: rgba(orange, 0.54) !important;
+}
+
+.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+	background-color: orange !important;
+}

@@ -14,8 +14,7 @@
     </mat-form-field>
 
     <div fxFlex="20" class="button-control">
-      <button mat-stroked-button color="primary" (click)="getDialogService().openNewMessageDialog(null)">New Message</button>
-      <!-- <button mat-stroked-button color="warn">Delete</button> -->
+      <button mat-stroked-button color="primary" (click)="getDialogService().openNewMessageDialog()">New Message</button>
     </div>
 
   </div>
@@ -36,13 +35,6 @@
 				<td mat-cell *matCellDef="let row">{{getHelperService().formatDatetime(row.timestamp)}}</td>
 			</ng-container>
 
-			<!-- Type Column -->
-			<ng-container matColumnDef="sdm">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header> Self Destructing </th>
-				<td mat-cell *matCellDef="let row" class="uppercase">
-					<span [ngClass]="{'notsdm': (row.sdm === 'no'), 'sdm': (row.sdm === 'yes')}">{{row.sdm}}</span>
-				</td>
-			</ng-container>
 
 			<!-- Message Column -->
 			<ng-container matColumnDef="message">

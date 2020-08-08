@@ -64,4 +64,7 @@ export class DataService {
 	// Messages
 	messages: any;
 
+	// Contacts
+	contacts: any;
+
 }

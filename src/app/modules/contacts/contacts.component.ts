@@ -1,5 +1,5 @@
 // Angular
-import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { trigger, state, transition, query, style, stagger, animate } from '@angular/animations';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -11,18 +11,14 @@ import { DomSanitizer } from '@angular/platform-browser';
 // Services
 import { HelperService } from './../../shared/services/helper.service';
 import { DialogService } from '../../shared/services/dialog.service';
+import { AuthService } from '../../shared/services/auth.service';
+import { DataService } from '../../shared/services/data.service';
 
 export interface Contacts {
   label: string;
   address: string;
   paymentid: string;
-  detailRow: boolean;
 }
-
-const names: string[] = [
-  'Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack', 'Charlotte', 'Theodore', 'Isla', 'Oliver',
-  'Isabella', 'Jasper', 'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'
-];
 
 @Component({
 	selector: 'app-contacts',
@@ -65,8 +61,9 @@ export class ContactsComponent implements OnInit {
   pageEvent: PageEvent;
   pageSize: Number = 10;
   pageSizeOptions: number[] = [5, 10, 25, 100];
-  displayedColumns: string[] = ['select', 'options', 'label', 'address', 'paymentid'];
-  dataSource: MatTableDataSource<Contacts>;
+  displayedColumns: string[] = ['options', 'label', 'address', 'paymentid'];
+	dataSource: MatTableDataSource<Contacts> = null;
+
   selection = new SelectionModel<Contacts>(true, []);
   isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
   expandedElement: any;
@@ -74,37 +71,15 @@ export class ContactsComponent implements OnInit {
   label: string;
   address: string;
   paymentid: string;
-  detailRow: boolean;
+	detailRow: boolean = false;
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-
-  isLoading: boolean = true;
-
-  /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
-  }
-
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    this.isAllSelected() ?
-    this.selection.clear() :
-    this.dataSource.data.forEach(row => this.selection.select(row));
-  }
-
-  /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: Contacts): string {
-    if (!row) {
-      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
-    }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.label + 1}`;
-  }
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
 
 	constructor(
+		private authService: AuthService,
 		private helperService: HelperService,
+		private dataService: DataService,
 		private dialogService: DialogService,
     public matIconRegistry: MatIconRegistry,
     public domSanitizer: DomSanitizer
@@ -114,10 +89,13 @@ export class ContactsComponent implements OnInit {
         `assets/fonts/materal-icons-twotone.svg`
       )
     );
-    // Create 100 users
-    const contacts = Array.from({length: 100}, (_, k) => this.createContacts(k + 1));
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(contacts);
+		this.helperService.getContacts();
+		setTimeout(() => {
+			// Assign the data to the data source for the table to render
+			this.dataSource = new MatTableDataSource(this.dataService.contacts);
+			this.dataSource.paginator = this.paginator;
+			this.dataSource.sort = this.sort;
+		}, 2000);
 	}
 
 	// Get Services
@@ -127,12 +105,35 @@ export class ContactsComponent implements OnInit {
 	getHelperService() {
 		return this.helperService;
 	}
+	getDataService() {
+		return this.dataService;
+	}
 
 	ngOnInit(): void {
-    this.isLoading = false;
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
+		this.dataService.isLoggedIn = this.authService.loggedIn();
+	}
+
+	/** Whether the number of selected elements matches the total number of rows. */
+	isAllSelected() {
+		const numSelected = this.selection.selected.length;
+		const numRows = this.dataService.contacts.length;
+		return numSelected === numRows;
+	}
+
+	/** Selects all rows if they are not all selected; otherwise clear selection. */
+	masterToggle() {
+		this.isAllSelected() ?
+		this.selection.clear() :
+		this.dataSource.data.forEach(row => this.selection.select(row));
+	}
+
+	/** The label for the checkbox on the passed row */
+	checkboxLabel(row?: Contacts): string {
+		if (!row) {
+			return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+		}
+		return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.label + 1}`;
+	}
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -140,17 +141,6 @@ export class ContactsComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-  }
-
-  /** Builds and returns a new User. */
-  createContacts(date: number): Contacts {
-    const name = names[Math.round(Math.random() * (names.length - 1))] + ' ' + names[Math.round(Math.random() * (names.length - 1))].charAt(0) + '.';
-    return {
-      label: name,
-      address: Math.random().toString(36).substring(2, 25) + Math.random().toString(36).substring(2, 25),
-      paymentid: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
-      detailRow: false
-    };
   }
 
 }

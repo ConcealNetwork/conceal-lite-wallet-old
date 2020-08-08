@@ -66,6 +66,7 @@
 						<mat-label>Transaction Fee</mat-label>
 						<input matInput formControlName="feeFormControl">
 						<span matSuffix>CCX</span>
+						<mat-hint>Fee for transaction</mat-hint>
 					</mat-form-field>
 				</div>
 				<div fxFlex="60" fxLayout="column">
@@ -91,7 +92,7 @@
 			<div class="actions" fxLayout="row" fxLayoutGap="15px">
 				<button mat-stroked-button fxFlex="25" type="button" (click)="confirmed=false">Review</button>
 				<button mat-stroked-button color="warn" fxFlex="35" type="button" (click)="close()">Cancel</button>
-				<button mat-stroked-button color="primary" fxFlex="40" type="submit">Authorise</button>
+				<button mat-stroked-button color="primary" fxFlex="40" type="submit" [disabled]="!form.valid">Authorise</button>
 			</div>
 		</div>
 

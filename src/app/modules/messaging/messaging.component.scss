@@ -4,9 +4,9 @@
 	margin-left: auto;
 	margin-right: auto;
 
-  .title {
-    margin-bottom: 0;
-  }
+	.title {
+		margin-bottom: 0;
+	}
 
 	.capitalize {
 		text-transform: capitalize;
@@ -26,11 +26,12 @@
 
 	.button-control {
 		text-align: right;
+
 		button {
 			margin-left: 10px;
-      font-size: 0.7rem;
-      border: 1px solid currentColor;
-      text-transform: uppercase;
+			font-size: 0.7rem;
+			border: 1px solid currentColor;
+			text-transform: uppercase;
 		}
 	}
 

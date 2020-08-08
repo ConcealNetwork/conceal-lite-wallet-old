@@ -22,6 +22,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
@@ -84,6 +86,8 @@ import { TransferDialog } from './components/dialogs/transfer/transfer.dialog';
 		MatProgressBarModule,
 		MatFormFieldModule,
 		MatInputModule,
+		MatSlideToggleModule,
+		MatSelectModule,
 		MatDialogModule,
 		MatTooltipModule,
 		QRCodeModule,

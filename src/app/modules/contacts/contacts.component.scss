@@ -1,34 +1,34 @@
 .container {
-  margin-top: 55px;
-  margin-left: 115px;
-  margin-right: 115px;
-  .title {
-    margin-top: -25px;
-    margin-bottom: 0;
-  }
-  .button-control {
-    text-align: end;
-    button {
-      margin-left: 10px;
-      font-size: 0.7rem;
-      border: 1px solid currentColor;
-      text-transform: uppercase;
-    }
-  }
-  .button-row {
-    background: rgb(57, 57, 57);
-    border-top: 0.1px solid orange;
-    border-bottom: 0.1px solid orange;
-    button {
-      margin-right: 10px;
-    }
-    .mat-stroked-button {
-      padding: 0 10px;
-      line-height: 25px;
-    }
-  }
-}
+	height: 100%;
+	width: 80vw;
+	margin-left: auto;
+	margin-right: auto;
 
-.pointer {
-  cursor: pointer;
+	.title {
+		margin-bottom: 0;
+	}
+
+	.capitalize {
+		text-transform: capitalize;
+	}
+
+	.uppercase {
+		text-transform: uppercase;
+	}
+
+	.pointer {
+		cursor: pointer;
+	}
+
+	.button-control {
+		text-align: right;
+
+		button {
+			margin-left: 10px;
+			font-size: 0.7rem;
+			border: 1px solid currentColor;
+			text-transform: uppercase;
+		}
+	}
+
 }

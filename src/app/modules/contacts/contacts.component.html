@@ -1,21 +1,20 @@
-<div class="loading" *ngIf="isLoading">
-  <app-loader [isLoading]="isLoading"></app-loader>
+<div class="loading" *ngIf="getDataService().isLoading">
+  <app-loader></app-loader>
 </div>
 
-<div class="container table" fxLayout="column" @enterAnimation>
+<div *ngIf="!getDataService().isLoading" class="container table" fxLayout="column" @enterAnimation>
 
-  <h1 class="title">{{ 'PAGES.CONTACTS.TITLE' | translate }}</h1>
+	<h1 class="title">{{ 'PAGES.CONTACTS.TITLE' | translate }}</h1>
 
-  <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center">
+  <div fxLayout="row" fxLayoutAlign="space-between center">
 
-    <mat-form-field fxFlex="70" class="filter">
+    <mat-form-field fxFlex="80" class="filter">
       <mat-label>Filter</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Search by Address, Payment ID or Label">
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search by address, payment ID or label">
     </mat-form-field>
 
-    <div fxFlex="30" class="button-control">
-      <button mat-stroked-button color="primary" (click)="getDialogService().openNewContactDialog(null)">New Contact</button>
-      <button mat-stroked-button color="warn">Delete</button>
+    <div fxFlex="20" class="button-control">
+      <button mat-stroked-button color="primary" (click)="getDialogService().openNewContactDialog()">New Contact</button>
     </div>
 
   </div>
@@ -24,29 +23,14 @@
 
     <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
 
-      <!-- Checkbox Column -->
-      <ng-container matColumnDef="select">
-        <th mat-header-cell *matHeaderCellDef>
-          <mat-checkbox color="primary" (change)="$event ? masterToggle() : null"
-            [checked]="selection.hasValue() && isAllSelected()"
-            [indeterminate]="selection.hasValue() && !isAllSelected()"
-            [aria-label]="checkboxLabel()">
-          </mat-checkbox>
-        </th>
-        <td mat-cell *matCellDef="let row">
-          <mat-checkbox color="primary" (click)="$event.stopPropagation()"
-            (change)="$event ? selection.toggle(row) : null"
-            [checked]="selection.isSelected(row)"
-            [aria-label]="checkboxLabel(row)">
-          </mat-checkbox>
-        </td>
-      </ng-container>
-
       <!-- Options Column -->
       <ng-container matColumnDef="options">
-        <th mat-header-cell *matHeaderCellDef><mat-icon svgIcon="unfold_more" style="margin-top: 10px;"></mat-icon></th>
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
         <td mat-cell *matCellDef="let row">
-          <mat-icon style="margin-top: 5px;" svgIcon="{{expandedElement === row ? 'expand_less' : 'expand_more'}}"></mat-icon>
+					<div fxLayoutAlign="start center" fxLayoutGap="10px">
+						<mat-icon svgIcon="{{expandedElement === row ? 'expand_less' : 'expand_more'}}"></mat-icon>
+						<span>Select</span>
+					</div>
         </td>
       </ng-container>
 
@@ -59,7 +43,7 @@
       <!-- Address Column -->
       <ng-container matColumnDef="address">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
-        <td mat-cell *matCellDef="let row"> ccx{{row.address}} </td>
+        <td mat-cell *matCellDef="let row">{{getHelperService().formatAddress(row.address)}}</td>
       </ng-container>
 
       <!-- Payment ID Column -->
@@ -71,11 +55,13 @@
       <!-- Actions Column - Expanded Content Column -->
       <ng-container matColumnDef="actions">
         <td mat-cell *matCellDef="let row" class="button-row" [attr.colspan]="displayedColumns.length">
-          <button mat-stroked-button color="primary">Pay</button>
-          <button mat-stroked-button color="primary">Message</button>
-          <button mat-stroked-button>Copy</button>
-          <button mat-stroked-button>Edit</button>
-          <button mat-stroked-button color="warn">Delete</button>
+					<div fxLayoutAlign="start center" fxLayoutGap="15px">
+						<button mat-stroked-button color="primary">Pay {{row.label}} </button>
+						<button mat-stroked-button color="primary">Message {{row.label}} </button>
+						<button mat-stroked-button>Copy Address</button>
+						<button mat-stroked-button>Copy Payment ID</button>
+						<button mat-stroked-button color="warn">Delete Contact</button>
+					</div>
         </td>
       </ng-container>
 

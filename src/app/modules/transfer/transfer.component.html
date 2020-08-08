@@ -46,6 +46,7 @@
 																{{ (item.key.length > 7) ? (item.key | slice:0:7) +'...':(item.key) }}{{ (item.key | slice:-7) }}
 															</mat-option>
 														</mat-select>
+														<mat-hint>Select one of your wallets</mat-hint>
 														<mat-error *ngIf="transfer.controls.walletFormControl.hasError('required')">
 															Wallet selection is <strong>required</strong>
 														</mat-error>
@@ -99,11 +100,11 @@
 											</div>
 											<div fxLayout="row" fxFlex fxLayoutAlign="start stretch" fxLayoutGap="15px">
 												<div class="form-fields" fxFlex="80" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="24px">
-													<mat-form-field hintLabel="65 characters" appearance="fill">
+													<mat-form-field hintLabel="98 characters" appearance="fill">
 														<mat-label>Address</mat-label>
-														<input matInput #address type="text" maxlength="65" placeholder="CCX Address" formControlName="toaddressFormControl">
+														<input matInput #address type="text" maxlength="98" placeholder="CCX Address" formControlName="toaddressFormControl">
 														<mat-icon class="icon-button" matSuffix svgIcon="contacts" matTooltip="Select from contacts" matTooltipPosition="below" matTooltipClass="custom-tooltip" routerLink="/contacts"></mat-icon>
-														<mat-hint align="end">{{address.value.length}} / 65</mat-hint>
+														<mat-hint align="end">{{address.value.length}} / 98</mat-hint>
 														<mat-error *ngIf="pay.controls.toaddressFormControl.hasError('required')">
 															Address selection is <strong>required</strong>
 														</mat-error>
@@ -111,7 +112,7 @@
 															<strong>From</strong> and <strong>To</strong> addresses cannot be the same.
 														</mat-error>
 														<mat-error *ngIf="pay.controls.toaddressFormControl.hasError('minlength')">
-															Address must be <strong>65 characters</strong>
+															Address must be <strong>98 characters</strong>
 														</mat-error>
 													</mat-form-field>
 													<mat-form-field hintLabel="35 characters" appearance="fill">
@@ -182,6 +183,7 @@
 																{{ (item.key.length > 7) ? (item.key | slice:0:7) +'...':(item.key) }}{{ (item.key | slice:-7) }}
 															</mat-option>
 														</mat-select>
+														<mat-hint>Select one of your wallets</mat-hint>
 														<mat-error *ngIf="transfer.controls.walletFormControl.hasError('required')">
 															Wallet selection is <strong>required</strong>
 														</mat-error>

@@ -70,11 +70,10 @@ export class DialogService {
 		})
 	}
 
-	openNewMessageDialog(value): void {
+	openNewMessageDialog(): void {
     const dialogRef = this.dialog.open(NewMessageDialog, {
 			width: '45%',
 			height: 'auto',
-      data: {address: value.address, message: value.message}
     })
     dialogRef.afterClosed().subscribe(result => {
 			this.dataService.success = '';

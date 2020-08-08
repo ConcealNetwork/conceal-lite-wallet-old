@@ -14,13 +14,7 @@ import { DataService } from '../../shared/services/data.service';
 export interface Messages {
 	message: string;
 	timestamp: string;
-	sdm: string;
 	type: string;
-}
-
-export interface NewMessage {
-  address: string;
-  message: string;
 }
 
 @Component({
@@ -59,7 +53,7 @@ export class MessagingComponent implements OnInit {
   pageEvent: PageEvent;
   pageSize: Number = 10;
   pageSizeOptions: number[] = [5, 10, 25, 100];
-  displayedColumns: string[] = ['type', 'timestamp', 'sdm', 'message'];
+  displayedColumns: string[] = ['type', 'timestamp', 'message'];
   dataSource: MatTableDataSource<Messages>;
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
@@ -77,7 +71,7 @@ export class MessagingComponent implements OnInit {
 			this.dataSource = new MatTableDataSource(this.dataService.messages);
 			this.dataSource.paginator = this.paginator;
 			this.dataSource.sort = this.sort;
-		}, 1500);
+		}, 2000);
 	}
 
 	// Get Services
@@ -93,6 +87,7 @@ export class MessagingComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.dataService.isLoggedIn = this.authService.loggedIn();
+		this.helperService.getWallets();
   }
 
   applyFilter(event: Event) {

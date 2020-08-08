@@ -42,8 +42,8 @@ export class TransferComponent implements OnInit {
 		]),
 		toaddressFormControl: new FormControl('', [
 			Validators.required,
-			Validators.minLength(65),
-			Validators.maxLength(65),
+			Validators.minLength(98),
+			Validators.maxLength(98),
 			this.matches.bind(this),
 		]),
 		paymentidFormControl: new FormControl('', [

@@ -40,12 +40,27 @@ export class CloudService {
     return this.http.get(`${this.api}/wallet/messages`);
 	};
 
-	sendMessage(address, message, password, sdm, twoFACode, wallet) {
+	sendMessage(address, message, code, wallet) {
 		const body = {
-			address, message, password, sdm, twoFACode, wallet
+			address, message, code, wallet
 		};
 		return this.http.post(`${this.api}/wallet/send-message`, JSON.stringify(body));
-  };
+	};
+
+	getContacts() {
+    return this.http.get(`${this.api}/user`);
+	};
+
+	addContact(label, address, paymentID, entryID=null, edit=false) {
+		const body = {
+			label, address, paymentID, entryID, edit
+		};
+		return this.http.post(`${this.api}/wallet/address-book`, JSON.stringify(body));
+	}
+
+	deleteContact(entryID) {
+		return this.http.delete(`${this.api}/wallet/address-book/delete/entryID/${entryID}`);
+	}
 
 	deleteWallet(address) {
 		return this.http.delete(`${this.api}/wallet?address=${address}`);

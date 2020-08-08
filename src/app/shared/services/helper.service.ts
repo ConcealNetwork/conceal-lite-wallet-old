@@ -195,7 +195,45 @@ export class HelperService {
 				this.dataService.isLoading = false;
 			}
 		})
-  };
+	};
+
+	sendMessage(address, message, twoFACode, wallet) {
+		this.cloudService.sendMessage(address, message, twoFACode, wallet).subscribe((data) => {
+			if (data['result'] === 'success') {
+				this.dataService.success = 'Your message was sent successfully, redirecting now...';
+				this.dataService.isFormLoading = false;
+				setTimeout(() => {
+					this.router.navigate(['/dashboard']);
+					this.dialog.closeAll();
+					this.snackbarService.openSnackBar('Your message was sent successfully', 'Dismiss');
+				}, 2000);
+			} else {
+				this.dataService.error = data['message'];
+				this.dataService.isFormLoading = false;
+				this.snackbarService.openSnackBar(data['message'], 'Dismiss');
+			}
+		})
+	}
+
+	getContacts() {
+		this.dataService.isLoading = true;
+		this.cloudService.getContacts().subscribe((data) => {
+			if (data['result'] === 'success') {
+				// Merge Transactions
+				let contacts = Object.values(data['message'].addressBook);
+				let arr = [];
+				for(let i = 0; i < contacts.length; i++) {
+						arr.push(contacts[i]);
+				}
+				const contactsMerged = Array.prototype.concat(...arr);
+				this.dataService.contacts = contactsMerged;
+				this.dataService.isLoading = false;
+			} else {
+				this.snackbarService.openSnackBar(data['message'], 'Dismiss');
+				this.dataService.isLoading = false;
+			}
+		})
+	};
 
 	copyToClipboard(value: string, message: string): void {
 		this.electronService.clipboard.clear();
