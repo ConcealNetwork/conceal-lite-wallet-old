@@ -86,9 +86,13 @@
 					</mat-form-field>
 				</div>
 			</div>
-			<div class="progress" *ngIf="getDataService().isFormLoading"><mat-progress-bar mode="query"></mat-progress-bar></div>
-			<div class="error" *ngIf="getDataService().error">{{ getDataService().error }}</div>
-			<div class="success" *ngIf="getDataService().success">{{ getDataService().success }}</div>
+
+			<div class="actions" fxLayout="row" fxLayoutGap="15px">
+				<div class="progress" *ngIf="getDataService().isFormLoading"><mat-progress-bar mode="query"></mat-progress-bar></div>
+				<div class="error" *ngIf="getDataService().error">{{ getDataService().error }}</div>
+				<div class="success" *ngIf="getDataService().success">{{ getDataService().success }}</div>
+			</div>
+
 			<div class="actions" fxLayout="row" fxLayoutGap="15px">
 				<button mat-stroked-button fxFlex="25" type="button" (click)="confirmed=false">Review</button>
 				<button mat-stroked-button color="warn" fxFlex="35" type="button" (click)="close()">Cancel</button>

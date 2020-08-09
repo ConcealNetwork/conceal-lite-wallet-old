@@ -70,10 +70,11 @@ export class DialogService {
 		})
 	}
 
-	openNewMessageDialog(): void {
+	openNewMessageDialog(address): void {
     const dialogRef = this.dialog.open(NewMessageDialog, {
 			width: '45%',
 			height: 'auto',
+			data: {address: address}
     })
     dialogRef.afterClosed().subscribe(result => {
 			this.dataService.success = '';
@@ -97,7 +98,7 @@ export class DialogService {
     const dialogRef = this.dialog.open(NewContactDialog, {
 			width: '45%',
 			height: 'auto',
-      data: {label: value.label, address: value.address, paymentid: value.paymentid}
+     // data: {label: value.label, address: value.address, paymentid: value.paymentid}
     })
     dialogRef.afterClosed().subscribe(result => {
 			this.dataService.success = '';

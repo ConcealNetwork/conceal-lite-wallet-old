@@ -55,11 +55,11 @@ export class CloudService {
 		const body = {
 			label, address, paymentID, entryID, edit
 		};
-		return this.http.post(`${this.api}/wallet/address-book`, JSON.stringify(body));
+		return this.http.post(`${this.api}/address-book`, JSON.stringify(body));
 	}
 
 	deleteContact(entryID) {
-		return this.http.delete(`${this.api}/wallet/address-book/delete/entryID/${entryID}`);
+		return this.http.delete(`${this.api}/address-book/delete/entryID/${entryID}`);
 	}
 
 	deleteWallet(address) {

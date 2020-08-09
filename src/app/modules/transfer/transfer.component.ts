@@ -138,6 +138,10 @@ export class TransferComponent implements OnInit {
 			this.transfer.controls.walletFormControl.patchValue(this.dataService.selectedWallet, { emitEvent: true });
 			this.pay.controls.walletFormControl.patchValue(this.dataService.selectedWallet, { emitEvent: true });
 		}
+		if (this.dataService.sendToWallet) {
+			this.pay.controls.toaddressFormControl.patchValue(this.dataService.sendToWallet, { emitEvent: true });
+			this.pay.controls.paymentidFormControl.patchValue(this.dataService.sendToPAymentID, { emitEvent: true });
+		}
 	}
 
 	// custom validator

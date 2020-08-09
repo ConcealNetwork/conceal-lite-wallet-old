@@ -235,6 +235,33 @@ export class HelperService {
 		})
 	};
 
+	addContact(label, address, paymentID) {
+		this.cloudService.addContact(label, address, paymentID).subscribe((data) => {
+			if (data['result'] === 'success') {
+				this.getContacts();
+				this.dataService.isFormLoading = false;
+				this.dataService.success = 'Contact created successfully, redirecting now...';
+				setTimeout(() => {
+					this.dialog.closeAll();
+					this.snackbarService.openSnackBar('Contact created', 'Dismiss');
+				}, 2000);
+			} else {
+				this.snackbarService.openSnackBar(data['message'], 'Dismiss');
+				this.dataService.isFormLoading = false;
+			}
+		})
+	}
+
+	deleteContact(entryID) {
+		this.cloudService.deleteContact(entryID).subscribe((data) => {
+			if (data['result'] === 'success') {
+				this.snackbarService.openSnackBar('Contact deleted', 'Dismiss');
+			} else {
+				this.snackbarService.openSnackBar(data['message'], 'Dismiss');
+			}
+		})
+	}
+
 	copyToClipboard(value: string, message: string): void {
 		this.electronService.clipboard.clear();
 		this.electronService.clipboard.writeText(value);
@@ -249,6 +276,13 @@ export class HelperService {
 		this.dataService.selectedWallet = wallet;
 		this.dataService.selectedTab = option;
 		this.selectedWallet(wallet);
+		this.router.navigate(['/transfer']);
+	}
+
+	transferTo(wallet, paymentID, option) {
+		this.dataService.sendToWallet = wallet;
+		this.dataService.sendToPAymentID = paymentID || null;
+		this.dataService.selectedTab = option;
 		this.router.navigate(['/transfer']);
 	}
 

@@ -1,5 +1,5 @@
 // Angular
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { trigger, state, transition, query, style, stagger, animate } from '@angular/animations';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -17,7 +17,8 @@ import { DataService } from '../../shared/services/data.service';
 export interface Contacts {
   label: string;
   address: string;
-  paymentid: string;
+	paymentid: string;
+	entryID: number;
 }
 
 @Component({
@@ -82,7 +83,8 @@ export class ContactsComponent implements OnInit {
 		private dataService: DataService,
 		private dialogService: DialogService,
     public matIconRegistry: MatIconRegistry,
-    public domSanitizer: DomSanitizer
+		public domSanitizer: DomSanitizer,
+		private changeDetectorRefs: ChangeDetectorRef
   ) {
     matIconRegistry.addSvgIconSet(
       domSanitizer.bypassSecurityTrustResourceUrl(
@@ -112,6 +114,14 @@ export class ContactsComponent implements OnInit {
 	ngOnInit(): void {
 		this.dataService.isLoggedIn = this.authService.loggedIn();
 	}
+
+	refresh() {
+		this.helperService.getContacts();
+		setTimeout(() => {
+			this.dataSource = new MatTableDataSource(this.dataService.contacts);
+			this.changeDetectorRefs.detectChanges();
+		}, 2000);
+  }
 
 	/** Whether the number of selected elements matches the total number of rows. */
 	isAllSelected() {

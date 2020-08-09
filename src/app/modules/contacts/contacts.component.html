@@ -8,13 +8,14 @@
 
   <div fxLayout="row" fxLayoutAlign="space-between center">
 
-    <mat-form-field fxFlex="80" class="filter">
+    <mat-form-field fxFlex="70" class="filter">
       <mat-label>Filter</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Search by address, payment ID or label">
     </mat-form-field>
 
-    <div fxFlex="20" class="button-control">
-      <button mat-stroked-button color="primary" (click)="getDialogService().openNewContactDialog()">New Contact</button>
+    <div fxFlex="30" class="button-control">
+      <button mat-stroked-button color="primary" (click)="getDialogService().openNewContactDialog(null)">New Contact</button>
+      <button mat-stroked-button (click)="refresh()">Refresh</button>
     </div>
 
   </div>
@@ -49,18 +50,18 @@
       <!-- Payment ID Column -->
       <ng-container matColumnDef="paymentid">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Payment ID </th>
-        <td mat-cell *matCellDef="let row"> {{row.paymentid}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.paymentid || 'N/A'}} </td>
       </ng-container>
 
       <!-- Actions Column - Expanded Content Column -->
       <ng-container matColumnDef="actions">
         <td mat-cell *matCellDef="let row" class="button-row" [attr.colspan]="displayedColumns.length">
 					<div fxLayoutAlign="start center" fxLayoutGap="15px">
-						<button mat-stroked-button color="primary">Pay {{row.label}} </button>
-						<button mat-stroked-button color="primary">Message {{row.label}} </button>
-						<button mat-stroked-button>Copy Address</button>
-						<button mat-stroked-button>Copy Payment ID</button>
-						<button mat-stroked-button color="warn">Delete Contact</button>
+						<button mat-stroked-button color="primary" aria-hidden="false" aria-label="Pay contact" matTooltip="Pay contact" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().transferTo(row.address, row.paymentid, 0)">Pay {{row.label}} </button>
+						<button mat-stroked-button color="primary" aria-hidden="false" aria-label="Message contact" matTooltip="Message contact" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getDialogService().openNewMessageDialog(row.address)">Message {{row.label}} </button>
+						<button mat-stroked-button aria-hidden="false" aria-label="Copy address" matTooltip="Copy address" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getHelperService().copyToClipboard(row.address, 'Address Copied')">Copy Address</button>
+						<button *ngIf="row.paymentid" mat-stroked-button aria-hidden="false" aria-label="Copy payment ID" matTooltip="Copy payment ID" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getHelperService().copyToClipboard(row.paymentid, 'Payment ID Copied')">Copy Payment ID</button>
+						<button mat-stroked-button color="warn" aria-hidden="false" aria-label="Delete contact" matTooltip="Delete contact" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().deleteContact(row.entryID)">Delete Contact</button>
 					</div>
         </td>
       </ng-container>

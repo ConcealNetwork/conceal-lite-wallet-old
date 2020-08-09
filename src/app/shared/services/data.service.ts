@@ -56,6 +56,8 @@ export class DataService {
 	selectedTab: number = 0;
 	selectedWallet: any;
 	todWallet: any;
+	sendToWallet: any;
+	sendToPAymentID: any;
 	sendAmount: number = 0;
 	balance: number = 0;
 	toBalance: number = 0;

@@ -1,7 +1,7 @@
 // Angular Core
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { trigger, transition, style, animate } from '@angular/animations';
 
 // Services
@@ -25,11 +25,17 @@ export class NewMessageDialog {
 
 	confirmed: boolean = false;
 
-  constructor(
+  constructor (
 		public dialogRef: MatDialogRef<NewMessageDialog>,
 		private helperService: HelperService,
-		private dataService: DataService
-	)	{	}
+		private dataService: DataService,
+		@Inject(MAT_DIALOG_DATA) public data: any
+	)	{
+			if(data.address) {
+				this.helperService.getWallets();
+				this.form.controls.toaddressFormControl.patchValue(this.data.address, { emitEvent: true });
+			}
+		}
 
 	form: FormGroup = new FormGroup({
 		twofaFormControl: new FormControl('', [

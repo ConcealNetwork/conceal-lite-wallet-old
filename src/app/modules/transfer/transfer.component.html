@@ -102,7 +102,7 @@
 												<div class="form-fields" fxFlex="80" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="24px">
 													<mat-form-field hintLabel="98 characters" appearance="fill">
 														<mat-label>Address</mat-label>
-														<input matInput #address type="text" maxlength="98" placeholder="CCX Address" formControlName="toaddressFormControl">
+														<input matInput #address [(value)]="getDataService().sendToWallet" type="text" maxlength="98" placeholder="CCX Address" formControlName="toaddressFormControl">
 														<mat-icon class="icon-button" matSuffix svgIcon="contacts" matTooltip="Select from contacts" matTooltipPosition="below" matTooltipClass="custom-tooltip" routerLink="/contacts"></mat-icon>
 														<mat-hint align="end">{{address.value.length}} / 98</mat-hint>
 														<mat-error *ngIf="pay.controls.toaddressFormControl.hasError('required')">
@@ -117,7 +117,7 @@
 													</mat-form-field>
 													<mat-form-field hintLabel="35 characters" appearance="fill">
 														<mat-label>Payment ID (Optional)</mat-label>
-														<input matInput #payid type="text" maxlength="35" placeholder="Payment ID" formControlName="paymentidFormControl">
+														<input matInput #payid [(value)]="getDataService().sendToPAymentID" type="text" maxlength="35" placeholder="Payment ID" formControlName="paymentidFormControl">
 														<mat-hint align="end">{{payid.value.length}} / 35</mat-hint>
 														<mat-error *ngIf="pay.controls.paymentidFormControl.hasError('minlength')">
 															Address must be <strong>35 characters</strong>
