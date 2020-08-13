@@ -53,6 +53,8 @@ export class DashboardComponent implements OnInit {
 		public matIconRegistry: MatIconRegistry,
 		public domSanitizer: DomSanitizer,
 	) {
+		this.helperService.getMarket();
+		this.helperService.getWallets();
 		matIconRegistry.addSvgIconSet(
 			domSanitizer.bypassSecurityTrustResourceUrl(
 				`assets/fonts/materal-icons-twotone.svg`
@@ -72,9 +74,12 @@ export class DashboardComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.helperService.getMarket();
-		this.helperService.getWallets();
 		this.dataService.isLoggedIn = this.authService.loggedIn();
+		setInterval(() => {
+			if(!this.dataService.hasWallet && !this.dataService.dialogOpen) {
+				this.dialogService.openNoWalletDialog();
+			}
+		}, 2000);
 	}
 
 	lineChartType = 'line';

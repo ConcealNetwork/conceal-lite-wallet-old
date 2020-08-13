@@ -1,0 +1,36 @@
+<div class="content" *ngIf="!import" @transition>
+	<h1 mat-dialog-title class="title">No Wallet Found</h1>
+	<h2 class="subtitle">Create a wallet to continue...</h2>
+	<div mat-dialog-content>
+		<div fxLayout="column" fxLayoutAlign="space-between stretch">
+			<div class="loading" *ngIf="getDataService().isFormLoading"><mat-progress-bar mode="query"></mat-progress-bar></div>
+			<div class="actions" fxLayout="row" fxLayoutGap="15px">
+				<button mat-stroked-button color="primary" fxFlex="50" aria-label="Generate a new wallet" matTooltip="Generate a new wallet" aria-label="Generate a new wallet" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="createWallet()">Create Wallet</button>
+				<button mat-stroked-button fxFlex="50" aria-label="Import wallet from keys" matTooltip="Import wallet from keys" aria-label="Import wallet from keys" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="importWallet()" [disabled]="true">Import Wallet</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content" *ngIf="import" @transition>
+	<h1 mat-dialog-title class="title">Import Wallet</h1>
+	<h2 class="subtitle">Enter private spend key to continue</h2>
+	<div class="private" mat-dialog-content>
+		<form [formGroup]="form" (ngSubmit)="submit()" fxLayout="column" fxLayoutAlign="space-between stretch">
+			<mat-form-field fxFill appearance="fill">
+				<mat-label>Private Spend Key</mat-label>
+				<input #PrivateSpendKey matInput formControlName="spendKeyFormControl">
+				<mat-error *ngIf="form.controls.spendKeyFormControl.hasError('required')">
+					Private Spend Key is <strong>required</strong>
+				</mat-error>
+			</mat-form-field>
+			<div class="progress" *ngIf="getDataService().isFormLoading"><mat-progress-bar mode="query"></mat-progress-bar></div>
+			<div class="error" *ngIf="getDataService().error">{{ getDataService().error }}</div>
+			<div class="success" *ngIf="getDataService().success">{{ getDataService().success }}</div>
+			<div class="actions" fxLayout="row" fxLayoutGap="15px">
+				<button mat-stroked-button color="primary" fxFlex="50" type="submit">Submit</button>
+				<button mat-stroked-button color="warn" fxFlex="50" (click)="this.form.reset()">Reset</button>
+			</div>
+		</form>
+	</div>
+</div>

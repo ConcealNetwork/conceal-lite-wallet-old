@@ -22,6 +22,8 @@ export class DataService {
 	isLoggedIn: boolean = false;
 	isFormLoading: boolean = false;
 	isKeysLoaded: boolean = false;
+	hasWallet: boolean = true;
+	dialogOpen: boolean = false;
 
 	// Market Data
 	marketData: any = [];

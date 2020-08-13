@@ -8,19 +8,21 @@
 
   <div fxLayout="row" fxLayoutAlign="space-between center">
 
-    <mat-form-field fxFlex="80" class="filter">
+    <mat-form-field fxFlex="70" class="filter">
       <mat-label>Filter</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Search message text, direction etc.">
     </mat-form-field>
 
-    <div fxFlex="20" class="button-control">
-      <button mat-stroked-button color="primary" (click)="getDialogService().openNewMessageDialog()">New Message</button>
+    <div fxFlex="30" class="button-control">
+			<button mat-stroked-button color="primary" (click)="getDialogService().openNewMessageDialog()">New Message</button>
+			<button mat-stroked-button (click)="refresh()" [disabled]="isLoading">Refresh</button>
     </div>
 
   </div>
 
   <div class="mat-elevation-z8">
 
+		<mat-progress-bar class="loading" mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
     <table mat-table [dataSource]="dataSource" matSort matSortActive="timestamp" matSortDisableClear matSortDirection="desc">
 
       <!-- Date Column -->

@@ -50,7 +50,9 @@
         "TITLE": "Lock Your Wallet"
       },
       "LOGIN": {
-        "TITLE": "Wallet Login"
+				"TITLE": "Conceal Lite Wallet",
+				"SUBTITLE1": "Powered by",
+				"SUBTITLE2": "Conceal Cloud™ ☁️"
       }
   }
 }

@@ -24,6 +24,10 @@
 		color: rgba($color: red, $alpha: 0.8);
 	}
 
+	.pointer {
+		cursor: pointer;
+	}
+
 	.button-control {
 		text-align: right;
 
@@ -33,6 +37,11 @@
 			border: 1px solid currentColor;
 			text-transform: uppercase;
 		}
+	}
+
+	.loading {
+		margin-top: 0;
+		margin-bottom: 0;
 	}
 
 }

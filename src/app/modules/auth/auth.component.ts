@@ -7,6 +7,7 @@ import { trigger, transition, query, style, stagger, animate } from '@angular/an
 // Services
 import { AuthService } from '../../shared/services/auth.service';
 import { DataService } from '../../shared/services/data.service';
+import { HelperService } from '../../shared/services/helper.service';
 
 @Component({
 	selector: 'app-auth',
@@ -18,20 +19,28 @@ import { DataService } from '../../shared/services/data.service';
 				transition(':enter', [
 					style({opacity:0}),
 					animate(800, style({opacity:1}))
-				]),
-				transition(':leave', [
-					style({opacity:1}),
-					animate(400, style({opacity:0}))
 				])
 			]
 		),
 		trigger('stagger', [
 			transition(':enter', [
-				query('#cards, .title', style({ opacity: 0, transform: 'translateX(-80px)' }), {optional: true}),
-				query('#cards, .title', stagger('200ms', [
-					animate('400ms 0.3s ease-out', style({ opacity: 1, transform: 'translateX(0)' })),
+				query('.title', style({ opacity: 0, transform: 'translateX(-80px)' }), {optional: true}),
+				query('.subtitle', style({ opacity: 0, transform: 'translateX(80px)' }), {optional: true}),
+				query('#cards, .title, .subtitle ', stagger('400ms', [
+					animate('1000ms 1s ease-out', style({ opacity: 1, transform: 'translateX(0)' })),
 				]), {optional: true}),
-				query('#cards', [
+				query('#cards, .title, .subtitle', [
+					animate(1000, style('*'))
+				], {optional: true})
+			])
+		]),
+		trigger('staggerDown', [
+			transition(':enter', [
+				query('button', style({ opacity: 0, transform: 'translateY(80px)' }), {optional: true}),
+				query('button ', stagger('600ms', [
+					animate('800ms 0.8s ease-out', style({ opacity: 1, transform: 'translateY(0)' })),
+				]), {optional: true}),
+				query('button', [
 					animate(1000, style('*'))
 				], {optional: true})
 			])
@@ -40,7 +49,11 @@ import { DataService } from '../../shared/services/data.service';
 })
 export class AuthComponent implements OnInit {
 
-  form: FormGroup = new FormGroup({
+	isSignUp: boolean = false;
+	isSignIn: boolean = false;
+	hasSignedUp: boolean = false;
+
+  signin: FormGroup = new FormGroup({
     emailFormControl: new FormControl('', [
       Validators.required,
       Validators.email,
@@ -55,14 +68,30 @@ export class AuthComponent implements OnInit {
     ])
 	});
 
+	signup: FormGroup = new FormGroup({
+		usernameFormControl: new FormControl('', [
+      Validators.minLength(1),
+      Validators.maxLength(24),
+    ]),
+    emailFormControl: new FormControl('', [
+      Validators.required,
+      Validators.email,
+    ]),
+    passwordFormControl: new FormControl('', [
+      Validators.required
+    ])
+	});
+
 	constructor (
 		private authService: AuthService,
 		private dataService: DataService,
+		private helperService: HelperService,
     private router: Router
 	) { }
 
 	// Get Services
 	getDataService() { return this.dataService }
+	getHelperService() { return this.helperService }
 
 	ngOnInit(): void {
 		this.dataService.isLoggedIn = this.authService.loggedIn();
@@ -75,39 +104,67 @@ export class AuthComponent implements OnInit {
 		this.dataService.isLoading = false;
 	}
 
-  submit() {
-    if (this.form.valid) {
-      this.dataService.error = null;
-      this.dataService.isFormLoading = true;
-      this.authService.login(this.form.value.emailFormControl, this.form.value.passwordFormControl, this.form.value.twofaFormControl).subscribe(
-        data => {
-          if (data['message'].token && data['result'] === 'success') {
-            this.authService.setToken(data['message'].token);
-            this.dataService.success = 'Success!';
-            this.dataService.isFormLoading = false;
-            setTimeout(() => {
-              this.router.navigate(['/']);
-            }, 2000);
-          }
-          if (data['result'] === 'success') {
-            this.dataService.success = 'Success! Redirecting now...';
-            this.dataService.isFormLoading = false;
-            setTimeout(() => {
-							this.router.navigate(['/']);
-							this.dataService.success = '';
-            }, 2000);
-          }
-          if (data['result'] === 'error') {
-            this.dataService.error = data['message'];
-            this.dataService.isFormLoading = false;
-          }
-        },
-        error => {
-            this.dataService.error = error.message;
-            this.dataService.isFormLoading = false;
-        }
-      );
-    }
-  }
+  submit(type) {
+
+		// Do Signup
+		if (type = 'signup') {
+			if (this.signup.valid) {
+				this.dataService.error = null;
+				this.dataService.isFormLoading = true;
+				this.authService.signUpUser(this.signup.value.usernameFormControl, this.signup.value.emailFormControl, this.signup.value.passwordFormControl).subscribe((data) => {
+					if (data['result'] === 'success') {
+						this.dataService.success = 'Signup successful!';
+						this.dataService.isFormLoading = false;
+						setTimeout(() => {
+							this.hasSignedUp = true;
+							this.dataService.error = null;
+							this.dataService.success = null;
+						}, 2000);
+					} else {
+						this.dataService.error = data['message'];
+						this.dataService.isFormLoading = false;
+					}
+				})
+			}
+		}
+
+		// Do Signin
+		if (type = 'signup') {
+			if (this.signin.valid) {
+				this.dataService.error = null;
+				this.dataService.success = null;
+				this.dataService.isFormLoading = true;
+				this.authService.login(this.signin.value.emailFormControl, this.signin.value.passwordFormControl, this.signin.value.twofaFormControl).subscribe(
+					data => {
+						if (data['message'].token && data['result'] === 'success') {
+							this.authService.setToken(data['message'].token);
+							this.dataService.success = 'Success!';
+							this.dataService.isFormLoading = false;
+							setTimeout(() => {
+								this.router.navigate(['/']);
+							}, 2000);
+						}
+						if (data['result'] === 'success') {
+							this.dataService.success = 'Success! Redirecting now...';
+							this.dataService.isFormLoading = false;
+							setTimeout(() => {
+								this.router.navigate(['/']);
+								this.dataService.success = '';
+							}, 2000);
+						}
+						if (data['result'] === 'error') {
+							this.dataService.error = data['message'];
+							this.dataService.isFormLoading = false;
+						}
+					},
+					error => {
+						this.dataService.error = error.message;
+						this.dataService.isFormLoading = false;
+					}
+				);
+			}
+		}
+
+	}
 
 }

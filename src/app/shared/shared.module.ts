@@ -44,6 +44,7 @@ import { FooterComponent } from './components/footer/footer.component';
 // Dialog Components
 import { ExportKeysDialog } from './components/dialogs/dashboard/export.dialog';
 import { ImportKeysDialog } from './components/dialogs/dashboard/import.dialog';
+import { NoWalletDialog } from './components/dialogs/dashboard/nowallet.dialog';
 import { QrCodeDialog } from './components/dialogs/dashboard/code.dialog';
 import { NewMessageDialog } from './components/dialogs/messages/new.message.dialog';
 import { NewContactDialog } from './components/dialogs/contacts/new.contact.dialog';
@@ -60,6 +61,7 @@ import { TransferDialog } from './components/dialogs/transfer/transfer.dialog';
 		FooterComponent,
 		ExportKeysDialog,
 		ImportKeysDialog,
+		NoWalletDialog,
 		QrCodeDialog,
 		NewMessageDialog,
 		NewContactDialog,

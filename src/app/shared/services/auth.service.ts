@@ -14,7 +14,7 @@ export interface Data {
 export class AuthService {
 	constructor(
 		private http: HttpClient,
-		public jwtHelper: JwtHelperService
+		public jwtHelper: JwtHelperService,
 	) {}
 
 	api = AppConfig.walletAPI;
@@ -33,7 +33,7 @@ export class AuthService {
 	loggedIn() {
 		return this.jwtHelper.isTokenExpired();
 	};
-	
+
 	getExpireDate() {
 		return this.jwtHelper.getTokenExpirationDate();
 	}
@@ -44,12 +44,12 @@ export class AuthService {
 
 	getToken() :any {
 		return localStorage.getItem('access_token');
-	} 
-	
+	}
+
 	logout() {
 		localStorage.removeItem('access_token');
 	}
-	
+
   	decodeToken() {
 		this.jwtHelper.decodeToken(this.getToken());
 	}
@@ -57,5 +57,12 @@ export class AuthService {
 	getQRCode = () => {
 		return this.http.post(this.api + '/two-factor-authentication/', null);
 	};
+
+	signUpUser(username, email, password) {
+		const body = {
+			name: username, email, password
+		};
+		return this.http.post(`${this.api}/user`, JSON.stringify(body));
+	}
 
 }

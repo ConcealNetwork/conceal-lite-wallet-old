@@ -1,12 +1,9 @@
 // Angular
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { trigger, state, transition, query, style, stagger, animate } from '@angular/animations';
-import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatIconRegistry } from '@angular/material/icon';
-import { DomSanitizer } from '@angular/platform-browser';
 
 // Services
 import { HelperService } from './../../shared/services/helper.service';
@@ -60,19 +57,13 @@ export class ContactsComponent implements OnInit {
 
   // MatPaginator Output
   pageEvent: PageEvent;
-  pageSize: Number = 10;
+  pageSize: Number = 5;
   pageSizeOptions: number[] = [5, 10, 25, 100];
   displayedColumns: string[] = ['options', 'label', 'address', 'paymentid'];
 	dataSource: MatTableDataSource<Contacts> = null;
-
-  selection = new SelectionModel<Contacts>(true, []);
-  isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
   expandedElement: any;
-
-  label: string;
-  address: string;
-  paymentid: string;
 	detailRow: boolean = false;
+	isLoading: boolean = true;
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
@@ -82,21 +73,15 @@ export class ContactsComponent implements OnInit {
 		private helperService: HelperService,
 		private dataService: DataService,
 		private dialogService: DialogService,
-    public matIconRegistry: MatIconRegistry,
-		public domSanitizer: DomSanitizer,
 		private changeDetectorRefs: ChangeDetectorRef
   ) {
-    matIconRegistry.addSvgIconSet(
-      domSanitizer.bypassSecurityTrustResourceUrl(
-        `assets/fonts/materal-icons-twotone.svg`
-      )
-    );
 		this.helperService.getContacts();
 		setTimeout(() => {
 			// Assign the data to the data source for the table to render
 			this.dataSource = new MatTableDataSource(this.dataService.contacts);
 			this.dataSource.paginator = this.paginator;
 			this.dataSource.sort = this.sort;
+			this.isLoading = false;
 		}, 2000);
 	}
 
@@ -113,36 +98,36 @@ export class ContactsComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.dataService.isLoggedIn = this.authService.loggedIn();
+		this.helperService.getMarket();
+		this.helperService.getWallets();
+		this.refresh();
 	}
 
 	refresh() {
-		this.helperService.getContacts();
+		this.isLoading = true;
+		this.helperService.getContacts(true);
 		setTimeout(() => {
 			this.dataSource = new MatTableDataSource(this.dataService.contacts);
+			this.dataSource.paginator = this.paginator;
+			this.dataSource.sort = this.sort;
 			this.changeDetectorRefs.detectChanges();
+			this.isLoading = false;
+		}, 3000);
+	}
+
+	delete(entryID) {
+		this.isLoading = true;
+		this.helperService.deleteContact(entryID);
+		setTimeout(() => {
+			this.helperService.getContacts(true);
 		}, 2000);
-  }
-
-	/** Whether the number of selected elements matches the total number of rows. */
-	isAllSelected() {
-		const numSelected = this.selection.selected.length;
-		const numRows = this.dataService.contacts.length;
-		return numSelected === numRows;
-	}
-
-	/** Selects all rows if they are not all selected; otherwise clear selection. */
-	masterToggle() {
-		this.isAllSelected() ?
-		this.selection.clear() :
-		this.dataSource.data.forEach(row => this.selection.select(row));
-	}
-
-	/** The label for the checkbox on the passed row */
-	checkboxLabel(row?: Contacts): string {
-		if (!row) {
-			return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
-		}
-		return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.label + 1}`;
+		setTimeout(() => {
+			this.dataSource = new MatTableDataSource(this.dataService.contacts);
+			this.dataSource.paginator = this.paginator;
+			this.dataSource.sort = this.sort;
+			this.changeDetectorRefs.detectChanges();
+			this.isLoading = false;
+		}, 3000);
 	}
 
   applyFilter(event: Event) {

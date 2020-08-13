@@ -15,13 +15,14 @@
 
     <div fxFlex="30" class="button-control">
       <button mat-stroked-button color="primary" (click)="getDialogService().openNewContactDialog(null)">New Contact</button>
-      <button mat-stroked-button (click)="refresh()">Refresh</button>
+      <button mat-stroked-button (click)="refresh()" [disabled]="isLoading">Refresh</button>
     </div>
 
   </div>
 
   <div class="mat-elevation-z8">
 
+		<mat-progress-bar class="loading" mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
     <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
 
       <!-- Options Column -->
@@ -61,7 +62,7 @@
 						<button mat-stroked-button color="primary" aria-hidden="false" aria-label="Message contact" matTooltip="Message contact" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getDialogService().openNewMessageDialog(row.address)">Message {{row.label}} </button>
 						<button mat-stroked-button aria-hidden="false" aria-label="Copy address" matTooltip="Copy address" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getHelperService().copyToClipboard(row.address, 'Address Copied')">Copy Address</button>
 						<button *ngIf="row.paymentid" mat-stroked-button aria-hidden="false" aria-label="Copy payment ID" matTooltip="Copy payment ID" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getHelperService().copyToClipboard(row.paymentid, 'Payment ID Copied')">Copy Payment ID</button>
-						<button mat-stroked-button color="warn" aria-hidden="false" aria-label="Delete contact" matTooltip="Delete contact" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().deleteContact(row.entryID)">Delete Contact</button>
+						<button mat-stroked-button color="warn" aria-hidden="false" aria-label="Delete contact" matTooltip="Delete contact" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="delete(row.entryID)">Delete Contact</button>
 					</div>
         </td>
       </ng-container>

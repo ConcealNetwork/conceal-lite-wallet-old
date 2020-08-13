@@ -44,21 +44,20 @@ export class HelperService {
 		})
 	}
 
-	getWallets() {
-		this.dataService.isLoading = true;
+	getWallets(refresh=false) {
+		if(!refresh) {
+			this.dataService.isLoading = true;
+		}
 		this.dataService.isWalletLoading = true;
 		this.cloudService.getWalletsData().subscribe((data) => {
 			if (data['result'] === 'success') {
-
 				this.dataService.height = data['message'].height;
 				this.dataService.wallets = data['message'].wallets;
-
 				this.dataService.walletCount = Object.keys(this.dataService.wallets).length;
 				this.dataService.available = Object.keys(this.dataService.wallets).reduce((acc, curr) => acc + this.dataService.wallets[curr].balance + this.dataService.wallets[curr].locked || acc, 0);
 				this.dataService.pending = Object.keys(this.dataService.wallets).reduce((acc, curr) => acc + this.dataService.wallets[curr].locked || acc, 0);
 				this.dataService.withdrawable = Object.keys(this.dataService.wallets).reduce((acc, curr) => acc + this.dataService.wallets[curr].balance || acc, 0);
 				this.dataService.transactionCount = Object.keys(this.dataService.wallets).reduce((acc, curr) => acc + this.dataService.wallets[curr].transactions.length || acc, 0);
-
 				this.cloudService.getPrices('btc').subscribe((data) => {
 					this.dataService.priceBTC = data['conceal'].btc;
 					this.dataService.portfolioBTC = (this.dataService.priceBTC * this.dataService.available);
@@ -70,38 +69,16 @@ export class HelperService {
 				this.dataService.isLoading = false;
 				this.dataService.isWalletLoading = false;
 			}
-		});
-	}
-
-	refreshWallets() {
-		this.dataService.isWalletLoading = true;
-		this.cloudService.getWalletsData().subscribe((data) => {
-			if (data['result'] === 'success') {
-
-				this.dataService.height = data['message'].height;
-				this.dataService.wallets = data['message'].wallets;
-
-				this.dataService.walletCount = Object.keys(this.dataService.wallets).length;
-				this.dataService.available = Object.keys(this.dataService.wallets).reduce((acc, curr) => acc + this.dataService.wallets[curr].balance + this.dataService.wallets[curr].locked || acc, 0);
-				this.dataService.pending = Object.keys(this.dataService.wallets).reduce((acc, curr) => acc + this.dataService.wallets[curr].locked || acc, 0);
-				this.dataService.withdrawable = Object.keys(this.dataService.wallets).reduce((acc, curr) => acc + this.dataService.wallets[curr].balance || acc, 0);
-				this.dataService.transactionCount = Object.keys(this.dataService.wallets).reduce((acc, curr) => acc + this.dataService.wallets[curr].transactions.length || acc, 0);
-
-				this.cloudService.getPrices('btc').subscribe((data) => {
-					this.dataService.priceBTC = data['conceal'].btc;
-					this.dataService.portfolioBTC = (this.dataService.priceBTC * this.dataService.available);
-				})
-				this.cloudService.getPrices('usd').subscribe((data) => {
-					this.dataService.priceUSD = data['conceal'].usd;
-					this.dataService.portfolioUSD = (this.dataService.priceUSD * this.dataService.available);
-				})
-				this.dataService.isWalletLoading = false;
-				this.dataService.isLoading = false;
+			if (data['result'] === 'error' && data['message'][0] === "You don't have any wallet. Please create one") {
+				this.dataService.hasWallet = false;
 			}
 		});
 	}
 
-	getTransactions() {
+	getTransactions(refresh=false) {
+		if(!refresh) {
+			this.dataService.isLoading = true;
+		}
 		this.cloudService.getWalletsData().subscribe((data) => {
 			this.dataService.wallets = data['message'].wallets;
 			// Merge Transactions
@@ -112,6 +89,7 @@ export class HelperService {
 			}
 			const transactionsMerged = Array.prototype.concat(...arr);
 			this.dataService.transactions = transactionsMerged;
+			this.dataService.isLoading = false;
 		});
 	}
 
@@ -137,13 +115,18 @@ export class HelperService {
 			if (data['result'] === 'success') {
 				this.dataService.success = 'Success! Importing wallet...';
 				this.dataService.isFormLoading = false;
+				this.dataService.hasWallet = true;
+				this.dataService.dialogOpen = false;
+				this.dialog.closeAll();
 				setTimeout(() => {
 					this.snackbarService.openSnackBar('Wallet imported', 'Dismiss');
-					this.refreshWallets();
+					this.getWallets(true);
 				}, 2000);
 			} else {
 				this.dataService.error = data['message'];
 				this.dataService.isFormLoading = false;
+				this.dataService.dialogOpen = false;
+				this.dialog.closeAll();
 				this.snackbarService.openSnackBar(data['message'], 'Dismiss');
 			}
 		})
@@ -155,7 +138,7 @@ export class HelperService {
 			this.cloudService.deleteWallet(wallet).subscribe((data) => {
 				if (data['result'] === 'success') {
 					this.snackbarService.openSnackBar('Wallet deleted', 'Dismiss');
-					this.refreshWallets();
+					this.getWallets(true);
 				} else {
 					this.snackbarService.openSnackBar(data['message'], 'Dismiss');
 				}
@@ -169,16 +152,25 @@ export class HelperService {
 		this.dataService.isLoading = true;
 		this.cloudService.createWallet().subscribe((data) => {
 			if (data['result'] === 'success') {
+				this.dataService.isFormLoading = false;
 				this.snackbarService.openSnackBar('Wallet created', 'Dismiss');
-				this.refreshWallets();
+				this.getWallets(true);
+				this.dataService.hasWallet = true;
+				this.dataService.dialogOpen = false;
+				this.dialog.closeAll();
 			} else {
+				this.dataService.isFormLoading = false;
 				this.snackbarService.openSnackBar(data['message'], 'Dismiss');
+				this.dataService.dialogOpen = false;
+				this.dialog.closeAll();
 			}
 		})
 	}
 
-	getMessages() {
-		this.dataService.isLoading = true;
+	getMessages(refresh=false) {
+		if(!refresh) {
+			this.dataService.isLoading = true;
+		}
 		this.cloudService.getMessages().subscribe((data) => {
 			if (data['result'] === 'success') {
 				// Merge Transactions
@@ -215,8 +207,10 @@ export class HelperService {
 		})
 	}
 
-	getContacts() {
-		this.dataService.isLoading = true;
+	getContacts(refresh=false) {
+		if(!refresh) {
+			this.dataService.isLoading = true;
+		}
 		this.cloudService.getContacts().subscribe((data) => {
 			if (data['result'] === 'success') {
 				// Merge Transactions
@@ -238,14 +232,15 @@ export class HelperService {
 	addContact(label, address, paymentID) {
 		this.cloudService.addContact(label, address, paymentID).subscribe((data) => {
 			if (data['result'] === 'success') {
-				this.getContacts();
 				this.dataService.isFormLoading = false;
 				this.dataService.success = 'Contact created successfully, redirecting now...';
 				setTimeout(() => {
+					this.router.navigate(['/dashboard']);
 					this.dialog.closeAll();
 					this.snackbarService.openSnackBar('Contact created', 'Dismiss');
 				}, 2000);
 			} else {
+				this.dataService.error = data['message'];
 				this.snackbarService.openSnackBar(data['message'], 'Dismiss');
 				this.dataService.isFormLoading = false;
 			}

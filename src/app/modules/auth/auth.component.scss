@@ -1,23 +1,98 @@
 .container {
 	height: 100%;
-	width: 90vw;
+	width: 68vw;
 	margin-left: auto;
 	margin-right: auto;
 
 	.title {
-		font-size: 1.6rem;
-		line-height: 1;
-		margin-block-start: 0 !important;
+		font-size: 1.8rem;
+		font-weight: 100;
+		color: orange;
+		margin-block-start: 0em;
+    margin-block-end: 0.6em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
 	}
 
 	.subtitle {
+		font-size: 2.1rem;
 		color: #888;
+		margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+		margin-inline-end: 0px;
+		.sub2 {
+			font-size: 2.5rem;
+			color: #eee;
+			font-weight: bold;
+		}
 	}
+
+	.start {
+		margin-top: 80px;
+		margin-left: 40px;
+		margin-right: 40px;
+		.mat-stroked-button {
+			font-size: 1.2rem;
+			//border-color: orange;
+			padding-top: 0.8rem;
+			padding-bottom: 0.8rem;
+			padding-left: 2.2rem;
+			padding-right: 2.2rem;
+		}
+		// .warn:not(disabled) {
+		// 	border-color: rgba($color: #f18787, $alpha: 0.5);
+		// 	background: rgba(#393939, 0.5);
+		// }
+		// .primary:not(disabled) {
+		// 	border-color: rgba($color: orange, $alpha: 0.5);
+		// 	background: rgba(#393939, 0.5);
+		// }
+	}
+
+	.other {
+		margin-top: -10px;
+		margin-bottom: 5px;
+		.links {
+			color: #ccc;
+			font-size: 0.65rem;
+			cursor: pointer;
+		}
+		.links:hover {
+			color: #888;
+		}
+	}
+
+	.activate {
+		background-color: rgba(#393939, 0.9);
+		border: 1px solid orange;
+		border-radius: 5px;
+		width: 40vw;
+		padding-top: 0.5rem;
+		padding-bottom: 1.5rem;
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+		.checkemail {
+			color: #fff;
+			font-size: 1.2rem;
+		}
+		p {
+			color: #ccc;
+			font-size: 0.9rem;
+		}
+		button {
+			border-color: rgba($color: orange, $alpha: 0.5);
+			font-size: .85rem;
+			padding: .4rem;
+			margin-top: 1.8rem;
+		}
+	}
+
 
 	.login {
 		background-color: rgba(#393939, 0.9);
 		border-radius: 5px;
-		min-width: 32vw;
+		min-width: 36vw;
 		min-height: 50vh;
 		padding-top: .1rem;
 		padding-bottom: .1rem;

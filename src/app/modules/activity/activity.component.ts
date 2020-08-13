@@ -1,13 +1,13 @@
 // Angular
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
 // Services
-import { AuthService } from '../../shared/services/auth.service';
 import { HelperService } from './../../shared/services/helper.service';
+import { AuthService } from '../../shared/services/auth.service';
 import { DataService } from '../../shared/services/data.service';
 
 export interface Transactions {
@@ -57,6 +57,7 @@ export class ActivityComponent implements OnInit {
   pageSizeOptions: number[] = [5, 10, 25, 100];
   displayedColumns: string[] = ['type', 'status', 'amount', 'fee', 'timestamp', 'address'];
 	dataSource: MatTableDataSource<Transactions>;
+	isLoading: boolean = true;
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
@@ -65,6 +66,7 @@ export class ActivityComponent implements OnInit {
 		private authService: AuthService,
 		private helperService: HelperService,
 		private dataService: DataService,
+		private changeDetectorRefs: ChangeDetectorRef
 	) {
 		this.helperService.getTransactions();
 		setTimeout(() => {
@@ -72,6 +74,7 @@ export class ActivityComponent implements OnInit {
 			this.dataSource = new MatTableDataSource(this.dataService.transactions);
 			this.dataSource.paginator = this.paginator;
 			this.dataSource.sort = this.sort;
+			this.isLoading = false;
 		}, 2000);
 	}
 
@@ -85,8 +88,22 @@ export class ActivityComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.dataService.isLoggedIn = this.authService.loggedIn();
+		this.helperService.getMarket();
+		this.helperService.getWallets();
+		this.refresh();
 	}
 
+	refresh() {
+		this.isLoading = true;
+		this.helperService.getTransactions(true);
+		setTimeout(() => {
+			this.dataSource = new MatTableDataSource(this.dataService.transactions);
+			this.dataSource.paginator = this.paginator;
+			this.dataSource.sort = this.sort;
+			this.changeDetectorRefs.detectChanges();
+			this.isLoading = false;
+		}, 3000);
+	}
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

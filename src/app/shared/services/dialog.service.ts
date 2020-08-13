@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 // Dialog Components
 import { ExportKeysDialog } from './../components/dialogs/dashboard/export.dialog';
 import { ImportKeysDialog } from './../components/dialogs/dashboard/import.dialog';
+import { NoWalletDialog } from './../components/dialogs/dashboard/nowallet.dialog';
 import { QrCodeDialog } from './../components/dialogs/dashboard/code.dialog';
 import { NewMessageDialog } from './../components/dialogs/messages/new.message.dialog';
 import { NewContactDialog } from './../components/dialogs/contacts/new.contact.dialog';
@@ -103,6 +104,14 @@ export class DialogService {
     dialogRef.afterClosed().subscribe(result => {
 			this.dataService.success = '';
 			this.dataService.error = '';
+    })
+	}
+
+	openNoWalletDialog(): void {
+    const dialogRef = this.dialog.open(NoWalletDialog, {
+			width: '40%',
+			height: 'auto',
+			disableClose: true,
     })
   }
 

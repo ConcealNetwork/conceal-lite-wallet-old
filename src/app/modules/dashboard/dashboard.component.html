@@ -35,7 +35,7 @@
         </mat-card-content>
         <mat-card-footer>
           <mat-card-actions fxLayoutAlign="start center">
-            <button mat-button aria-hidden="false" aria-label="Refresh balances" matTooltip="Refresh balances" aria-label="Refresh balances" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().refreshWallets()">
+            <button mat-button aria-hidden="false" aria-label="Refresh balances" matTooltip="Refresh balances" aria-label="Refresh balances" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().getWallets(true)">
               Refresh
 						</button>
 						<button mat-button aria-hidden="false" aria-label="Banking & deposits" matTooltip="Banking & deposits" aria-label="Banking & deposits" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getDialogService().openBankingDialog()">
@@ -119,13 +119,14 @@
               </button>
             </mat-card-actions>
           </mat-card-footer>
-        </mat-card>
+				</mat-card>
         <div class="new walletCard" fxFlex fxLayout="column" *ngIf="getDataService().walletCount <= 2">
           <div fxFlex="auto" fxLayoutGap="15px" fxLayout="column" fxLayoutAlign="space-around center">
-            <button id="button" mat-button aria-label="Import wallet from keys" matTooltip="Import wallet from keys" aria-label="Import wallet from keys" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getDialogService().openImportKeysDialog()">Import Wallet</button>
-            <button id="button" mat-button aria-label="Generate a new wallet" matTooltip="Generate a new wallet" aria-label="Generate a new wallet" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().createWallet()">Create Wallet</button>
+						<button id="button" mat-button aria-label="Generate a new wallet" matTooltip="Generate a new wallet" aria-label="Generate a new wallet" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().createWallet()">Create Wallet</button>
+            <button id="button" mat-button aria-label="Import wallet from keys" matTooltip="Import wallet from keys" aria-label="Import wallet from keys" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getDialogService().openImportKeysDialog()" [disabled]="true">Import Wallet</button>
           </div>
-        </div>
+				</div>
+				<div class="new walletCard" fxFlex fxLayout="column" *ngIf="getDataService().walletCount <= 1"></div>
       </div>
     </div>
 

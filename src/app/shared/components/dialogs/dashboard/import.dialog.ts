@@ -14,17 +14,17 @@ import { DataService } from '../../../services/data.service';
 })
 export class ImportKeysDialog {
 
-	form: FormGroup = new FormGroup({
-		spendKeyFormControl: new FormControl('', [
-		Validators.required
-		])
-	});
-
 	constructor (
 		private helperService: HelperService,
 		private dataService: DataService,
 		public dialogRef: MatDialogRef<ImportKeysDialog>,	@Inject(MAT_DIALOG_DATA) public data: any
 	) {}
+
+	form: FormGroup = new FormGroup({
+		spendKeyFormControl: new FormControl('', [
+		Validators.required
+		])
+	});
 
 	getDataService() {
 		return this.dataService;

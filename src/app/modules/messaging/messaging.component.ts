@@ -1,5 +1,5 @@
 // Angular
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -54,7 +54,8 @@ export class MessagingComponent implements OnInit {
   pageSize: Number = 10;
   pageSizeOptions: number[] = [5, 10, 25, 100];
   displayedColumns: string[] = ['type', 'timestamp', 'message'];
-  dataSource: MatTableDataSource<Messages>;
+	dataSource: MatTableDataSource<Messages>;
+	isLoading: boolean = true;
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
@@ -64,6 +65,7 @@ export class MessagingComponent implements OnInit {
 		private helperService: HelperService,
 		private dataService: DataService,
 		private dialogService: DialogService,
+		private changeDetectorRefs: ChangeDetectorRef,
 	) {
 		this.helperService.getMessages();
 		setTimeout(() => {
@@ -71,6 +73,7 @@ export class MessagingComponent implements OnInit {
 			this.dataSource = new MatTableDataSource(this.dataService.messages);
 			this.dataSource.paginator = this.paginator;
 			this.dataSource.sort = this.sort;
+			this.isLoading = false;
 		}, 2000);
 	}
 
@@ -87,8 +90,22 @@ export class MessagingComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.dataService.isLoggedIn = this.authService.loggedIn();
+		this.helperService.getMarket();
 		this.helperService.getWallets();
-  }
+		this.refresh();
+	}
+
+	refresh() {
+		this.isLoading = true;
+		this.helperService.getMessages(true);
+		setTimeout(() => {
+			this.dataSource = new MatTableDataSource(this.dataService.messages);
+			this.dataSource.paginator = this.paginator;
+			this.dataSource.sort = this.sort;
+			this.changeDetectorRefs.detectChanges();
+			this.isLoading = false;
+		}, 3000);
+	}
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

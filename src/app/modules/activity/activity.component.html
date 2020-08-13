@@ -4,15 +4,24 @@
 
 <div *ngIf="!getDataService().isLoading" class="container table" fxLayout="column" @enterAnimation>
 
-  <h1 class="title">{{ 'PAGES.ACTIVITY.TITLE' | translate }}</h1>
+	<h1 class="title">{{ 'PAGES.ACTIVITY.TITLE' | translate }}</h1>
 
-  <mat-form-field class="filter">
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Search by address, status, direction etc.">
-  </mat-form-field>
+	<div fxLayout="row" fxLayoutAlign="space-between center">
+
+		<mat-form-field fxFlex="80" class="filter">
+			<mat-label>Filter</mat-label>
+			<input matInput (keyup)="applyFilter($event)" placeholder="Search by address, status, direction etc.">
+		</mat-form-field>
+
+		<div fxFlex="20" class="button-control">
+			<button mat-stroked-button (click)="refresh()" [disabled]="isLoading">Refresh</button>
+		</div>
+
+	</div>
 
   <div class="mat-elevation-z8">
 
+		<mat-progress-bar class="loading" mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
     <table mat-table [dataSource]="dataSource" matSort matSortActive="timestamp" matSortDisableClear matSortDirection="desc">
 
       <!-- type Column -->
