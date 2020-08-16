@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 // Services
 import { ElectronService } from './shared/services/electron.service';
+import { WatcherService } from './shared/services/watcher.service';
 import { AppConfig } from '../environments/environment';
 
 @Component({
@@ -14,12 +15,24 @@ import { AppConfig } from '../environments/environment';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+	timeout: number = 4000;
+	interval: number = 4000;
+
   constructor(
-    public electronService: ElectronService,
+		public electronService: ElectronService,
+		private watcherService: WatcherService,
     private translate: TranslateService
   ) {
+
     translate.setDefaultLang('en');
-    console.log('AppConfig', AppConfig);
+		console.log('AppConfig', AppConfig);
+
+		setTimeout(() => {
+			setInterval(() => {
+				this.watcherService.checkForWallet();
+			}, this.interval);
+		}, this.timeout);
 
     if (electronService.isElectron) {
       console.log(process.env);
@@ -28,6 +41,7 @@ export class AppComponent {
       console.log('NodeJS childProcess', electronService.childProcess);
     } else {
       console.log('Mode web');
-    }
+		}
+
   }
 }

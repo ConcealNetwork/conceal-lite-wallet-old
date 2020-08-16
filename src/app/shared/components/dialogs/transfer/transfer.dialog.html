@@ -48,8 +48,8 @@
 		</div>
 
 		<div class="actions" fxLayout="row" fxLayoutGap="15px">
-			<button mat-stroked-button color="warn" fxFlex="50" type="button" (click)="close()">Cancel</button>
 			<button mat-stroked-button color="primary" fxFlex="50" type="button" (click)="confirmed=true">Confirm</button>
+			<button mat-stroked-button color="warn" fxFlex="50" type="button" (click)="close()">Cancel</button>
 		</div>
 
 	</div>
@@ -57,7 +57,8 @@
 	<div id="panel" class="content" *ngIf="confirmed" @transition>
 
 		<h1 mat-dialog-title class="title">Authorization</h1>
-		<h2 class="subtitle">Please enter your 2FA code to authorize your transaction</h2>
+		<h2 class="subtitle" *ngIf="getDataService().hasTwoFa">Please enter your 2FA code to authorize your message</h2>
+		<h2 class="subtitle" *ngIf="!getDataService().hasTwoFa">Please enter your password to authorize your message</h2>
 
 		<div mat-dialog-content fxLayout="column">
 			<div class="send" fxFlex="100" fxLayout="row" fxLayoutGap="15px">
@@ -69,7 +70,7 @@
 						<mat-hint>Fee for transaction</mat-hint>
 					</mat-form-field>
 				</div>
-				<div fxFlex="60" fxLayout="column">
+				<div fxFlex="60" fxLayout="column" *ngIf="getDataService().hasTwoFa">
 					<mat-form-field fxFill hintLabel="6 Numbers" appearance="fill">
 						<mat-label>2FA Code</mat-label>
 						<input #twofa matInput minlength="6" maxlength="6" placeholder="00000" formControlName="twofaFormControl">
@@ -85,18 +86,27 @@
 						</mat-error>
 					</mat-form-field>
 				</div>
+				<div fxFlex="60" fxLayout="column" *ngIf="!getDataService().hasTwoFa">
+					<mat-form-field fxFill appearance="fill" hintLabel="Your password">
+						<mat-label>Password</mat-label>
+						<input type="password" matInput placeholder="password" formControlName="passwordFormControl">
+						<mat-error *ngIf="form.controls.passwordFormControl.hasError('required')">
+							Password is <strong>required</strong>
+						</mat-error>
+					</mat-form-field>
+				</div>
 			</div>
 
 			<div class="actions" fxLayout="row" fxLayoutGap="15px">
-				<div class="progress" *ngIf="getDataService().isFormLoading"><mat-progress-bar mode="query"></mat-progress-bar></div>
-				<div class="error" *ngIf="getDataService().error">{{ getDataService().error }}</div>
-				<div class="success" *ngIf="getDataService().success">{{ getDataService().success }}</div>
+				<div fxFill class="progress" *ngIf="getDataService().isFormLoading"><mat-progress-bar mode="query"></mat-progress-bar></div>
+				<div fxFill class="error" *ngIf="getDataService().error">{{ getDataService().error }}</div>
+				<div fxFill class="success" *ngIf="getDataService().success">{{ getDataService().success }}</div>
 			</div>
 
 			<div class="actions" fxLayout="row" fxLayoutGap="15px">
+				<button mat-stroked-button color="primary" fxFlex="50" type="submit" [disabled]="!form.valid">Authorise</button>
 				<button mat-stroked-button fxFlex="25" type="button" (click)="confirmed=false">Review</button>
-				<button mat-stroked-button color="warn" fxFlex="35" type="button" (click)="close()">Cancel</button>
-				<button mat-stroked-button color="primary" fxFlex="40" type="submit" [disabled]="!form.valid">Authorise</button>
+				<button mat-stroked-button color="warn" fxFlex="25" type="button" (click)="close()">Cancel</button>
 			</div>
 		</div>
 

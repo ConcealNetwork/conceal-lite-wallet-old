@@ -1,4 +1,15 @@
-<div class="content" *ngIf="!getDataService().isKeysLoaded" @transition>
+<div class="content" *ngIf="!getDataService().hasTwoFa" @transition>
+	<h1 mat-dialog-title class="title">2FA Required</h1>
+	<h2 class="subtitle">You must enable Two-Factor Authentication to retrieve your keys.	Please go to settings to enable it.</h2>
+	<div class="twofa" mat-dialog-content>
+		<div class="actions" fxLayout="row" fxLayoutGap="15px">
+			<button mat-stroked-button color="primary" fxFlex="50" [mat-dialog-close]="true" routerLink="/settings">Settings</button>
+			<button mat-stroked-button color="warn" fxFlex="50" type="button" (click)="close()">Cancel</button>
+		</div>
+	</div>
+</div>
+
+<div class="content" *ngIf="!getDataService().isKeysLoaded && getDataService().hasTwoFa" @transition>
 	<h1 mat-dialog-title class="title">Export Keys</h1>
 	<h2 class="subtitle">Enter you 2FA code to continue</h2>
 	<div class="twofa" mat-dialog-content>

@@ -189,8 +189,8 @@ export class HelperService {
 		})
 	};
 
-	sendMessage(address, message, twoFACode, wallet) {
-		this.cloudService.sendMessage(address, message, twoFACode, wallet).subscribe((data) => {
+	sendMessage(address, message, wallet, code, password) {
+		this.cloudService.sendMessage(address, message, wallet, code, password).subscribe((data) => {
 			if (data['result'] === 'success') {
 				this.dataService.success = 'Your message was sent successfully, redirecting now...';
 				this.dataService.isFormLoading = false;
@@ -294,8 +294,8 @@ export class HelperService {
 		if (this.dataService.balance) this.dataService.sendAmount = ((percent / 100) * this.dataService.balance);
 	}
 
-	transferFunds(amount, wallet, address, paymentID, message, code) {
-		this.cloudService.createTransaction(amount, wallet, address, paymentID, message, code).subscribe((data) => {
+	transferFunds(amount, wallet, address, paymentID, message, code, password) {
+		this.cloudService.createTransaction(amount, wallet, address, paymentID, message, code, password).subscribe((data) => {
 			if (data['result'] === 'success') {
 				this.dataService.success = 'Your transaction was successful, redirecting now...';
 				this.dataService.isFormLoading = false;
@@ -308,6 +308,18 @@ export class HelperService {
 				this.dataService.error = data['message'];
 				this.dataService.isFormLoading = false;
 				this.snackbarService.openSnackBar(data['message'], 'Dismiss');
+			}
+		})
+	}
+
+	checkFor2FA() {
+		this.cloudService.check2FA().subscribe((data) => {
+			if (data['result'] === 'success') {
+				if (!data['message'].enabled && !this.dataService.twofaWarning) {
+					this.snackbarService.openSnackBarNo2FA('Two-factor authentication is not enabled. For your safety, enable it now in settings.', 'Ignore');
+					this.dataService.twofaWarning = true;
+					this.dataService.hasTwoFa = false;
+				}
 			}
 		})
 	}

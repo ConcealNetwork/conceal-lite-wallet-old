@@ -104,67 +104,73 @@ export class AuthComponent implements OnInit {
 		this.dataService.isLoading = false;
 	}
 
-  submit(type) {
-
-		// Do Signup
-		if (type = 'signup') {
-			if (this.signup.valid) {
-				this.dataService.error = null;
-				this.dataService.isFormLoading = true;
-				this.authService.signUpUser(this.signup.value.usernameFormControl, this.signup.value.emailFormControl, this.signup.value.passwordFormControl).subscribe((data) => {
-					if (data['result'] === 'success') {
-						this.dataService.success = 'Signup successful!';
+	submitSignIn() {
+		// Do Signin
+		if (this.signin.valid) {
+			this.dataService.success = '';
+			this.dataService.error = '';
+			this.dataService.isFormLoading = true;
+			this.authService.login(this.signin.value.emailFormControl, this.signin.value.passwordFormControl, this.signin.value.twofaFormControl).subscribe(
+				data => {
+					if (data['message'].token && data['result'] === 'success') {
+						this.authService.setToken(data['message'].token);
+						this.dataService.success = 'Success!';
 						this.dataService.isFormLoading = false;
 						setTimeout(() => {
-							this.hasSignedUp = true;
-							this.dataService.error = null;
-							this.dataService.success = null;
+							this.router.navigate(['/']);
 						}, 2000);
-					} else {
+					}
+					if (data['result'] === 'success') {
+						this.dataService.success = 'Success! Redirecting now...';
+						this.dataService.isFormLoading = false;
+						setTimeout(() => {
+							this.router.navigate(['/']);
+							this.dataService.success = '';
+							this.dataService.error = '';
+						}, 2000);
+					}
+					if (data['result'] === 'error') {
 						this.dataService.error = data['message'];
 						this.dataService.isFormLoading = false;
+						setTimeout(() => {
+							this.dataService.success = '';
+							this.dataService.error = '';
+						}, 5000);
 					}
-				})
-			}
+				},
+				error => {
+					this.dataService.error = error.message;
+					this.dataService.isFormLoading = false;
+				}
+			);
 		}
+	}
 
-		// Do Signin
-		if (type = 'signup') {
-			if (this.signin.valid) {
-				this.dataService.error = null;
-				this.dataService.success = null;
-				this.dataService.isFormLoading = true;
-				this.authService.login(this.signin.value.emailFormControl, this.signin.value.passwordFormControl, this.signin.value.twofaFormControl).subscribe(
-					data => {
-						if (data['message'].token && data['result'] === 'success') {
-							this.authService.setToken(data['message'].token);
-							this.dataService.success = 'Success!';
-							this.dataService.isFormLoading = false;
-							setTimeout(() => {
-								this.router.navigate(['/']);
-							}, 2000);
-						}
-						if (data['result'] === 'success') {
-							this.dataService.success = 'Success! Redirecting now...';
-							this.dataService.isFormLoading = false;
-							setTimeout(() => {
-								this.router.navigate(['/']);
-								this.dataService.success = '';
-							}, 2000);
-						}
-						if (data['result'] === 'error') {
-							this.dataService.error = data['message'];
-							this.dataService.isFormLoading = false;
-						}
-					},
-					error => {
-						this.dataService.error = error.message;
-						this.dataService.isFormLoading = false;
-					}
-				);
-			}
+  submitSignUp() {
+		// Do Signup
+		if (this.signup.valid) {
+			this.dataService.success = '';
+			this.dataService.error = '';
+			this.dataService.isFormLoading = true;
+			this.authService.signUpUser(this.signup.value.usernameFormControl, this.signup.value.emailFormControl, this.signup.value.passwordFormControl).subscribe((data) => {
+				if (data['result'] === 'success') {
+					this.dataService.success = 'Signup successful!';
+					this.dataService.isFormLoading = false;
+					setTimeout(() => {
+						this.hasSignedUp = true;
+						this.dataService.success = '';
+						this.dataService.error = '';
+					}, 2000);
+				} else {
+					this.dataService.error = data['message'];
+					this.dataService.isFormLoading = false;
+					setTimeout(() => {
+						this.dataService.success = '';
+						this.dataService.error = '';
+					}, 5000);
+				}
+			})
 		}
-
 	}
 
 }

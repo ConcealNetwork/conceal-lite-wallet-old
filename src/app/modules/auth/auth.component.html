@@ -19,7 +19,7 @@
 
 	<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="45px" *ngIf="isSignIn" @enterAnimation>
 		<div id="cards" fxLayout="column" class="login" fxLayoutAlign="center">
-      <form [formGroup]="signin" (ngSubmit)="submit()">
+      <form [formGroup]="signin">
         <p>Sign in to continue.</p>
         <p>
           <mat-form-field fxFill appearance="fill" hintLabel="Your email address">
@@ -63,12 +63,12 @@
           {{ getDataService().success }}
         </p>
         <p class="actions" fxLayout="row" fxLayoutGap="15px">
+					<button mat-stroked-button color="primary" fxFlex="50" (click)="submitSignIn()">Login</button>
 					<button mat-stroked-button color="warn" fxFlex="50" (click)="this.signin.reset()">Clear</button>
-          <button mat-stroked-button color="primary" fxFlex="50" type="submit(signin)">Login</button>
 				</p>
 			</form>
 			<div class="other" fxLayout="column" fxLayoutAlign="space-between center">
-				<div class="links" (click)="isSignIn=false;isSignUp=true;">New User? Sign Up</div>
+				<div class="links" (click)="isSignIn=false;isSignUp=true;getDataService().error='';">New User? Sign Up</div>
 				<div class="links" (click)="null">Forgot Passsword? Reset Now</div>
 				<div class="links" (click)="isSignIn=false;">Go Back</div>
 			</div>
@@ -77,7 +77,7 @@
 
 	<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="45px" *ngIf="isSignUp && !hasSignedUp" @enterAnimation>
 		<div id="cards" fxLayout="column" class="login" fxLayoutAlign="center">
-      <form [formGroup]="signup" (ngSubmit)="submit()">
+      <form [formGroup]="signup">
 				<p>Sign up to continue.</p>
 				<p>
           <mat-form-field fxFill appearance="fill" hintLabel="Your username">
@@ -120,12 +120,12 @@
           {{ getDataService().success }}
         </p>
         <p class="actions" fxLayout="row" fxLayoutGap="15px">
+					<button mat-stroked-button color="primary" fxFlex="50" (click)="submitSignUp()">Signup</button>
 					<button mat-stroked-button color="warn" fxFlex="50" (click)="this.signup.reset()">Clear</button>
-					<button mat-stroked-button color="primary" fxFlex="50" type="submit(signup)">Signup</button>
         </p>
 			</form>
 			<div class="other" fxLayout="column" fxLayoutAlign="space-between center">
-				<div class="links" (click)="isSignIn=true;isSignUp=false;">Existing User? Sign In</div>
+				<div class="links" (click)="isSignIn=true;isSignUp=false;getDataService().error='';">Existing User? Sign In</div>
 				<div class="links" (click)="isSignUp=false;">Go Back</div>
 			</div>
 		</div>

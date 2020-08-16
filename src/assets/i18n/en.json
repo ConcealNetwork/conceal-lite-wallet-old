@@ -3,7 +3,8 @@
       "HEADER": {
         "TITLE": "Lite Wallet",
         "DASHBOARD": "Dashboard",
-        "TRANSFER": "Pay & Transfer"
+        "TRANSFER": "Pay & Transfer",
+        "BANKING": "Banking"
       },
       "FOOTER": {
         "WALLET": "Cloud Wallet",

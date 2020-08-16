@@ -26,6 +26,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 // 3rd Party
 import { QRCodeModule } from 'angularx-qrcode';
@@ -92,6 +93,7 @@ import { TransferDialog } from './components/dialogs/transfer/transfer.dialog';
 		MatSelectModule,
 		MatDialogModule,
 		MatTooltipModule,
+		MatAutocompleteModule,
 		QRCodeModule,
 		NgPipesModule
   ],

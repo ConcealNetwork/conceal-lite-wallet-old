@@ -24,6 +24,8 @@ export class DataService {
 	isKeysLoaded: boolean = false;
 	hasWallet: boolean = true;
 	dialogOpen: boolean = false;
+	twofaWarning: boolean = false;
+	hasTwoFa: boolean = true;
 
 	// Market Data
 	marketData: any = [];

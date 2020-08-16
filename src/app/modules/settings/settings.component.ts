@@ -38,10 +38,10 @@ export class SettingsComponent implements OnInit {
 	isLoading: boolean = true;
 	currentLang: string;
 
-	constructor(private translate: TranslateService) { 
+	constructor(private translate: TranslateService) {
 		this.translate.use('en');
 	}
-	
+
 	useLanguage(language: string) {
 		this.translate.use(language);
 		this.currentLang = language;

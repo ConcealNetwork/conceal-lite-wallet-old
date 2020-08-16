@@ -7,6 +7,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 // Services
 import { ElectronService } from '../../services/electron.service';
 import { DataService } from '../../services/data.service';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'app-header',
@@ -22,7 +23,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
 		public electronService: ElectronService,
-    private dataService: DataService,
+		private dataService: DataService,
+		private dialogService: DialogService,
     public router: Router,
     private route: ActivatedRoute,
     public matIconRegistry: MatIconRegistry,
@@ -35,6 +37,10 @@ export class HeaderComponent implements OnInit {
     );
 	}
 
+	// Get Services
+	getDialogService() {
+		return this.dialogService;
+	}
 	getDataService() {
 		return this.dataService;
 	}

@@ -21,15 +21,15 @@
           <div class="balances" fxLayout="column" fxLayoutAlign="space-evenly stretch">
             <div class="balance" fxLayout="row" fxFlex="25" fxLayout="row" fxLayoutAlign="space-between stretch">
               <span class="st">Total Available</span>
-              <span class="sb">{{getHelperService().formatAmount(getDataService().available, 1, 5) || 0}} <span class="ccx">CCX</span></span>
+              <span class="sb">{{getHelperService().formatAmount(getDataService().available, 1, 6) || 0}} <span class="ccx">CCX</span></span>
             </div>
             <div class="balance" fxLayout="row" fxFlex="25" fxLayout="row" fxLayoutAlign="space-between stretch">
               <span class="st">Total Pending</span>
-              <span class="sb" [ngClass]="{'locked': (getDataService().pending != 0)}">{{getHelperService().formatAmount(getDataService().pending, 1, 5) || 0}} <span class="ccx">CCX</span></span>
+              <span class="sb" [ngClass]="{'locked': (getDataService().pending != 0)}">{{getHelperService().formatAmount(getDataService().pending, 1, 6) || 0}} <span class="ccx">CCX</span></span>
             </div>
             <div class="balance" fxLayout="row" fxFlex="25" fxLayout="row" fxLayoutAlign="space-between stretch">
               <span class="st">Total Withdrawable</span>
-              <span class="sb">{{getHelperService().formatAmount(getDataService().withdrawable, 1, 5) || 0}} <span class="ccx">CCX</span></span>
+              <span class="sb">{{getHelperService().formatAmount(getDataService().withdrawable, 1, 6) || 0}} <span class="ccx">CCX</span></span>
             </div>
           </div>
         </mat-card-content>
@@ -94,15 +94,15 @@
             <div class="balances" fxLayout="column" fxLayoutAlign="space-evenly stretch">
               <div class="balance" fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
                 <span class="st">Available</span>
-                <span class="sb">{{ getHelperService().formatAmount(item.value.total, 1, 5) }} <span class="ccx">CCX</span></span>
+                <span class="sb">{{ getHelperService().formatAmount(item.value.total, 1, 6) }} <span class="ccx">CCX</span></span>
               </div>
               <div class="balance" fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
                 <span class="st">Pending</span>
-                <span class="sb" [ngClass]="{'locked': (item.value.locked != 0)}">{{ getHelperService().formatAmount(item.value.locked, 1, 5) }} <span class="ccx">CCX</span></span>
+                <span class="sb" [ngClass]="{'locked': (item.value.locked != 0)}">{{ getHelperService().formatAmount(item.value.locked, 1, 6) }} <span class="ccx">CCX</span></span>
               </div>
               <div class="balance" fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
                 <span class="st">Withdrawable</span>
-                <span class="sb">{{ getHelperService().formatAmount(item.value.balance, 1, 5) }} <span class="ccx">CCX</span></span>
+                <span class="sb">{{ getHelperService().formatAmount(item.value.balance, 1, 6) }} <span class="ccx">CCX</span></span>
               </div>
             </div>
           </mat-card-content>

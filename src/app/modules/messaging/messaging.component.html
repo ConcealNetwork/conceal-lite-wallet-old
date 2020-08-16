@@ -14,8 +14,8 @@
     </mat-form-field>
 
     <div fxFlex="30" class="button-control">
-			<button mat-stroked-button color="primary" (click)="getDialogService().openNewMessageDialog()">New Message</button>
-			<button mat-stroked-button (click)="refresh()" [disabled]="isLoading">Refresh</button>
+			<button mat-stroked-button color="primary" aria-hidden="false" aria-label="Send new message" matTooltip="Send new message" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getDialogService().openNewMessageDialog()">New Message</button>
+			<button mat-stroked-button aria-hidden="false" aria-label="Refresh messages" matTooltip="Refresh messages" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="refresh()" [disabled]="isLoading">Refresh</button>
     </div>
 
   </div>

@@ -6,7 +6,7 @@
 
 	<div fxLayout="row" fxLayoutGap="45px">
 
-		<mat-tab-group fxFlex="100" [selectedIndex]="getDataService().selectedTab">
+		<mat-tab-group fxFlex="100" [selectedIndex]="getDataService().selectedTab" (selectedTabChange)="resetForms($event)">
 
 			<mat-tab label="Pay">
 				<form [formGroup]="pay" (ngSubmit)="submit()">
@@ -29,7 +29,7 @@
 												<div class="balance" fxFlex="30">
 													<div class="available">Available</div>
 													<div class="amount">
-														<span>{{getDataService().balance}}</span>
+														<span>{{getHelperService().formatAmount(getDataService().balance, 1, 6) || 0}}</span>
 														<span class="symbol"> CCX</span>
 													</div>
 												</div>
@@ -102,8 +102,13 @@
 												<div class="form-fields" fxFlex="80" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="24px">
 													<mat-form-field hintLabel="98 characters" appearance="fill">
 														<mat-label>Address</mat-label>
-														<input matInput #address [(value)]="getDataService().sendToWallet" type="text" maxlength="98" placeholder="CCX Address" formControlName="toaddressFormControl">
-														<mat-icon class="icon-button" matSuffix svgIcon="contacts" matTooltip="Select from contacts" matTooltipPosition="below" matTooltipClass="custom-tooltip" routerLink="/contacts"></mat-icon>
+														<input matInput #address [(value)]="getDataService().sendToWallet" type="text" maxlength="98" placeholder="CCX Address" formControlName="toaddressFormControl" [matAutocomplete]="auto">
+														<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+															<mat-option *ngFor="let option of getDataService().contacts" [value]="option.address">
+																{{option.label}} <small>({{getHelperService().formatAddress(option.address)}})</small>
+															</mat-option>
+														</mat-autocomplete>
+														<mat-icon class="icon-button" matSuffix svgIcon="contacts"></mat-icon>
 														<mat-hint align="end">{{address.value.length}} / 98</mat-hint>
 														<mat-error *ngIf="pay.controls.toaddressFormControl.hasError('required')">
 															Address selection is <strong>required</strong>
@@ -145,7 +150,7 @@
 				</form>
 			</mat-tab>
 
-			<mat-tab label="Transfer">
+			<mat-tab label="Transfer" (click)="resetForms()">
 				<form [formGroup]="transfer" (ngSubmit)="submit()">
 					<p class="description">Transfer between your wallets.</p>
 					<div fxLayout="row">
@@ -166,7 +171,7 @@
 												<div class="balance" fxFlex="30">
 													<div class="available">Available</div>
 													<div class="amount">
-														<span>{{getDataService().balance}}</span>
+														<span>{{getHelperService().formatAmount(getDataService().balance, 1, 6) || 0}}</span>
 														<span class="symbol"> CCX</span>
 													</div>
 												</div>

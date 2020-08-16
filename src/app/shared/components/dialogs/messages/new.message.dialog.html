@@ -26,8 +26,13 @@
 
 				<mat-form-field hintLabel="98 characters" appearance="fill">
 					<mat-label>Address</mat-label>
-					<input matInput #address type="text" maxlength="98" placeholder="CCX Address" formControlName="toaddressFormControl">
-					<mat-icon class="icon-button" matSuffix svgIcon="contacts" matTooltip="Select from contacts" matTooltipPosition="below" matTooltipClass="custom-tooltip" routerLink="/contacts"></mat-icon>
+					<input matInput #address type="text" maxlength="98" placeholder="CCX Address" formControlName="toaddressFormControl" [matAutocomplete]="auto">
+					<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+						<mat-option *ngFor="let option of getDataService().contacts" [value]="option.address">
+							{{option.label}} <small>({{getHelperService().formatAddress(option.address)}})</small>
+						</mat-option>
+					</mat-autocomplete>
+					<mat-icon class="icon-button" matSuffix svgIcon="contacts"></mat-icon>
 					<mat-hint align="end">{{address.value.length}} / 98</mat-hint>
 					<mat-error *ngIf="form.controls.toaddressFormControl.hasError('required')">
 						Address selection is <strong>required</strong>
@@ -53,8 +58,8 @@
 		</div>
 
 		<div class="actions" fxLayout="row" fxLayoutGap="25px">
-			<button mat-stroked-button color="warn" fxFlex="50" type="button" (click)="close()">Cancel</button>
 			<button mat-stroked-button color="primary" fxFlex="50" type="button" (click)="isFormValid()">Confirm</button>
+			<button mat-stroked-button color="warn" fxFlex="50" type="button" (click)="close()">Cancel</button>
 		</div>
 
 	</div>
@@ -62,7 +67,8 @@
 	<div id="panel" class="content" *ngIf="confirmed" @transition>
 
 		<h1 mat-dialog-title class="title">Authorization</h1>
-		<h2 class="subtitle">Please enter your 2FA code to authorize your message</h2>
+		<h2 class="subtitle" *ngIf="getDataService().hasTwoFa">Please enter your 2FA code to authorize your message</h2>
+		<h2 class="subtitle" *ngIf="!getDataService().hasTwoFa">Please enter your password to authorize your message</h2>
 
 		<div mat-dialog-content fxLayout="column">
 			<div class="send" fxFlex="100" fxLayout="row" fxLayoutGap="15px">
@@ -74,7 +80,7 @@
 						<mat-hint>Fee for transaction</mat-hint>
 					</mat-form-field>
 				</div>
-				<div fxFlex="60" fxLayout="column">
+				<div fxFlex="60" fxLayout="column" *ngIf="getDataService().hasTwoFa">
 					<mat-form-field fxFill hintLabel="6 Numbers" appearance="fill">
 						<mat-label>2FA Code</mat-label>
 						<input #twofa matInput minlength="6" maxlength="6" placeholder="00000" formControlName="twofaFormControl">
@@ -90,18 +96,23 @@
 						</mat-error>
 					</mat-form-field>
 				</div>
+				<div fxFlex="60" fxLayout="column" *ngIf="!getDataService().hasTwoFa">
+					<mat-form-field fxFill appearance="fill" hintLabel="Your password">
+						<mat-label>Password</mat-label>
+						<input type="password" matInput placeholder="password" formControlName="passwordFormControl">
+						<mat-error *ngIf="form.controls.passwordFormControl.hasError('required')">
+							Password is <strong>required</strong>
+						</mat-error>
+					</mat-form-field>
+				</div>
 			</div>
-			<!-- <div fxFlex="100" fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="20px">
-				<mat-label>Self Destruct Message?</mat-label>
-				<mat-slide-toggle #sda [checked]="checked" formControlName="selfdestructFormControl"><span class="checked">{{sda.checked}}</span></mat-slide-toggle>
-			</div> -->
 			<div class="progress" *ngIf="getDataService().isFormLoading"><mat-progress-bar mode="query"></mat-progress-bar></div>
 			<div class="error" *ngIf="getDataService().error">{{ getDataService().error }}</div>
 			<div class="success" *ngIf="getDataService().success">{{ getDataService().success }}</div>
 			<div class="actions" fxLayout="row" fxLayoutGap="15px">
+				<button mat-stroked-button color="primary" fxFlex="50" type="submit" [disabled]="!form.valid">Authorise</button>
 				<button mat-stroked-button fxFlex="25" type="button" (click)="confirmed=false">Back</button>
-				<button mat-stroked-button color="warn" fxFlex="35" type="button" (click)="close()">Cancel</button>
-				<button mat-stroked-button color="primary" fxFlex="40" type="submit" [disabled]="!form.valid">Authorise</button>
+				<button mat-stroked-button color="warn" fxFlex="25" type="button" (click)="close()">Cancel</button>
 			</div>
 		</div>
 

@@ -13,6 +13,10 @@ export class CloudService {
 
 	constructor(private http: HttpClient) { }
 
+	check2FA() {
+		return this.http.get(`${this.api}/two-factor-authentication/enabled/`);
+  };
+
 	getWalletsData() {
 		return this.http.get(`${this.api}/wallet/unified`);
 	};
@@ -40,9 +44,9 @@ export class CloudService {
     return this.http.get(`${this.api}/wallet/messages`);
 	};
 
-	sendMessage(address, message, code, wallet) {
+	sendMessage(address, message, wallet, code, password) {
 		const body = {
-			address, message, code, wallet
+			address, message, wallet, code, password
 		};
 		return this.http.post(`${this.api}/wallet/send-message`, JSON.stringify(body));
 	};
@@ -75,19 +79,22 @@ export class CloudService {
 		return this.http.post(`${this.api}/wallet/import`, privateSpendKey);
 	};
 
-	createTransaction(amount, wallet, address, paymentID, message, code) {
+	createTransaction(amount, wallet, address, paymentID, message, code, password) {
 		let client = '';
 		let ref = '';
-    const body = {
+		if(!message) message = '';
+		if(!paymentID) paymentID = '';
+    let body = {
       amount: parseFloat(amount),
 			wallet,  		// origin
 			address,  	// destination
 			paymentID, 	// destination ID
 			message, 		// message
 			code,				// 2FA code
+			password,		// 2FA code
 			client,			// Client not used
 			ref					// Ref not used
-    };
+		};
 		return this.http.put(`${this.api}/wallet`, JSON.stringify(body));
   };
 

@@ -34,7 +34,8 @@
 		margin-right: 40px;
 		.mat-stroked-button {
 			font-size: 1.2rem;
-			//border-color: orange;
+			//border-color: rgba($color: #fff, $alpha: 0.5);
+			border-width: 2.5px;
 			padding-top: 0.8rem;
 			padding-bottom: 0.8rem;
 			padding-left: 2.2rem;

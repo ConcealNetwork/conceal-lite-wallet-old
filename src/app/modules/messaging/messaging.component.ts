@@ -92,6 +92,7 @@ export class MessagingComponent implements OnInit {
 		this.dataService.isLoggedIn = this.authService.loggedIn();
 		this.helperService.getMarket();
 		this.helperService.getWallets();
+		this.helperService.checkFor2FA();
 		this.refresh();
 	}
 

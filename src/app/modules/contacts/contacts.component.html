@@ -14,8 +14,8 @@
     </mat-form-field>
 
     <div fxFlex="30" class="button-control">
-      <button mat-stroked-button color="primary" (click)="getDialogService().openNewContactDialog(null)">New Contact</button>
-      <button mat-stroked-button (click)="refresh()" [disabled]="isLoading">Refresh</button>
+      <button mat-stroked-button color="primary" aria-hidden="false" aria-label="Create new contact" matTooltip="Create new contact" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getDialogService().openNewContactDialog(null)">New Contact</button>
+      <button mat-stroked-button aria-hidden="false" aria-label="Refresh contacts" matTooltip="Refresh contacts" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="refresh()" [disabled]="isLoading">Refresh</button>
     </div>
 
   </div>
@@ -60,8 +60,8 @@
 					<div fxLayoutAlign="start center" fxLayoutGap="15px">
 						<button mat-stroked-button color="primary" aria-hidden="false" aria-label="Pay contact" matTooltip="Pay contact" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().transferTo(row.address, row.paymentid, 0)">Pay {{row.label}} </button>
 						<button mat-stroked-button color="primary" aria-hidden="false" aria-label="Message contact" matTooltip="Message contact" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getDialogService().openNewMessageDialog(row.address)">Message {{row.label}} </button>
-						<button mat-stroked-button aria-hidden="false" aria-label="Copy address" matTooltip="Copy address" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getHelperService().copyToClipboard(row.address, 'Address Copied')">Copy Address</button>
-						<button *ngIf="row.paymentid" mat-stroked-button aria-hidden="false" aria-label="Copy payment ID" matTooltip="Copy payment ID" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getHelperService().copyToClipboard(row.paymentid, 'Payment ID Copied')">Copy Payment ID</button>
+						<button mat-stroked-button aria-hidden="false" aria-label="Copy address" matTooltip="Copy address" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().copyToClipboard(row.address, 'Address Copied')">Copy Address</button>
+						<button *ngIf="row.paymentid" mat-stroked-button aria-hidden="false" aria-label="Copy payment ID" matTooltip="Copy payment ID" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().copyToClipboard(row.paymentid, 'Payment ID Copied')">Copy Payment ID</button>
 						<button mat-stroked-button color="warn" aria-hidden="false" aria-label="Delete contact" matTooltip="Delete contact" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="delete(row.entryID)">Delete Contact</button>
 					</div>
         </td>

@@ -14,7 +14,7 @@
 		</mat-form-field>
 
 		<div fxFlex="20" class="button-control">
-			<button mat-stroked-button (click)="refresh()" [disabled]="isLoading">Refresh</button>
+			<button mat-stroked-button aria-hidden="false" aria-label="Refresh transactions" matTooltip="Refresh transactions" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="refresh()" [disabled]="isLoading">Refresh</button>
 		</div>
 
 	</div>
@@ -41,13 +41,13 @@
       <!-- amount Column -->
       <ng-container matColumnDef="amount">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Amount</th>
-        <td mat-cell *matCellDef="let row">{{getHelperService().formatAmount(row.amount, 5, 5)}} CCX</td>
+        <td mat-cell *matCellDef="let row">{{getHelperService().formatAmount(row.amount, 1, 6)}} CCX</td>
 			</ng-container>
 
 			<!-- fee Column -->
       <ng-container matColumnDef="fee">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Fee</th>
-        <td mat-cell *matCellDef="let row">{{getHelperService().formatAmount(row.fee, 5, 5)}} CCX</td>
+        <td mat-cell *matCellDef="let row">{{getHelperService().formatAmount(row.fee, 1, 6)}} CCX</td>
 			</ng-container>
 
 			<!-- timestamp Column -->

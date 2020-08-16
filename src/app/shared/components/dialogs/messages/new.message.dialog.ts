@@ -25,25 +25,7 @@ export class NewMessageDialog {
 
 	confirmed: boolean = false;
 
-  constructor (
-		public dialogRef: MatDialogRef<NewMessageDialog>,
-		private helperService: HelperService,
-		private dataService: DataService,
-		@Inject(MAT_DIALOG_DATA) public data: any
-	)	{
-			if(data.address) {
-				this.helperService.getWallets();
-				this.form.controls.toaddressFormControl.patchValue(this.data.address, { emitEvent: true });
-			}
-		}
-
 	form: FormGroup = new FormGroup({
-		twofaFormControl: new FormControl('', [
-			Validators.minLength(6),
-			Validators.maxLength(6),
-			Validators.pattern('^[0-9]*$'),
-			Validators.required,
-		]),
 		walletFormControl: new FormControl('', [
 			Validators.required,
 		]),
@@ -58,11 +40,35 @@ export class NewMessageDialog {
 			Validators.maxLength(260),
 			Validators.required,
 		]),
-		//selfdestructFormControl: new FormControl('', []),
 		feeFormControl: new FormControl({value: this.dataService.fee, disabled: true},[
 			//Validators.required,
 		]),
 	});
+
+
+  constructor (
+		public dialogRef: MatDialogRef<NewMessageDialog>,
+		private helperService: HelperService,
+		private dataService: DataService,
+		@Inject(MAT_DIALOG_DATA) public data: any)
+	{
+		if(data.address) {
+			this.form.controls.toaddressFormControl.patchValue(this.data.address, { emitEvent: true });
+		}
+		if (this.dataService.hasTwoFa) {
+			this.form.addControl('twofaFormControl', new FormControl('', [
+				Validators.minLength(6),
+				Validators.maxLength(6),
+				Validators.pattern('^[0-9]*$'),
+				Validators.required,
+			]))
+		}
+		if (!this.dataService.hasTwoFa) {
+			this.form.addControl('passwordFormControl', new FormControl('', [
+				Validators.required,
+			]))
+		}
+	}
 
 	getHelperService() {
 		return this.helperService;
@@ -92,12 +98,14 @@ export class NewMessageDialog {
 		if (this.form.valid) {
 			this.dataService.error = null;
 			this.dataService.isFormLoading = true;
+			let password = this.form.value.passwordFormControl || '';
+			let code = this.form.value.twofaFormControl || '';
 			this.helperService.sendMessage(
 				this.form.value.toaddressFormControl,
 				this.form.value.messageFormControl,
-				this.form.value.twofaFormControl,
-				//this.form.value.selfdestructFormControl,
-				this.form.value.walletFormControl
+				this.form.value.walletFormControl,
+				code,
+				password
 			);
 		}
 	}

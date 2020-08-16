@@ -18,9 +18,18 @@ export class SnackbarService {
 	openSnackBar(message: string, action: string) {
 		this.snackBar.open(message, action, {
 			duration: 8000,
-			panelClass: 'notify',
+			panelClass: 'snak-notify',
 			horizontalPosition: this.snackbarHorizontalPosition,
 			verticalPosition: this.snackbarVerticalPosition,
+		});
+	}
+
+	openSnackBarNo2FA(message: string, action: string) {
+		this.snackBar.open(message, action, {
+			duration: 8000000,
+			panelClass: 'snak-warning',
+			horizontalPosition: 'right',
+			verticalPosition: 'bottom',
 		});
 	}
 

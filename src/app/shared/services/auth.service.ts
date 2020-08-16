@@ -50,7 +50,7 @@ export class AuthService {
 		localStorage.removeItem('access_token');
 	}
 
-  	decodeToken() {
+  decodeToken() {
 		this.jwtHelper.decodeToken(this.getToken());
 	}
 

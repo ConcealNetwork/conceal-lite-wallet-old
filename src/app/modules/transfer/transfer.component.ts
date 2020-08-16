@@ -100,10 +100,16 @@ export class TransferComponent implements OnInit {
 		return this.dataService;
 	}
 
+	resetForms() {
+		this.transfer.reset();
+		this.pay.reset();
+		this.dataService.balance = 0;
+	}
+
 	setAmount(value) {
 		this.getHelperService().percentageOfBalance(value);
-		this.transfer.controls.amountFormControl.patchValue(this.dataService.sendAmount, { emitEvent: true });
-		this.pay.controls.amountFormControl.patchValue(this.dataService.sendAmount, { emitEvent: true });
+		this.transfer.controls.amountFormControl.patchValue(this.helperService.formatAmount(this.dataService.sendAmount, 1, 6), { emitEvent: true });
+		this.pay.controls.amountFormControl.patchValue(this.helperService.formatAmount(this.dataService.sendAmount, 1, 6), { emitEvent: true });
 	}
 
 	submit() {
@@ -130,9 +136,13 @@ export class TransferComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		this.dataService.isLoggedIn = this.authService.loggedIn();
 		this.helperService.getMarket();
 		this.helperService.getWallets();
-		this.dataService.isLoggedIn = this.authService.loggedIn();
+		this.helperService.getContacts();
+		this.helperService.checkFor2FA();
+		this.transfer.reset();
+		this.pay.reset();
 		this.dataService.sendAmount = 0;
 		if (this.dataService.selectedWallet) {
 			this.transfer.controls.walletFormControl.patchValue(this.dataService.selectedWallet, { emitEvent: true });

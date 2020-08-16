@@ -26,12 +26,6 @@ export class TransferDialog {
 	confirmed: boolean = false;
 
 	form: FormGroup = new FormGroup({
-		twofaFormControl: new FormControl('', [
-		Validators.minLength(6),
-		Validators.maxLength(6),
-		Validators.pattern('^[0-9]*$'),
-		Validators.required,
-		]),
 		amountFormControl: new FormControl({value: this.data.amount, disabled: true},[
 			Validators.required,
 		]),
@@ -41,10 +35,10 @@ export class TransferDialog {
 		toaddressFormControl: new FormControl({value: this.data.address, disabled: true},[
 			Validators.required,
 		]),
-		paymentidFormControl: new FormControl({value: this.data.paymentID, disabled: true},[
+		paymentidFormControl: new FormControl({value: this.data.paymentID || '', disabled: true},[
 			//Validators.required,
 		]),
-		messageFormControl: new FormControl({value: this.data.message, disabled: true},[
+		messageFormControl: new FormControl({value: this.data.message || '', disabled: true},[
 			//Validators.required,
 		]),
 		feeFormControl: new FormControl({value: this.dataService.fee, disabled: true},[
@@ -57,8 +51,21 @@ export class TransferDialog {
 		private helperService: HelperService,
 		private dataService: DataService,
 		@Inject(MAT_DIALOG_DATA) public data: any
-	) { }
-
+	) {
+		if (this.dataService.hasTwoFa) {
+			this.form.addControl('twofaFormControl', new FormControl('', [
+				Validators.minLength(6),
+				Validators.maxLength(6),
+				Validators.pattern('^[0-9]*$'),
+				Validators.required,
+			]))
+		}
+		if (!this.dataService.hasTwoFa) {
+			this.form.addControl('passwordFormControl', new FormControl('', [
+				Validators.required,
+			]))
+		}
+	}
 
 	getDataService() {
 		return this.dataService;
@@ -68,13 +75,17 @@ export class TransferDialog {
 		if (this.form.valid) {
 			this.dataService.error = null;
 			this.dataService.isFormLoading = true;
+			let amount = (this.data.amount - this.dataService.fee);
+			let password = this.form.value.passwordFormControl || '';
+			let code = this.form.value.twofaFormControl || '';
 			this.helperService.transferFunds(
-				this.data.amount,
+				amount.toFixed(6),
 				this.data.wallet,
 				this.data.address,
 				this.data.paymentID,
 				this.data.message,
-				this.form.value.twofaFormControl
+				code,
+				password
 			);
 		}
 	}
