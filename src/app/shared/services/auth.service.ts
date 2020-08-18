@@ -21,12 +21,7 @@ export class AuthService {
 	token;
 
 	login(email: string, password: string, twofa: string) {
-		const body = {
-			email,
-			password,
-			rememberme: false,
-			code: twofa
-		}
+		const body = { email,	password,	rememberme: false, code: twofa }
 		return this.http.post(this.api + '/auth', JSON.stringify(body));
 	};
 
@@ -54,14 +49,22 @@ export class AuthService {
 		this.jwtHelper.decodeToken(this.getToken());
 	}
 
-	getQRCode = () => {
-		return this.http.post(this.api + '/two-factor-authentication/', null);
+	getQRCode() {
+		return this.http.post(`${this.api}/two-factor-authentication`, null);
 	};
 
+	enable2FA(code, enable) {
+		const body = { code, enable };
+		return this.http.put(`${this.api}/two-factor-authentication`, JSON.stringify(body));
+	};
+
+	disable2FA(code) {
+		const body = { code };
+		return this.http.delete(`${this.api}/two-factor-authentication?code=${code}`);
+  };
+
 	signUpUser(username, email, password) {
-		const body = {
-			name: username, email, password
-		};
+		const body = { name: username, email, password };
 		return this.http.post(`${this.api}/user`, JSON.stringify(body));
 	}
 

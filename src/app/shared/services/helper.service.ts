@@ -207,6 +207,14 @@ export class HelperService {
 		})
 	}
 
+	getUser() {
+		this.cloudService.getUser().subscribe((data) => {
+			if (data['result'] === 'success') {
+				this.dataService.user = data['message'];
+			}
+		})
+	};
+
 	getContacts(refresh=false) {
 		if(!refresh) {
 			this.dataService.isLoading = true;
@@ -315,8 +323,11 @@ export class HelperService {
 	checkFor2FA() {
 		this.cloudService.check2FA().subscribe((data) => {
 			if (data['result'] === 'success') {
+				if (data['message'].enabled) {
+					this.dataService.hasTwoFa = true;
+				}
 				if (!data['message'].enabled && !this.dataService.twofaWarning) {
-					this.snackbarService.openSnackBarNo2FA('Two-factor authentication is not enabled. For your safety, enable it now in settings.', 'Ignore');
+					this.snackbarService.openSnackBarNo2FA('Two-factor authentication is not enabled. For your safety, enable it in settings.', 'Ignore');
 					this.dataService.twofaWarning = true;
 					this.dataService.hasTwoFa = false;
 				}

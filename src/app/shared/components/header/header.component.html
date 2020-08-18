@@ -26,14 +26,14 @@
 	</div>
 	<span class="border"></span>
 	<div class="window-ctl">
-		<button mat-icon-button aria-hidden="false" aria-label="Minimize" (click)="minimize()">
+		<button mat-icon-button aria-hidden="false" aria-label="Minimize" (click)="minimize()" matTooltip="Minimize" matTooltipPosition="below" matTooltipClass="custom-tooltip">
 			<mat-icon svgIcon="minimize"></mat-icon>
 		</button>
-		<button mat-icon-button aria-hidden="false" aria-label="Maximize" (click)="fullScreen()">
+		<button mat-icon-button aria-hidden="false" aria-label="Maximize" (click)="fullScreen()" matTooltip="Maximize" matTooltipPosition="below" matTooltipClass="custom-tooltip">
 			<mat-icon svgIcon="fullscreen" *ngIf="!isFullScreen"></mat-icon>
 			<mat-icon svgIcon="fullscreen_exit" *ngIf="isFullScreen"></mat-icon>
 		</button>
-		<button mat-icon-button aria-hidden="false" aria-label="Close" (click)="logout()">
+		<button mat-icon-button aria-hidden="false" aria-label="Close" (click)="logout()" matTooltip="Logout & Exit" matTooltipPosition="below" matTooltipClass="custom-tooltip">
 			<mat-icon svgIcon="close"></mat-icon>
 		</button>
 	</div>

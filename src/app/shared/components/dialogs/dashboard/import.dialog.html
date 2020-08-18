@@ -17,7 +17,7 @@
 			<div class="success" *ngIf="getDataService().success">{{ getDataService().success }}</div>
 			<div class="actions" fxLayout="row" fxLayoutGap="15px">
 				<button mat-stroked-button color="primary" fxFlex="50" type="submit">Submit</button>
-				<button mat-stroked-button color="warn" fxFlex="50" (click)="this.form.reset()">Reset</button>
+				<button mat-stroked-button color="warn" fxFlex="50" (click)="this.form.reset()">Clear</button>
 			</div>
 		</form>
 	</div>

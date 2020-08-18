@@ -73,4 +73,7 @@ export class DataService {
 	// Contacts
 	contacts: any;
 
+	// User
+	user: any;
+
 }

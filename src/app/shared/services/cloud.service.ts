@@ -14,7 +14,7 @@ export class CloudService {
 	constructor(private http: HttpClient) { }
 
 	check2FA() {
-		return this.http.get(`${this.api}/two-factor-authentication/enabled/`);
+		return this.http.get(`${this.api}/two-factor-authentication/enabled`);
   };
 
 	getWalletsData() {
@@ -55,6 +55,10 @@ export class CloudService {
     return this.http.get(`${this.api}/user`);
 	};
 
+	getUser() {
+    return this.http.get(`${this.api}/user`);
+	};
+
 	addContact(label, address, paymentID, entryID=null, edit=false) {
 		const body = {
 			label, address, paymentID, entryID, edit
@@ -71,7 +75,7 @@ export class CloudService {
 	};
 
 	createWallet() {
-		return this.http.post(`${this.api}/wallet/`, null);
+		return this.http.post(`${this.api}/wallet`, null);
 	};
 
 	importWallet(privateSpendKey) {

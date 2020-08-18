@@ -1,0 +1,40 @@
+<div class="content" @transition>
+	<h1 mat-dialog-title class="title">Enable 2FA</h1>
+	<h2 class="subtitle">Enter you 2FA code to continue</h2>
+	<div class="twofa" mat-dialog-content>
+		<div class="qrcode" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
+			<div fxFlex="55" class="desc">
+				<p><strong>Step 1.</strong> Scan the QR code with your two-factor authentication device to set up your account. </p>
+				<p><strong>Step 2.</strong> Enter the two-factor passcode which your device generates to enable 2FA.</p>
+			</div>
+			<div fxFlex="45" class="code">
+				<img class="image" src="{{qrCode}}">
+			</div>
+		</div>
+		<form [formGroup]="form" (ngSubmit)="submit()" fxLayout="column" fxLayoutAlign="space-between stretch">
+			<p>
+				<mat-form-field fxFill hintLabel="6 Numbers" appearance="fill">
+					<mat-label>2FA Code</mat-label>
+					<input #twofa matInput minlength="6" maxlength="6" placeholder="00000" formControlName="twofaFormControl">
+					<mat-hint align="end">{{twofa.value?.length || 0}}/6</mat-hint>
+					<mat-error *ngIf="form.controls.twofaFormControl.hasError('minlength') || form.controls.twofaFormControl.hasError('maxlength')">
+						2FA code should be <strong>6 numbers</strong>
+					</mat-error>
+					<mat-error *ngIf="form.controls.twofaFormControl.hasError('pattern')">
+						2FA code should be <strong>only numbers</strong>
+					</mat-error>
+					<mat-error *ngIf="form.controls.twofaFormControl.hasError('required')">
+						2FA Code is <strong>required</strong>
+					</mat-error>
+				</mat-form-field>
+			</p>
+			<div class="progress" *ngIf="getDataService().isFormLoading"><mat-progress-bar mode="query"></mat-progress-bar></div>
+			<div class="error" *ngIf="getDataService().error">{{ getDataService().error }}</div>
+			<div class="success" *ngIf="getDataService().success">{{ getDataService().success }}</div>
+			<div class="actions" fxLayout="row" fxLayoutGap="15px">
+				<button mat-stroked-button color="primary" fxFlex="50" type="submit" [disabled]="!form.valid">Enable</button>
+				<button mat-stroked-button color="warn" fxFlex="50" (click)="this.form.reset()" >Clear</button>
+			</div>
+		</form>
+	</div>
+</div>

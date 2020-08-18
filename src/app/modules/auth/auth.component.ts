@@ -26,8 +26,8 @@ import { HelperService } from '../../shared/services/helper.service';
 			transition(':enter', [
 				query('.title', style({ opacity: 0, transform: 'translateX(-80px)' }), {optional: true}),
 				query('.subtitle', style({ opacity: 0, transform: 'translateX(80px)' }), {optional: true}),
-				query('#cards, .title, .subtitle ', stagger('400ms', [
-					animate('1000ms 1s ease-out', style({ opacity: 1, transform: 'translateX(0)' })),
+				query('#cards, .title, .subtitle ', stagger('1000ms', [
+					animate('1000ms 1.2s ease-out', style({ opacity: 1, transform: 'translateX(0)' })),
 				]), {optional: true}),
 				query('#cards, .title, .subtitle', [
 					animate(1000, style('*'))
@@ -37,11 +37,11 @@ import { HelperService } from '../../shared/services/helper.service';
 		trigger('staggerDown', [
 			transition(':enter', [
 				query('button', style({ opacity: 0, transform: 'translateY(80px)' }), {optional: true}),
-				query('button ', stagger('600ms', [
-					animate('800ms 0.8s ease-out', style({ opacity: 1, transform: 'translateY(0)' })),
+				query('button ', stagger('400ms', [
+					animate('600ms 0.6s ease-out', style({ opacity: 1, transform: 'translateY(0)' })),
 				]), {optional: true}),
 				query('button', [
-					animate(1000, style('*'))
+					animate(600, style('*'))
 				], {optional: true})
 			])
 		])

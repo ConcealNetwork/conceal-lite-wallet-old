@@ -51,6 +51,8 @@ import { NewMessageDialog } from './components/dialogs/messages/new.message.dial
 import { NewContactDialog } from './components/dialogs/contacts/new.contact.dialog';
 import { BankingDialog } from './components/dialogs/banking/banking.dialog';
 import { TransferDialog } from './components/dialogs/transfer/transfer.dialog';
+import { Disable2faDialog } from './components/dialogs/settings/disable2fa.dialog';
+import { Enable2faDialog } from './components/dialogs/settings/enable2fa.dialog';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,9 @@ import { TransferDialog } from './components/dialogs/transfer/transfer.dialog';
 		NewMessageDialog,
 		NewContactDialog,
 		BankingDialog,
-		TransferDialog
+		TransferDialog,
+		Disable2faDialog,
+		Enable2faDialog
   ],
   imports: [
     CommonModule,

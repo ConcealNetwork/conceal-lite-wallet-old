@@ -1,12 +1,52 @@
-<div class="loading" *ngIf="isLoading">
-  <app-loader [isLoading]="isLoading"></app-loader>
+<div class="loading" *ngIf="getDataService().isLoading">
+  <app-loader></app-loader>
 </div>
 
-<div *ngIf="!isLoading" class="container" fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="35px" @enterAnimation @stagger>
-  <h1 class="title">{{ 'PAGES.SETTINGS.TITLE' | translate }}</h1>
-  
-  <div>
-    <h4 class="subtitle">Language</h4>
+<div *ngIf="!getDataService().isLoading" class="container" fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="35px" @enterAnimation @staggerLeft @staggerDown>
+	<h1 id="title" class="title">{{ 'PAGES.SETTINGS.TITLE' | translate }}</h1>
+
+	<div class="account">
+		<h4 id="title" class="subtitle">Account Details</h4>
+		<div fxLayout="row" fxLayoutGap="35px">
+
+			<mat-card id="cards" fxFlex="50">
+				<mat-card-content class="user" fxFlex="auto">
+          <div fxLayout="column" fxLayoutAlign="center stretch">
+            <div class="box" fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
+              <span class="option">Username</span>
+              <span class="value">{{getDataService().user?.name}}</span>
+						</div>
+						<mat-divider></mat-divider>
+            <div class="box" fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
+              <span class="option">Email</span>
+              <span class="value">{{getDataService().user?.email}}</span>
+            </div>
+          </div>
+        </mat-card-content>
+			</mat-card>
+
+			<mat-card id="cards" fxFlex="50">
+        <mat-card-content class="user" fxFlex="auto">
+          <div fxLayout="column" fxLayoutAlign="center stretch">
+            <div class="box" fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
+              <span class="option">Password</span>
+              <button mat-stroked-button>Request Reset</button>
+						</div>
+						<mat-divider></mat-divider>
+            <div class="box" fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
+              <span class="option">Two-Factor Authentication</span>
+              <button mat-stroked-button class="disable" *ngIf="getDataService().hasTwoFa" (click)="getDialogService().openDisable2faDialog()">Disable 2FA</button>
+              <button mat-stroked-button class="enable" *ngIf="!getDataService().hasTwoFa" (click)="getDialogService().openEnable2faDialog()">Enable 2FA</button>
+            </div>
+          </div>
+        </mat-card-content>
+			</mat-card>
+
+		</div>
+	</div>
+
+  <div class="lang">
+    <h4 id="title" class="subtitle">Language Selection</h4>
     <div class="language" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="15px">
       <mat-card id="cards" class="cards" [class.selected]="currentLang=='en'" fxLayout="column" fxLayoutAlign="center center" (click)="useLanguage('en')">
         <mat-icon *ngIf="currentLang=='en'" class="icon" svgIcon="check" matTooltip="Current Language" aria-label="Current Language" matTooltipPosition="above" matTooltipClass="custom-tooltip"></mat-icon>
@@ -15,18 +55,14 @@
       <mat-card id="cards" class="cards" [class.selected]="currentLang=='sp'" fxLayout="column" fxLayoutAlign="center center" (click)="useLanguage('sp')">
         <mat-icon *ngIf="currentLang=='sp'" class="icon" svgIcon="check" matTooltip="Current Language" aria-label="Current Language" matTooltipPosition="above" matTooltipClass="custom-tooltip"></mat-icon>
         <img src="./assets/images/sp.png">Spanish
+			</mat-card>
+			<mat-card id="cards" class="cards" [class.selected]="currentLang=='fr'"fxLayout="column" fxLayoutAlign="center center" (click)="useLanguage('fr')">
+        <mat-icon *ngIf="currentLang=='fr'" class="icon" svgIcon="check" matTooltip="Current Language" aria-label="Current Language" matTooltipPosition="above" matTooltipClass="custom-tooltip"></mat-icon>
+        <img src="./assets/images/fr.png">French
       </mat-card>
       <mat-card id="cards" class="cards" [class.selected]="currentLang=='ma'" fxLayout="column" fxLayoutAlign="center center" (click)="useLanguage('ma')">
         <mat-icon *ngIf="currentLang=='ma'" class="icon" svgIcon="check" matTooltip="Current Language" aria-label="Current Language" matTooltipPosition="above" matTooltipClass="custom-tooltip"></mat-icon>
         <img src="./assets/images/ch.png">Mandarin
-      </mat-card>
-      <mat-card id="cards" class="cards" [class.selected]="currentLang=='fr'"fxLayout="column" fxLayoutAlign="center center" (click)="useLanguage('fr')">
-        <mat-icon *ngIf="currentLang=='fr'" class="icon" svgIcon="check" matTooltip="Current Language" aria-label="Current Language" matTooltipPosition="above" matTooltipClass="custom-tooltip"></mat-icon>
-        <img src="./assets/images/fr.png">French
-      </mat-card>
-      <mat-card id="cards" class="cards" [class.selected]="currentLang=='hi'" fxLayout="column" fxLayoutAlign="center center" (click)="useLanguage('hi')">
-        <mat-icon *ngIf="currentLang=='hi'" class="icon" svgIcon="check" matTooltip="Current Language" aria-label="Current Language" matTooltipPosition="above" matTooltipClass="custom-tooltip"></mat-icon>
-        <img src="./assets/images/in.png">Hindi
       </mat-card>
     </div>
   </div>

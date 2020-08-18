@@ -1,7 +1,13 @@
-// Import Core
+// Angular
 import { Component, OnInit } from '@angular/core';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 import { TranslateService } from '@ngx-translate/core';
+
+// Services
+import { AuthService } from '../../shared/services/auth.service';
+import { HelperService } from './../../shared/services/helper.service';
+import { DataService } from '../../shared/services/data.service';
+import { DialogService } from '../../shared/services/dialog.service';
 
 @Component({
 	selector: 'app-settings',
@@ -20,13 +26,24 @@ import { TranslateService } from '@ngx-translate/core';
 				])
 			]
 		),
-		trigger('stagger', [
+		trigger('staggerLeft', [
 			transition(':enter', [
-				query('#cards, .title, .subtitle', style({ opacity: 0, transform: 'translateX(-80px)' }), {optional: true}),
-				query('#cards, .title, .subtitle', stagger('200ms', [
-					animate('400ms 0.3s ease-out', style({ opacity: 1, transform: 'translateX(0)' })),
+				query('#cards', style({ opacity: 0, transform: 'translateX(-40px)' }), {optional: true}),
+				query('#cards', stagger('300ms', [
+					animate('400ms 0.35s ease-out', style({ opacity: 1, transform: 'translateX(0)' })),
 				]), {optional: true}),
 				query('#cards', [
+					animate(1000, style('*'))
+				], {optional: true})
+			])
+		]),
+		trigger('staggerDown', [
+			transition(':enter', [
+				query('#title, #button', style({ opacity: 0, transform: 'translateY(-40px)' }), {optional: true}),
+				query('#title, #button', stagger('300ms', [
+					animate('400ms 0.35s ease-out', style({ opacity: 1, transform: 'translateY(0)' })),
+				]), {optional: true}),
+				query('#title, #button', [
 					animate(1000, style('*'))
 				], {optional: true})
 			])
@@ -35,11 +52,28 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class SettingsComponent implements OnInit {
 
-	isLoading: boolean = true;
 	currentLang: string;
 
-	constructor(private translate: TranslateService) {
+	constructor(
+		private translate: TranslateService,
+		private authService: AuthService,
+		private dialogService: DialogService,
+		private helperService: HelperService,
+		private dataService: DataService,
+	) {
+		this.helperService.getUser();
 		this.translate.use('en');
+	}
+
+	// Get Services
+	getDialogService() {
+		return this.dialogService;
+	}
+	getHelperService() {
+		return this.helperService;
+	}
+	getDataService() {
+		return this.dataService;
 	}
 
 	useLanguage(language: string) {
@@ -48,8 +82,11 @@ export class SettingsComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.isLoading = false;
 		this.currentLang = this.translate.currentLang;
+		this.dataService.isLoggedIn = this.authService.loggedIn();
+		this.helperService.getMarket();
+		this.helperService.getWallets();
+		this.helperService.checkFor2FA();
 	}
 
 }
