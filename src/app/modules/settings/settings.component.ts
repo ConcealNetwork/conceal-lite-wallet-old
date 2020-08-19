@@ -2,12 +2,14 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 // Services
 import { AuthService } from '../../shared/services/auth.service';
 import { HelperService } from './../../shared/services/helper.service';
 import { DataService } from '../../shared/services/data.service';
 import { DialogService } from '../../shared/services/dialog.service';
+import { SnackbarService } from '../../shared/services/snackbar.service';
 
 @Component({
 	selector: 'app-settings',
@@ -58,8 +60,10 @@ export class SettingsComponent implements OnInit {
 		private translate: TranslateService,
 		private authService: AuthService,
 		private dialogService: DialogService,
+		private snackbarService: SnackbarService,
 		private helperService: HelperService,
 		private dataService: DataService,
+		private router: Router
 	) {
 		this.helperService.getUser();
 		this.translate.use('en');
@@ -74,6 +78,21 @@ export class SettingsComponent implements OnInit {
 	}
 	getDataService() {
 		return this.dataService;
+	}
+
+	resetPassword(email) {
+		this.authService.resetPassword(email).subscribe((data) => {
+			if (data['result'] === 'success') {
+				this.snackbarService.openSnackBar('Your password has been reset, please check your email to change your cloud password.', 'Dismiss');
+				setTimeout(() => {
+					this.authService.logout();
+					this.dataService.isLoggedIn = this.authService.loggedIn();
+					this.router.navigate(['/']);
+				}, 3000);
+			} else {
+				this.snackbarService.openSnackBar(data['message'], 'Dismiss');
+			}
+		})
 	}
 
 	useLanguage(language: string) {

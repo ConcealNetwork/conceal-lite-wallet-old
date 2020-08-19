@@ -61,6 +61,16 @@ export class AuthService {
 	disable2FA(code) {
 		const body = { code };
 		return this.http.delete(`${this.api}/two-factor-authentication?code=${code}`);
+	};
+
+	resetPassword(email) {
+		const body = { email };
+		return this.http.put(`${this.api}/auth`, JSON.stringify(body));
+	};
+
+	changePassword(email) {
+		const body = { email };
+		return this.http.patch(`${this.api}/user`, JSON.stringify(body));
   };
 
 	signUpUser(username, email, password) {

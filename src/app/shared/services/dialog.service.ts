@@ -13,6 +13,7 @@ import { BankingDialog } from './../components/dialogs/banking/banking.dialog';
 import { TransferDialog } from './../components/dialogs/transfer/transfer.dialog';
 import { Disable2faDialog } from './../components/dialogs/settings/disable2fa.dialog';
 import { Enable2faDialog } from './../components/dialogs/settings/enable2fa.dialog';
+import { ChangePasswordDialog } from './../components/dialogs/settings/change-password.dialog';
 
 // Services
 import { DataService } from '../services/data.service';
@@ -130,6 +131,17 @@ export class DialogService {
 
 	openEnable2faDialog(): void {
     const dialogRef = this.dialog.open(Enable2faDialog, {
+			width: '40%',
+			height: 'auto',
+		})
+		dialogRef.afterClosed().subscribe(result => {
+			this.dataService.success = '';
+			this.dataService.error = '';
+    })
+	}
+
+	openChangePasswordDialog(): void {
+    const dialogRef = this.dialog.open(ChangePasswordDialog, {
 			width: '40%',
 			height: 'auto',
 		})

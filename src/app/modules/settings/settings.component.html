@@ -19,7 +19,8 @@
 						<mat-divider></mat-divider>
             <div class="box" fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
               <span class="option">Email</span>
-              <span class="value">{{getDataService().user?.email}}</span>
+							<span class="value">{{getDataService().user?.email}}</span>
+							<button mat-stroked-button color="warn" (click)="getDialogService().openChangePasswordDialog()">Change</button>
             </div>
           </div>
         </mat-card-content>
@@ -29,14 +30,14 @@
         <mat-card-content class="user" fxFlex="auto">
           <div fxLayout="column" fxLayoutAlign="center stretch">
             <div class="box" fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
-              <span class="option">Password</span>
-              <button mat-stroked-button>Request Reset</button>
+							<span class="option">Password</span>
+							<button mat-stroked-button color="warn" (click)="resetPassword(getDataService().user?.email)">Reset</button>
 						</div>
 						<mat-divider></mat-divider>
             <div class="box" fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
               <span class="option">Two-Factor Authentication</span>
-              <button mat-stroked-button class="disable" *ngIf="getDataService().hasTwoFa" (click)="getDialogService().openDisable2faDialog()">Disable 2FA</button>
-              <button mat-stroked-button class="enable" *ngIf="!getDataService().hasTwoFa" (click)="getDialogService().openEnable2faDialog()">Enable 2FA</button>
+              <button mat-stroked-button class="disable" *ngIf="getDataService().hasTwoFa" (click)="getDialogService().openDisable2faDialog()">Turn Off</button>
+              <button mat-stroked-button class="enable" *ngIf="!getDataService().hasTwoFa" (click)="getDialogService().openEnable2faDialog()">Turn On</button>
             </div>
           </div>
         </mat-card-content>

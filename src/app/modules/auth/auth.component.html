@@ -4,7 +4,7 @@
 
 <div *ngIf="!getDataService().isLoading" class="container" fxLayout="column" fxLayoutAlign="center stretch" @stagger @staggerDown>
 
-	<div class="welcome" *ngIf="!isSignIn && !isSignUp && !hasSignedUp" @enterAnimation>
+	<div class="welcome" *ngIf="!isSignIn && !isSignUp && !isResetPW && !hasSignedUp && !hasResetPW" @enterAnimation>
 		<div class="welcome" fxLayout="column">
 			<h1 class="title" fxFlexAlign="start">{{ 'PAGES.LOGIN.TITLE' | translate }}</h1>
 			<h2 class="subtitle" fxFlexAlign="end">{{ 'PAGES.LOGIN.SUBTITLE1' | translate }} <span class="sub2">{{ 'PAGES.LOGIN.SUBTITLE2' | translate }}</span></h2>
@@ -20,7 +20,8 @@
 	<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="45px" *ngIf="isSignIn" @enterAnimation>
 		<div id="cards" fxLayout="column" class="login" fxLayoutAlign="center">
       <form [formGroup]="signin">
-        <p>Sign in to continue.</p>
+				<h4 id="title" class="subtitle">Sign In</h4>
+        <p id="title" class="subtext">Please sign in to continue.</p>
         <p>
           <mat-form-field fxFill appearance="fill" hintLabel="Your email address">
             <mat-label>Email Address</mat-label>
@@ -55,7 +56,9 @@
             </mat-error>
           </mat-form-field>
         </p>
-        <mat-progress-bar mode="query" *ngIf="getDataService().isFormLoading"></mat-progress-bar>
+				<p *ngIf="getDataService().isFormLoading">
+					<mat-progress-bar mode="query"></mat-progress-bar>
+				</p>
         <p *ngIf="getDataService().error" class="error">
           {{ getDataService().error }}
         </p>
@@ -69,16 +72,17 @@
 			</form>
 			<div class="other" fxLayout="column" fxLayoutAlign="space-between center">
 				<div class="links" (click)="isSignIn=false;isSignUp=true;getDataService().error='';">New User? Sign Up</div>
-				<div class="links" (click)="null">Forgot Passsword? Reset Now</div>
+				<div class="links" (click)="isSignIn=false;isSignUp=false;isResetPW=true;getDataService().error='';">Forgot Passsword? Reset Now</div>
 				<div class="links" (click)="isSignIn=false;">Go Back</div>
 			</div>
 		</div>
 	</div>
 
-	<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="45px" *ngIf="isSignUp && !hasSignedUp" @enterAnimation>
+	<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="45px" *ngIf="isSignUp" @enterAnimation>
 		<div id="cards" fxLayout="column" class="login" fxLayoutAlign="center">
       <form [formGroup]="signup">
-				<p>Sign up to continue.</p>
+				<h4 id="title" class="subtitle">Sign Up</h4>
+				<p id="title" class="subtext">Please sign up to continue.</p>
 				<p>
           <mat-form-field fxFill appearance="fill" hintLabel="Your username">
             <mat-label>Username</mat-label>
@@ -112,7 +116,9 @@
             </mat-error>
           </mat-form-field>
         </p>
-        <mat-progress-bar mode="query" *ngIf="getDataService().isFormLoading"></mat-progress-bar>
+				<p *ngIf="getDataService().isFormLoading">
+					<mat-progress-bar mode="query"></mat-progress-bar>
+				</p>
         <p *ngIf="getDataService().error" class="error">
           {{ getDataService().error }}
         </p>
@@ -131,12 +137,56 @@
 		</div>
 	</div>
 
+	<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="45px" *ngIf="isResetPW" @enterAnimation>
+		<div id="cards" fxLayout="column" class="login" fxLayoutAlign="center">
+      <form [formGroup]="pwreset">
+				<h4 id="title" class="subtitle">Password Reset</h4>
+				<p id="title" class="subtext">Enter your email to continue.</p>
+				<mat-form-field fxFill appearance="fill" hintLabel="Your email address">
+					<mat-label>Email Address</mat-label>
+					<input type="email" matInput placeholder="you@youremail.com" formControlName="emailFormControl">
+					<mat-error *ngIf="pwreset.controls.emailFormControl.hasError('email') && !pwreset.controls.emailFormControl.hasError('required')">
+						Please enter a valid email address
+					</mat-error>
+					<mat-error *ngIf="pwreset.controls.emailFormControl.hasError('required')">
+						Email address is <strong>required</strong>
+					</mat-error>
+				</mat-form-field>
+				<p *ngIf="getDataService().isFormLoading">
+					<mat-progress-bar mode="query"></mat-progress-bar>
+				</p>
+        <p *ngIf="getDataService().error" class="error">
+          {{ getDataService().error }}
+        </p>
+        <p *ngIf="getDataService().success" class="success">
+          {{ getDataService().success }}
+        </p>
+        <p class="actions" fxLayout="row" fxLayoutGap="15px">
+					<button mat-stroked-button color="primary" fxFlex="50" (click)="submitPwReset()">Reset</button>
+					<button mat-stroked-button color="warn" fxFlex="50" (click)="this.pwreset.reset()">Clear</button>
+        </p>
+			</form>
+			<div class="other" fxLayout="column" fxLayoutAlign="space-between center">
+				<div class="links" (click)="isResetPW=false;">Go Back</div>
+			</div>
+		</div>
+	</div>
+
 	<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px" *ngIf="hasSignedUp" @enterAnimation>
 		<div id="cards" fxLayout="column" class="activate" fxLayoutAlign="center">
 			<p class="checkemail">Please check your email.</p>
 			<p>We've just sent you a link to activate your account.</p>
 			<p>Please follow the link in your email to activate your account then click below to continue.</p>
-			<button mat-stroked-button color="primary" (click)="isSignIn=true;isSignUp=false;hasSignedUp=false;">Continue to Sign In</button>
+			<button mat-stroked-button color="primary" (click)="isSignIn=true;isSignUp=false;isResetPW=false;hasSignedUp=false;hasResetPW=false;">Continue to Sign In</button>
+		</div>
+	</div>
+
+	<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px" *ngIf="hasResetPW" @enterAnimation>
+		<div id="cards" fxLayout="column" class="activate" fxLayoutAlign="center">
+			<p class="checkemail">Please check your email.</p>
+			<p>We've just sent you a link to reset your password.</p>
+			<p>Please follow the link in your email to reset your password then click below to continue.</p>
+			<button mat-stroked-button color="primary" (click)="isSignIn=true;isSignUp=false;isResetPW=false;hasSignedUp=false;hasResetPW=false;">Continue to Sign In</button>
 		</div>
 	</div>
 

@@ -53,6 +53,7 @@ import { BankingDialog } from './components/dialogs/banking/banking.dialog';
 import { TransferDialog } from './components/dialogs/transfer/transfer.dialog';
 import { Disable2faDialog } from './components/dialogs/settings/disable2fa.dialog';
 import { Enable2faDialog } from './components/dialogs/settings/enable2fa.dialog';
+import { ChangePasswordDialog } from './components/dialogs/settings/change-password.dialog';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { Enable2faDialog } from './components/dialogs/settings/enable2fa.dialog'
 		BankingDialog,
 		TransferDialog,
 		Disable2faDialog,
-		Enable2faDialog
+		Enable2faDialog,
+		ChangePasswordDialog
   ],
   imports: [
     CommonModule,

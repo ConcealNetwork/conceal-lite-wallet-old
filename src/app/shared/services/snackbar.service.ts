@@ -33,4 +33,13 @@ export class SnackbarService {
 		});
 	}
 
+	openSnackBarEmailChange(message: string, action: string) {
+		this.snackBar.open(message, action, {
+			duration: 8000000,
+			panelClass: 'snak-warning',
+			horizontalPosition: 'right',
+			verticalPosition: 'bottom',
+		});
+	}
+
 }

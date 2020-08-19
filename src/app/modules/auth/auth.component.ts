@@ -51,7 +51,9 @@ export class AuthComponent implements OnInit {
 
 	isSignUp: boolean = false;
 	isSignIn: boolean = false;
+	isResetPW: boolean = false;
 	hasSignedUp: boolean = false;
+	hasResetPW: boolean = false;
 
   signin: FormGroup = new FormGroup({
     emailFormControl: new FormControl('', [
@@ -80,6 +82,13 @@ export class AuthComponent implements OnInit {
     passwordFormControl: new FormControl('', [
       Validators.required
     ])
+	});
+
+	pwreset: FormGroup = new FormGroup({
+    emailFormControl: new FormControl('', [
+      Validators.required,
+      Validators.email,
+    ]),
 	});
 
 	constructor (
@@ -154,10 +163,39 @@ export class AuthComponent implements OnInit {
 			this.dataService.isFormLoading = true;
 			this.authService.signUpUser(this.signup.value.usernameFormControl, this.signup.value.emailFormControl, this.signup.value.passwordFormControl).subscribe((data) => {
 				if (data['result'] === 'success') {
-					this.dataService.success = 'Signup successful!';
+					this.dataService.success = 'Success! Signup completed';
 					this.dataService.isFormLoading = false;
 					setTimeout(() => {
 						this.hasSignedUp = true;
+						this.isSignUp = false;
+						this.dataService.success = '';
+						this.dataService.error = '';
+					}, 2000);
+				} else {
+					this.dataService.error = data['message'];
+					this.dataService.isFormLoading = false;
+					setTimeout(() => {
+						this.dataService.success = '';
+						this.dataService.error = '';
+					}, 5000);
+				}
+			})
+		}
+	}
+
+	submitPwReset() {
+		// Do PW Reset
+		if (this.pwreset.valid) {
+			this.dataService.success = '';
+			this.dataService.error = '';
+			this.dataService.isFormLoading = true;
+			this.authService.resetPassword(this.pwreset.value.emailFormControl).subscribe((data) => {
+				if (data['result'] === 'success') {
+					this.dataService.success = 'Success! Your password has been reset';
+					this.dataService.isFormLoading = false;
+					setTimeout(() => {
+						this.hasResetPW = true;
+						this.isResetPW = false;
 						this.dataService.success = '';
 						this.dataService.error = '';
 					}, 2000);
