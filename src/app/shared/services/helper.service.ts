@@ -47,8 +47,8 @@ export class HelperService {
 	getWallets(refresh=false) {
 		if(!refresh) {
 			this.dataService.isLoading = true;
+			this.dataService.isWalletLoading = true;
 		}
-		this.dataService.isWalletLoading = true;
 		this.cloudService.getWalletsData().subscribe((data) => {
 			if (data['result'] === 'success') {
 				this.dataService.height = data['message'].height;
@@ -69,7 +69,7 @@ export class HelperService {
 				this.dataService.isLoading = false;
 				this.dataService.isWalletLoading = false;
 			}
-			if (data['result'] === 'error' && data['message'][0] === "You don't have any wallet. Please create one") {
+			if (data['result'] === 'error' && data['message'][0] === "You don't have wallet. Please create one") {
 				this.dataService.hasWallet = false;
 			}
 		});
@@ -85,9 +85,16 @@ export class HelperService {
 			let transactions = Object.values(this.dataService.wallets);
 			let arr = [];
 			for(let i = 0; i < transactions.length; i++) {
-					arr.push(transactions[i]['transactions']);
+				arr.push(transactions[i]['transactions']);
 			}
 			const transactionsMerged = Array.prototype.concat(...arr);
+			if (this.dataService.transactions && this.dataService.transactions.length < transactionsMerged.length) {
+				console.log('new transaction');
+				setTimeout(() => {
+					this.snackbarService.openSnackNewTransaction('New transaction detected', 'Dismiss');
+					console.log('open dialog')
+				}, 4000);
+			}
 			this.dataService.transactions = transactionsMerged;
 			this.dataService.isLoading = false;
 		});

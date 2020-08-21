@@ -16,8 +16,8 @@ import { AppConfig } from '../environments/environment';
 })
 export class AppComponent {
 
-	timeout: number = 4000;
-	interval: number = 4000;
+	timeout: number = 2000;
+	interval: number = 20000;
 
   constructor(
 		public electronService: ElectronService,
@@ -31,6 +31,8 @@ export class AppComponent {
 		setTimeout(() => {
 			setInterval(() => {
 				this.watcherService.checkForWallet();
+				this.watcherService.checkForTransactions();
+				this.watcherService.updateWallets();
 			}, this.interval);
 		}, this.timeout);
 
