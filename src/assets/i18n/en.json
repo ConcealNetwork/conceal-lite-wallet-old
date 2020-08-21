@@ -4,7 +4,7 @@
         "TITLE": "Lite Wallet",
         "DASHBOARD": "Dashboard",
         "TRANSFER": "Pay & Transfer",
-        "BANKING": "Banking"
+				"BANKING": "Banking"
       },
       "FOOTER": {
         "WALLET": "Cloud Wallet",
@@ -14,25 +14,56 @@
       },
       "DASHBOARD": {
         "TITLE": "Dashboard",
-        "BALANCE": "Combined Balance",
-        "ADDRESS": "Address",
-        "PORTFOLIO": "Your Portfolio",
-        "WALLETS": "Your Wallets",
-        "ACTIVITY": "Recent Activity",
-        "MARKET": "Market Data"
+				"HEADINGS": {
+					"Balance": "Combined Balance",
+					"Address": "Address",
+					"Portfolio": "Your Portfolio",
+					"Wallets": "Your Wallets",
+					"Activity": "Recent Activity",
+					"Market": "Market Data"
+				},
+				"TEXT": {
+					"Total.Available": "Total Available",
+					"Total.Pending": "Total Pending",
+					"Total.Withdrawable": "Total Withdrawable",
+					"Available": "Available",
+					"Pending": "Pending",
+					"Withdrawable": "Withdrawable",
+					"Pay": "Pay",
+					"Transfer": "Transfer",
+					"Remove": "Remove",
+					"Banking": "Banking",
+					"Create.Wallet": "Create Wallet",
+					"Import.Wallet": "Import Wallet",
+					"Generate.Wallet": "Generate a new wallet",
+					"Import.Keys": "Import wallet from keys",
+					"Pay.Someone": "Pay someone",
+					"Transfer.Between.Accounts": "Transfer between accounts",
+					"Delete.Wallet": "Delete wallet",
+					"Banking.Deposits": "Banking & deposits",
+					"Scan.Code": "Scan QR",
+					"Export.Private.Keys": "Export private keys",
+					"Copy.Address": "Copy address",
+					"Code": "QR Code",
+					"Export.Keys": "Export Keys",
+					"Copy": "Copy"
+        }
 			},
 			"TRANSFER": {
         "TITLE": "Transfer",
         "HEADINGS": {
-          "SENDER": "From Wallet",
-          "RECIPIENT": "To Wallet"
-        }
-			},
-			"PAY": {
-        "TITLE": "Pay Someone",
-        "HEADINGS": {
-          "SENDER": "Origin",
-          "RECIPIENT": "Destination"
+          "Pay": "Pay",
+          "Transfer": "Transfer",
+          "From.Wallet": "From Wallet",
+					"To.Wallet": "To Wallet",
+					"Origin": "Origin",
+          "Destination": "Destination"
+				},
+				"TEXT": {
+          "1": "Pay from your wallets",
+					"2": "Please select a wallet to send from and the desired amount to pay.",
+					"Available": "Available",
+					"From.Wallet": "From Wallet"
         }
 			},
 			"ACTIVITY": {

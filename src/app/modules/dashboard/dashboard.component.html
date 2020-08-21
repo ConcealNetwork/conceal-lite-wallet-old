@@ -7,11 +7,11 @@
   <div fxLayout="row" fxLayoutGap="25px">
 
 		<div fxFlex="35">
-      <h1 id="title" class="title">{{ 'PAGES.DASHBOARD.PORTFOLIO' | translate }}</h1>
+      <h1 id="title" class="title">{{ 'PAGES.DASHBOARD.HEADINGS.Portfolio' | translate }}</h1>
       <mat-card id="cards" class="cards portfolio-card" fxLayout="column">
         <mat-card-header>
           <mat-card-title fxLayout="row" fxLayoutAlign="space-between stretch">
-						<div>{{ 'PAGES.DASHBOARD.BALANCE' | translate }}</div>
+						<div>{{ 'PAGES.DASHBOARD.HEADINGS.Balance' | translate }}</div>
 						<div class="spinner" fxLayoutGap="5px">
 							<mat-spinner *ngIf="getDataService().isWalletLoading"></mat-spinner>
 						</div>
@@ -20,26 +20,23 @@
         <mat-card-content fxFlex="auto">
           <div class="balances" fxLayout="column" fxLayoutAlign="space-evenly stretch">
             <div class="balance" fxLayout="row" fxFlex="25" fxLayout="row" fxLayoutAlign="space-between stretch">
-              <span class="st">Total Available</span>
+              <span class="st">{{ 'PAGES.DASHBOARD.TEXT.Total.Available' | translate }}</span>
               <span class="sb">{{getHelperService().formatAmount(getDataService().available, 1, 6) || 0}} <span class="ccx">CCX</span></span>
             </div>
             <div class="balance" fxLayout="row" fxFlex="25" fxLayout="row" fxLayoutAlign="space-between stretch">
-              <span class="st">Total Pending</span>
+              <span class="st">{{ 'PAGES.DASHBOARD.TEXT.Total.Pending' | translate }}</span>
               <span class="sb" [ngClass]="{'locked': (getDataService().pending != 0)}">{{getHelperService().formatAmount(getDataService().pending, 1, 6) || 0}} <span class="ccx">CCX</span></span>
             </div>
             <div class="balance" fxLayout="row" fxFlex="25" fxLayout="row" fxLayoutAlign="space-between stretch">
-              <span class="st">Total Withdrawable</span>
+              <span class="st">{{ 'PAGES.DASHBOARD.TEXT.Total.Withdrawable' | translate }}</span>
               <span class="sb">{{getHelperService().formatAmount(getDataService().withdrawable, 1, 6) || 0}} <span class="ccx">CCX</span></span>
             </div>
           </div>
         </mat-card-content>
         <mat-card-footer>
           <mat-card-actions fxLayoutAlign="start center">
-            <button mat-button aria-hidden="false" aria-label="Refresh balances" matTooltip="Refresh balances" aria-label="Refresh balances" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().getWallets(true)">
-              Refresh
-						</button>
-						<button mat-button aria-hidden="false" aria-label="Banking & deposits" matTooltip="Banking & deposits" aria-label="Banking & deposits" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getDialogService().openBankingDialog()">
-              Banking
+						<button mat-button aria-hidden="false" matTooltip="{{ 'PAGES.DASHBOARD.TEXT.Banking.Deposits' | translate }}" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getDialogService().openBankingDialog()">
+              {{ 'PAGES.DASHBOARD.TEXT.Banking' | translate }}
             </button>
           </mat-card-actions>
         </mat-card-footer>
@@ -47,7 +44,7 @@
     </div>
 
 		<div fxFlex="65">
-			<h1 id="title" class="title">{{ 'PAGES.DASHBOARD.MARKET' | translate }}</h1>
+			<h1 id="title" class="title">{{ 'PAGES.DASHBOARD.HEADINGS.Market' | translate }}</h1>
 			<mat-card id="cards" class="cards chart-card">
 				<mat-card-content>
 					<div class="chart-wrapper">
@@ -69,7 +66,7 @@
 	<div fxLayout="row" fxLayoutGap="45px">
 
     <div fxFlex="100">
-      <h1 id="title" class="title">{{ 'PAGES.DASHBOARD.WALLETS' | translate }}</h1>
+      <h1 id="title" class="title">{{ 'PAGES.DASHBOARD.HEADINGS.Wallets' | translate }}</h1>
       <div class="walletRow" fxLayout="row" fxLayoutGap="25px">
         <mat-card id="cards" class="cards walletCard" fxFlex fxLayout="column" *ngFor="let item of getDataService().wallets | keyvalue">
           <mat-card-header>
@@ -78,14 +75,14 @@
                 {{ (item.key.length>7)? (item.key | slice:0:7)+'...':(item.key) }}{{(item.key | slice:-7)}}
               </div>
               <div class="icons" fxLayoutGap="0px">
-                <button mat-button mat-icon-button aria-hidden="false" aria-label="Scan QR code" matTooltip="Scan QR code" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getDialogService().openQRCodeDialog(item.key)">
-                  <mat-icon svgIcon="camera_enhance">QR Code</mat-icon>
+                <button mat-button mat-icon-button matTooltip="{{ 'PAGES.DASHBOARD.TEXT.Scan.Code' | translate }}" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getDialogService().openQRCodeDialog(item.key)">
+                  <mat-icon svgIcon="camera_enhance">{{ 'PAGES.DASHBOARD.TEXT.Code' | translate }}</mat-icon>
 								</button>
-								<button mat-button mat-icon-button aria-hidden="false" aria-label="Export private keys" matTooltip="Export private keys" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getDialogService().openExportKeysDialog(item.key)">
-                  <mat-icon svgIcon="lock_open">Export Keys</mat-icon>
+								<button mat-button mat-icon-button matTooltip="{{ 'PAGES.DASHBOARD.TEXT.Export.Private.Keys' | translate }}" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getDialogService().openExportKeysDialog(item.key)">
+                  <mat-icon svgIcon="lock_open">{{ 'PAGES.DASHBOARD.TEXT.Export.Keys' | translate }}</mat-icon>
                 </button>
-                <button mat-button mat-icon-button aria-hidden="false" aria-label="Copy address" matTooltip="Copy address" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getHelperService().copyToClipboard(item.key, 'Address Copied')">
-                  <mat-icon svgIcon="assignment">Copy</mat-icon>
+                <button mat-button mat-icon-button matTooltip="{{ 'PAGES.DASHBOARD.TEXT.Copy.Address' | translate }}" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getHelperService().copyToClipboard(item.key, 'Address Copied')">
+                  <mat-icon svgIcon="assignment">{{ 'PAGES.DASHBOARD.TEXT.Copy' | translate }}</mat-icon>
                 </button>
               </div>
             </mat-card-title>
@@ -93,37 +90,41 @@
           <mat-card-content fxFlex="auto">
             <div class="balances" fxLayout="column" fxLayoutAlign="space-evenly stretch">
               <div class="balance" fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
-                <span class="st">Available</span>
+                <span class="st">{{ 'PAGES.DASHBOARD.TEXT.Available' | translate }}</span>
                 <span class="sb">{{ getHelperService().formatAmount(item.value.total, 1, 6) }} <span class="ccx">CCX</span></span>
               </div>
               <div class="balance" fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
-                <span class="st">Pending</span>
+                <span class="st">{{ 'PAGES.DASHBOARD.TEXT.Pending' | translate }}</span>
                 <span class="sb" [ngClass]="{'locked': (item.value.locked != 0)}">{{ getHelperService().formatAmount(item.value.locked, 1, 6) }} <span class="ccx">CCX</span></span>
               </div>
               <div class="balance" fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
-                <span class="st">Withdrawable</span>
+                <span class="st">{{ 'PAGES.DASHBOARD.TEXT.Withdrawable' | translate }}</span>
                 <span class="sb">{{ getHelperService().formatAmount(item.value.balance, 1, 6) }} <span class="ccx">CCX</span></span>
               </div>
             </div>
           </mat-card-content>
           <mat-card-footer>
             <mat-card-actions fxLayoutAlign="start center">
-              <button mat-button aria-hidden="false" aria-label="Pay someone" matTooltip="Pay someone" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().transferFrom(item.key, 0)">
-                Pay
+              <button mat-button matTooltip="{{ 'PAGES.DASHBOARD.TEXT.Pay.Someone' | translate }}" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().transferFrom(item.key, 0)">
+                {{ 'PAGES.DASHBOARD.TEXT.Pay' | translate }}
               </button>
-              <button mat-button aria-hidden="false" aria-label="Transfer between accounts" matTooltip="Transfer between accounts" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().transferFrom(item.key, 1)">
-                Transfer
+              <button mat-button matTooltip="{{ 'PAGES.DASHBOARD.TEXT.Transfer.Between.Accounts' | translate }}" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().transferFrom(item.key, 1)">
+                {{ 'PAGES.DASHBOARD.TEXT.Transfer' | translate }}
               </button>
-              <button mat-button color="warn" aria-hidden="false" aria-label="Delete wallet" matTooltip="Delete wallet" aria-label="Delete wallet" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().deleteWallet(item.key, item.value.total)">
-                Remove
+              <button mat-button color="warn" matTooltip="{{ 'PAGES.DASHBOARD.TEXT.Delete.Wallet' | translate }}" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().deleteWallet(item.key, item.value.total)">
+                {{ 'PAGES.DASHBOARD.TEXT.Remove' | translate }}
               </button>
             </mat-card-actions>
           </mat-card-footer>
 				</mat-card>
         <div class="new walletCard" fxFlex fxLayout="column" *ngIf="getDataService().walletCount <= 2">
           <div fxFlex="auto" fxLayoutGap="15px" fxLayout="column" fxLayoutAlign="space-around center">
-						<button id="button" mat-button aria-label="Generate a new wallet" matTooltip="Generate a new wallet" aria-label="Generate a new wallet" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().createWallet()">Create Wallet</button>
-            <button id="button" mat-button aria-label="Import wallet from keys" matTooltip="Import wallet from keys" aria-label="Import wallet from keys" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getDialogService().openImportKeysDialog()" [disabled]="true">Import Wallet</button>
+						<button id="button" mat-button matTooltip="{{ 'PAGES.DASHBOARD.TEXT.Generate.Wallet' | translate }}" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().createWallet()">
+							{{ 'PAGES.DASHBOARD.TEXT.Create.Wallet' | translate }}
+						</button>
+            <button id="button" mat-button matTooltip="{{ 'PAGES.DASHBOARD.TEXT.Import.Keys' | translate }}" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getDialogService().openImportKeysDialog()" [disabled]="true">
+							{{ 'PAGES.DASHBOARD.TEXT.Import.Wallet' | translate }}
+						</button>
           </div>
 				</div>
 				<div class="new walletCard" fxFlex fxLayout="column" *ngIf="getDataService().walletCount <= 1"></div>

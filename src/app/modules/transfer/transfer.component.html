@@ -8,7 +8,7 @@
 
 		<mat-tab-group fxFlex="100" [selectedIndex]="getDataService().selectedTab" (selectedTabChange)="resetForms($event)">
 
-			<mat-tab label="Pay">
+			<mat-tab label="{{ 'PAGES.TRANSFER.HEADINGS.Pay' | translate }}">
 				<form [formGroup]="pay" (ngSubmit)="submit()">
 					<p class="description">Pay from your wallets.</p>
 					<div fxLayout="row">
@@ -17,7 +17,7 @@
 								<mat-expansion-panel id="panel" [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
 									<mat-expansion-panel-header>
 										<mat-panel-title>
-											<span fxFlex>{{ 'PAGES.PAY.HEADINGS.SENDER' | translate }}</span>
+											<span fxFlex>{{ 'PAGES.TRANSFER.HEADINGS.From.Wallet' | translate }}</span>
 										</mat-panel-title>
 									</mat-expansion-panel-header>
 									<mat-panel-description>
@@ -85,7 +85,7 @@
 								<mat-expansion-panel id="panel" [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
 									<mat-expansion-panel-header>
 										<mat-panel-title>
-											<span fxFlex>{{ 'PAGES.PAY.HEADINGS.RECIPIENT' | translate }}</span>
+											<span fxFlex>{{ 'PAGES.TRANSFER.HEADINGS.To.Wallet' | translate }}</span>
 										</mat-panel-title>
 									</mat-expansion-panel-header>
 									<mat-panel-description>
@@ -150,7 +150,7 @@
 				</form>
 			</mat-tab>
 
-			<mat-tab label="Transfer" (click)="resetForms()">
+			<mat-tab label="{{ 'PAGES.TRANSFER.HEADINGS.Transfer' | translate }}" (click)="resetForms()">
 				<form [formGroup]="transfer" (ngSubmit)="submit()">
 					<p class="description">Transfer between your wallets.</p>
 					<div fxLayout="row">
@@ -159,7 +159,7 @@
 								<mat-expansion-panel id="panel" [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
 									<mat-expansion-panel-header>
 										<mat-panel-title>
-											<span fxFlex>{{ 'PAGES.TRANSFER.HEADINGS.SENDER' | translate }}</span>
+											<span fxFlex>{{ 'PAGES.TRANSFER.HEADINGS.Origin' | translate }}</span>
 										</mat-panel-title>
 									</mat-expansion-panel-header>
 									<mat-panel-description>
@@ -227,7 +227,7 @@
 								<mat-expansion-panel id="panel" [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
 									<mat-expansion-panel-header>
 										<mat-panel-title>
-											<span fxFlex>{{ 'PAGES.TRANSFER.HEADINGS.RECIPIENT' | translate }}</span>
+											<span fxFlex>{{ 'PAGES.TRANSFER.HEADINGS.Destination' | translate }}</span>
 										</mat-panel-title>
 									</mat-expansion-panel-header>
 									<mat-panel-description>
