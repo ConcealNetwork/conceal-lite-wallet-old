@@ -66,37 +66,29 @@ export class HelperService {
 					this.dataService.priceUSD = data['conceal'].usd;
 					this.dataService.portfolioUSD = (this.dataService.priceUSD * this.dataService.available);
 				})
+				// Merge Transactions
+				let transactions = Object.values(this.dataService.wallets);
+				let arr = [];
+				for(let i = 0; i < transactions.length; i++) {
+					arr.push(transactions[i]['transactions']);
+				}
+				const transactionsMerged = Array.prototype.concat(...arr);
+				if (this.dataService.transactions && this.dataService.transactions.length < transactionsMerged.length) {
+					console.log('new transaction');
+					setTimeout(() => {
+						this.snackbarService.openSnackNewTransaction('New transaction detected', 'Dismiss');
+					}, 4000);
+				}
+				this.dataService.transactions = transactionsMerged;
 				this.dataService.isLoading = false;
 				this.dataService.isWalletLoading = false;
-			}
-			if (data['result'] === 'error' && data['message'][0] === "You don't have wallet. Please create one") {
+			} else if (data['result'] === 'error' && data['message'][0] === "You don't have any wallet. Please create one") {
+				this.dataService.isLoading = true;
 				this.dataService.hasWallet = false;
+				console.log('no wallet found');
+			} else {
+				this.snackbarService.openSnackBar(data['message'], 'Dismiss');
 			}
-		});
-	}
-
-	getTransactions(refresh=false) {
-		if(!refresh) {
-			this.dataService.isLoading = true;
-		}
-		this.cloudService.getWalletsData().subscribe((data) => {
-			this.dataService.wallets = data['message'].wallets;
-			// Merge Transactions
-			let transactions = Object.values(this.dataService.wallets);
-			let arr = [];
-			for(let i = 0; i < transactions.length; i++) {
-				arr.push(transactions[i]['transactions']);
-			}
-			const transactionsMerged = Array.prototype.concat(...arr);
-			if (this.dataService.transactions && this.dataService.transactions.length < transactionsMerged.length) {
-				console.log('new transaction');
-				setTimeout(() => {
-					this.snackbarService.openSnackNewTransaction('New transaction detected', 'Dismiss');
-					console.log('open dialog')
-				}, 4000);
-			}
-			this.dataService.transactions = transactionsMerged;
-			this.dataService.isLoading = false;
 		});
 	}
 
@@ -145,7 +137,7 @@ export class HelperService {
 			this.cloudService.deleteWallet(wallet).subscribe((data) => {
 				if (data['result'] === 'success') {
 					this.snackbarService.openSnackBar('Wallet deleted', 'Dismiss');
-					this.getWallets(true);
+					this.getWallets();
 				} else {
 					this.snackbarService.openSnackBar(data['message'], 'Dismiss');
 				}

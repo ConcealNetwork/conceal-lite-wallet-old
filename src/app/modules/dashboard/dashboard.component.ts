@@ -73,9 +73,26 @@ export class DashboardComponent implements OnInit {
 		return this.dataService;
 	}
 
+	checkForWallet() {
+		console.log('checking for no wallet')
+		if(this.dataService.hasWallet == false && this.dataService.dialogOpen == false) {
+			this.dialogService.openNoWalletDialog();
+			this.dataService.dialogOpen = true;
+		}
+	}
+
 	ngOnInit(): void {
 		this.dataService.isLoggedIn = this.authService.loggedIn();
 		this.helperService.checkFor2FA();
+		setTimeout(() => {
+			this.checkForWallet();
+		}, 2500);
+		setInterval(() => {
+			if (!this.dataService.isLoggedIn) {
+				this.helperService.getWallets(true);
+				this.checkForWallet();
+			}
+		}, 10000);
 	}
 
 	lineChartType = 'line';

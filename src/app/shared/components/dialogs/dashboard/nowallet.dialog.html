@@ -1,6 +1,6 @@
 <div class="content" *ngIf="!import" @transition>
 	<h1 mat-dialog-title class="title">No Wallet Found</h1>
-	<h2 class="subtitle">Create a wallet to continue...</h2>
+	<h2 class="subtitle">Please create a wallet to continue...</h2>
 	<div mat-dialog-content>
 		<div fxLayout="column" fxLayoutAlign="space-between stretch">
 			<div class="loading" *ngIf="getDataService().isFormLoading"><mat-progress-bar mode="query"></mat-progress-bar></div>

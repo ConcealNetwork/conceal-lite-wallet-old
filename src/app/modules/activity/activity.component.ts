@@ -68,7 +68,7 @@ export class ActivityComponent implements OnInit {
 		private dataService: DataService,
 		private changeDetectorRefs: ChangeDetectorRef
 	) {
-		this.helperService.getTransactions();
+		this.helperService.getWallets();
 		setTimeout(() => {
 			// Assign the data to the data source for the table to render
 			this.dataSource = new MatTableDataSource(this.dataService.transactions);
@@ -96,7 +96,7 @@ export class ActivityComponent implements OnInit {
 
 	refresh() {
 		this.isLoading = true;
-		this.helperService.getTransactions(true);
+		this.helperService.getWallets(true);
 		setTimeout(() => {
 			this.dataSource = new MatTableDataSource(this.dataService.transactions);
 			this.dataSource.paginator = this.paginator;
