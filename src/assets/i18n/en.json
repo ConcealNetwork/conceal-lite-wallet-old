@@ -1,12 +1,90 @@
 {
   "PAGES": {
-      "HOME": {
-          "TITLE": "App works !",
-          "GO_TO_DETAIL": "Go to Detail"
+      "HEADER": {
+        "TITLE": "Lite Wallet",
+        "DASHBOARD": "Dashboard",
+        "TRANSFER": "Pay & Transfer",
+				"BANKING": "Banking"
       },
-      "DETAIL": {
-        "TITLE": "Detail page !",
-        "BACK_TO_HOME": "Back to Home"
-    }
+      "FOOTER": {
+        "WALLET": "Cloud Wallet",
+        "NODE": "Smart Node",
+        "ONLINE": "Online",
+        "OFFLINE": "Offline"
+      },
+      "DASHBOARD": {
+        "TITLE": "Dashboard",
+				"HEADINGS": {
+					"Balance": "Combined Balance",
+					"Address": "Address",
+					"Portfolio": "Your Portfolio",
+					"Wallets": "Your Wallets",
+					"Activity": "Recent Activity",
+					"Market": "Market Data"
+				},
+				"TEXT": {
+					"Total.Available": "Total Available",
+					"Total.Pending": "Total Pending",
+					"Total.Withdrawable": "Total Withdrawable",
+					"Available": "Available",
+					"Pending": "Pending",
+					"Withdrawable": "Withdrawable",
+					"Pay": "Pay",
+					"Transfer": "Transfer",
+					"Remove": "Remove",
+					"Banking": "Banking",
+					"Create.Wallet": "Create Wallet",
+					"Import.Wallet": "Import Wallet",
+					"Generate.Wallet": "Generate a new wallet",
+					"Import.Keys": "Import wallet from keys",
+					"Pay.Someone": "Pay someone",
+					"Transfer.Between.Accounts": "Transfer between accounts",
+					"Delete.Wallet": "Delete wallet",
+					"Banking.Deposits": "Banking & deposits",
+					"Scan.Code": "Scan QR",
+					"Export.Private.Keys": "Export private keys",
+					"Copy.Address": "Copy address",
+					"Code": "QR Code",
+					"Export.Keys": "Export Keys",
+					"Copy": "Copy"
+        }
+			},
+			"TRANSFER": {
+        "TITLE": "Transfer",
+        "HEADINGS": {
+          "Pay": "Pay",
+          "Transfer": "Transfer",
+          "From.Wallet": "From Wallet",
+					"To.Wallet": "To Wallet",
+					"Origin": "Origin",
+          "Destination": "Destination"
+				},
+				"TEXT": {
+          "1": "Pay from your wallets",
+					"2": "Please select a wallet to send from and the desired amount to pay.",
+					"Available": "Available",
+					"From.Wallet": "From Wallet"
+        }
+			},
+			"ACTIVITY": {
+        "TITLE": "Transactions"
+      },
+      "CONTACTS": {
+        "TITLE": "Contacts"
+      },
+      "MESSAGING": {
+        "TITLE": "Messages"
+      },
+      "SETTINGS": {
+        "TITLE": "Settings"
+      },
+      "LOCK": {
+        "TITLE": "Lock Your Wallet"
+      },
+      "LOGIN": {
+				"TITLE": "Conceal Lite Wallet",
+				"SUBTITLE1": "Powered by",
+				"SUBTITLE2": "Conceal Cloud™ ☁️"
+      }
   }
 }

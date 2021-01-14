@@ -1,0 +1,14 @@
+.mat-tab-label-container {
+	//margin-bottom: 25px;
+	font-size: 1.8rem;
+	.mat-tab-label {
+		font-size: 1rem;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+	}
+	.mat-tab-label-active {
+		background-color: rgba($color: white, $alpha: 0.03);
+		color: white;
+		opacity: 1;
+	}
+}

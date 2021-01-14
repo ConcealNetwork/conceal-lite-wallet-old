@@ -1,0 +1,61 @@
+.expansion-panel {
+
+	.mat-expansion-panel-header {
+		border-radius: 0;
+		font-size: 0.8rem;
+		padding-top: 0.1rem;
+		padding-bottom: 0.1rem;
+
+		.mat-icon {
+			color: white;
+			padding-right: 10px;
+			vertical-align: sub;
+		}
+
+		svg {
+			overflow: visible;
+			margin-bottom: -4px;
+		}
+
+		.mat-expansion-panel-header-title {
+			color: orange;
+		}
+	}
+
+	.mat-expansion-panel-body {
+		padding-left: 25px;
+		padding-right: 25px;
+		padding-top: 0.3rem;
+		padding-bottom: 0.2rem;
+		background: rgba($color: grey, $alpha: 0.4);
+		border-top: 0.5px solid orange;
+		font-size: 0.7rem;
+	}
+
+	.mat-action-row {
+		padding: 0px;
+	}
+
+	.mat-expansion-panel-header-description {
+		margin-right: 0px
+	}
+
+}
+
+// Fix for at-expansion-panel issue
+// mat-accordion mat-expansion-panel {
+//   mat-expansion-panel-header {
+//     height: 28px; // height may be different for you
+//   }
+//   .mat-expansion-panel-content {
+//     height: 0;
+//   }
+//   &.mat-expanded {
+//     mat-expansion-panel-header {
+//       height: 28px; // height may be different for you
+//     }
+//     .mat-expansion-panel-content {
+//       height: auto;
+//     }
+//   }
+// }

@@ -1,0 +1,40 @@
+<mat-toolbar color="primary">
+	<img src="./assets/images/logo-sm.png" class="logo">
+	<span color="accent" class="title hidden-sm">{{ 'PAGES.HEADER.TITLE' | translate }}</span>
+	<div *ngIf="!getDataService().isLoggedIn">
+		<button mat-button class="navlink" routerLink="/dashboard" routerLinkActive="active">{{ 'PAGES.HEADER.DASHBOARD' | translate }}</button>
+		<button mat-button class="navlink" routerLink="/transfer" routerLinkActive="active">{{ 'PAGES.HEADER.TRANSFER' | translate }}</button>
+		<button mat-button class="navlink" (click)="getDialogService().openBankingDialog()">{{ 'PAGES.HEADER.BANKING' | translate }}</button>
+	</div>
+	<span class="spacer"></span>
+	<div class="action-icons" *ngIf="!getDataService().isLoggedIn">
+		<button mat-icon-button aria-hidden="false" aria-label="Transactions" routerLink="/activity" routerLinkActive="active" matTooltip="Transactions" matTooltipPosition="below" matTooltipClass="custom-tooltip">
+			<mat-icon svgIcon="receipt"></mat-icon>
+		</button>
+		<button mat-icon-button aria-hidden="false" aria-label="Contacts" routerLink="/contacts" routerLinkActive="active" matTooltip="Contacts" matTooltipPosition="below" matTooltipClass="custom-tooltip">
+			<mat-icon svgIcon="contacts"></mat-icon>
+		</button>
+		<button mat-icon-button aria-hidden="false" aria-label="Messaging" routerLink="/message" routerLinkActive="active" matTooltip="Messaging" matTooltipPosition="below" matTooltipClass="custom-tooltip">
+			<mat-icon svgIcon="message"></mat-icon>
+		</button>
+		<button mat-icon-button aria-hidden="false" aria-label="Settings" routerLink="/settings" routerLinkActive="active" matTooltip="Settings" matTooltipPosition="below" matTooltipClass="custom-tooltip">
+			<mat-icon svgIcon="settings"></mat-icon>
+		</button>
+		<button mat-icon-button aria-hidden="false" aria-label="Lock" routerLink="/auth" routerLinkActive="active" matTooltip="Authentication" matTooltipPosition="below" matTooltipClass="custom-tooltip">
+			<mat-icon svgIcon="lock"></mat-icon>
+		</button>
+	</div>
+	<span class="border"></span>
+	<div class="window-ctl">
+		<button mat-icon-button aria-hidden="false" aria-label="Minimize" (click)="minimize()" matTooltip="Minimize" matTooltipPosition="below" matTooltipClass="custom-tooltip">
+			<mat-icon svgIcon="minimize"></mat-icon>
+		</button>
+		<button mat-icon-button aria-hidden="false" aria-label="Maximize" (click)="fullScreen()" matTooltip="Maximize" matTooltipPosition="below" matTooltipClass="custom-tooltip">
+			<mat-icon svgIcon="fullscreen" *ngIf="!isFullScreen"></mat-icon>
+			<mat-icon svgIcon="fullscreen_exit" *ngIf="isFullScreen"></mat-icon>
+		</button>
+		<button mat-icon-button aria-hidden="false" aria-label="Close" (click)="logout()" matTooltip="Logout & Exit" matTooltipPosition="below" matTooltipClass="custom-tooltip">
+			<mat-icon svgIcon="close"></mat-icon>
+		</button>
+	</div>
+</mat-toolbar>

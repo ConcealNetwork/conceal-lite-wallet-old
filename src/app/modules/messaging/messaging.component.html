@@ -1,0 +1,55 @@
+<div class="loading" *ngIf="getDataService().isLoading">
+  <app-loader></app-loader>
+</div>
+
+<div *ngIf="!getDataService().isLoading" class="container table" fxLayout="column" @enterAnimation>
+
+  <h1 class="title">{{ 'PAGES.MESSAGING.TITLE' | translate }}</h1>
+
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+
+    <mat-form-field fxFlex="70" class="filter">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search message text, direction etc.">
+    </mat-form-field>
+
+    <div fxFlex="30" class="button-control">
+			<button mat-stroked-button color="primary" aria-hidden="false" aria-label="Send new message" matTooltip="Send new message" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getDialogService().openNewMessageDialog()">New Message</button>
+			<button mat-stroked-button aria-hidden="false" aria-label="Refresh messages" matTooltip="Refresh messages" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="refresh()" [disabled]="isLoading">Refresh</button>
+    </div>
+
+  </div>
+
+  <div class="mat-elevation-z8">
+
+		<mat-progress-bar class="loading" mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+    <table mat-table [dataSource]="dataSource" matSort matSortActive="timestamp" matSortDisableClear matSortDirection="desc">
+
+      <!-- Date Column -->
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Direction </th>
+        <td mat-cell *matCellDef="let row"> {{getHelperService().formatTypeText(row.type)}} </td>
+			</ng-container>
+
+      <!-- Height Column -->
+      <ng-container matColumnDef="timestamp">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Time </th>
+				<td mat-cell *matCellDef="let row">{{getHelperService().formatDatetime(row.timestamp)}}</td>
+			</ng-container>
+
+
+			<!-- Message Column -->
+			<ng-container matColumnDef="message">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> Message </th>
+				<td mat-cell *matCellDef="let row"> {{row.message}} </td>
+			</ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
+    </table>
+
+    <mat-paginator class="mat-paginator-sticky" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+  </div>
+
+</div>

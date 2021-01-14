@@ -1,0 +1,74 @@
+.content {
+
+	.title {
+		font-size: 1.4rem;
+		color: orange;
+		line-height: 1;
+		margin-block-start: 0 !important;
+	}
+
+	.subtitle {
+		margin-top: -5px;
+		margin-bottom: 25px;
+		font-size: 0.8rem;
+		color: white;
+	}
+
+	.mat-dialog-content {
+		.mat-form-field {
+			font-size: 0.8rem;
+		}
+	}
+
+	.checked {
+		text-transform: uppercase;
+		margin: 15px;
+	}
+
+	.send {
+		margin-top: 10px;
+		margin-bottom: 20px;
+	}
+
+	.error {
+		font-size: 0.6rem;
+		text-align: center;
+		line-height: 2;
+		border: 1px solid rgba(255, 0, 0, 0.5);
+		border-radius: 5px;
+		padding-top: 0.5rem;
+		padding-bottom: .5rem;
+		margin-bottom: 10px;
+	}
+
+	.success {
+		font-size: 0.6rem;
+		text-align: center;
+		line-height: 2;
+		border: 1px solid rgba(0, 255, 0, 0.5);
+		border-radius: 5px;
+		padding-top: .5rem;
+		padding-bottom: .5rem;
+		margin-bottom: 10px;
+	}
+
+	.progress {
+		margin-top: 10px;
+		margin-bottom: 25px;
+	}
+
+	.status {
+		margin-top: 25px;
+		margin-bottom: -15px;
+	}
+
+	.actions {
+		margin-top: 25px;
+
+		button {
+			font-size: .85rem;
+			padding: .4rem;
+		}
+	}
+
+}

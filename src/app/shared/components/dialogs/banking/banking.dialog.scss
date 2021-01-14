@@ -1,0 +1,23 @@
+.content {
+	overflow: hidden;
+
+	.title {
+		font-size: 1.4rem;
+		color: orange;
+		line-height: 1;
+		margin-block-start: 0 !important;
+	}
+
+	.subtitle {
+		margin-top: -5px;
+		font-size: 0.8rem;
+		color: white;
+	}
+
+	.text {
+		font-size: 0.8rem;
+		color: #ccc;
+		margin-bottom: 25px;
+	}
+
+}

@@ -1,0 +1,47 @@
+.table {
+
+    .mat-elevation-z8 {
+        position: relative;
+        //height: calc(100vh - 350px);
+        overflow: auto;
+        margin-bottom: 45px;
+    }
+
+    .filter {
+        width: 100%;
+        font-size: 0.8rem
+    }
+
+    .mat-table {
+				width: 100%;
+				//height: 100%;
+        thead {
+            background: rgba($color: #555, $alpha: 1);
+        }
+        th.mat-header-cell {
+            border-bottom: 1px solid orange;
+            color: white;
+            font-size: 0.8rem;
+        }
+    }
+
+    .mat-paginator {
+        width: 100%;
+        font-size: 0.6rem;
+        .mat-paginator-container {
+            min-height: 52px;
+            background: rgba($color: grey, $alpha: 0.4);
+            border-top: 1px solid orange;
+        }
+        .mat-paginator-range-actions {
+            align-items: baseline;
+        }
+    }
+
+    .mat-paginator-sticky {
+        bottom: 0px;
+        position: sticky;
+        z-index: 10;
+    }
+
+}

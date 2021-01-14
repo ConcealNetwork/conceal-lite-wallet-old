@@ -1,0 +1,46 @@
+.content {
+	overflow: hidden;
+
+	.title {
+		font-size: 1.4rem;
+		color: orange;
+		line-height: 1;
+		margin-block-start: 0 !important;
+	}
+
+	.subtitle {
+		margin-top: -5px;
+		font-size: 0.8rem;
+		color: white;
+	}
+
+	.wrap {
+		z-index: 1;
+		display: flex;
+		justify-content: center;
+		/* align horizontal */
+		align-items: center;
+
+		/* align vertical */
+		.code {
+			z-index: 2;
+		}
+
+		.logo {
+			z-index: 3;
+			position: fixed;
+			background: #393939ff;
+			border-radius: 100px;
+			border: 9px solid orange;
+
+			.image {
+				width: 101px;
+				height: 101px;
+				margin-top: 3px;
+				margin-bottom: -6px;
+				padding: 3px;
+			}
+		}
+	}
+
+}

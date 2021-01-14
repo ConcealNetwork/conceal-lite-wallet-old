@@ -1,0 +1,122 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+
+	<div id="panel" class="content" *ngIf="!confirmed" @transition>
+
+		<h1 mat-dialog-title class="title">New Message</h1>
+		<h2 class="subtitle">Send a message to an address</h2>
+
+		<div mat-dialog-content fxLayout="row">
+			<div fxFlex fxLayout="column" fxLayoutGap="25px">
+
+				<mat-form-field appearance="fill">
+					<mat-label>From Wallet</mat-label>
+					<span matPrefix>
+						<mat-icon svgIcon="account_balance_wallet"></mat-icon>
+					</span>
+					<mat-select #wallet (selectionChange)="selectionChanged($event.value)" formControlName="walletFormControl">
+						<mat-option [value]="item.key" *ngFor="let item of getDataService().wallets | keyvalue">
+							{{ (item.key.length > 7) ? (item.key | slice:0:7) +'...':(item.key) }}{{ (item.key | slice:-7) }}
+						</mat-option>
+					</mat-select>
+					<mat-hint>Select one of your wallets</mat-hint>
+					<mat-error *ngIf="form.controls.walletFormControl.hasError('required')">
+						Wallet selection is <strong>required</strong>
+					</mat-error>
+				</mat-form-field>
+
+				<mat-form-field hintLabel="98 characters" appearance="fill">
+					<mat-label>Address</mat-label>
+					<input matInput #address type="text" maxlength="98" placeholder="CCX Address" formControlName="toaddressFormControl" [matAutocomplete]="auto">
+					<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+						<mat-option *ngFor="let option of getDataService().contacts" [value]="option.address">
+							{{option.label}} <small>({{getHelperService().formatAddress(option.address)}})</small>
+						</mat-option>
+					</mat-autocomplete>
+					<mat-icon class="icon-button" matSuffix svgIcon="contacts"></mat-icon>
+					<mat-hint align="end">{{address.value.length}} / 98</mat-hint>
+					<mat-error *ngIf="form.controls.toaddressFormControl.hasError('required')">
+						Address selection is <strong>required</strong>
+					</mat-error>
+					<mat-error *ngIf="form.controls.toaddressFormControl.hasError('match')">
+						<strong>From</strong> and <strong>To</strong> addresses cannot be the same.
+					</mat-error>
+					<mat-error *ngIf="form.controls.toaddressFormControl.hasError('minlength')">
+						Address must be <strong>98 characters</strong>
+					</mat-error>
+				</mat-form-field>
+
+				<mat-form-field hintLabel="Max 260 characters" appearance="fill">
+					<mat-label>Message</mat-label>
+					<textarea rows="3" matInput #message type="text" maxlength="260" placeholder="Message" formControlName="messageFormControl"></textarea>
+					<mat-hint align="end">{{message.value.length}} / 260</mat-hint>
+					<mat-error *ngIf="form.controls.messageFormControl.hasError('required')">
+						A message is <strong>required</strong>
+					</mat-error>
+				</mat-form-field>
+
+			</div>
+		</div>
+
+		<div class="actions" fxLayout="row" fxLayoutGap="25px">
+			<button mat-stroked-button color="primary" fxFlex="50" type="button" (click)="isFormValid()">Confirm</button>
+			<button mat-stroked-button color="warn" fxFlex="50" type="button" (click)="close()">Cancel</button>
+		</div>
+
+	</div>
+
+	<div id="panel" class="content" *ngIf="confirmed" @transition>
+
+		<h1 mat-dialog-title class="title">Authorization</h1>
+		<h2 class="subtitle" *ngIf="getDataService().hasTwoFa">Please enter your 2FA code to authorize your message</h2>
+		<h2 class="subtitle" *ngIf="!getDataService().hasTwoFa">Please enter your password to authorize your message</h2>
+
+		<div mat-dialog-content fxLayout="column">
+			<div class="send" fxFlex="100" fxLayout="row" fxLayoutGap="15px">
+				<div fxFlex="40" fxLayout="column">
+					<mat-form-field appearance="fill">
+						<mat-label>Transaction Fee</mat-label>
+						<input matInput formControlName="feeFormControl">
+						<span matSuffix>CCX</span>
+						<mat-hint>Fee for transaction</mat-hint>
+					</mat-form-field>
+				</div>
+				<div fxFlex="60" fxLayout="column" *ngIf="getDataService().hasTwoFa">
+					<mat-form-field fxFill hintLabel="6 Numbers" appearance="fill">
+						<mat-label>2FA Code</mat-label>
+						<input #twofa matInput minlength="6" maxlength="6" placeholder="00000" formControlName="twofaFormControl">
+						<mat-hint align="end">{{twofa.value?.length || 0}}/6</mat-hint>
+						<mat-error *ngIf="form.controls.twofaFormControl.hasError('minlength') || form.controls.twofaFormControl.hasError('maxlength')">
+							2FA code should be <strong>6 numbers</strong>
+						</mat-error>
+						<mat-error *ngIf="form.controls.twofaFormControl.hasError('pattern')">
+							2FA code should be <strong>numbers only</strong>
+						</mat-error>
+						<mat-error *ngIf="form.controls.twofaFormControl.hasError('required')">
+							2FA Code is <strong>required</strong>
+						</mat-error>
+					</mat-form-field>
+				</div>
+				<div fxFlex="60" fxLayout="column" *ngIf="!getDataService().hasTwoFa">
+					<mat-form-field fxFill appearance="fill" hintLabel="Your password">
+						<mat-label>Password</mat-label>
+						<input type="password" matInput placeholder="password" formControlName="passwordFormControl">
+						<mat-error *ngIf="form.controls.passwordFormControl.hasError('required')">
+							Password is <strong>required</strong>
+						</mat-error>
+					</mat-form-field>
+				</div>
+			</div>
+			<div class="progress" *ngIf="getDataService().isFormLoading"><mat-progress-bar mode="query"></mat-progress-bar></div>
+			<div class="error" *ngIf="getDataService().error">{{ getDataService().error }}</div>
+			<div class="success" *ngIf="getDataService().success">{{ getDataService().success }}</div>
+			<div class="actions" fxLayout="row" fxLayoutGap="15px">
+				<button mat-stroked-button color="primary" fxFlex="50" type="submit" [disabled]="!form.valid">Authorise</button>
+				<button mat-stroked-button fxFlex="25" type="button" (click)="confirmed=false">Back</button>
+				<button mat-stroked-button color="warn" fxFlex="25" type="button" (click)="close()">Cancel</button>
+			</div>
+		</div>
+
+	</div>
+
+</form>
+

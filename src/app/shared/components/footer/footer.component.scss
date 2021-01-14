@@ -1,0 +1,39 @@
+.mat-toolbar {
+	font-size: 0.7rem;
+	color: #fff;
+	background: rgba(0, 0, 0, 0.2);
+	border-top: 0.8px solid rgba(255, 255, 255, 0.08) !important;
+	padding-left: 25px;
+	padding-right: 25px;
+	opacity: 0.8;
+
+	.section {
+		height: 50px;
+		.progress {
+			font-size: 0.6rem;
+			text-align: center;
+		}
+		.items {
+			color: #c4c4c4;
+			font-size: 0.56rem;
+			text-align: center;
+			line-height: 1;
+			.title{
+				display: block;
+				color: orange;
+				line-height: 1;
+				padding: 2.5px;
+			}
+			.value {
+				display: block;
+				font-size: 0.6rem;
+				line-height: 1;
+				padding: 2.5px;
+				.ccx {
+					color: #fff;
+				}
+			}
+		}
+	}
+
+}

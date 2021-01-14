@@ -1,0 +1,100 @@
+.container {
+	height: 100%;
+	width: 80vw;
+	margin-left: auto;
+	margin-right: auto;
+
+	.title {
+		line-height: 1;
+		margin-block-start: 0 !important;
+		margin-block-end: 0 !important;
+	}
+
+	.subtitle {
+		color: #888;
+	}
+
+	.mat-card {
+		background: rgba(#393939, 0.8);
+		border-radius: 4px;
+		padding: 0px;
+	}
+
+	.account {
+		.user {
+			font-size: 0.9rem;
+			padding-left: 1rem;
+			padding-right: 1rem;
+
+			.box {
+				padding-top: 0.6rem;
+				padding-bottom: 0.6rem;
+
+				button {
+					margin-right: -10px;
+				}
+
+				.enable {
+					color: lightgreen;
+				}
+				.disable {
+					color: pink;
+				}
+
+			}
+
+			.option {
+				color: orange;
+				font-size: 1rem;
+				line-height: 2;
+			}
+
+			button {
+				transform: scale(0.9);
+			}
+
+			.value {
+				font-size: 0.7rem;
+				line-height: 2.7;
+			}
+		}
+	}
+
+	.lang {
+		margin-top: -1.2rem;
+
+		.language {
+			.selected {
+				background: darken(green, $amount: 15);
+				border: 2px solid green !important
+			}
+
+			.cards {
+				min-width: 10rem;
+				border: solid 2px transparent;
+				padding: 1rem 2rem 1rem 2rem;
+
+				img {
+					width: 50px;
+					margin-bottom: 15px;
+					border: 2px solid #ccc;
+					border-radius: 500px;
+				}
+
+				.icon {
+					position: absolute;
+					top: 2px;
+					right: 5px;
+					color: #ddd;
+				}
+			}
+
+			.cards:hover {
+				border: 2px solid orange;
+				transform: scale(1.05);
+				cursor: pointer;
+			}
+		}
+	}
+
+}

@@ -1,0 +1,45 @@
+{
+  "PAGES": {
+      "HEADER": {
+        "TITLE": "लाइट वॉलेट",
+        "DASHBOARD": "Dashboard",
+        "TRANSFER": "Transfer",
+        "ACTIVITY": "Activity"
+      },
+      "FOOTER": {
+        "WALLET": "Cloud Wallet",
+        "NODE": "Smart Node",
+        "ONLINE": "Online",
+        "OFFLINE": "Offline"
+      },
+      "DASHBOARD": {
+        "TITLE": "Dashboard",
+        "BALANCE": "Balance",
+        "ADDRESS": "Address",
+        "ACTIVITY": "Recent Activity"
+			},
+			"TRANSFER": {
+        "TITLE": "Transfer Funds",
+        "HEADINGS": {
+          "AMOUNT": "Amount",
+          "RECIPIENT": "Recipient",
+          "MESSAGE": "Message"
+        }
+			},
+			"ACTIVITY": {
+        "TITLE": "Transactions"
+      },
+      "CONTACTS": {
+        "TITLE": "Contacts"
+      },
+      "MESSAGING": {
+        "TITLE": "Messages"
+      },
+      "SETTINGS": {
+        "TITLE": "Settings"
+      },
+      "LOCK": {
+        "TITLE": "Lock Your Wallet"
+      }
+  }
+}

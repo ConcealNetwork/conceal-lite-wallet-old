@@ -1,0 +1,44 @@
+<mat-toolbar fxLayout="row" fxLayoutAlign="space-around stretch" *ngIf="!getDataService().isWalletLoading && !getDataService().isLoggedIn">
+	<div class="section" fxLayout="column" fxLayoutAlign="center stretch">
+		<section class="items">
+			<span class="title">Current Height</span>
+			<span class="value">{{getDataService().height || 0}}</span>
+		</section>
+	</div>
+	<div class="section" fxLayout="column" fxLayoutAlign="center stretch">
+		<section class="items">
+			<span class="title">Portfolio (CCX)</span>
+			<span class="value">{{getHelperService().formatAmount(getDataService().available, 3, 6) || 0}} <span class="ccx">CCX</span></span>
+		</section>
+	</div>
+	<div class="section" fxLayout="column" fxLayoutAlign="center stretch">
+		<section class="items">
+			<span class="title">Portfolio (BTC)</span>
+			<span class="value">{{getHelperService().formatAmount(getDataService().portfolioBTC, 8, 8) || 0}} <span class="ccx">BTC</span></span>
+		</section>
+	</div>
+	<div class="section" fxLayout="column" fxLayoutAlign="center stretch">
+		<section class="items">
+			<span class="title">Portfolio (USD)</span>
+			<span class="value">{{getHelperService().formatAmount(getDataService().portfolioUSD, 2, 2) || 0}} <span class="ccx">USD</span></span>
+		</section>
+	</div>
+	<div class="section" fxLayout="column" fxLayoutAlign="center stretch">
+		<section class="items">
+			<span class="title">Transactions</span>
+			<span class="value">{{getDataService().transactionCount || 0}}</span>
+		</section>
+	</div>
+</mat-toolbar>
+
+<mat-toolbar fxLayout="row" fxLayoutAlign="center stretch" *ngIf="getDataService().isWalletLoading && !getDataService().isLoggedIn">
+	<div fxFlex="30" class="section" fxLayout="column" fxLayoutAlign="center stretch">
+		<section fxFill class="progress">
+			<span>Refreshing, one moment please...</span>
+			<mat-progress-bar [color]="color" [mode]="mode"></mat-progress-bar>
+		</section>
+	</div>
+</mat-toolbar>
+
+<mat-toolbar *ngIf="getDataService().isLoggedIn"></mat-toolbar>
+

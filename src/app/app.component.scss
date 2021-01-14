@@ -1,3 +1,28 @@
-:host {
-  
+.background {
+    z-index: -99;
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+}
+
+.wrapper {
+    z-index: 0;
+    position: relative;
+    height: 100%;
+    background: url(../assets/images/background.jpg) no-repeat center fixed;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.header, .footer {
+    z-index: 2;
+    background: rgba(151, 141, 141, 0.2);
+    border-bottom: 0.8px solid rgba(255, 255, 255, 0.08);
+    border-top: 0.8px solid rgba(255, 255, 255, 0.08);
+}
+
+.content {
+    z-index: 3;
+    height: calc(100% - (70px + 50px));
+    overflow-y: auto;
 }
