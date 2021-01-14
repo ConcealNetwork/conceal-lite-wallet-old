@@ -76,13 +76,13 @@
               </div>
               <div class="icons" fxLayoutGap="0px">
                 <button mat-button mat-icon-button matTooltip="{{ 'PAGES.DASHBOARD.TEXT.Scan.Code' | translate }}" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getDialogService().openQRCodeDialog(item.key)">
-                  <mat-icon svgIcon="camera_enhance">{{ 'PAGES.DASHBOARD.TEXT.Code' | translate }}</mat-icon>
+                  <mat-icon svgIcon="camera_enhance"></mat-icon>
 								</button>
 								<button mat-button mat-icon-button matTooltip="{{ 'PAGES.DASHBOARD.TEXT.Export.Private.Keys' | translate }}" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getDialogService().openExportKeysDialog(item.key)">
-                  <mat-icon svgIcon="lock_open">{{ 'PAGES.DASHBOARD.TEXT.Export.Keys' | translate }}</mat-icon>
+                  <mat-icon svgIcon="lock_open"></mat-icon>
                 </button>
                 <button mat-button mat-icon-button matTooltip="{{ 'PAGES.DASHBOARD.TEXT.Copy.Address' | translate }}" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="getHelperService().copyToClipboard(item.key, 'Address Copied')">
-                  <mat-icon svgIcon="assignment">{{ 'PAGES.DASHBOARD.TEXT.Copy' | translate }}</mat-icon>
+                  <mat-icon svgIcon="assignment"></mat-icon>
                 </button>
               </div>
             </mat-card-title>
