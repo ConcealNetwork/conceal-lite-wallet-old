@@ -4,8 +4,8 @@ import * as url from 'url';
 
 let aspect = require("electron-aspectratio");
 let mainWindowHandler;
-
 let win: BrowserWindow = null;
+
 const args = process.argv.slice(1),
   serve = args.some(val => val === '--serve');
 
@@ -37,6 +37,12 @@ function createWindow(): BrowserWindow {
 
 	//define the ratio
 	mainWindowHandler.setRatio(16, 9, 10);
+
+  //Create a new handler for the mainWindow
+  mainWindowHandler = new aspect(win);
+
+  //define the ratio
+  mainWindowHandler.setRatio(16, 9, 10);
 
   if (serve) {
 
