@@ -30,7 +30,13 @@
             "scripts": [],
             "customWebpackConfig": {
               "path": "./angular.webpack.js"
-            }
+            },
+						"allowedCommonJsDependencies": [
+							"chart.js",
+							"qrcode",
+							"rxjs/operators",
+							"rxjs"
+					 ]
           },
           "configurations": {
             "dev": {
