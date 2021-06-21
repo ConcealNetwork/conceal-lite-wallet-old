@@ -117,7 +117,7 @@
             </mat-card-actions>
           </mat-card-footer>
 				</mat-card>
-        <div class="new walletCard" fxFlex fxLayout="column" *ngIf="getDataService().walletCount <= 2">
+        <div class="new walletCard" fxFlex fxLayout="column" *ngIf="getDataService().walletCount <= 1">
           <div fxFlex="auto" fxLayoutGap="15px" fxLayout="column" fxLayoutAlign="space-around center">
 						<button id="button" mat-button matTooltip="{{ 'PAGES.DASHBOARD.TEXT.Generate.Wallet' | translate }}" matTooltipPosition="below" matTooltipClass="custom-tooltip" (click)="getHelperService().createWallet()">
 							{{ 'PAGES.DASHBOARD.TEXT.Create.Wallet' | translate }}

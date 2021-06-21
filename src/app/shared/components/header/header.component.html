@@ -4,7 +4,6 @@
 	<div *ngIf="!getDataService().isLoggedIn">
 		<button mat-button class="navlink" routerLink="/dashboard" routerLinkActive="active">{{ 'PAGES.HEADER.DASHBOARD' | translate }}</button>
 		<button mat-button class="navlink" routerLink="/transfer" routerLinkActive="active">{{ 'PAGES.HEADER.TRANSFER' | translate }}</button>
-		<button mat-button class="navlink" (click)="getDialogService().openBankingDialog()">{{ 'PAGES.HEADER.BANKING' | translate }}</button>
 	</div>
 	<span class="spacer"></span>
 	<div class="action-icons" *ngIf="!getDataService().isLoggedIn">

@@ -120,12 +120,12 @@
 															Address must be <strong>98 characters</strong>
 														</mat-error>
 													</mat-form-field>
-													<mat-form-field hintLabel="35 characters" appearance="fill">
+													<mat-form-field hintLabel="64 characters" appearance="fill">
 														<mat-label>Payment ID (Optional)</mat-label>
-														<input matInput #payid [(value)]="getDataService().sendToPAymentID" type="text" maxlength="35" placeholder="Payment ID" formControlName="paymentidFormControl">
-														<mat-hint align="end">{{payid.value.length}} / 35</mat-hint>
+														<input matInput #payid [(value)]="getDataService().sendToPAymentID" type="text" maxlength="64" placeholder="Payment ID" formControlName="paymentidFormControl">
+														<mat-hint align="end">{{payid.value.length}} / 64</mat-hint>
 														<mat-error *ngIf="pay.controls.paymentidFormControl.hasError('minlength')">
-															Address must be <strong>35 characters</strong>
+															Address must be <strong>64 characters</strong>
 														</mat-error>
 													</mat-form-field>
 												</div>
