@@ -1,4 +1,4 @@
-# Introduction
+# This software has been DEPRECATED (it has been replaced by Conceal-App)
 
 Bootstrap and package your project with Angular 11 and Electron 11 (Typescript + SASS + Hot Reload) for creating Desktop applications.
 
